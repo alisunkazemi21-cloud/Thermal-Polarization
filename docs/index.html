@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermal Polarization — From Molecular Motion to Electrical Work</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<style>
+/* ============================================================
+   TOKENS
+============================================================ */
+:root{
+  --paper: #F5F2EA;
+  --paper-raised: #FAF8F2;
+  --ink: #151515;
+  --ink-soft: #47433c;
+  --indigo: #193B5A;
+  --indigo-soft: #2b5170;
+  --blue: #52718A;
+  --blue-pale: #DCE5EA;
+  --border: #C9C4B8;
+  --border-soft: #ded9cd;
+  --red-hyp: #8a4b3a;
+  --green-est: #33513b;
+
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+
+  --nav-w: 264px;
+  --page-max: 700px;
+  --wide-max: 920px;
+}
+
+html.dark{
+  --paper: #17191c;
+  --paper-raised: #1e2125;
+  --ink: #ece8df;
+  --ink-soft: #b9b4a8;
+  --indigo: #7fa8c9;
+  --indigo-soft: #9dbedb;
+  --blue: #8fa9bc;
+  --blue-pale: #262b30;
+  --border: #3a3d3f;
+  --border-soft: #2c2f31;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s ease, color .3s ease;
+}
+
+::selection{ background:var(--blue-pale); color:var(--indigo); }
+
+a{ color:var(--indigo); }
+
+h1,h2,h3,h4{
+  font-family:var(--serif);
+  font-weight:600;
+  color:var(--ink);
+  margin:0 0 .5em 0;
+  letter-spacing:-0.01em;
+}
+
+p{ margin:0 0 1.1em 0; max-width:62ch; color:var(--ink-soft); }
+p.lede{ color:var(--ink); font-size:1.15rem; }
+
+.serif-em{ font-style:italic; font-family:var(--serif); color:var(--ink); }
+
+/* thin rules everywhere */
+hr.rule{ border:none; border-top:1px solid var(--border); margin:2.5em 0; }
+
+/* ============================================================
+   SKIP LINK / ACCESSIBILITY
+============================================================ */
+.skip-link{
+  position:absolute; left:-999px; top:0; background:var(--indigo); color:var(--paper);
+  padding:.6em 1em; z-index:999;
+}
+.skip-link:focus{ left:1em; top:1em; }
+
+:focus-visible{ outline:2px solid var(--indigo); outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+
+/* ============================================================
+   TOP PROGRESS BAR
+============================================================ */
+#progress-track{
+  position:fixed; top:0; left:0; width:100%; height:2px; background:transparent; z-index:60;
+}
+#progress-bar{
+  height:100%; width:0%; background:var(--indigo); transition:width .1s linear;
+}
+
+/* ============================================================
+   LEFT NAVIGATION (desktop)
+============================================================ */
+#site-nav{
+  position:fixed; top:0; left:0; bottom:0; width:var(--nav-w);
+  border-right:1px solid var(--border);
+  padding:2.2em 1.6em 1.6em 1.6em;
+  display:flex; flex-direction:column;
+  overflow-y:auto;
+  z-index:50;
+  background:var(--paper);
+}
+.nav-mark{
+  font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--indigo);
+  margin-bottom:.15em;
+}
+.nav-mark-sub{
+  font-size:.72rem; color:var(--ink-soft); letter-spacing:.03em; margin-bottom:1.6em;
+  border-bottom:1px solid var(--border-soft); padding-bottom:1.3em;
+}
+.nav-list{ list-style:none; margin:0; padding:0; flex:1; }
+.nav-list li{ margin:0; }
+.nav-link{
+  display:flex; gap:.7em; align-items:baseline;
+  padding:.4em 0; text-decoration:none; color:var(--ink-soft);
+  font-size:.86rem; border-left:2px solid transparent; padding-left:.7em; margin-left:-.7em;
+  transition:color .15s ease, border-color .15s ease;
+}
+.nav-link .n{ font-family:var(--mono); font-size:.72rem; color:var(--border); min-width:1.4em; }
+.nav-link:hover{ color:var(--ink); }
+.nav-link.active{ color:var(--indigo); border-left-color:var(--indigo); }
+.nav-link.active .n{ color:var(--indigo); }
+
+.nav-foot{ padding-top:1.2em; border-top:1px solid var(--border-soft); display:flex; flex-direction:column; gap:.9em; }
+.nav-btn-row{ display:flex; gap:.5em; }
+.mini-btn{
+  font-family:var(--sans); font-size:.74rem; background:transparent; border:1px solid var(--border);
+  color:var(--ink-soft); padding:.4em .6em; cursor:pointer; border-radius:2px;
+}
+.mini-btn:hover{ border-color:var(--indigo); color:var(--indigo); }
+.mini-btn.active{ background:var(--indigo); color:var(--paper); border-color:var(--indigo); }
+
+#search-box{
+  width:100%; font-family:var(--sans); font-size:.82rem; background:var(--paper-raised);
+  border:1px solid var(--border); padding:.5em .6em; color:var(--ink); border-radius:2px;
+}
+#search-results{
+  margin-top:.6em; display:none; flex-direction:column; gap:.4em; max-height:220px; overflow-y:auto;
+}
+#search-results.show{ display:flex; }
+.search-hit{
+  font-size:.78rem; color:var(--ink-soft); text-decoration:none; border-left:2px solid var(--border);
+  padding:.2em .6em; display:block;
+}
+.search-hit:hover{ border-left-color:var(--indigo); color:var(--indigo); }
+.search-hit b{ color:var(--indigo); font-weight:600; }
+
+.research-state{
+  font-size:.72rem; color:var(--ink-soft); line-height:1.7;
+}
+.research-state .rs-title{ text-transform:uppercase; letter-spacing:.08em; font-size:.64rem; color:var(--border); margin-bottom:.5em; }
+.rs-item{ display:flex; align-items:center; gap:.5em; }
+.rs-dot{ width:6px; height:6px; border-radius:50%; background:var(--border); flex:none; }
+.rs-item.current .rs-dot{ background:var(--indigo); }
+.rs-item.current{ color:var(--indigo); }
+.rs-item.done .rs-dot{ background:var(--blue); }
+
+/* ============================================================
+   MOBILE TOP NAV
+============================================================ */
+#mobile-nav{ display:none; }
+
+/* ============================================================
+   MAIN CANVAS
+============================================================ */
+#main{
+  margin-left:var(--nav-w);
+  padding:0 8vw 8em 8vw;
+}
+.section{
+  max-width:var(--page-max);
+  padding-top:6.5em;
+  scroll-margin-top:2em;
+}
+.section.wide{ max-width:var(--wide-max); }
+.section-num{
+  font-family:var(--serif); font-style:italic; color:var(--blue); font-size:1rem; margin-bottom:.3em;
+}
+.section h2.section-title{
+  font-size:2.1rem; margin-bottom:.3em;
+}
+.section-kicker{
+  font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); letter-spacing:.02em;
+  margin-bottom:2em; padding-bottom:1.6em; border-bottom:1px solid var(--border-soft);
+}
+.page-no{
+  position:fixed; bottom:1.4em; left:calc(var(--nav-w) + 8vw); font-family:var(--mono); font-size:.72rem;
+  color:var(--border); z-index:10;
+}
+
+/* ============================================================
+   STATUS TAGS
+============================================================ */
+.tag{
+  display:inline-flex; align-items:center; gap:.4em; font-family:var(--mono); font-size:.68rem;
+  padding:.22em .55em; border:1px solid currentColor; border-radius:2px; white-space:nowrap;
+}
+.tag.established{ color:var(--green-est); }
+.tag.inferred{ color:var(--blue); }
+.tag.hypothesis{ color:var(--red-hyp); }
+.tag.unknown{ color:var(--ink-soft); border-style:dashed; }
+.tag .dot{ width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+/* ============================================================
+   COVER
+============================================================ */
+#cover{
+  min-height:92vh; display:flex; flex-direction:column; justify-content:center; padding-top:2em;
+  max-width:var(--wide-max);
+}
+.cover-eyebrow{
+  font-family:var(--mono); font-size:.74rem; color:var(--blue); margin-bottom:1.6em;
+  display:flex; align-items:center; gap:.7em;
+}
+.cover-eyebrow .line{ width:2.4em; height:1px; background:var(--border); }
+.cover-title{
+  font-family:var(--serif); font-weight:600; font-size:clamp(2.6rem, 7vw, 5.2rem); line-height:1.02;
+  margin:0; letter-spacing:-0.015em;
+}
+.cover-title .accent{ color:var(--indigo); font-style:italic; }
+.cover-sub{
+  font-family:var(--serif); font-size:clamp(1.1rem,2.4vw,1.5rem); color:var(--ink-soft); margin-top:.5em; max-width:34ch;
+  font-style:italic;
+}
+.cover-meta{ margin-top:2.4em; max-width:46ch; color:var(--ink-soft); font-size:.95rem; }
+.cover-status{ margin-top:1.6em; }
+
+.cover-diagram{ margin-top:3.4em; }
+.hcl-row{
+  display:flex; align-items:center; gap:1.2em; font-family:var(--mono); font-size:.85rem;
+}
+.hcl-box{ padding:.6em 1em; border:1px solid var(--border); background:var(--paper-raised); }
+.hcl-box.hot{ border-color:var(--red-hyp); color:var(--red-hyp); }
+.hcl-box.cold{ border-color:var(--indigo); color:var(--indigo); }
+.hcl-arrow{ flex:1; height:1px; background:linear-gradient(90deg, var(--red-hyp), var(--indigo)); position:relative; min-width:60px; }
+.hcl-arrow svg{ position:absolute; inset:0; width:100%; height:24px; top:-12px; }
+
+/* ============================================================
+   CHAIN DIAGRAM (vertical, section 02)
+============================================================ */
+.chain{ display:flex; flex-direction:column; align-items:flex-start; margin:2em 0; }
+.chain-node{
+  font-family:var(--mono); font-size:.85rem; padding:.55em .9em; border:1px solid var(--border);
+  background:var(--paper-raised); color:var(--ink);
+}
+.chain-node.emph{ border-color:var(--indigo); color:var(--indigo); font-weight:500; }
+.chain-arrow{ font-family:var(--mono); color:var(--border); padding:.25em 0 .25em 1.05em; font-size:.9rem; }
+.chain-highlight{
+  margin-top:1.6em; padding:1em 1.2em; border-left:2px solid var(--indigo); background:var(--blue-pale);
+}
+.chain-highlight p{ margin:0; color:var(--ink); font-family:var(--mono); font-size:.85rem; }
+.note-box{
+  margin-top:1.6em; padding:1em 1.2em; border-left:2px solid var(--border); background:var(--paper-raised);
+}
+.note-box p{ margin:0; font-size:.92rem; }
+
+/* ============================================================
+   LAYERS (section 03)
+============================================================ */
+.layer{
+  display:grid; grid-template-columns:2.6em 1fr; gap:1em; padding:1.6em 0; border-top:1px solid var(--border-soft);
+}
+.layer:first-of-type{ border-top:none; }
+.layer-index{ font-family:var(--serif); font-style:italic; color:var(--blue); font-size:1.4rem; }
+.layer h3{ font-size:1.15rem; margin-bottom:.35em; }
+.equation-block{
+  margin:1.4em 0; padding:1em 1.2em; background:var(--paper-raised); border:1px solid var(--border-soft);
+  overflow-x:auto;
+}
+.separator-statement{
+  margin:2.2em 0; padding:1.4em 1.6em; border:1px solid var(--indigo); position:relative;
+}
+.separator-statement .not-equal{ font-family:var(--serif); font-style:italic; font-size:1.3rem; color:var(--indigo); }
+
+/* ============================================================
+   EVIDENCE MAP (section 04)
+============================================================ */
+.evidence-block{ margin-bottom:2.4em; }
+.evidence-block h3{ font-size:1.25rem; display:flex; align-items:center; gap:.7em; flex-wrap:wrap; }
+.evidence-block .findings{ margin-top:.8em; }
+.finding{
+  display:grid; grid-template-columns:auto 1fr; gap:1em; padding:.9em 0; border-top:1px solid var(--border-soft);
+  align-items:start;
+}
+.finding p{ margin:0; font-size:.94rem; }
+
+/* ============================================================
+   LITERATURE CARDS (section 05)
+============================================================ */
+.lit-grid{ display:flex; flex-direction:column; gap:0; }
+.lit-card{
+  border-top:1px solid var(--border); padding:1.6em 0; cursor:pointer;
+}
+.lit-card:last-child{ border-bottom:1px solid var(--border); }
+.lit-head{ display:flex; align-items:baseline; gap:1em; justify-content:space-between; }
+.lit-year{ font-family:var(--mono); color:var(--blue); font-size:.85rem; }
+.lit-title{ font-family:var(--serif); font-size:1.25rem; margin:.25em 0 0 0; }
+.lit-toggle{ font-family:var(--mono); color:var(--border); font-size:1.1rem; transition:transform .2s ease; }
+.lit-card.open .lit-toggle{ transform:rotate(45deg); color:var(--indigo); }
+.lit-body{
+  display:grid; grid-template-rows:0fr; transition:grid-template-rows .28s ease;
+}
+.lit-card.open .lit-body{ grid-template-rows:1fr; }
+.lit-body-inner{ overflow:hidden; }
+.lit-body-content{ padding-top:1.1em; }
+.lit-field{ margin-bottom:1em; }
+.lit-field .lbl{ font-family:var(--mono); font-size:.68rem; color:var(--ink-soft); letter-spacing:.04em; margin-bottom:.3em; display:block; }
+.lit-field p{ margin:0; font-size:.92rem; }
+.lit-keys{ display:flex; flex-wrap:wrap; gap:.4em; margin-top:.2em; }
+.lit-key{ font-family:var(--mono); font-size:.72rem; padding:.2em .55em; background:var(--blue-pale); color:var(--indigo-soft); border-radius:2px; }
+
+/* ============================================================
+   CAUSAL CHAIN DIAGRAM (section 06)
+============================================================ */
+.causal-diagram{ display:flex; flex-direction:column; gap:.4em; margin:2em 0; }
+.causal-node-wrap{ position:relative; }
+.causal-node{
+  width:100%; text-align:left; font-family:var(--mono); font-size:.88rem; padding:.85em 1.1em;
+  border:1px solid var(--border); background:var(--paper-raised); color:var(--ink); cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center; transition:border-color .15s ease, background .15s ease;
+}
+.causal-node:hover{ border-color:var(--blue); }
+.causal-node.to-test{ border-color:var(--red-hyp); color:var(--red-hyp); border-style:dashed; }
+.causal-node .plus{ color:var(--border); font-size:1rem; }
+.causal-connector{ height:14px; margin-left:1.4em; border-left:1px solid var(--border-soft); }
+.causal-panel{
+  display:none; padding:1em 1.2em; margin:.2em 0 .2em 0; background:var(--blue-pale); border-left:2px solid var(--indigo);
+  font-size:.92rem;
+}
+.causal-panel.show{ display:block; }
+.causal-panel p{ margin:0; color:var(--ink); }
+
+/* ============================================================
+   TABLES (media selection, comparison)
+============================================================ */
+.data-table{ width:100%; border-collapse:collapse; margin:1.4em 0; font-size:.88rem; }
+.data-table th, .data-table td{
+  text-align:left; padding:.65em .8em; border-bottom:1px solid var(--border-soft); vertical-align:top;
+}
+.data-table th{ font-family:var(--mono); font-size:.7rem; letter-spacing:.03em; color:var(--ink-soft); font-weight:500; }
+.data-table td.empty-cell{ color:var(--border); font-style:italic; }
+.table-scroll{ overflow-x:auto; }
+.media-statement{
+  margin:1.8em 0; padding-left:1.2em; border-left:2px solid var(--indigo);
+}
+.media-statement p{ font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--ink); margin:0; }
+
+/* ============================================================
+   PHASES / WORKFLOW (section 08)
+============================================================ */
+.phase{ display:grid; grid-template-columns:3.4em 1fr; gap:1.2em; padding:1.6em 0; border-top:1px solid var(--border-soft); }
+.phase:first-of-type{ border-top:none; }
+.phase-tag{ font-family:var(--mono); font-size:.72rem; color:var(--blue); padding-top:.2em; }
+.phase h3{ font-size:1.15rem; margin-bottom:.4em; }
+.phase-list{ margin:.6em 0 0 0; padding:0; list-style:none; }
+.phase-list li{
+  font-family:var(--mono); font-size:.85rem; color:var(--ink-soft); padding:.15em 0;
+}
+.phase-list li::before{ content:"— "; color:var(--border); }
+
+/* ============================================================
+   LOAD CURVE PLACEHOLDER (section 09)
+============================================================ */
+.load-curve-frame{
+  margin:2em 0; padding:1.6em; border:1px dashed var(--border); background:var(--paper-raised); position:relative;
+}
+.load-curve-frame svg{ width:100%; height:auto; }
+.simulation-target-badge{
+  position:absolute; top:.9em; right:.9em; font-family:var(--mono); font-size:.65rem; color:var(--red-hyp);
+  border:1px dashed var(--red-hyp); padding:.25em .5em;
+}
+.q-list{ list-style:none; margin:1.4em 0; padding:0; }
+.q-list li{ font-size:.94rem; padding:.6em 0; border-top:1px solid var(--border-soft); color:var(--ink-soft); }
+.q-list li:first-child{ border-top:none; }
+
+/* ============================================================
+   THERMO ACCOUNTING (section 10)
+============================================================ */
+.flow-diagram{
+  display:flex; align-items:center; justify-content:center; gap:1.4em; margin:2em 0; flex-wrap:wrap;
+  font-family:var(--mono); font-size:.85rem;
+}
+.flow-box{ padding:.9em 1.2em; border:1px solid var(--border); background:var(--paper-raised); text-align:center; }
+.flow-box.system{ border-color:var(--indigo); color:var(--indigo); font-weight:500; }
+.flow-arrow{ color:var(--border); font-size:1.1rem; }
+.carnot-note{ font-size:.88rem; color:var(--ink-soft); font-style:italic; margin-top:.6em; }
+
+/* ============================================================
+   RESEARCH FRONTIER (section 11) -- visually separated
+============================================================ */
+#frontier{
+  background:var(--paper-raised); margin-left:calc(-8vw); margin-right:calc(-8vw); padding-left:8vw; padding-right:8vw;
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+.frontier-tags{ display:flex; flex-wrap:wrap; gap:.6em; margin:1.6em 0; }
+.frontier-tag{
+  font-family:var(--mono); font-size:.78rem; padding:.4em .8em; border:1px solid var(--border-soft); color:var(--ink-soft);
+}
+.frontier-statement{
+  margin-top:1.8em; padding:1.2em 1.4em; border-left:2px solid var(--blue); background:var(--paper);
+}
+.frontier-statement p{ margin:0; }
+
+/* ============================================================
+   OPEN QUESTIONS (section 12)
+============================================================ */
+.oq-list{ display:flex; flex-direction:column; }
+.oq-item{ border-top:1px solid var(--border); padding:1.2em 0; }
+.oq-item:last-child{ border-bottom:1px solid var(--border); }
+.oq-head{ display:flex; gap:1em; align-items:baseline; cursor:pointer; }
+.oq-id{ font-family:var(--mono); font-size:.8rem; color:var(--blue); }
+.oq-text{ font-family:var(--serif); font-size:1.1rem; }
+.oq-note{ display:none; margin-top:.8em; padding-left:2.6em; font-size:.9rem; color:var(--ink-soft); }
+.oq-item.open .oq-note{ display:block; }
+
+/* ============================================================
+   RESEARCH LOG (section 13)
+============================================================ */
+.log-entry{
+  border-top:1px solid var(--border-soft); padding:1.4em 0; display:grid; grid-template-columns:9em 1fr; gap:1em;
+}
+.log-entry:first-of-type{ border-top:1px solid var(--border); }
+.log-date{ font-family:var(--mono); font-size:.78rem; color:var(--blue); }
+.log-body .lbl{ font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); letter-spacing:.04em; display:block; margin-top:.7em; }
+.log-body .lbl:first-child{ margin-top:0; }
+.log-body p{ margin:.15em 0 0 0; font-size:.92rem; }
+.log-form{
+  margin-top:2em; padding:1.6em; background:var(--paper-raised); border:1px solid var(--border-soft);
+}
+.log-form h3{ font-size:1rem; margin-bottom:1em; }
+.form-row{ margin-bottom:1em; }
+.form-row label{ display:block; font-family:var(--mono); font-size:.7rem; color:var(--ink-soft); margin-bottom:.35em; letter-spacing:.03em; }
+.form-row input, .form-row textarea, .form-row select{
+  width:100%; font-family:var(--sans); font-size:.9rem; padding:.55em .7em; background:var(--paper);
+  border:1px solid var(--border); color:var(--ink); border-radius:2px;
+}
+.form-row textarea{ min-height:4.5em; resize:vertical; }
+.btn-primary{
+  font-family:var(--sans); font-size:.88rem; background:var(--indigo); color:var(--paper); border:none;
+  padding:.65em 1.3em; cursor:pointer; border-radius:2px;
+}
+.btn-primary:hover{ background:var(--indigo-soft); }
+.empty-log{ padding:1.6em 0; color:var(--ink-soft); font-style:italic; font-size:.92rem; }
+
+/* ============================================================
+   HOVER DEFINITIONS
+============================================================ */
+.term{
+  border-bottom:1px dotted var(--blue); cursor:help; position:relative; color:var(--ink);
+}
+.term .tip{
+  display:none; position:absolute; bottom:130%; left:0; width:240px; background:var(--ink); color:var(--paper);
+  font-family:var(--sans); font-size:.78rem; line-height:1.4; padding:.7em .9em; border-radius:3px; z-index:40;
+}
+html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--border); }
+.term:hover .tip, .term:focus .tip{ display:block; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+#site-footer{
+  max-width:var(--wide-max); padding-top:3em; margin-top:3em; border-top:1px solid var(--border);
+  font-size:.85rem; color:var(--ink-soft);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+/* ============================================================
+   v0.2 ADDITIONS — FILTERS, LEVEL BADGES, AUDIT, CHECKPOINT
+============================================================ */
+.filter-bar{ display:flex; flex-wrap:wrap; gap:.5em; margin:1.4em 0 2em 0; }
+.filter-btn{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.02em; background:transparent;
+  border:1px solid var(--border); color:var(--ink-soft); padding:.4em .8em; cursor:pointer; border-radius:2px;
+  transition:all .15s ease;
+}
+.filter-btn:hover{ border-color:var(--blue); color:var(--ink); }
+.filter-btn.active{ background:var(--indigo); border-color:var(--indigo); color:var(--paper); }
+.filter-group-label{ font-family:var(--mono); font-size:.62rem; color:var(--border); letter-spacing:.06em; margin-right:.6em; align-self:center; }
+
+.level-badge{
+  font-family:var(--mono); font-size:.66rem; padding:.18em .5em; border-radius:2px; letter-spacing:.03em;
+}
+.level-badge.level-a{ background:var(--blue-pale); color:var(--indigo); }
+.level-badge.level-b{ background:transparent; border:1px solid var(--border); color:var(--ink-soft); }
+.level-badge.level-c{ background:transparent; border:1px dashed var(--border); color:var(--ink-soft); }
+
+.lit-compact-list{ display:flex; flex-direction:column; }
+.lit-compact{ display:grid; grid-template-columns:auto auto 1fr; gap:.9em; align-items:baseline; padding:.7em 0; border-top:1px solid var(--border-soft); }
+.lit-compact:first-child{ border-top:none; }
+.lit-compact .lc-year{ font-family:var(--mono); font-size:.76rem; color:var(--blue); }
+.lit-compact .lc-title{ font-size:.9rem; color:var(--ink); }
+.lit-compact .lc-title .lc-sub{ display:block; color:var(--ink-soft); font-size:.82rem; margin-top:.15em; }
+.branch-label{ font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); margin:1.6em 0 .6em 0; letter-spacing:.03em; }
+.branch-label:first-child{ margin-top:0; }
+
+.evq-toggle{ display:flex; gap:.5em; margin:1.6em 0 1.8em 0; }
+.evq-panel{ display:none; }
+.evq-panel.show{ display:block; }
+.evq-item{ display:flex; gap:1em; padding:.8em 0; border-top:1px solid var(--border-soft); }
+.evq-item:first-child{ border-top:none; }
+.evq-num{ font-family:var(--mono); font-size:.78rem; color:var(--blue); flex:none; width:1.6em; }
+.evq-item p{ margin:0; font-size:.92rem; }
+
+.audit-pair{ display:grid; grid-template-columns:1fr 1fr; gap:1.2em; margin:1.2em 0 1.8em 0; }
+.audit-col{ padding:1em 1.2em; border:1px solid var(--border-soft); }
+.audit-col.dont{ border-left:2px solid var(--red-hyp); }
+.audit-col.do{ border-left:2px solid var(--green-est); }
+.audit-col .lbl{ font-family:var(--mono); font-size:.66rem; letter-spacing:.04em; display:block; margin-bottom:.5em; }
+.audit-col.dont .lbl{ color:var(--red-hyp); }
+.audit-col.do .lbl{ color:var(--green-est); }
+.audit-col p{ margin:0; font-size:.9rem; font-style:italic; }
+
+.checkpoint-panel{ border:1.5px solid var(--indigo); padding:2em 2.2em; margin:2em 0; }
+.checkpoint-panel .cp-eyebrow{ font-family:var(--mono); font-size:.72rem; color:var(--indigo); letter-spacing:.04em; margin-bottom:.6em; }
+.checkpoint-panel h3{ font-size:1.5rem; margin-bottom:1em; }
+.criteria-grid{ display:flex; flex-direction:column; }
+.criteria-item{ display:grid; grid-template-columns:2em 8em 1fr; gap:1em; padding:.7em 0; border-top:1px solid var(--border-soft); align-items:baseline; }
+.criteria-item:first-child{ border-top:none; }
+.criteria-item .ci-letter{ font-family:var(--serif); font-style:italic; color:var(--blue); }
+.criteria-item .ci-name{ font-family:var(--mono); font-size:.74rem; color:var(--ink-soft); }
+.criteria-item p{ margin:0; font-size:.9rem; }
+
+.locked-section{ position:relative; }
+.locked-banner{
+  display:inline-flex; align-items:center; gap:.5em; font-family:var(--mono); font-size:.74rem;
+  color:var(--red-hyp); border:1px dashed var(--red-hyp); padding:.5em .9em; margin-bottom:1.6em;
+}
+.method-q-list{ display:flex; flex-direction:column; opacity:.68; }
+.method-q{ display:grid; grid-template-columns:7em 1fr; gap:1em; padding:.7em 0; border-top:1px solid var(--border-soft); }
+.method-q:first-child{ border-top:none; }
+.method-q .mq-tag{ font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); }
+.method-q p{ margin:0; font-size:.9rem; color:var(--ink-soft); }
+
+.not-vs-current{ display:grid; grid-template-columns:1fr 1fr; gap:2em; margin:2em 0; align-items:start; }
+.not-col .lbl{ font-family:var(--mono); font-size:.68rem; color:var(--ink-soft); letter-spacing:.04em; margin-bottom:.8em; display:block; }
+.not-col ul{ list-style:none; margin:0; padding:0; }
+.not-col li{ padding:.5em 0; border-top:1px solid var(--border-soft); font-size:.92rem; color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--border); }
+.not-col li:first-child{ border-top:none; }
+.current-col{ display:flex; align-items:center; justify-content:center; height:100%; }
+.current-box{ border:1.5px solid var(--indigo); padding:1.6em; text-align:center; }
+.current-box p{ margin:0; font-family:var(--serif); font-style:italic; color:var(--indigo); font-size:1.1rem; }
+
+.falsify-list{ display:flex; flex-direction:column; }
+.falsify-item{ display:grid; grid-template-columns:2.4em 1fr; gap:1em; padding:.9em 0; border-top:1px solid var(--border-soft); }
+.falsify-item:first-child{ border-top:none; }
+.falsify-item .f-num{ font-family:var(--mono); color:var(--red-hyp); font-size:.82rem; }
+.falsify-item p{ margin:0; font-size:.92rem; }
+
+.state-check{ color:var(--green-est); }
+.state-current{ color:var(--indigo); font-weight:500; }
+.state-future{ color:var(--border); }
+
+@media (max-width:720px){
+  .audit-pair, .not-vs-current{ grid-template-columns:1fr; }
+  .lit-compact{ grid-template-columns:1fr; }
+  .criteria-item{ grid-template-columns:1fr; }
+  .method-q{ grid-template-columns:1fr; }
+}
+
+/* ============================================================
+   SIMULATION LOG MODULE
+============================================================ */
+.simlog-quote{
+  font-family:var(--serif); font-style:italic; font-size:1.15rem; color:var(--indigo);
+  border-left:2px solid var(--indigo); padding-left:1.1em; margin:1.6em 0 2.2em 0;
+}
+.subhead{
+  display:flex; align-items:baseline; gap:.7em; margin:2.6em 0 1.2em 0; padding-top:2em; border-top:1px solid var(--border);
+}
+.subhead:first-of-type{ margin-top:1.6em; padding-top:0; border-top:none; }
+.subhead .sub-num{ font-family:var(--serif); font-style:italic; color:var(--blue); font-size:1.05rem; }
+.subhead h3{ margin:0; font-size:1.3rem; }
+
+.roadmap-track{ display:flex; flex-wrap:wrap; align-items:center; gap:0; font-family:var(--mono); font-size:.8rem; margin:1.4em 0; }
+.roadmap-node{ display:flex; flex-direction:column; align-items:center; gap:.4em; padding:0 1.1em; text-align:center; }
+.roadmap-node .rn-mark{ width:10px; height:10px; border-radius:50%; border:1.5px solid var(--border); }
+.roadmap-node.done .rn-mark{ background:var(--blue); border-color:var(--blue); }
+.roadmap-node.current .rn-mark{ background:var(--indigo); border-color:var(--indigo); box-shadow:0 0 0 3px var(--blue-pale); }
+.roadmap-node span.rn-label{ color:var(--ink-soft); max-width:9em; }
+.roadmap-node.current span.rn-label{ color:var(--indigo); font-weight:500; }
+.roadmap-connector{ flex:1; min-width:1.4em; height:1px; background:var(--border); }
+.roadmap-current-state{ font-family:var(--mono); font-size:.76rem; color:var(--indigo); margin-top:.6em; }
+
+.experiment-tree{ display:flex; flex-direction:column; gap:0; }
+.sim-block{ border-top:1px solid var(--border); padding:1.6em 0; }
+.sim-block:first-child{ border-top:none; }
+.sim-block-head{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:.6em; }
+.sim-block-head h4{ font-family:var(--serif); font-size:1.2rem; margin:0; }
+.sim-sub-list{ margin-top:1em; display:flex; flex-direction:column; }
+.sim-sub-row{ display:grid; grid-template-columns:8.5em 1fr; gap:1em; padding:.6em 0; border-top:1px solid var(--border-soft); align-items:baseline; }
+.sim-sub-row:first-child{ border-top:none; }
+.sim-sub-row .ssr-id{ font-family:var(--mono); font-size:.78rem; color:var(--blue); }
+.sim-sub-row .ssr-title{ font-size:.9rem; color:var(--ink); }
+
+.exp-table-wrap{ overflow-x:auto; margin:1.4em 0; }
+.exp-table{ width:100%; border-collapse:collapse; font-size:.82rem; min-width:1100px; }
+.exp-table th{ text-align:left; padding:.6em .7em; border-bottom:1px solid var(--border); font-family:var(--mono); font-size:.66rem; letter-spacing:.03em; color:var(--ink-soft); font-weight:500; white-space:nowrap; }
+.exp-table td{ padding:.7em .7em; border-bottom:1px solid var(--border-soft); vertical-align:top; }
+.exp-row{ cursor:pointer; transition:background .12s ease; }
+.exp-row:hover{ background:var(--paper-raised); }
+.exp-row .exp-id-cell{ font-family:var(--mono); color:var(--indigo); font-size:.82rem; }
+.exp-row.expanded{ background:var(--blue-pale); }
+.exp-card-row td{ padding:0; border-bottom:1px solid var(--border); }
+.exp-card{ display:none; padding:1.8em 1.6em; background:var(--paper-raised); }
+.exp-card.show{ display:block; }
+
+.tbd{ color:var(--border); font-style:italic; }
+
+.exp-flow{ display:flex; flex-direction:column; align-items:flex-start; margin:1em 0 1.8em 0; }
+.exp-flow-node{ font-family:var(--mono); font-size:.76rem; padding:.4em .8em; border:1px solid var(--border-soft); color:var(--ink-soft); }
+.exp-flow-arrow{ font-family:var(--mono); color:var(--border); padding:.1em 0 .1em .95em; font-size:.8rem; }
+
+.exp-section{ margin-bottom:1.8em; }
+.exp-section .es-letter{ font-family:var(--mono); font-size:.68rem; color:var(--indigo); letter-spacing:.03em; display:block; margin-bottom:.5em; }
+.exp-section h5{ font-family:var(--serif); font-size:1rem; margin:0 0 .5em 0; }
+.exp-section p{ margin:0 0 .5em 0; font-size:.9rem; }
+
+.def-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:.9em 1.4em; }
+.def-item .dl{ font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); display:block; margin-bottom:.2em; }
+.def-item .dv{ font-size:.9rem; }
+
+.geometry-panel{ display:grid; grid-template-columns:1fr 1fr; gap:1.6em; margin:1em 0; align-items:start; }
+.geometry-ascii{ font-family:var(--mono); font-size:.78rem; line-height:1.5; color:var(--ink-soft); background:var(--paper); border:1px solid var(--border-soft); padding:1.2em; white-space:pre; overflow-x:auto; }
+@media (max-width:720px){ .geometry-panel{ grid-template-columns:1fr; } }
+
+.param-table{ width:100%; border-collapse:collapse; font-size:.84rem; margin:.6em 0 1.2em 0; }
+.param-table th{ text-align:left; padding:.5em .7em; border-bottom:1px solid var(--border); font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); }
+.param-table td{ padding:.55em .7em; border-bottom:1px solid var(--border-soft); font-size:.85rem; }
+.lock-pill{ font-family:var(--mono); font-size:.64rem; padding:.1em .5em; border:1px solid var(--border); color:var(--ink-soft); }
+
+.analysis-item{ padding:.9em 0; border-top:1px solid var(--border-soft); }
+.analysis-item:first-child{ border-top:none; }
+.analysis-item .lbl{ font-family:var(--mono); font-size:.66rem; color:var(--blue); letter-spacing:.03em; display:block; margin-top:.4em; }
+
+.expectation-box{ border-left:2px solid var(--blue); background:var(--blue-pale); padding:1em 1.2em; margin:.6em 0; }
+.expectation-box .lbl{ font-family:var(--mono); font-size:.66rem; color:var(--indigo-soft); letter-spacing:.03em; display:block; margin-bottom:.4em; }
+.expectation-box p{ margin:0; font-style:italic; }
+.noresult-box{ border:1px dashed var(--border); padding:1em 1.2em; margin:.6em 0; color:var(--ink-soft); font-style:italic; text-align:center; }
+
+.validation-list{ display:flex; flex-direction:column; }
+.validation-item{ display:grid; grid-template-columns:9em 1fr; gap:1em; padding:.6em 0; border-top:1px solid var(--border-soft); }
+.validation-item:first-child{ border-top:none; }
+.validation-item .vl{ font-family:var(--mono); font-size:.72rem; color:var(--ink-soft); }
+.validation-item p{ margin:0; font-size:.88rem; }
+
+.lock-compare{ display:flex; flex-wrap:wrap; gap:.5em; margin:.8em 0; }
+.lock-tag{ font-family:var(--mono); font-size:.72rem; padding:.25em .6em; border-radius:2px; }
+.lock-tag.changed{ background:var(--blue-pale); color:var(--indigo); }
+.lock-tag.unchanged{ background:transparent; border:1px solid var(--border); color:var(--ink-soft); }
+.lock-tag.unknown{ background:transparent; border:1px dashed var(--red-hyp); color:var(--red-hyp); }
+
+.decision-entry{ padding:.9em 0; border-top:1px solid var(--border-soft); }
+.decision-entry:first-child{ border-top:none; }
+.decision-entry .de-grid{ display:grid; grid-template-columns:6em 1fr; gap:.8em; margin-top:.3em; }
+.decision-entry .de-lbl{ font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); }
+.decision-entry p{ margin:0; font-size:.88rem; }
+
+.run-list{ display:flex; flex-direction:column; margin-top:.6em; }
+.run-item{ display:flex; gap:.8em; padding:.5em 0; border-top:1px solid var(--border-soft); font-size:.86rem; align-items:baseline; }
+.run-item:first-child{ border-top:none; }
+.run-item .run-id{ font-family:var(--mono); color:var(--blue); font-size:.78rem; flex:none; }
+
+.checklist-group{ margin-bottom:1.8em; }
+.checklist-group h4{ font-family:var(--mono); font-size:.74rem; color:var(--ink-soft); letter-spacing:.03em; text-transform:uppercase; margin-bottom:.8em; }
+.checklist-item{ display:flex; align-items:flex-start; gap:.7em; padding:.45em 0; border-top:1px solid var(--border-soft); font-size:.9rem; }
+.checklist-item:first-child{ border-top:none; }
+.checklist-item input[type=checkbox]{ margin-top:.25em; accent-color:var(--indigo); }
+.checklist-item label{ cursor:pointer; }
+.checklist-item.checked label{ color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--border); }
+
+.failure-entry{ border-top:1px solid var(--border); padding:1.2em 0; }
+.failure-entry:first-child{ border-top:none; }
+.failure-entry .fe-id{ font-family:var(--mono); font-size:.82rem; color:var(--red-hyp); }
+.failure-entry .fe-grid{ display:grid; grid-template-columns:9em 1fr; gap:.8em; margin-top:.6em; }
+.failure-entry .fe-lbl{ font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); }
+.failure-entry p{ margin:0; font-size:.88rem; }
+
+.current-exp-card{ border:1.5px solid var(--indigo); padding:2em 2.2em; margin:1.6em 0; }
+.current-exp-card .ce-eyebrow{ font-family:var(--mono); font-size:.72rem; color:var(--indigo); letter-spacing:.04em; margin-bottom:.5em; }
+.current-exp-card .ce-id{ font-family:var(--serif); font-style:italic; font-size:1.6rem; color:var(--ink); margin-bottom:.8em; }
+
+.guardrail-box{ border:1px solid var(--indigo); padding:1.8em 2em; margin:1.6em 0; text-align:center; }
+.guardrail-box .gb-title{ font-family:var(--mono); font-size:.8rem; letter-spacing:.06em; color:var(--indigo); margin-bottom:1.2em; }
+
+.export-row{ display:flex; gap:.7em; flex-wrap:wrap; margin:1.4em 0; }
+
+.status-planned{ color:var(--blue); border-color:var(--blue); }
+.status-running{ color:var(--indigo); border-color:var(--indigo); }
+.status-completed{ color:var(--green-est); border-color:var(--green-est); }
+.status-failed{ color:var(--red-hyp); border-color:var(--red-hyp); }
+.status-needsrevision{ color:#8a6a2f; border-color:#8a6a2f; }
+.status-validated{ color:var(--green-est); border-color:var(--green-est); font-weight:600; }
+.status-rejected{ color:var(--ink-soft); border-color:var(--border); text-decoration:line-through; }
+
+@media (max-width:720px){
+  .exp-table{ min-width:900px; }
+}
+
+@media (max-width:960px){
+  #site-nav{ display:none; }
+  #mobile-nav{
+    display:flex; position:fixed; top:0; left:0; right:0; z-index:60; background:var(--paper);
+    border-bottom:1px solid var(--border); align-items:center; justify-content:space-between;
+    padding:.8em 5vw;
+  }
+  #mobile-nav .nav-mark{ margin:0; font-size:.95rem; }
+  #mobile-menu-btn{
+    background:none; border:1px solid var(--border); color:var(--ink); font-family:var(--mono); font-size:.75rem;
+    padding:.4em .7em; cursor:pointer; border-radius:2px;
+  }
+  #mobile-panel{
+    display:none; position:fixed; top:48px; left:0; right:0; bottom:0; background:var(--paper); z-index:59;
+    overflow-y:auto; padding:1.5em 6vw;
+  }
+  #mobile-panel.show{ display:block; }
+  #main{ margin-left:0; padding:4.5em 6vw 6em 6vw; }
+  .page-no{ display:none; }
+  .section{ padding-top:3em; }
+  #frontier{ margin-left:-6vw; margin-right:-6vw; padding-left:6vw; padding-right:6vw; }
+  .layer, .phase{ grid-template-columns:1fr; }
+  .log-entry{ grid-template-columns:1fr; }
+  .table-scroll{ -webkit-overflow-scrolling:touch; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="progress-track"><div id="progress-bar"></div></div>
+
+<nav id="site-nav" aria-label="Sections">
+  <div class="nav-mark">Thermal Polarization</div>
+  <div class="nav-mark-sub">A living research notebook</div>
+
+  <ul class="nav-list" id="nav-list">
+    <li><a class="nav-link" data-target="cover" href="#cover"><span class="n">00</span><span>Cover</span></a></li>
+    <li><a class="nav-link" data-target="question" href="#question"><span class="n">01</span><span>The question</span></a></li>
+    <li><a class="nav-link" data-target="mechanism" href="#mechanism"><span class="n">02</span><span>The core idea</span></a></li>
+    <li><a class="nav-link" data-target="hierarchy" href="#hierarchy"><span class="n">03</span><span>Literature hierarchy</span></a></li>
+    <li><a class="nav-link" data-target="litmap" href="#litmap"><span class="n">04</span><span>Supervised literature map</span></a></li>
+    <li><a class="nav-link" data-target="agree" href="#agree"><span class="n">05</span><span>What the literature agrees on</span></a></li>
+    <li><a class="nav-link" data-target="audit" href="#audit"><span class="n">06</span><span>Scientific audit</span></a></li>
+    <li><a class="nav-link" data-target="physicsmap" href="#physicsmap"><span class="n">07</span><span>The central physics map</span></a></li>
+    <li><a class="nav-link" data-target="gap" href="#gap"><span class="n">08</span><span>The gap</span></a></li>
+    <li><a class="nav-link" data-target="questions" href="#questions"><span class="n">09</span><span>Secondary questions</span></a></li>
+    <li><a class="nav-link" data-target="media" href="#media"><span class="n">10</span><span>Media selection</span></a></li>
+    <li><a class="nav-link" data-target="measure" href="#measure"><span class="n">11</span><span>Measurement architecture</span></a></li>
+    <li><a class="nav-link" data-target="observables" href="#observables"><span class="n">12</span><span>Distinction between observables</span></a></li>
+    <li><a class="nav-link" data-target="falsify" href="#falsify"><span class="n">13</span><span>Falsification logic</span></a></li>
+    <li><a class="nav-link" data-target="thermo" href="#thermo"><span class="n">14</span><span>No free energy</span></a></li>
+    <li><a class="nav-link" data-target="stay" href="#stay"><span class="n">15</span><span>Stay on the question</span></a></li>
+    <li><a class="nav-link" data-target="checkpoint" href="#checkpoint"><span class="n">16</span><span>Research checkpoint</span></a></li>
+    <li><a class="nav-link" data-target="simlog" href="#simlog"><span class="n">17</span><span>Simulation log</span></a></li>
+    <li><a class="nav-link" data-target="locked" href="#locked"><span class="n">18</span><span>Next: simulation design</span></a></li>
+    <li><a class="nav-link" data-target="final" href="#final"><span class="n">19</span><span>Checkpoint 01</span></a></li>
+    <li><a class="nav-link" data-target="log" href="#log"><span class="n">20</span><span>Research log</span></a></li>
+  </ul>
+
+  <div class="nav-foot">
+    <input type="search" id="search-box" placeholder="Search the notebook…" aria-label="Search the notebook">
+    <div id="search-results"></div>
+
+    <div class="research-state">
+      <div class="rs-title">Research state — v0.2</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Literature discovery</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Literature synthesis</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Cross-literature classification</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Scientific gap definition</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Research-question freeze</div>
+      <div class="rs-item current"><span class="rs-dot"></span>Checkpoint 01</div>
+      <div class="rs-item"><span class="rs-dot"></span>Simulation-method selection</div>
+      <div class="rs-item"><span class="rs-dot"></span>Model implementation</div>
+      <div class="rs-item"><span class="rs-dot"></span>Literature reproduction</div>
+      <div class="rs-item"><span class="rs-dot"></span>Cross-liquid comparison</div>
+      <div class="rs-item"><span class="rs-dot"></span>Electrical extraction</div>
+      <div class="rs-item"><span class="rs-dot"></span>Power characterization</div>
+      <div class="rs-item"><span class="rs-dot"></span>Thermodynamic analysis</div>
+    </div>
+
+    <div class="nav-btn-row">
+      <button class="mini-btn" id="theme-toggle" type="button">Dark paper</button>
+    </div>
+  </div>
+</nav>
+
+<div id="mobile-nav">
+  <div class="nav-mark">Thermal Polarization</div>
+  <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-panel">Contents</button>
+</div>
+<div id="mobile-panel">
+  <ul class="nav-list" id="nav-list-mobile"></ul>
+  <input type="search" id="search-box-mobile" placeholder="Search the notebook…" aria-label="Search the notebook">
+  <div id="search-results-mobile"></div>
+  <div class="nav-btn-row" style="margin-top:1.4em;">
+    <button class="mini-btn" id="theme-toggle-mobile" type="button">Dark paper</button>
+  </div>
+</div>
+
+<div class="page-no" id="page-no">01 / 13</div>
+
+<main id="main">
+
+<!-- ================= 00 COVER ================= -->
+<section class="section wide" id="cover" data-title="Cover">
+  <div class="cover-eyebrow"><span class="line"></span> Computational physics — molecular simulation research · Research Book v0.2</div>
+  <h1 class="cover-title">Thermal Polarization<br><span class="accent">→ Electrical Work</span></h1>
+  <p class="cover-sub">Can a bulk polar liquid subjected to a thermal gradient produce a measurable electrical potential and, ultimately, deliver net electrical power to an external load?</p>
+  <p class="cover-meta">Stage: literature synthesis → scientific checkpoint. Not yet at simulation-method selection. This notebook classifies, reconciles and audits the literature reviewed so far, and brings the research to a defined checkpoint immediately before choosing simulation methods.</p>
+  <div class="cover-status">
+    <span class="tag hypothesis"><span class="dot"></span>Exploratory research — no result yet claimed</span>
+    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: Checkpoint 01</span>
+  </div>
+
+  <div class="cover-diagram">
+    <div class="hcl-row">
+      <div class="hcl-box hot">HOT</div>
+      <div class="hcl-arrow">
+        <svg viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="0" y1="12" x2="190" y2="12" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" style="color:var(--border)"/>
+          <path d="M182 6 L192 12 L182 18" fill="none" stroke="var(--indigo)" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <div class="hcl-box" style="border-color:var(--blue);color:var(--blue);">POLAR LIQUID</div>
+      <div class="hcl-arrow">
+        <svg viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="0" y1="12" x2="190" y2="12" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" style="color:var(--border)"/>
+          <path d="M182 6 L192 12 L182 18" fill="none" stroke="var(--indigo)" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <div class="hcl-box cold">COLD</div>
+    </div>
+    <p style="margin-top:1.2em; font-size:.85rem; max-width:48ch;">Molecular dipoles gradually reorient across the gradient — a bias, not yet a battery.</p>
+  </div>
+</section>
+
+<!-- ================= 01 THE QUESTION ================= -->
+<section class="section" id="question" data-title="The question">
+  <div class="section-num">01</div>
+  <h2 class="section-title">The question</h2>
+  <div class="section-kicker">Non-negotiable research scope</div>
+
+  <p class="lede serif-em">Can a bulk polar liquid subjected to a thermal gradient deliver measurable net electrical power to an external load through thermally induced molecular polarization?</p>
+
+  <p>The core project is fixed to this chain:</p>
+
+  <div class="equation-block">
+    \[ \nabla T \rightarrow J_q \rightarrow \text{molecular response} \rightarrow P \rightarrow E \rightarrow V_{OC} \rightarrow I \rightarrow P_{out} \]
+  </div>
+
+  <p>The primary physical system is the <strong>bulk polar liquid</strong>. The first candidate systems are H<sub>2</sub>O and CH<sub>3</sub>CN. The first scientific objective is not device engineering — it is:</p>
+
+  <div class="media-statement">
+    <p>Determine whether thermopolarization in a bulk polar liquid can be connected quantitatively to extractable electrical work.</p>
+  </div>
+
+  <p>Nanochannels, ion-selective membranes, Brownian ratchets, molecular motors, triboelectric harvesters, molecular junctions, and other advanced architectures do not replace this question. They may appear only as supporting or future research directions.</p>
+
+  <div class="chain">
+    <div class="chain-node">∇T — imposed thermal gradient</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">J<sub>q</sub> — heat flux</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">Molecular response</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Thermopolarization, P</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Electric field, E</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Open-circuit voltage, V<sub>OC</sub></div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Load current, I</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Electrical power, P<sub>out</sub></div>
+  </div>
+
+  <div class="chain-highlight">
+    <p>P → E → V<sub>OC</sub> → I → P<sub>out</sub> — the central unresolved segment of this project.</p>
+  </div>
+
+  <div class="note-box">
+    <p>The literature reviewed so far establishes important parts of the upstream physical chain, but the central engineering question is whether a bulk system can deliver measurable net electrical power to an external load.</p>
+  </div>
+</section>
+
+<!-- ================= 02 CORE MECHANISM ================= -->
+<section class="section" id="mechanism" data-title="The core idea">
+  <div class="section-num">02</div>
+  <h2 class="section-title">The core idea</h2>
+  <div class="section-kicker">A polar liquid under thermal stress</div>
+
+  <p>A temperature gradient creates a nonequilibrium state. In molecular simulations of water, polar molecules develop a preferential orientation along the thermal gradient. The resulting polarization can be represented schematically as:</p>
+
+  <div class="equation-block">
+    \[ P = P(T,\, \nabla T,\, \rho,\, \text{molecular dynamics},\, \text{structure}) \]
+  </div>
+
+  <p>The important point is that polarization is not determined by molecular dipole moment alone. It depends on how molecular structure and dynamics respond to the thermal field.</p>
+
+  <hr class="rule">
+
+  <h3>From polarization to voltage</h3>
+  <p>Polarization can generate an electric field. Conceptually, P → E, and:</p>
+
+  <div class="equation-block">
+    \[ \Delta V = -\int E \cdot dl \]
+  </div>
+
+  <p>But an open-circuit potential is not equivalent to usable electrical power. The project must distinguish three quantities:</p>
+
+  <div class="layer">
+    <div class="layer-index">P</div>
+    <div>
+      <h3>Polarization</h3>
+      <p>The macroscopic, ensemble-averaged orientational response of the liquid to the imposed gradient.</p>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-index">V<sub>OC</sub></div>
+    <div>
+      <h3>Open-circuit voltage</h3>
+      <p>The potential difference implied by integrating the induced field across the sample, with no current drawn.</p>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-index">P<sub>out</sub></div>
+    <div>
+      <h3>Extractable power</h3>
+      <div class="equation-block" style="margin-top:.6em;">\[ P_{out} = VI \]</div>
+    </div>
+  </div>
+
+  <div class="separator-statement">
+    <p><span class="not-equal">The first two may exist while the third remains negligible.</span><br><br>
+    That distinction is central to the research.</p>
+  </div>
+</section>
+
+<!-- ================= 03 LITERATURE HIERARCHY ================= -->
+<section class="section wide" id="hierarchy" data-title="Literature hierarchy">
+  <div class="section-num">03</div>
+  <h2 class="section-title">Literature hierarchy</h2>
+  <div class="section-kicker">Core / supporting / future — never mixed</div>
+
+  <p>Every scientific statement in this notebook carries one of five labels. Nothing here should be read past its label.</p>
+  <div class="filter-bar" id="status-filter-bar">
+    <span class="filter-group-label">STATUS</span>
+    <button class="filter-btn active" data-status="all" type="button">All</button>
+    <button class="filter-btn" data-status="established" type="button">Established</button>
+    <button class="filter-btn" data-status="inferred" type="button">Inferred</button>
+    <button class="filter-btn" data-status="hypothesis" type="button">Hypothesis</button>
+    <button class="filter-btn" data-status="open" type="button">Open</button>
+    <button class="filter-btn" data-status="totest" type="button">To test</button>
+  </div>
+  <div class="filter-bar" id="level-filter-bar">
+    <span class="filter-group-label">LEVEL</span>
+    <button class="filter-btn active" data-level="all" type="button">All</button>
+    <button class="filter-btn" data-level="A" type="button">Core</button>
+    <button class="filter-btn" data-level="B" type="button">Supporting</button>
+    <button class="filter-btn" data-level="C" type="button">Future</button>
+  </div>
+
+  <div class="branch-label" data-level-section="A">LEVEL A — CORE LITERATURE — directly concerns thermopolarization in bulk polar liquids</div>
+  <div class="lit-grid" id="lit-grid"><!-- injected by JS: Level A cards --></div>
+
+  <div class="branch-label" data-level-section="B">LEVEL B — SUPPORTING PHYSICS — thermal noise, directed transport, rotational dynamics; does not define the core phenomenon</div>
+  <div class="lit-compact-list" id="lit-compact-b"><!-- injected by JS --></div>
+
+  <div class="branch-label" data-level-section="C">LEVEL C — ADJACENT / FUTURE TECHNOLOGY — architecture and scaling ideas; not evidence that our bulk system produces power</div>
+  <div class="lit-compact-list" id="lit-compact-c"><!-- injected by JS --></div>
+</section>
+
+<!-- ================= 04 SUPERVISED LITERATURE MAP ================= -->
+<section class="section" id="litmap" data-title="Supervised literature map">
+  <div class="section-num">04</div>
+  <h2 class="section-title">Supervised literature map</h2>
+  <div class="section-kicker">Three branches, never merged into one story</div>
+
+  <div class="branch-label">CORE PHENOMENON</div>
+  <div class="chain">
+    <div class="chain-node">Core phenomenon</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">Microscopic mechanism</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">Thermodynamic control</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">Cross-liquid generalization</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">Higher-order response</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node">General theory</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">[unresolved] Electrical extraction</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Current</div>
+    <div class="chain-arrow">↓</div>
+    <div class="chain-node emph">Power</div>
+  </div>
+
+  <div class="branch-label">SUPPORTING PHYSICS</div>
+  <div class="note-box"><p>Thermal noise thermodynamics, directed transport under fluctuations, rotational relaxation and Langevin dynamics — Level B. Answers what stochastic thermodynamics requires from a heat-to-work converter, without redefining this as a Brownian-motor project.</p></div>
+
+  <div class="branch-label">FUTURE ENGINEERING</div>
+  <div class="note-box"><p>Molecular junctions, thermoelectric and triboelectric harvesters, surface ratchets — Level C. Useful for architecture and scaling concepts once the bulk-liquid question is answered, not before.</p></div>
+</section>
+
+<!-- ================= 05 WHAT THE LITERATURE AGREES ON ================= -->
+<section class="section" id="agree" data-title="What the literature actually agrees on">
+  <div class="section-num">05</div>
+  <h2 class="section-title">What the literature actually agrees on</h2>
+  <div class="section-kicker">Reconciled synthesis of Level A</div>
+
+  <div class="evq-toggle">
+    <button class="mini-btn active" id="evq-know-btn" type="button">What we know</button>
+    <button class="mini-btn" id="evq-need-btn" type="button">What we need to find out</button>
+  </div>
+
+  <div class="evq-panel show" id="evq-know">
+    <div id="agree-list"><!-- injected by JS --></div>
+  </div>
+  <div class="evq-panel" id="evq-need">
+    <div id="agree-questions"><!-- injected by JS, reuses secondary questions --></div>
+  </div>
+</section>
+
+<!-- ================= 06 SCIENTIFIC AUDIT ================= -->
+<section class="section" id="audit" data-title="Scientific audit">
+  <div class="section-num">06</div>
+  <h2 class="section-title">Scientific audit</h2>
+  <div class="section-kicker">Downgrading overstatements found in earlier summaries</div>
+
+  <div class="audit-pair">
+    <div class="audit-col dont"><span class="lbl">Do not say</span><p>"Large dipole moment produces more power."</p></div>
+    <div class="audit-col do"><span class="lbl">Say instead</span><p>Molecular dipole magnitude is one potentially relevant parameter, but the literature indicates that molecular dynamics, structure, and higher multipole contributions also matter.</p></div>
+  </div>
+  <div class="audit-pair">
+    <div class="audit-col dont"><span class="lbl">Do not say</span><p>"An electric field of X proves a battery."</p></div>
+    <div class="audit-col do"><span class="lbl">Say instead</span><p>An induced electric field has been predicted/reported under the simulated thermal gradient; electrical power extraction remains an open question.</p></div>
+  </div>
+  <div class="audit-pair">
+    <div class="audit-col dont"><span class="lbl">Do not say</span><p>"The 2025 theory proves our generator works."</p></div>
+    <div class="audit-col do"><span class="lbl">Say instead</span><p>The 2025 theoretical framework may provide a useful response-theory basis for the next stage.</p></div>
+  </div>
+
+  <div class="note-box">
+    <p>Three standing rules: do not treat the Brownian-motor literature as evidence of thermopolarization; do not treat molecular thermoelectric junctions as bulk-liquid generators; do not combine unrelated mechanisms merely because they all involve thermal motion.</p>
+  </div>
+</section>
+
+<!-- ================= 07 CENTRAL PHYSICS MAP ================= -->
+<section class="section" id="physicsmap" data-title="The central physics map">
+  <div class="section-num">07</div>
+  <h2 class="section-title">The central physics map</h2>
+  <div class="section-kicker">Click a node to open its note — the final four are OPEN / TO TEST</div>
+
+  <div class="causal-diagram" id="causal-diagram"><!-- injected by JS --></div>
+</section>
+
+<!-- ================= 08 THE GAP ================= -->
+<section class="section" id="gap" data-title="The gap">
+  <div class="section-num">08</div>
+  <h2 class="section-title">The gap</h2>
+  <div class="section-kicker">The most important scientific gap in the project</div>
+
+  <p>The literature gives substantial evidence for:</p>
+  <div class="equation-block">\[ \nabla T \rightarrow P \]</div>
+  <p>and provides theoretical explanations for the microscopic origin of this response. However, the project still needs to determine:</p>
+  <div class="equation-block">\[ P \rightarrow E \rightarrow V_{OC} \]</div>
+  <p>and, critically:</p>
+  <div class="equation-block">\[ V_{OC} \rightarrow I \rightarrow P_{out} \]</div>
+  <p>under a physically consistent electrical load. This is the central research gap.</p>
+</section>
+
+<!-- ================= 09 SECONDARY QUESTIONS ================= -->
+<section class="section" id="questions" data-title="Secondary questions">
+  <div class="section-num">09</div>
+  <h2 class="section-title">Secondary questions</h2>
+  <div class="section-kicker">Click a question to expand it</div>
+
+  <div class="oq-list" id="oq-list"><!-- injected by JS --></div>
+</section>
+
+<!-- ================= 10 MEDIA SELECTION ================= -->
+<section class="section wide" id="media" data-title="Media selection">
+  <div class="section-num">10</div>
+  <h2 class="section-title">Media selection</h2>
+  <div class="section-kicker">Define the criteria — do not force a winner</div>
+
+  <p>Compare H<sub>2</sub>O (reference / validation medium) against CH<sub>3</sub>CN (non-aqueous comparison medium). Potential future candidates remain unselected. A candidate liquid should be evaluated through multiple physical properties — not only μ, but also:</p>
+
+  <div class="equation-block">
+    \[ \rho,\quad \kappa,\quad \eta,\quad D_r,\quad \tau_{rot},\quad \epsilon,\quad S_{J\mu}(\omega) \]
+  </div>
+  <p>and the structure of its molecular interactions.</p>
+
+  <div class="layer">
+    <div class="layer-index">01</div>
+    <div>
+      <h3>Water <span class="tag established" style="margin-left:.5em;"><span class="dot"></span>reference / validation medium</span></h3>
+      <p>Water is the reference system. It has extensive literature, validated molecular models, and well-documented thermopolarization behavior. The first simulation should reproduce known behavior before attempting power extraction.</p>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-index">02</div>
+    <div>
+      <h3>Acetonitrile <span class="tag inferred" style="margin-left:.5em;"><span class="dot"></span>non-aqueous comparison medium</span></h3>
+      <p>Acetonitrile is a strongly polar liquid with published thermopolarization simulations. It provides an important test of whether the phenomenon extends beyond water.</p>
+    </div>
+  </div>
+
+  <div class="media-statement">
+    <p>The best medium is not necessarily the liquid with the largest molecular dipole moment.</p>
+  </div>
+  <p>Instead, we seek the liquid with the most favorable combination of molecular polarity, density, dynamics, thermal transport, and heat–dipole coupling.</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr><th>Parameter</th><th>H<sub>2</sub>O</th><th>CH<sub>3</sub>CN</th><th>Future candidate</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Dipole moment, μ</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Density, ρ</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Thermal conductivity, κ</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Viscosity, η</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Rotational diffusion</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Rotational relaxation time</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Librational dynamics</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Dielectric response</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Dipole / quadrupole structure</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Thermal expansion</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Heat-flux / dipole spectral coupling</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Validated force fields available</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Literature benchmark data available</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+        <tr><td>Thermodynamic operating window</td><td class="empty-cell">—</td><td class="empty-cell">—</td><td class="empty-cell">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.82rem; font-style:italic;">Table intentionally empty. This checkpoint defines the selection criteria — a numerical ranking is not created until the underlying data are actually available and comparable.</p>
+</section>
+
+<!-- ================= 11 MEASUREMENT ARCHITECTURE ================= -->
+<section class="section" id="measure" data-title="Measurement architecture">
+  <div class="section-num">11</div>
+  <h2 class="section-title">Measurement architecture</h2>
+  <div class="section-kicker">What we will measure, once methods are chosen</div>
+
+  <div class="layer">
+    <div class="layer-index">1</div>
+    <div><h3>Thermal state</h3><p>T(z), ∇T, J<sub>q</sub></p></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">2</div>
+    <div><h3>Structural state</h3><p>ρ(z), molecular structure, local ordering</p></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">3</div>
+    <div><h3>Molecular orientation</h3><p>⟨cos θ(z)⟩, dipole orientation distribution, rotational dynamics</p></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">4</div>
+    <div><h3>Polarization</h3><p>P(z), dipolar contribution, higher multipole contributions where feasible</p></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">5</div>
+    <div><h3>Electrostatic response</h3><p>E(z), V<sub>OC</sub></p></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">6</div>
+    <div><h3>Electrical extraction</h3><p>I(R<sub>L</sub>), V(R<sub>L</sub>), P(R<sub>L</sub>), P<sub>max</sub></p></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">7</div>
+    <div><h3>Thermodynamics</h3><p>Q<sub>hot</sub>, Q<sub>cold</sub>, W<sub>out</sub>, Ṡ<sub>gen</sub>, η</p></div>
+  </div>
+</section>
+
+<!-- ================= 12 DISTINCTION BETWEEN OBSERVABLES ================= -->
+<section class="section" id="observables" data-title="Distinction between observables">
+  <div class="section-num">12</div>
+  <h2 class="section-title">The critical distinction between observables</h2>
+  <div class="section-kicker">A field is not yet a power source</div>
+
+  <div class="layer">
+    <div class="layer-index">1</div>
+    <div><h3>Primary physical observable</h3><div class="equation-block" style="margin-top:.5em;">\[ P(z) \]</div></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">2</div>
+    <div><h3>Electrostatic consequence</h3><div class="equation-block" style="margin-top:.5em;">\[ E(z),\quad V_{OC} \]</div></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">3</div>
+    <div><h3>Engineering output</h3><div class="equation-block" style="margin-top:.5em;">\[ I,\quad P_{out} \]</div></div>
+  </div>
+  <div class="layer">
+    <div class="layer-index">4</div>
+    <div><h3>Thermodynamic validation</h3><div class="equation-block" style="margin-top:.5em;">\[ Q,\quad W,\quad S_{gen},\quad \eta \]</div></div>
+  </div>
+
+  <div class="separator-statement">
+    <p><span class="not-equal">This hierarchy makes it impossible to confuse polarization with electrical power.</span></p>
+  </div>
+
+  <p>When an electrical load is connected, charge redistribution occurs, the field may be screened, the polarization may change, the thermal profile may change, and an internal resistance emerges. Therefore:</p>
+  <div class="equation-block">\[ V_{OC} \neq P_{out} \]</div>
+  <p>The project must computationally establish whether P<sub>out</sub> &gt; 0, and how large it is:</p>
+  <div class="equation-block">\[ I > 0 \qquad P_{out} = V_{load} I_{load} > 0 \]</div>
+
+  <ul class="q-list">
+    <li>How does polarization respond to electrical loading?</li>
+    <li>Does the thermal gradient remain stable?</li>
+    <li>Does charge redistribution screen the field?</li>
+    <li>What is the internal electrical resistance?</li>
+    <li>What is the maximum power point?</li>
+  </ul>
+
+  <div class="load-curve-frame">
+    <span class="simulation-target-badge">Simulation target — not yet measured</span>
+    <svg viewBox="0 0 600 240" role="img" aria-label="Placeholder load curve chart, not yet measured">
+      <line x1="50" y1="200" x2="560" y2="200" stroke="var(--border)" stroke-width="1"/>
+      <line x1="50" y1="20" x2="50" y2="200" stroke="var(--border)" stroke-width="1"/>
+      <text x="30" y="16" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-soft)">V,I,P</text>
+      <text x="520" y="218" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-soft)">R_L</text>
+      <path d="M50 60 L560 190" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <path d="M50 195 L300 60 L560 190" fill="none" stroke="var(--indigo)" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <text x="470" y="150" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--blue)">V(R)</text>
+      <text x="290" y="52" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--indigo)">P(R)</text>
+    </svg>
+    <p style="font-size:.8rem; margin-top:.8em; margin-bottom:0;">V<sub>OC</sub> → V<sub>load</sub>(R) → I<sub>load</sub>(R) → P<sub>load</sub>(R) — curve shapes are illustrative only.</p>
+  </div>
+</section>
+
+<!-- ================= 13 FALSIFICATION LOGIC ================= -->
+<section class="section" id="falsify" data-title="Falsification logic">
+  <div class="section-num">13</div>
+  <h2 class="section-title">What would kill the hypothesis?</h2>
+  <div class="section-kicker">The goal is to determine whether it can work, not to prove that it does</div>
+
+  <div class="falsify-list">
+    <div class="falsify-item"><div class="f-num">01</div><p>Published thermopolarization cannot be reproduced.</p></div>
+    <div class="falsify-item"><div class="f-num">02</div><p>The apparent voltage disappears when finite-size / electrostatic artifacts are removed.</p></div>
+    <div class="falsify-item"><div class="f-num">03</div><p>Closing the circuit eliminates the potential without producing measurable current.</p></div>
+    <div class="falsify-item"><div class="f-num">04</div><p>The apparent electrical output is entirely attributable to an artifact or numerical bookkeeping.</p></div>
+    <div class="falsify-item"><div class="f-num">05</div><p>The extracted work violates energy conservation or the second law.</p></div>
+    <div class="falsify-item"><div class="f-num">06</div><p>The resulting power is effectively zero under physically meaningful operating conditions.</p></div>
+  </div>
+
+  <div class="note-box">
+    <p>A negative result is scientifically valuable. The goal is not to prove that the generator works — it is to determine whether it can work.</p>
+  </div>
+</section>
+
+<!-- ================= 14 THERMODYNAMIC ACCOUNTING ================= -->
+<section class="section" id="thermo" data-title="Thermodynamic accounting">
+  <div class="section-num">14</div>
+  <h2 class="section-title">No free energy</h2>
+  <div class="section-kicker">Thermodynamic checkpoint</div>
+
+  <p class="lede serif-em">Any electrical work extracted from the system must ultimately be paid for by the imposed thermal nonequilibrium.</p>
+
+  <p>The fundamental energy balance is:</p>
+  <div class="equation-block">
+    \[ Q_{hot} = Q_{cold} + W_{out} + \Delta U \]
+  </div>
+  <p>For steady state, \( \Delta U \rightarrow 0 \), so:</p>
+  <div class="equation-block">
+    \[ Q_{hot} \approx Q_{cold} + W_{out} \]
+  </div>
+
+  <div class="flow-diagram">
+    <div class="flow-box">Q<sub>hot</sub></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box system">System</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">Q<sub>cold</sub></div>
+  </div>
+  <div class="flow-diagram">
+    <div class="flow-box system">System</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">W<sub>out</sub></div>
+  </div>
+
+  <p>The efficiency is:</p>
+  <div class="equation-block">
+    \[ \eta = \frac{W_{out}}{Q_{in}} \]
+  </div>
+
+  <p>and the second law requires:</p>
+  <div class="equation-block">
+    \[ \dot{S}_{gen} \ge 0 \]
+  </div>
+
+  <div class="note-box">
+    <p>The project must never interpret equilibrium thermal fluctuations as a free energy source.</p>
+  </div>
+</section>
+
+<!-- ================= 15 STAY ON THE QUESTION ================= -->
+<section class="section wide" id="stay" data-title="Stay on the question">
+  <div class="section-num">15</div>
+  <h2 class="section-title">Stay on the question</h2>
+  <div class="section-kicker">Everything else comes later</div>
+
+  <div class="not-vs-current">
+    <div class="not-col">
+      <span class="lbl">NOT THE CURRENT QUESTION</span>
+      <ul>
+        <li>Can we build a nanochannel?</li>
+        <li>Can ions be pumped?</li>
+        <li>Can we build a molecular ratchet?</li>
+        <li>Can triboelectricity increase the output?</li>
+        <li>Can we make an array?</li>
+        <li>Can we build a nanoscale device?</li>
+      </ul>
+    </div>
+    <div class="current-col">
+      <div class="current-box">
+        <p>Can a bulk polar liquid under ∇T deliver electrical power?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 16 RESEARCH CHECKPOINT ================= -->
+<section class="section wide" id="checkpoint" data-title="Research checkpoint">
+  <div class="section-num">16</div>
+  <h2 class="section-title">Research checkpoint</h2>
+  <div class="section-kicker">The project may move to simulation-method selection only once these are defined</div>
+
+  <div class="checkpoint-panel">
+    <div class="cp-eyebrow">CHECKPOINT 01</div>
+    <h3>Literature complete / simulation design next</h3>
+    <div class="criteria-grid">
+      <div class="criteria-item"><div class="ci-letter">A</div><div class="ci-name">Research question</div><p>Defined.</p></div>
+      <div class="criteria-item"><div class="ci-letter">B</div><div class="ci-name">Physical mechanism</div><p>Thermal gradient → molecular response → thermopolarization.</p></div>
+      <div class="criteria-item"><div class="ci-letter">C</div><div class="ci-name">Candidate media</div><p>H<sub>2</sub>O and CH<sub>3</sub>CN.</p></div>
+      <div class="criteria-item"><div class="ci-letter">D</div><div class="ci-name">Core observables</div><p>T(z), J<sub>q</sub>, ρ(z), orientation, P(z), E(z), V<sub>OC</sub>, I, P<sub>out</sub>.</p></div>
+      <div class="criteria-item"><div class="ci-letter">E</div><div class="ci-name">Thermodynamic constraints</div><p>Energy conservation and positive entropy production.</p></div>
+      <div class="criteria-item"><div class="ci-letter">F</div><div class="ci-name">Scientific gap</div><p>Electrical extraction from bulk thermopolarization.</p></div>
+      <div class="criteria-item"><div class="ci-letter">G</div><div class="ci-name">Falsification criteria</div><p>Explicitly defined.</p></div>
+      <div class="criteria-item"><div class="ci-letter">H</div><div class="ci-name">Literature hierarchy</div><p>Core / supporting / future.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 17 SIMULATION LOG ================= -->
+<section class="section wide" id="simlog" data-title="Simulation log">
+  <div class="section-num">17</div>
+  <h2 class="section-title">Simulation Log</h2>
+  <div class="section-kicker">A controlled record of every computational experiment</div>
+
+  <div class="simlog-quote">
+    <p style="margin:0;">From this point onward, every simulation is treated as a reproducible computational experiment rather than an isolated calculation.</p>
+  </div>
+
+  <!-- 01 RESEARCH PROGRESS -->
+  <div class="subhead"><span class="sub-num">01</span><h3>Research progress</h3></div>
+  <div class="roadmap-track" id="roadmap-track"><!-- injected by JS --></div>
+  <div class="roadmap-current-state">Current state: SIMULATION DESIGN / SIM 01 PREPARATION</div>
+
+  <!-- 02 SIMULATION PROGRAM -->
+  <div class="subhead"><span class="sub-num">02</span><h3>Simulation program</h3></div>
+  <div class="experiment-tree">
+    <div class="sim-block">
+      <div class="sim-block-head"><h4>SIM 01 — Literature Reproduction</h4><span class="tag status-planned">SIM 01 preparation</span></div>
+      <p>Purpose: reproduce the established thermopolarization response in bulk water.</p>
+      <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P(z) \]</div>
+      <div class="sim-sub-list" id="sim01-sublist"><!-- injected by JS --></div>
+    </div>
+    <div class="sim-block">
+      <div class="sim-block-head"><h4>SIM 02 — Electrostatic Validation</h4><span class="tag status-planned">PLANNED</span></div>
+      <div class="equation-block">\[ P(z) \rightarrow E(z) \rightarrow V_{OC} \]</div>
+    </div>
+    <div class="sim-block">
+      <div class="sim-block-head"><h4>SIM 03 — Electrical Extraction</h4><span class="tag status-planned">PLANNED</span></div>
+      <div class="equation-block">\[ V_{OC} \rightarrow I_{load} \rightarrow P_{out} \]</div>
+    </div>
+  </div>
+
+  <!-- 03 MASTER EXPERIMENT TABLE / 04 EXPERIMENT CARD -->
+  <div class="subhead"><span class="sub-num">03</span><h3>Master experiment table</h3></div>
+  <p style="font-size:.85rem;">Click a row to open the full experiment record.</p>
+  <div class="exp-table-wrap">
+    <table class="exp-table" id="exp-table">
+      <thead><tr>
+        <th>ID</th><th>Objective</th><th>System</th><th>Model</th><th>Geometry</th><th>Thermal setup</th><th>Method</th><th>Key parameters</th><th>Primary outputs</th><th>Status</th>
+      </tr></thead>
+      <tbody id="exp-table-body"><!-- injected by JS --></tbody>
+    </table>
+  </div>
+
+  <!-- 05 PARAMETER MATRIX -->
+  <div class="subhead"><span class="sub-num">05</span><h3>Parameter matrix</h3></div>
+  <p style="font-size:.85rem;">Every parameter across SIM-01-A01 – A05, side by side, so changes are visible at a glance.</p>
+  <div class="exp-table-wrap">
+    <table class="exp-table" id="param-matrix"><!-- injected by JS --></table>
+  </div>
+
+  <!-- 06 RESULTS MATRIX -->
+  <div class="subhead"><span class="sub-num">06</span><h3>Results matrix</h3></div>
+  <div class="exp-table-wrap">
+    <table class="exp-table" id="results-matrix"><!-- injected by JS --></table>
+  </div>
+  <p style="font-size:.8rem; font-style:italic;">Actual, uncertainty and literature agreement remain unfilled until a simulation is actually run.</p>
+
+  <!-- 07 SIMULATION CHECKLIST -->
+  <div class="subhead"><span class="sub-num">07</span><h3>Simulation checklist — SIM-01-A01</h3></div>
+  <p style="font-size:.85rem;">Checklist state is saved locally in your browser.</p>
+  <div class="checklist-group">
+    <h4>Before running</h4>
+    <div id="checklist-before"><!-- injected by JS --></div>
+  </div>
+  <div class="checklist-group">
+    <h4>After running</h4>
+    <div id="checklist-after"><!-- injected by JS --></div>
+  </div>
+
+  <!-- 08 FAILURE LOG -->
+  <div class="subhead"><span class="sub-num">08</span><h3>Failure log</h3></div>
+  <p style="font-size:.85rem;">Failed and rejected runs are never deleted — they are protocol history, kept for scientific value.</p>
+  <div id="failure-entries"><!-- injected by JS --></div>
+
+  <form class="log-form" id="failure-form">
+    <h3>Add a failure / rejected run</h3>
+    <div class="form-row"><label for="fl-runid">Run ID</label><input type="text" id="fl-runid" placeholder="e.g. SIM-01-A02 — Run 003" required></div>
+    <div class="form-row"><label for="fl-date">Date</label><input type="date" id="fl-date" required></div>
+    <div class="form-row"><label for="fl-setup">Setup</label><input type="text" id="fl-setup"></div>
+    <div class="form-row"><label for="fl-mode">Failure mode</label><input type="text" id="fl-mode" required></div>
+    <div class="form-row"><label for="fl-cause">Suspected cause</label><textarea id="fl-cause"></textarea></div>
+    <div class="form-row"><label for="fl-evidence">Evidence</label><textarea id="fl-evidence"></textarea></div>
+    <div class="form-row"><label for="fl-action">Corrective action</label><textarea id="fl-action"></textarea></div>
+    <div class="form-row"><label for="fl-usable">Scientific value / usable?</label>
+      <select id="fl-usable"><option>Useful for protocol refinement</option><option>Not usable</option><option>Undetermined</option></select>
+    </div>
+    <button class="btn-primary" type="submit">Add failure record</button>
+  </form>
+
+  <!-- 09 DECISION HISTORY -->
+  <div class="subhead"><span class="sub-num">09</span><h3>Decision history</h3></div>
+  <div id="decision-entries"><!-- injected by JS --></div>
+
+  <!-- 10 CURRENT EXPERIMENT -->
+  <div class="subhead"><span class="sub-num">10</span><h3>Current experiment</h3></div>
+  <div class="current-exp-card">
+    <div class="ce-eyebrow">CURRENT EXPERIMENT</div>
+    <div class="ce-id">SIM-01-A01</div>
+    <div class="exp-section"><h5>Objective</h5><p>Establish a reliable equilibrium baseline for bulk SPC/E water before applying a thermal gradient.</p></div>
+    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">PLANNED</span></div>
+    <div class="exp-section"><h5>Next decision</h5><p>Finalize simulation geometry and numerical protocol.</p></div>
+  </div>
+
+  <!-- 11 RESEARCH GUARDRAILS -->
+  <div class="subhead"><span class="sub-num">11</span><h3>Research guardrails</h3></div>
+  <div class="guardrail-box">
+    <div class="gb-title">DO NOT LOSE THE QUESTION</div>
+    <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P \rightarrow E \rightarrow V_{OC} \rightarrow I \rightarrow P_{out} \]</div>
+    <p style="font-size:.85rem; margin:1em 0 0 0;">SIM 01 is only \( \nabla T \rightarrow J_q \rightarrow P \). SIM 02 is \( P \rightarrow E \rightarrow V_{OC} \). SIM 03 is \( V_{OC} \rightarrow I \rightarrow P_{out} \). Do not skip validation stages.</p>
+  </div>
+
+  <div class="export-row">
+    <button class="mini-btn" id="simlog-export" type="button">Export simulation log (JSON)</button>
+    <button class="mini-btn" id="simlog-import-btn" type="button">Import simulation log</button>
+    <input type="file" id="simlog-import-file" accept="application/json" style="display:none;">
+  </div>
+
+  <div class="note-box">
+    <p>The literature gave us the question. The simulation log gives us a controlled way to answer it.</p>
+  </div>
+</section>
+
+<!-- ================= 18 SIMULATION METHODS — LOCKED ================= -->
+<section class="section locked-section" id="locked" data-title="Next: simulation design">
+  <div class="section-num">18</div>
+  <h2 class="section-title">Next: simulation design</h2>
+  <div class="section-kicker">Not yet designed</div>
+
+  <div class="locked-banner">LOCKED UNTIL CHECKPOINT 01 IS ACCEPTED</div>
+
+  <div class="method-q-list">
+    <div class="method-q"><div class="mq-tag">METHOD 01</div><p>Which molecular model / force field?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 02</div><p>Which simulation engine?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 03</div><p>How should the thermal gradient be imposed?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 04</div><p>What geometry and boundary conditions?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 05</div><p>How large must the bulk system be?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 06</div><p>How long must equilibration and production runs be?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 07</div><p>How should polarization be calculated?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 08</div><p>How should E and V<sub>OC</sub> be obtained without electrostatic artifacts?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 09</div><p>How can a physically meaningful electrical load be represented?</p></div>
+    <div class="method-q"><div class="mq-tag">METHOD 10</div><p>How do we validate convergence and finite-size effects?</p></div>
+  </div>
+  <p style="font-size:.82rem; font-style:italic; margin-top:1.4em;">These questions are not answered here.</p>
+</section>
+
+<!-- ================= 19 CHECKPOINT 01 SUMMARY ================= -->
+<section class="section" id="final" data-title="Checkpoint 01 — summary">
+  <div class="section-num">19</div>
+  <h2 class="section-title">Checkpoint 01</h2>
+  <div class="section-kicker">A single-page summary</div>
+
+  <h3>What we know</h3>
+  <ul class="phase-list" style="margin:0 0 1.6em 0;">
+    <li>Thermal gradients can induce polarization in polar liquids.</li>
+    <li>Water is the strongest reference system.</li>
+    <li>Acetonitrile demonstrates that the phenomenon is not necessarily unique to water.</li>
+    <li>Thermopolarization depends on molecular dynamics and thermodynamic state.</li>
+    <li>Dipole, quadrupole, density and structural effects can matter.</li>
+  </ul>
+
+  <h3>What we hypothesize</h3>
+  <div class="separator-statement">
+    <p class="serif-em" style="font-size:1.05rem;">Thermally induced polarization may produce an electrical potential that can potentially deliver work to an external load.</p>
+  </div>
+
+  <h3 style="margin-top:1.6em;">What we do not know</h3>
+  <ul class="phase-list" style="margin:0 0 1.6em 0;">
+    <li>Whether measurable current can be sustained.</li>
+    <li>Whether non-zero net power can be extracted.</li>
+    <li>What the maximum power is.</li>
+    <li>What medium maximizes electrical output.</li>
+    <li>Whether the effect survives realistic operating conditions.</li>
+  </ul>
+
+  <h3>What happens next</h3>
+  <p>Not device design. Not nanochannels. Not ratchets. Not optimization. First:</p>
+  <div class="equation-block">
+    \[ \boxed{\text{Choose the simulation methodology capable of answering the bulk question rigorously.}} \]
+  </div>
+
+  <div class="note-box">
+    <p>We have finished asking what the literature says. We now know exactly what we need to simulate.</p>
+  </div>
+</section>
+
+<!-- ================= 20 RESEARCH LOG ================= -->
+<section class="section" id="log" data-title="Research log">
+  <div class="section-num">20</div>
+  <h2 class="section-title">Research log</h2>
+  <div class="section-kicker">A living notebook — entries are stored locally in your browser</div>
+
+  <div id="log-entries"><!-- injected by JS --></div>
+
+  <form class="log-form" id="log-form">
+    <h3>Add an entry</h3>
+    <div class="form-row">
+      <label for="log-date">Date</label>
+      <input type="date" id="log-date" required>
+    </div>
+    <div class="form-row">
+      <label for="log-source">Source / simulation</label>
+      <input type="text" id="log-source" placeholder="e.g. Phase 1 NEMD run, SPC/E water" required>
+    </div>
+    <div class="form-row">
+      <label for="log-obs">Observation</label>
+      <textarea id="log-obs" required></textarea>
+    </div>
+    <div class="form-row">
+      <label for="log-interp">Interpretation</label>
+      <textarea id="log-interp"></textarea>
+    </div>
+    <div class="form-row">
+      <label for="log-conf">Confidence</label>
+      <select id="log-conf">
+        <option>Low</option>
+        <option selected>Medium</option>
+        <option>High</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="log-next">Next question</label>
+      <input type="text" id="log-next">
+    </div>
+    <button class="btn-primary" type="submit">Add entry</button>
+  </form>
+</section>
+
+<footer id="site-footer">
+  <p>Thermal Polarization → Electrical Work is an exploratory computational physics notebook. Every claim carries one of four labels — established, inferred, hypothesis, or unknown — and no hypothesis is presented here as a result. The project has not yet demonstrated electrical power generation; that remains the question.</p>
+</footer>
+
+</main>
+
+<script>
+/* ============================================================
+   DATA
+============================================================ */
+const LEVEL_A = [
+  {
+    year: "2008", authors: "Bresme et al.", level: "A", status: "established",
+    title: "Water Polarization under Thermal Gradients",
+    role: "Foundational phenomenon",
+    established: "Thermally induced molecular polarization in water under a temperature gradient. Water dipoles acquire a preferential orientation under thermal nonequilibrium.",
+    notEstablished: "Whether the resulting potential delivers net electrical work under an external load.",
+    whyItMatters: "Gives us \u2207T \u2192 P \u2192 E as an established result — the foundation the whole project stands on.",
+    createsQuestion: "Does E \u2192 V_OC \u2192 I \u2192 P_out ever close?"
+  },
+  {
+    year: "2013", authors: "Armstrong et al.", level: "A", status: "inferred",
+    title: "Enhancement of Thermal Polarization of Water via Heat Flux and Dipole Moment Dynamic Correlations",
+    role: "Microscopic dynamical mechanism",
+    established: "A dynamical relationship between heat flux and dipole fluctuations using the SPC/E water model — heat flux, dipole correlations, dynamical coupling, librational modes, spectral overlap, thermodynamic dependence.",
+    notEstablished: "Whether this dynamical coupling framework generalizes beyond water.",
+    whyItMatters: "Thermopolarization cannot be understood solely through static dipole magnitude — dynamical matching matters.",
+    createsQuestion: "Which candidate liquids have favorable heat-flux / dipole spectral overlap?"
+  },
+  {
+    year: "2015", authors: "Armstrong & Bresme", level: "A", status: "established",
+    title: "Temperature Inversion of the Thermal Polarization of Water",
+    role: "Thermodynamic dependence",
+    established: "Non-monotonic temperature dependence and possible inversion of thermal polarization — dipole, quadrupole, density, and thermal expansion all compete.",
+    notEstablished: "Where the inversion point sits for liquids other than water.",
+    whyItMatters: "Temperature is a physically meaningful control parameter, not a fixed operating condition.",
+    createsQuestion: "Where is the operating window that maximizes response for each candidate liquid?"
+  },
+  {
+    year: "2020", authors: "Bresme et al.", level: "A", status: "established",
+    title: "Polarization of Acetonitrile under Thermal Fields",
+    role: "Cross-liquid generalization",
+    established: "Thermopolarization behavior in CH\u2083CN, a strongly polar non-aqueous liquid.",
+    notEstablished: "Whether acetonitrile's heat\u2013dipole coupling is stronger or weaker than water's in a way that matters for extraction.",
+    whyItMatters: "Tests whether thermopolarization is a special feature of water's hydrogen-bond network or a broader property of polar liquids.",
+    createsQuestion: "Is thermopolarization a special feature of water, or a general property of polar molecular liquids?"
+  },
+  {
+    year: "2022", authors: "Lervik et al.", level: "A", status: "established",
+    title: "Polarisation of Water under Thermal Fields: Dipole and Quadrupole Moments",
+    role: "Higher-order molecular response",
+    established: "Dipole, quadrupole, density, thermal expansion and force-field dependence are separable contributions to the macroscopic response.",
+    notEstablished: "How these separated contributions combine once an electrical circuit is closed.",
+    whyItMatters: "Molecular dipole magnitude alone is not a sufficient predictor of macroscopic thermal polarization.",
+    createsQuestion: "How much of the response is dipole versus quadrupole and density effects, across liquids?"
+  },
+  {
+    year: "2025", authors: "Bedeaux et al.", level: "A", status: "inferred",
+    title: "Theory of Thermopolarization Effect",
+    role: "General theoretical framework",
+    established: "A broader theoretical framework connecting thermopolarization to a general transport / response theory.",
+    notEstablished: "That this theory proves electrical power extraction from bulk liquids — it does not.",
+    whyItMatters: "May provide a useful response-theory basis for the next stage. Thermopolarization theory is explicitly separate from electrical power generation.",
+    createsQuestion: "Does the theory make any prediction about extractable power, not just field strength?"
+  }
+];
+
+const LEVEL_B = [
+  { year:"1997", ref:"Astumian", title:"Brownian motor theory", note:"What thermal noise means thermodynamically.", status:"established" },
+  { year:"1998", ref:"Astumian & Der\u00e9nyi", title:"Brownian pumps / directed transport", note:"Conditions under which fluctuations can produce directed transport.", status:"established" },
+  { year:"2015", ref:"—", title:"Exact analytical Brownian heat engine", note:"A solvable model of a stochastic heat-to-work converter.", status:"established" },
+  { year:"2016", ref:"—", title:"Brownian Carnot engine", note:"Stochastic-thermodynamics bound on a Brownian engine's efficiency.", status:"established" },
+  { year:"1994", ref:"—", title:"Rotational Brownian motion / dielectric relaxation", note:"Describes rotational relaxation of polar molecules.", status:"established" },
+  { year:"1996", ref:"—", title:"Rotational Brownian motion in external potentials", note:"Rotational dynamics under an imposed field.", status:"established" },
+  { year:"2005", ref:"—", title:"Rotational Langevin dynamics", note:"Relevant rotational timescales for stochastic orientational motion.", status:"established" }
+];
+
+const LEVEL_C = [
+  { year:"—", ref:"—", title:"Single-molecule electrical motors", note:"Architecture concept — not bulk-liquid evidence.", status:"open" },
+  { year:"—", ref:"—", title:"Molecular thermoelectric junctions", note:"Engineering concept for future comparison, not a bulk generator.", status:"open" },
+  { year:"—", ref:"—", title:"Porphyrin molecular heat engines", note:"Single-molecule scale — a future-technology reference point.", status:"open" },
+  { year:"—", ref:"—", title:"Molecular tunnel junctions", note:"Electron-transport architecture, unrelated to bulk polarization.", status:"open" },
+  { year:"—", ref:"—", title:"Thermal-motion harvesters", note:"General energy-harvesting concept for future engineering.", status:"open" },
+  { year:"—", ref:"—", title:"Triboelectric thermal-motion harvesters", note:"A different mechanism entirely — not evidence for this project.", status:"open" },
+  { year:"—", ref:"—", title:"Surface Brownian ratchets", note:"Postponed architecture — after the bulk proof, not before.", status:"open" }
+];
+
+const AGREEMENT_POINTS = [
+  "Thermal gradients can induce polarization in polar molecular liquids.",
+  "Water provides the best-established reference system.",
+  "The phenomenon is not necessarily limited to water; acetonitrile provides important evidence for cross-liquid behavior.",
+  "Thermopolarization depends on more than molecular dipole magnitude.",
+  "Molecular dynamics and heat-flux / dipole correlations are relevant.",
+  "Temperature and thermodynamic state can strongly affect both magnitude and direction of the response.",
+  "Dipole, quadrupole, density and thermal expansion may all contribute.",
+  "The existence of thermopolarization does NOT by itself establish useful electrical power generation.",
+  "The literature reviewed so far does not provide the complete demonstrated chain \u2207T \u2192 P \u2192 V_OC \u2192 I \u2192 P_out for our proposed bulk-liquid architecture."
+];
+
+const CAUSAL_NODES = [
+  { label: "Input — \u2207T", note: "The imposed boundary condition — fixed hot and cold reservoirs across the simulation cell.", toTest:false },
+  { label: "Transport — J_q", note: "The resulting heat flux through the liquid, computed directly from the NEMD trajectory.", toTest:false },
+  { label: "Microscopic response — \u03bc(t), \u03b8(t), D_r, \u03c4_rot", note: "Dipole trajectory, orientation angle, rotational diffusion and relaxation time — the molecular-scale substrate.", toTest:false },
+  { label: "Collective response — P(z)", note: "The macroscopic, ensemble-averaged polarization profile across the sample.", toTest:false },
+  { label: "Electrostatic response — E(z)", note: "The induced field inferred from the polarization profile.", toTest:true },
+  { label: "Open circuit — V_OC", note: "The open-circuit potential difference implied by integrating E across the sample.", toTest:true },
+  { label: "Closed circuit — I_load", note: "Only defined once an external circuit is closed — has not yet been demonstrated non-zero.", toTest:true },
+  { label: "Power — P_out = VI", note: "The quantity this whole notebook is organized around, and the one with no result yet.", toTest:true }
+];
+
+const OPEN_QUESTIONS = [
+  { q: "What is the magnitude and spatial profile of thermopolarization?", note: "Requires reproducing and extending the Level A NEMD results across candidate liquids." },
+  { q: "How does thermopolarization depend on T, P, \u03c1, \u2207T?", note: "The 2015 inversion study shows this dependence is non-trivial and non-monotonic." },
+  { q: "How important are molecular rotational and librational dynamics?", note: "Raised by the 2013 spectral-coupling study." },
+  { q: "Does heat-flux / dipole spectral overlap predict polarization strength?", note: "Untested across liquids — polarization strength and extractable power may not track each other." },
+  { q: "How do H\u2082O and CH\u2083CN compare?", note: "The central Level A cross-liquid comparison, still without a numerical ranking." },
+  { q: "Can thermopolarization generate a measurable open-circuit voltage?", note: "The first point at which the project moves from polarization toward electrical extraction." },
+  { q: "What happens when the circuit is closed?", note: "Closing the loop may screen the field substantially — this is the central skeptical question." },
+  { q: "What current can flow?", note: "Depends on internal resistance and how fast polarization can be replenished." },
+  { q: "What is the maximum extractable power?", note: "Requires a full load-resistance sweep once simulation methods are chosen." },
+  { q: "What is the thermodynamic efficiency and entropy production?", note: "Governed by the Carnot bound and the second law — never a free-energy source." }
+];
+
+const DEFAULT_LOG = [
+  { date:"2024-01-15", source:"A1 — Bresme et al. 2008 — literature review", obs:"Water dipoles orient toward the colder region under an imposed \u2207T in NEMD.", interp:"Confirms the basic thermopolarization phenomenon exists and is simulatable.", conf:"High", next:"Does the effect scale to bulk system sizes we can afford computationally?" },
+  { date:"2024-01-22", source:"A2 — Armstrong et al. 2013 — literature review", obs:"Heat flux / dipole dynamic correlations, not just static dipole magnitude, appear to set the polarization strength.", interp:"Molecular dynamics matching may matter more than molecular polarity when choosing a liquid.", conf:"Medium", next:"Which liquids have known heat-flux/dipole spectral overlap data?" },
+  { date:"2024-02-03", source:"A3 — Armstrong & Bresme 2015 — literature review", obs:"Thermal polarization is non-monotonic in temperature; an inversion point exists.", interp:"Operating temperature is a real design variable, not a fixed condition.", conf:"High", next:"Where does the inversion sit for candidate liquids beyond water?" },
+  { date:"2024-02-19", source:"A4 — Bresme et al. 2020 — literature review", obs:"Acetonitrile also exhibits thermopolarization behavior.", interp:"The phenomenon is not water-specific, supporting a broader liquid search.", conf:"Medium", next:"How does CH3CN's coupling compare quantitatively to water's?" },
+  { date:"2024-03-01", source:"A5 — Lervik et al. 2022 — literature review", obs:"Dipole, quadrupole, and thermal-expansion contributions are separable in water.", interp:"\u201cLarger dipole\u201d is not a safe proxy for \u201cmore polarization.\u201d", conf:"High", next:"Do quadrupole contributions matter as much in non-aqueous liquids?" },
+  { date:"2024-03-14", source:"A6 — Bedeaux et al. 2025 — literature review", obs:"A general theoretical framework for thermopolarization has been proposed.", interp:"Possible basis for predicting behavior in liquids without existing simulation data — does not itself prove power extraction.", conf:"Medium", next:"Does the theory make any prediction about extractable power, not just field?" },
+  { date:"2024-04-02", source:"Scientific audit pass", obs:"Reviewed all imported summaries for overstatement; downgraded three claims (see Section 06).", interp:"Earlier notes conflated field prediction with proof of power generation — corrected.", conf:"High", next:"Formalize Checkpoint 01 criteria before touching simulation methods." }
+];
+
+/* ============================================================
+   SIMULATION LOG — DATA
+============================================================ */
+const GEOMETRY_ASCII =
+`            z
+            \u2191
+
+    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
+    \u2502  HOT RESERVOIR  \u2502
+    \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
+    \u2502                 \u2502
+    \u2502    BULK H\u2082O     \u2502
+    \u2502                 \u2502
+    \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
+    \u2502 COLD RESERVOIR  \u2502
+    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518`;
+
+const EXPERIMENTS = [
+  {
+    id: "SIM-01-A01", parent: "SIM-01", title: "Equilibrium baseline", status: "planned",
+    objective: "Establish a reliable equilibrium baseline for bulk SPC/E water before applying a thermal gradient.",
+    scientificQuestion: "Does the chosen force field and protocol reproduce known bulk water properties (density, energy, pressure) at equilibrium?",
+    hypothesis: "\\text{At equilibrium, } P_z(z) \\approx 0 \\text{ everywhere (no imposed } \\nabla T\\text{).}",
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:null },
+    thermalSetup: "Uniform temperature",
+    method: "Equilibrium MD",
+    geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null },
+    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:null },
+    md: [
+      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:null, u:"ps/ns"},
+      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+    ],
+    analysis: [
+      {name:"Temperature", eq:"T", purpose:"Confirm target temperature is held at equilibrium."},
+      {name:"Density", eq:"\\rho", purpose:"Compare against literature reference density for SPC/E water."},
+      {name:"Energy", eq:"E", purpose:"Confirm energy conservation / thermostat behavior."},
+      {name:"Polarization baseline", eq:"P_z", purpose:"Confirm no spurious polarization exists without an imposed gradient."}
+    ],
+    primaryOutput: "\\rho,\\ T,\\ E \\text{ within target tolerance}",
+    secondaryOutputs: ["Pressure", "Polarization baseline (expected \u2248 0)"],
+    expectedResult: "Density, temperature and energy consistent with published SPC/E bulk water values at the chosen thermodynamic state.",
+    actualResult: null,
+    validation: [
+      {name:"Energy conservation", note:"Total energy stable within thermostat-expected fluctuation."},
+      {name:"Temperature stability", note:"T(t) fluctuates around target with no drift."},
+      {name:"Density agreement", note:"\u03c1 within an appropriate tolerance of the literature SPC/E value."},
+      {name:"Pressure range", note:"P within the intended operating window."}
+    ],
+    uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
+    changed: [], unchanged: [], unknown: ["all parameters — first experiment in the sequence"],
+    decisions: [{ decision:"Use SPC/E force field.", reason:"Literature reproduction.", evidence:"Level A core papers (A1, A2, A3) use SPC/E-class water models.", alternative:"TIP4P/2005.", rejected:"Less directly comparable to the reproduced literature baseline." }],
+    runs: [],
+    interpretation: null, confidence: null, alternativeExplanations: null,
+    nextExperiment: "SIM-01-A02 — introduce the thermal gradient once the equilibrium baseline is validated."
+  },
+  {
+    id: "SIM-01-A02", parent: "SIM-01", title: "Thermal gradient establishment", status: "planned",
+    objective: "Establish a steady-state thermal gradient across the validated equilibrium system.",
+    scientificQuestion: "Can a stable, steady-state \u2207T be imposed and maintained across the bulk liquid using the chosen NEMD protocol?",
+    hypothesis: "\\text{A steady-state } T(z) \\text{ profile and constant } J_q \\text{ can be established for a physically reasonable } \\nabla T.",
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Equilibrated configuration from SIM-01-A01" },
+    thermalSetup: "Hot / cold regions",
+    method: "NEMD",
+    geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null },
+    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:"Thermostat coupling constants: TBD" },
+    md: [
+      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:null, u:"ps/ns"},
+      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+    ],
+    analysis: [
+      {name:"Temperature profile", eq:"T(z)", purpose:"Verify the thermal gradient is linear and steady in time."},
+      {name:"Heat flux", eq:"J_q", purpose:"Verify steady-state heat transport (constant along z)."},
+      {name:"Density profile", eq:"\\rho(z)", purpose:"Detect density gradients or thermal-expansion effects."}
+    ],
+    primaryOutput: "T(z)",
+    secondaryOutputs: ["J_q", "\\rho(z)"],
+    expectedResult: "A linear, time-stable T(z) profile with constant heat flux once steady state is reached.",
+    actualResult: null,
+    validation: [
+      {name:"Steady state", note:"T(z) stable across independent time windows (no residual drift)."},
+      {name:"Flux constancy", note:"J_q constant along z within statistical noise."},
+      {name:"Density artifact check", note:"Any \u03c1(z) gradient is consistent with expected thermal expansion, not a boundary artifact."}
+    ],
+    uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
+    changed: ["thermal setup (uniform \u2192 hot/cold regions)", "method (equilibrium MD \u2192 NEMD)"],
+    unchanged: ["force field", "density", "box dimensions", "timestep", "electrostatics"],
+    unknown: ["thermostat coupling parameters", "T_H, T_C values"],
+    decisions: [{ decision:"Use a two-region hot/cold thermostatting scheme rather than a single boundary-driven gradient.", reason:"Matches the NEMD protocol used in the reproduced literature.", evidence:"A1 (2008), A2 (2013).", alternative:"Boundary-driven (fixed wall temperatures).", rejected:"Less directly comparable to the bulk NEMD literature being reproduced." }],
+    runs: [],
+    interpretation: null, confidence: null, alternativeExplanations: null,
+    nextExperiment: "SIM-01-A03 — measure thermopolarization once a steady-state gradient is confirmed."
+  },
+  {
+    id: "SIM-01-A03", parent: "SIM-01", title: "Thermopolarization measurement", status: "planned",
+    objective: "Measure the spatial thermopolarization profile P_z(z) in bulk SPC/E water under a steady-state thermal gradient.",
+    scientificQuestion: "Does the simulation reproduce the established preferential orientation of water dipoles under a thermal gradient?",
+    hypothesis: "P_z \\neq 0 \\text{ under } \\nabla T \\neq 0.",
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Steady-state configuration from SIM-01-A02" },
+    thermalSetup: "Same as A02",
+    method: "NEMD",
+    geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null, note:"Same as A02" },
+    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:"Same as A02" },
+    md: [
+      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:null, u:"ps/ns"},
+      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+    ],
+    analysis: [
+      {name:"Temperature profile", eq:"T(z)", purpose:"Verify the thermal gradient."},
+      {name:"Heat flux", eq:"J_q", purpose:"Verify steady-state heat transport."},
+      {name:"Density profile", eq:"\\rho(z)", purpose:"Detect density gradients or thermal-expansion effects."},
+      {name:"Molecular orientation", eq:"\\langle\\cos\\theta(z)\\rangle", purpose:"Measure preferential dipole orientation."},
+      {name:"Polarization", eq:"P_z(z) = \\frac{1}{V_{slab}}\\sum_i \\mu_{i,z}", purpose:"Primary thermopolarization observable."}
+    ],
+    primaryOutput: "P_z(z)",
+    secondaryOutputs: ["T(z)", "J_q", "\\rho(z)", "\\langle\\cos\\theta(z)\\rangle"],
+    expectedResult: "Water dipoles preferentially orient toward the colder region, giving a non-zero, spatially varying P_z(z) consistent with A1 (2008).",
+    actualResult: null,
+    validation: [
+      {name:"Direction", note:"Does the polarization direction agree with the literature?"},
+      {name:"Spatial behavior", note:"Does P_z(z) show the expected spatial behavior?"},
+      {name:"Magnitude", note:"Is the magnitude reasonably consistent with published simulation results?"},
+      {name:"Stability", note:"Does the result remain stable across independent sampling windows?"},
+      {name:"Statistical significance", note:"Is the measured response distinguishable from equilibrium fluctuations?"}
+    ],
+    uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
+    changed: ["analysis focus (adds orientation and polarization observables)"],
+    unchanged: ["force field", "density", "box dimensions", "timestep", "electrostatics", "thermal setup", "sampling"],
+    unknown: [],
+    decisions: [{ decision:"Compute P_z(z) via slab-averaged dipole summation rather than a continuum dielectric estimate.", reason:"Directly comparable to the NEMD literature method.", evidence:"A2 (2013) dynamic-correlation approach.", alternative:"Continuum/linear-response estimate from bulk susceptibility.", rejected:"Would not capture the dynamical coupling A2 identifies as important." }],
+    runs: [],
+    interpretation: null, confidence: null, alternativeExplanations: null,
+    nextExperiment: "SIM-01-A04 — sweep \u2207T once a single-gradient measurement is validated."
+  },
+  {
+    id: "SIM-01-A04", parent: "SIM-01", title: "Thermal-gradient sweep", status: "planned",
+    objective: "Determine the response of thermopolarization to the magnitude of the imposed thermal gradient.",
+    scientificQuestion: "Does P_z scale approximately linearly with \\nabla T in the regime established by the literature, and where (if anywhere) does that break down?",
+    hypothesis: "P_z(\\nabla T) \\text{ is approximately linear in the regime reported by A1/A2, with possible deviation at larger } \\nabla T.",
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Independent steady states at each \u2207T" },
+    thermalSetup: "Multiple \u2207T values",
+    method: "NEMD",
+    geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null, note:"Same as A02/A03 unless convergence testing (A05) indicates otherwise" },
+    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:"Series of (T_H, T_C) pairs — values TBD" },
+    md: [
+      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:null, u:"ps/ns"},
+      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+    ],
+    analysis: [
+      {name:"Polarization vs gradient", eq:"P_z(\\nabla T)", purpose:"Primary scaling relationship."},
+      {name:"Temperature profile", eq:"T(z)", purpose:"Confirm steady state at each \u2207T value."},
+      {name:"Heat flux", eq:"J_q(\\nabla T)", purpose:"Check whether transport regime changes across the sweep."}
+    ],
+    primaryOutput: "P_z \\text{ vs } \\nabla T",
+    secondaryOutputs: ["T(z) per gradient", "J_q per gradient"],
+    expectedResult: "An approximately linear P_z–\u2207T relationship in the regime covered by A1/A2, consistent with the established literature.",
+    actualResult: null,
+    validation: [
+      {name:"Linearity", note:"Is the P_z–\u2207T relationship linear in the expected regime?"},
+      {name:"Sign consistency", note:"Does the polarization direction stay consistent across all \u2207T values?"},
+      {name:"Nonlinearity check", note:"Any apparent nonlinearity is distinguished from noise, not assumed."}
+    ],
+    uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
+    changed: ["\u2207T (swept across multiple values)"],
+    unchanged: ["force field", "density", "box dimensions", "timestep", "electrostatics", "sampling"],
+    unknown: ["number and spacing of \u2207T values to sample"],
+    decisions: [],
+    runs: [],
+    interpretation: null, confidence: null, alternativeExplanations: null,
+    nextExperiment: "SIM-01-A05 — test robustness of the A03/A04 results before treating SIM-01 as complete."
+  },
+  {
+    id: "SIM-01-A05", parent: "SIM-01", title: "Convergence / finite-size validation", status: "planned",
+    objective: "Test the robustness of the thermopolarization measurement against system size, run duration, and sampling choices.",
+    scientificQuestion: "Is the measured P_z(z) response an artifact of system size or insufficient sampling, or does it persist under independent variation of these controls?",
+    hypothesis: "\\text{The sign and approximate magnitude of } P_z \\text{ are stable across system sizes and run durations, within uncertainty.}",
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:"Varied (test variable)", density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Independent builds at each system size" },
+    thermalSetup: "Same as A02/A03",
+    method: "NEMD",
+    geometry: { Lx:"Varied (test variable)", Ly:"Varied (test variable)", Lz:"Varied (test variable)", bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null },
+    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:"Same as A03, held fixed while system size/duration vary" },
+    md: [
+      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:"Varied (test variable)", u:"ps/ns"},
+      {p:"sampling interval", v:"Varied (test variable)", u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+    ],
+    analysis: [
+      {name:"Uncertainty vs system size", eq:"\\sigma(N)", purpose:"Detect finite-size dependence."},
+      {name:"Uncertainty vs duration", eq:"\\sigma(t_{prod})", purpose:"Detect under-sampling."},
+      {name:"Block averaging", eq:"\\sigma_{block}", purpose:"Obtain a defensible uncertainty estimate."}
+    ],
+    primaryOutput: "\\text{Uncertainty, convergence, finite-size dependence}",
+    secondaryOutputs: ["P_z(z) recomputed at each system size / duration"],
+    expectedResult: "The literature does not fix a required system size for this project — this experiment exists to establish our own convergence bound, not to reproduce a specific published number.",
+    actualResult: null,
+    validation: [
+      {name:"Size stability", note:"Result stable across at least two independent system sizes."},
+      {name:"Duration stability", note:"Result stable across at least two independent run durations."},
+      {name:"Uncertainty scaling", note:"Uncertainty decreases with sampling as expected for a well-behaved estimator."}
+    ],
+    uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
+    changed: ["system size", "simulation duration", "sampling interval"],
+    unchanged: ["force field", "\u2207T", "thermal setup", "electrostatics"],
+    unknown: ["specific size/duration values to test"],
+    decisions: [],
+    runs: [],
+    interpretation: null, confidence: null, alternativeExplanations: null,
+    nextExperiment: "SIM-02 (electrostatic validation) — but only once SIM-01 is validated across A01\u2013A05."
+  }
+];
+
+const CHECKLIST_BEFORE = [
+  "Research question defined", "Primary observable defined", "Geometry defined", "Boundary conditions defined",
+  "Force field defined", "Thermal method defined", "Timestep defined", "Equilibration defined",
+  "Production length defined", "Sampling strategy defined", "Convergence criteria defined",
+  "Validation criteria defined", "Parameter changes documented"
+];
+const CHECKLIST_AFTER = [
+  "Energy conservation / expected thermostat behavior checked", "Temperature profile checked", "Heat flux checked",
+  "Density profile checked", "Primary observable calculated", "Uncertainty estimated", "Independent sampling checked",
+  "Finite-size concerns evaluated", "Literature comparison completed", "Interpretation separated from observation",
+  "Next experiment defined"
+];
+
+const DECISIONS = [
+  { id:"001", decision:"Start with SPC/E water.", reason:"Literature reproduction." },
+  { id:"002", decision:"Do not evaluate electrical power in SIM 01.", reason:"First reproduce thermopolarization independently." },
+  { id:"003", decision:"Keep H\u2082O as reference before CH\u2083CN.", reason:"Water has the strongest literature benchmark." }
+];
+
+const DEFAULT_FAILURES = [
+  { runId:"SIM-01-A02 \u2014 Run 003", date:"—", setup:"Two-region thermostat, initial coupling constants", mode:"Temperature profile unstable.", cause:"Thermostat coupling too aggressive.", evidence:"T(z) oscillated rather than reaching a steady linear profile across the sampled window.", action:"Revise thermalization parameters.", usable:"Useful for protocol refinement" }
+];
+
+/* ============================================================
+   RENDER: LITERATURE CARDS (Level A) + COMPACT LISTS (B, C)
+============================================================ */
+const litGrid = document.getElementById('lit-grid');
+LEVEL_A.forEach((p, i) => {
+  const card = document.createElement('article');
+  card.className = 'lit-card';
+  card.dataset.level = 'A';
+  card.dataset.status = p.status;
+  card.innerHTML = `
+    <div class="lit-head" role="button" tabindex="0" aria-expanded="false">
+      <div>
+        <div class="lit-year">A${i+1} — ${p.year}, ${p.authors} <span class="tag ${p.status}" style="margin-left:.6em;"><span class="dot"></span>${p.status}</span> <span class="level-badge level-a" style="margin-left:.4em;">${p.role}</span></div>
+        <h3 class="lit-title">${p.title}</h3>
+      </div>
+      <div class="lit-toggle">+</div>
+    </div>
+    <div class="lit-body">
+      <div class="lit-body-inner">
+        <div class="lit-body-content">
+          <div class="lit-field"><span class="lbl">What it established</span><p>${p.established}</p></div>
+          <div class="lit-field"><span class="lbl">What it did not establish</span><p>${p.notEstablished}</p></div>
+          <div class="lit-field"><span class="lbl">Why it matters</span><p>${p.whyItMatters}</p></div>
+          <div class="lit-field"><span class="lbl">What question it creates</span><p>${p.createsQuestion}</p></div>
+        </div>
+      </div>
+    </div>
+  `;
+  const head = card.querySelector('.lit-head');
+  const toggle = () => {
+    const willOpen = !card.classList.contains('open');
+    card.classList.toggle('open');
+    head.setAttribute('aria-expanded', String(willOpen));
+  };
+  head.addEventListener('click', toggle);
+  head.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  litGrid.appendChild(card);
+});
+
+function renderCompact(containerId, items, levelLetter){
+  const el = document.getElementById(containerId);
+  items.forEach(it => {
+    const row = document.createElement('div');
+    row.className = 'lit-compact';
+    row.dataset.level = levelLetter;
+    row.dataset.status = it.status;
+    row.innerHTML = `
+      <span class="lc-year">${it.year}</span>
+      <span class="level-badge level-${levelLetter.toLowerCase()}">${it.ref}</span>
+      <span class="lc-title">${it.title}<span class="lc-sub">${it.note}</span></span>
+    `;
+    el.appendChild(row);
+  });
+}
+renderCompact('lit-compact-b', LEVEL_B, 'B');
+renderCompact('lit-compact-c', LEVEL_C, 'C');
+
+/* ============================================================
+   FILTERS: STATUS + LEVEL
+============================================================ */
+function applyLiteratureFilters(){
+  const activeStatus = document.querySelector('#status-filter-bar .filter-btn.active').dataset.status;
+  const activeLevel = document.querySelector('#level-filter-bar .filter-btn.active').dataset.level;
+  document.querySelectorAll('#lit-grid .lit-card, #lit-compact-b .lit-compact, #lit-compact-c .lit-compact').forEach(el => {
+    const statusOk = activeStatus === 'all' || el.dataset.status === activeStatus || (activeStatus==='totest' && el.dataset.status==='to-test');
+    const levelOk = activeLevel === 'all' || el.dataset.level === activeLevel;
+    el.style.display = (statusOk && levelOk) ? '' : 'none';
+  });
+  document.querySelectorAll('[data-level-section]').forEach(label => {
+    const lvl = label.dataset.levelSection;
+    const anyVisible = Array.from(document.querySelectorAll(`[data-level="${lvl}"]`)).some(el => el.style.display !== 'none');
+    label.style.display = (activeLevel === 'all' || activeLevel === lvl) && anyVisible ? '' : 'none';
+  });
+}
+document.querySelectorAll('#status-filter-bar .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#status-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyLiteratureFilters();
+  });
+});
+document.querySelectorAll('#level-filter-bar .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#level-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyLiteratureFilters();
+  });
+});
+
+/* ============================================================
+   RENDER: WHAT THE LITERATURE AGREES ON + EVIDENCE/QUESTION TOGGLE
+============================================================ */
+const agreeList = document.getElementById('agree-list');
+AGREEMENT_POINTS.forEach((text, i) => {
+  const item = document.createElement('div');
+  item.className = 'evq-item';
+  item.innerHTML = `<div class="evq-num">${i+1}</div><p>${text}</p>`;
+  agreeList.appendChild(item);
+});
+const agreeQuestions = document.getElementById('agree-questions');
+OPEN_QUESTIONS.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'evq-item';
+  el.innerHTML = `<div class="evq-num">Q${i+1}</div><p>${item.q}</p>`;
+  agreeQuestions.appendChild(el);
+});
+document.getElementById('evq-know-btn').addEventListener('click', function(){
+  this.classList.add('active');
+  document.getElementById('evq-need-btn').classList.remove('active');
+  document.getElementById('evq-know').classList.add('show');
+  document.getElementById('evq-need').classList.remove('show');
+});
+document.getElementById('evq-need-btn').addEventListener('click', function(){
+  this.classList.add('active');
+  document.getElementById('evq-know-btn').classList.remove('active');
+  document.getElementById('evq-need').classList.add('show');
+  document.getElementById('evq-know').classList.remove('show');
+});
+
+/* ============================================================
+   RENDER: CAUSAL DIAGRAM
+============================================================ */
+const causalWrap = document.getElementById('causal-diagram');
+CAUSAL_NODES.forEach((n, i) => {
+  const nodeWrap = document.createElement('div');
+  nodeWrap.className = 'causal-node-wrap';
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'causal-node' + (n.toTest ? ' to-test' : '');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = `<span>${String(i+1).padStart(2,'0')} — ${n.label}${n.toTest ? ' <span style="font-size:.68rem;">(OPEN / TO TEST)</span>' : ''}</span><span class="plus">+</span>`;
+  const panel = document.createElement('div');
+  panel.className = 'causal-panel';
+  panel.innerHTML = `<p>${n.note}</p>`;
+  btn.addEventListener('click', () => {
+    const open = panel.classList.toggle('show');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.querySelector('.plus').textContent = open ? '\u2212' : '+';
+  });
+  nodeWrap.appendChild(btn);
+  nodeWrap.appendChild(panel);
+  causalWrap.appendChild(nodeWrap);
+  if(i < CAUSAL_NODES.length - 1){
+    const connector = document.createElement('div');
+    connector.className = 'causal-connector';
+    causalWrap.appendChild(connector);
+  }
+});
+
+/* ============================================================
+   RENDER: OPEN QUESTIONS
+============================================================ */
+const oqList = document.getElementById('oq-list');
+OPEN_QUESTIONS.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'oq-item';
+  el.innerHTML = `
+    <div class="oq-head" role="button" tabindex="0" aria-expanded="false">
+      <span class="oq-id">Q${String(i+1).padStart(2,'0')}</span>
+      <span class="oq-text">${item.q}</span>
+    </div>
+    <div class="oq-note">${item.note}</div>
+  `;
+  const head = el.querySelector('.oq-head');
+  const toggle = () => {
+    const open = el.classList.toggle('open');
+    head.setAttribute('aria-expanded', String(open));
+  };
+  head.addEventListener('click', toggle);
+  head.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  oqList.appendChild(el);
+});
+
+/* ============================================================
+   RESEARCH LOG (localStorage)
+============================================================ */
+const LOG_KEY = 'thermal-polarization-research-log';
+function loadLog(){
+  try{
+    const raw = localStorage.getItem(LOG_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){ /* ignore */ }
+  return DEFAULT_LOG.slice();
+}
+function saveLog(entries){
+  try{ localStorage.setItem(LOG_KEY, JSON.stringify(entries)); }catch(e){ /* storage unavailable */ }
+}
+function renderLog(){
+  const container = document.getElementById('log-entries');
+  const entries = loadLog();
+  container.innerHTML = '';
+  if(entries.length === 0){
+    container.innerHTML = '<p class="empty-log">No entries yet. Add the first observation below.</p>';
+    return;
+  }
+  entries.slice().reverse().forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'log-entry';
+    div.innerHTML = `
+      <div class="log-date">${e.date}</div>
+      <div class="log-body">
+        <span class="lbl">Source / simulation</span><p>${escapeHtml(e.source)}</p>
+        <span class="lbl">Observation</span><p>${escapeHtml(e.obs)}</p>
+        ${e.interp ? `<span class="lbl">Interpretation</span><p>${escapeHtml(e.interp)}</p>` : ''}
+        <span class="lbl">Confidence</span><p>${e.conf}</p>
+        ${e.next ? `<span class="lbl">Next question</span><p>${escapeHtml(e.next)}</p>` : ''}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+renderLog();
+
+document.getElementById('log-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const entries = loadLog();
+  entries.push({
+    date: document.getElementById('log-date').value || new Date().toISOString().slice(0,10),
+    source: document.getElementById('log-source').value,
+    obs: document.getElementById('log-obs').value,
+    interp: document.getElementById('log-interp').value,
+    conf: document.getElementById('log-conf').value,
+    next: document.getElementById('log-next').value
+  });
+  saveLog(entries);
+  renderLog();
+  this.reset();
+});
+
+/* ============================================================
+   SIMULATION LOG — RENDER
+============================================================ */
+function fmt(v){
+  if(v === null || v === undefined || v === ''){ return '<span class="tbd">TBD</span>'; }
+  return v;
+}
+function eqInline(latex){
+  if(!latex) return fmt(null);
+  return `\\(${latex}\\)`;
+}
+
+/* -- 01 Research progress roadmap -- */
+const ROADMAP = [
+  { label:"Literature", state:"done" },
+  { label:"Checkpoint 01", state:"done" },
+  { label:"Simulation design", state:"current" },
+  { label:"SIM 01", state:"" },
+  { label:"SIM 02", state:"" },
+  { label:"SIM 03", state:"" }
+];
+const roadmapTrack = document.getElementById('roadmap-track');
+ROADMAP.forEach((n, i) => {
+  const node = document.createElement('div');
+  node.className = 'roadmap-node' + (n.state ? ' ' + n.state : '');
+  node.innerHTML = `<div class="rn-mark"></div><span class="rn-label">${n.label}</span>`;
+  roadmapTrack.appendChild(node);
+  if(i < ROADMAP.length - 1){
+    const c = document.createElement('div');
+    c.className = 'roadmap-connector';
+    roadmapTrack.appendChild(c);
+  }
+});
+
+/* -- 02 Simulation program sub-list -- */
+const sim01SubList = document.getElementById('sim01-sublist');
+EXPERIMENTS.forEach(exp => {
+  const row = document.createElement('div');
+  row.className = 'sim-sub-row';
+  row.innerHTML = `<span class="ssr-id">${exp.id}</span><span class="ssr-title">${exp.title} <span class="tag status-${exp.status}" style="margin-left:.5em;">${exp.status}</span></span>`;
+  sim01SubList.appendChild(row);
+});
+
+/* -- 03 / 04 Master experiment table + expandable experiment card -- */
+function buildExperimentCard(exp){
+  const geo = exp.geometry, th = exp.thermal, sys = exp.system;
+  const flowNodes = ["QUESTION","SETUP","PARAMETERS","METHOD","OBSERVABLE","VALIDATION","RESULT","INTERPRETATION","NEXT EXPERIMENT"];
+
+  const flowHtml = `<div class="exp-flow">${flowNodes.map((n,i)=>
+    `<div class="exp-flow-node">${n}</div>${i<flowNodes.length-1?'<div class="exp-flow-arrow">\u2193</div>':''}`
+  ).join('')}</div>`;
+
+  const defItem = (label, val) => `<div class="def-item"><span class="dl">${label}</span><span class="dv">${fmt(val)}</span></div>`;
+
+  const mdRows = exp.md.map(m => `<tr><td>${m.p}</td><td>${fmt(m.v)}</td><td>${m.u}</td><td class="tbd">TBD</td><td><span class="lock-pill">No</span></td></tr>`).join('');
+
+  const analysisHtml = exp.analysis.map(a => `
+    <div class="analysis-item">
+      <h5>${a.name}</h5>
+      <div class="equation-block" style="margin:.4em 0;">\\[ ${a.eq} \\]</div>
+      <span class="lbl">Purpose</span><p>${a.purpose}</p>
+    </div>`).join('');
+
+  const validationHtml = exp.validation.map(v => `<div class="validation-item"><div class="vl">${v.name}</div><p>${v.note}</p></div>`).join('');
+
+  const lockCompare = (arr, cls) => arr.map(t => `<span class="lock-tag ${cls}">${t}</span>`).join('');
+  const lockHtml = (exp.changed.length + exp.unchanged.length + exp.unknown.length === 0)
+    ? `<p style="font-size:.88rem; color:var(--ink-soft);">First experiment in the sequence — no prior parameters to compare.</p>`
+    : `
+      ${exp.changed.length ? `<span class="lbl" style="font-family:var(--mono); font-size:.66rem; color:var(--indigo); display:block; margin-bottom:.4em;">CHANGED</span><div class="lock-compare">${lockCompare(exp.changed,'changed')}</div>` : ''}
+      ${exp.unchanged.length ? `<span class="lbl" style="font-family:var(--mono); font-size:.66rem; color:var(--ink-soft); display:block; margin:.8em 0 .4em 0;">UNCHANGED</span><div class="lock-compare">${lockCompare(exp.unchanged,'unchanged')}</div>` : ''}
+      ${exp.unknown.length ? `<span class="lbl" style="font-family:var(--mono); font-size:.66rem; color:var(--red-hyp); display:block; margin:.8em 0 .4em 0;">UNKNOWN</span><div class="lock-compare">${lockCompare(exp.unknown,'unknown')}</div>` : ''}
+    `;
+
+  const decisionsHtml = exp.decisions.length
+    ? exp.decisions.map(d => `
+      <div class="decision-entry">
+        <div class="de-grid"><div class="de-lbl">Decision</div><p>${d.decision}</p></div>
+        <div class="de-grid"><div class="de-lbl">Reason</div><p>${d.reason}</p></div>
+        <div class="de-grid"><div class="de-lbl">Evidence</div><p>${d.evidence}</p></div>
+        <div class="de-grid"><div class="de-lbl">Alternative</div><p>${d.alternative}</p></div>
+        <div class="de-grid"><div class="de-lbl">Rejected because</div><p>${d.rejected}</p></div>
+      </div>`).join('')
+    : `<p style="font-size:.88rem; color:var(--ink-soft);">No new decisions recorded for this experiment.</p>`;
+
+  const runsHtml = exp.runs.length
+    ? `<div class="run-list">${exp.runs.map(r => `<div class="run-item"><span class="run-id">${r.id}</span><span>${r.note}</span></div>`).join('')}</div>`
+    : `<div class="noresult-box">No runs yet.</div>`;
+
+  return `
+    ${flowHtml}
+    <div class="exp-section"><span class="es-letter">A. OBJECTIVE</span><h5>What exactly are we trying to determine?</h5><p>${exp.objective}</p></div>
+    <div class="exp-section"><span class="es-letter">B. SCIENTIFIC QUESTION</span><p>${exp.scientificQuestion}</p></div>
+    <div class="exp-section"><span class="es-letter">C. HYPOTHESIS</span><div class="equation-block">\\[ ${exp.hypothesis} \\]</div><p style="font-size:.8rem; font-style:italic;">Not a confirmed result — what the literature leads us to expect.</p></div>
+
+    <div class="exp-section"><span class="es-letter">D. SYSTEM DEFINITION</span>
+      <div class="def-grid">
+        ${defItem('Molecular species', sys.species)}
+        ${defItem('Force field', sys.forceField)}
+        ${defItem('Number of molecules', sys.molecules)}
+        ${defItem('Initial density', sys.density)}
+        ${defItem('Target temperature', sys.temperature)}
+        ${defItem('Pressure', sys.pressure)}
+        ${defItem('Composition', sys.composition)}
+        ${defItem('Initial configuration', sys.initialConfig)}
+      </div>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">E. GEOMETRY</span>
+      <div class="geometry-panel">
+        <div class="geometry-ascii">${GEOMETRY_ASCII}</div>
+        <div class="def-grid">
+          ${defItem('L_x', geo.Lx)}
+          ${defItem('L_y', geo.Ly)}
+          ${defItem('L_z', geo.Lz)}
+          ${defItem('Spatial bins', geo.bins)}
+          ${defItem('Gradient direction', geo.gradientDirection)}
+          ${defItem('Boundary conditions', geo.boundaryConditions)}
+          ${defItem('Periodicity', geo.periodicity)}
+        </div>
+      </div>
+      ${geo.note ? `<p style="font-size:.85rem; font-style:italic;">${geo.note}</p>` : ''}
+    </div>
+
+    <div class="exp-section"><span class="es-letter">F. THERMAL SETUP</span>
+      <p style="font-size:.88rem;">Configuration: ${exp.thermalSetup}</p>
+      <div class="def-grid">
+        ${defItem('T_H', th.Th)}
+        ${defItem('T_C', th.Tc)}
+        ${defItem('Hot region', th.hotRegion)}
+        ${defItem('Cold region', th.coldRegion)}
+        ${defItem('Thermalization method', th.method)}
+        ${defItem('Thermostat parameters', th.parameters)}
+      </div>
+      <div class="equation-block" style="margin-top:1em;">\\[ \\nabla T = \\frac{T_H - T_C}{L_z} \\]</div>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">G. MOLECULAR DYNAMICS PARAMETERS</span>
+      <table class="param-table">
+        <thead><tr><th>Parameter</th><th>Value</th><th>Unit</th><th>Source / reason</th><th>Locked?</th></tr></thead>
+        <tbody>${mdRows}</tbody>
+      </table>
+      <p style="font-size:.8rem; font-style:italic;">TBD values are not invented — they remain visibly marked until decided.</p>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">H. ANALYSIS METHODS</span>${analysisHtml}</div>
+
+    <div class="exp-section"><span class="es-letter">I. PRIMARY OUTPUT</span><div class="equation-block">\\[ \\boxed{${exp.primaryOutput}} \\]</div><p style="font-size:.82rem;">Everything else is supporting evidence.</p></div>
+
+    <div class="exp-section"><span class="es-letter">J. SECONDARY OUTPUTS</span><p>${exp.secondaryOutputs.map(eqInline).join(', &nbsp; ')}</p></div>
+
+    <div class="exp-section"><span class="es-letter">K. EXPECTED RESULT</span>
+      <div class="expectation-box"><span class="lbl">LITERATURE EXPECTATION</span><p>${exp.expectedResult}</p></div>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">L. ACTUAL RESULT</span>
+      ${exp.actualResult ? `<p>${exp.actualResult}</p>` : `<div class="noresult-box">NO RESULT YET</div>`}
+    </div>
+
+    <div class="exp-section"><span class="es-letter">M. VALIDATION CRITERIA</span><div class="validation-list">${validationHtml}</div></div>
+
+    <div class="exp-section"><span class="es-letter">N. UNCERTAINTY</span>
+      <div class="def-grid">
+        ${defItem('Mean', exp.uncertainty.mean)}
+        ${defItem('Standard deviation', exp.uncertainty.sd)}
+        ${defItem('Standard error', exp.uncertainty.se)}
+        ${defItem('Confidence interval', exp.uncertainty.ci)}
+        ${defItem('Block-averaging method', exp.uncertainty.blockMethod)}
+        ${defItem('Independent samples', exp.uncertainty.nIndependent)}
+      </div>
+      <p style="font-size:.8rem; font-style:italic;">Not calculated — insufficient data until a run is completed.</p>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">O. PARAMETER LOCK</span>${lockHtml}</div>
+
+    <div class="exp-section"><span class="es-letter">P. DECISION LOG</span>${decisionsHtml}</div>
+
+    <div class="exp-section"><span class="es-letter">Q. RUN HISTORY</span>${runsHtml}</div>
+
+    <div class="exp-section"><span class="es-letter">R. RESULT</span>
+      <div class="def-grid">
+        ${defItem('Result summary', null)}
+        ${defItem('Key numerical result', null)}
+        ${defItem('Primary figure', null)}
+        ${defItem('Supporting figures', null)}
+        ${defItem('Uncertainty', null)}
+        ${defItem('Statistical confidence', null)}
+        ${defItem('Comparison to literature', null)}
+      </div>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">S. SCIENTIFIC STATUS</span><span class="tag status-${exp.status}">${exp.status.toUpperCase()}</span></div>
+
+    <div class="exp-section"><span class="es-letter">T. INTERPRETATION</span>
+      <div class="def-grid">
+        ${defItem('Observation', exp.actualResult)}
+        ${defItem('Interpretation', exp.interpretation)}
+        ${defItem('Confidence', exp.confidence)}
+        ${defItem('Alternative explanations', exp.alternativeExplanations)}
+      </div>
+    </div>
+
+    <div class="exp-section"><span class="es-letter">U. NEXT EXPERIMENT</span><p>${exp.nextExperiment}</p></div>
+  `;
+}
+
+const expTableBody = document.getElementById('exp-table-body');
+EXPERIMENTS.forEach(exp => {
+  const row = document.createElement('tr');
+  row.className = 'exp-row';
+  row.innerHTML = `
+    <td class="exp-id-cell">${exp.id}</td>
+    <td>${exp.title}</td>
+    <td>${fmt(exp.system.species)}</td>
+    <td>${fmt(exp.system.forceField)}</td>
+    <td>${fmt(exp.geometry.note || null) === fmt(null) ? 'TBD' : exp.geometry.note}</td>
+    <td>${exp.thermalSetup}</td>
+    <td>${exp.method}</td>
+    <td>${exp.md.slice(0,2).map(m=>m.p).join(', ')}\u2026</td>
+    <td>${eqInline(exp.primaryOutput)}</td>
+    <td><span class="tag status-${exp.status}">${exp.status}</span></td>
+  `;
+  const cardRow = document.createElement('tr');
+  cardRow.className = 'exp-card-row';
+  const cardTd = document.createElement('td');
+  cardTd.colSpan = 10;
+  const card = document.createElement('div');
+  card.className = 'exp-card';
+  card.innerHTML = buildExperimentCard(exp);
+  cardTd.appendChild(card);
+  cardRow.appendChild(cardTd);
+
+  row.addEventListener('click', () => {
+    const opening = !card.classList.contains('show');
+    card.classList.toggle('show');
+    row.classList.toggle('expanded', opening);
+    if(opening && window.renderMathInElement){ renderMathInElement(card, { delimiters:[{left:"\\[",right:"\\]",display:true},{left:"\\(",right:"\\)",display:false}] }); }
+  });
+
+  expTableBody.appendChild(row);
+  expTableBody.appendChild(cardRow);
+});
+
+/* -- 05 Parameter matrix -- */
+function mdVal(exp, name){ const m = exp.md.find(x => x.p === name); return m ? m.v : null; }
+const PARAM_ROWS = [
+  { label:"System", get:e=>e.system.species },
+  { label:"Force field", get:e=>e.system.forceField },
+  { label:"N (molecules)", get:e=>e.system.molecules },
+  { label:"Density, \u03c1", get:e=>e.system.density },
+  { label:"Box dimensions", get:e=> (e.geometry.Lx||e.geometry.Ly||e.geometry.Lz) ? `${e.geometry.Lx||'TBD'} \u00d7 ${e.geometry.Ly||'TBD'} \u00d7 ${e.geometry.Lz||'TBD'}` : null },
+  { label:"T_H", get:e=>e.thermal.Th },
+  { label:"T_C", get:e=>e.thermal.Tc },
+  { label:"\u2207T", get:e=> e.id==="SIM-01-A01" ? "\u2014 (equilibrium)" : (e.id==="SIM-01-A04" ? "Swept (multiple values)" : e.thermal.gradient) },
+  { label:"Timestep", get:e=>mdVal(e,"timestep") },
+  { label:"Equilibration", get:e=>mdVal(e,"equilibration") },
+  { label:"Production", get:e=>mdVal(e,"production") },
+  { label:"Thermostat", get:e=>e.thermal.parameters },
+  { label:"Electrostatics", get:e=>mdVal(e,"electrostatics") },
+  { label:"Cutoff", get:e=>mdVal(e,"cutoff") },
+  { label:"Sampling interval", get:e=>mdVal(e,"sampling interval") },
+  { label:"Random seed", get:e=>null }
+];
+const paramMatrix = document.getElementById('param-matrix');
+paramMatrix.innerHTML = `
+  <thead><tr><th>Parameter</th>${EXPERIMENTS.map(e=>`<th>${e.id.replace('SIM-01-','')}</th>`).join('')}</tr></thead>
+  <tbody>
+    ${PARAM_ROWS.map(row => {
+      const vals = EXPERIMENTS.map(e => row.get(e));
+      return `<tr><td>${row.label}</td>${vals.map((v,i) => {
+        const changed = i>0 && v !== null && v !== vals[i-1] && vals[i-1] !== null;
+        return `<td>${changed ? `<span class="lock-tag changed">${v}</span>` : fmt(v)}</td>`;
+      }).join('')}</tr>`;
+    }).join('')}
+  </tbody>
+`;
+
+/* -- 06 Results matrix -- */
+const resultsMatrix = document.getElementById('results-matrix');
+resultsMatrix.innerHTML = `
+  <thead><tr><th>Experiment</th><th>Primary observable</th><th>Expected</th><th>Actual</th><th>Uncertainty</th><th>Literature agreement</th><th>Status</th></tr></thead>
+  <tbody>
+    ${EXPERIMENTS.map(e => `<tr>
+      <td class="exp-id-cell">${e.id}</td>
+      <td>${eqInline(e.primaryOutput)}</td>
+      <td style="max-width:220px;">${e.expectedResult}</td>
+      <td>\u2014</td>
+      <td>\u2014</td>
+      <td>\u2014</td>
+      <td><span class="tag status-${e.status}">${e.status}</span></td>
+    </tr>`).join('')}
+  </tbody>
+`;
+
+/* -- 07 Simulation checklist (localStorage) -- */
+const CHECKLIST_KEY = 'thermal-polarization-simlog-checklist';
+function loadChecklist(){
+  try{ const raw = localStorage.getItem(CHECKLIST_KEY); if(raw) return JSON.parse(raw); }catch(e){}
+  return { before: CHECKLIST_BEFORE.map(()=>false), after: CHECKLIST_AFTER.map(()=>false) };
+}
+function saveChecklist(state){ try{ localStorage.setItem(CHECKLIST_KEY, JSON.stringify(state)); }catch(e){} }
+function renderChecklist(){
+  const state = loadChecklist();
+  const beforeEl = document.getElementById('checklist-before');
+  const afterEl = document.getElementById('checklist-after');
+  beforeEl.innerHTML = '';
+  afterEl.innerHTML = '';
+  CHECKLIST_BEFORE.forEach((label, i) => {
+    const item = document.createElement('div');
+    item.className = 'checklist-item' + (state.before[i] ? ' checked' : '');
+    item.innerHTML = `<input type="checkbox" id="cb-before-${i}" ${state.before[i]?'checked':''}><label for="cb-before-${i}">${label}</label>`;
+    item.querySelector('input').addEventListener('change', function(){
+      const s = loadChecklist(); s.before[i] = this.checked; saveChecklist(s); renderChecklist();
+    });
+    beforeEl.appendChild(item);
+  });
+  CHECKLIST_AFTER.forEach((label, i) => {
+    const item = document.createElement('div');
+    item.className = 'checklist-item' + (state.after[i] ? ' checked' : '');
+    item.innerHTML = `<input type="checkbox" id="cb-after-${i}" ${state.after[i]?'checked':''}><label for="cb-after-${i}">${label}</label>`;
+    item.querySelector('input').addEventListener('change', function(){
+      const s = loadChecklist(); s.after[i] = this.checked; saveChecklist(s); renderChecklist();
+    });
+    afterEl.appendChild(item);
+  });
+}
+renderChecklist();
+
+/* -- 08 Failure log (localStorage) -- */
+const FAILURE_KEY = 'thermal-polarization-simlog-failures';
+function loadFailures(){
+  try{ const raw = localStorage.getItem(FAILURE_KEY); if(raw) return JSON.parse(raw); }catch(e){}
+  return DEFAULT_FAILURES.slice();
+}
+function saveFailures(list){ try{ localStorage.setItem(FAILURE_KEY, JSON.stringify(list)); }catch(e){} }
+function renderFailures(){
+  const container = document.getElementById('failure-entries');
+  const list = loadFailures();
+  container.innerHTML = '';
+  if(list.length === 0){ container.innerHTML = '<p class="empty-log">No failed or rejected runs recorded yet.</p>'; return; }
+  list.slice().reverse().forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'failure-entry';
+    el.innerHTML = `
+      <div class="fe-id">${escapeHtml(f.runId)} — ${escapeHtml(f.date)}</div>
+      <div class="fe-grid"><div class="fe-lbl">Setup</div><p>${escapeHtml(f.setup||'')}</p></div>
+      <div class="fe-grid"><div class="fe-lbl">Failure mode</div><p>${escapeHtml(f.mode)}</p></div>
+      <div class="fe-grid"><div class="fe-lbl">Suspected cause</div><p>${escapeHtml(f.cause||'')}</p></div>
+      <div class="fe-grid"><div class="fe-lbl">Evidence</div><p>${escapeHtml(f.evidence||'')}</p></div>
+      <div class="fe-grid"><div class="fe-lbl">Corrective action</div><p>${escapeHtml(f.action||'')}</p></div>
+      <div class="fe-grid"><div class="fe-lbl">Scientific value</div><p>${escapeHtml(f.usable)}</p></div>
+    `;
+    container.appendChild(el);
+  });
+}
+renderFailures();
+document.getElementById('failure-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const list = loadFailures();
+  list.push({
+    runId: document.getElementById('fl-runid').value,
+    date: document.getElementById('fl-date').value || new Date().toISOString().slice(0,10),
+    setup: document.getElementById('fl-setup').value,
+    mode: document.getElementById('fl-mode').value,
+    cause: document.getElementById('fl-cause').value,
+    evidence: document.getElementById('fl-evidence').value,
+    action: document.getElementById('fl-action').value,
+    usable: document.getElementById('fl-usable').value
+  });
+  saveFailures(list);
+  renderFailures();
+  this.reset();
+});
+
+/* -- 09 Decision history -- */
+const decisionEntries = document.getElementById('decision-entries');
+DECISIONS.forEach(d => {
+  const el = document.createElement('div');
+  el.className = 'decision-entry';
+  el.innerHTML = `
+    <div class="de-grid"><div class="de-lbl">Decision ${d.id}</div><p>${d.decision}</p></div>
+    <div class="de-grid"><div class="de-lbl">Reason</div><p>${d.reason}</p></div>
+  `;
+  decisionEntries.appendChild(el);
+});
+
+/* -- Export / Import -- */
+document.getElementById('simlog-export').addEventListener('click', () => {
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    experiments: EXPERIMENTS,
+    decisions: DECISIONS,
+    checklist: loadChecklist(),
+    failures: loadFailures()
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'thermal-polarization-simulation-log.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+document.getElementById('simlog-import-btn').addEventListener('click', () => {
+  document.getElementById('simlog-import-file').click();
+});
+document.getElementById('simlog-import-file').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    try{
+      const data = JSON.parse(evt.target.result);
+      if(data.checklist) saveChecklist(data.checklist);
+      if(data.failures) saveFailures(data.failures);
+      renderChecklist();
+      renderFailures();
+    }catch(err){ /* invalid file — ignore silently, no fabricated feedback */ }
+  };
+  reader.readAsText(file);
+  this.value = '';
+});
+
+/* ============================================================
+   SCROLL PROGRESS + NAV ACTIVE STATE + PAGE NUMBER
+============================================================ */
+const sections = Array.from(document.querySelectorAll('#main .section'));
+const navLinks = Array.from(document.querySelectorAll('#nav-list .nav-link'));
+const progressBar = document.getElementById('progress-bar');
+const pageNo = document.getElementById('page-no');
+
+function onScroll(){
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop || document.body.scrollTop;
+  const height = (doc.scrollHeight - doc.clientHeight) || 1;
+  progressBar.style.width = Math.min(100, (scrolled / height) * 100) + '%';
+
+  let currentIndex = 0;
+  const scrollPos = scrolled + window.innerHeight * 0.3;
+  sections.forEach((sec, i) => {
+    if(sec.offsetTop <= scrollPos) currentIndex = i;
+  });
+  navLinks.forEach((l, i) => l.classList.toggle('active', i === currentIndex));
+  pageNo.textContent = String(currentIndex + 1).padStart(2,'0') + ' / ' + sections.length;
+}
+document.addEventListener('scroll', onScroll, { passive:true });
+window.addEventListener('resize', onScroll);
+onScroll();
+
+/* ============================================================
+   MOBILE NAV
+============================================================ */
+const navListMobile = document.getElementById('nav-list-mobile');
+navListMobile.innerHTML = document.getElementById('nav-list').innerHTML;
+const mobilePanel = document.getElementById('mobile-panel');
+const mobileBtn = document.getElementById('mobile-menu-btn');
+mobileBtn.addEventListener('click', () => {
+  const showing = mobilePanel.classList.toggle('show');
+  mobileBtn.setAttribute('aria-expanded', String(showing));
+});
+navListMobile.querySelectorAll('.nav-link').forEach(l => {
+  l.addEventListener('click', () => { mobilePanel.classList.remove('show'); });
+});
+
+/* ============================================================
+   THEME TOGGLE
+============================================================ */
+const THEME_KEY = 'thermal-polarization-theme';
+function applyTheme(t){
+  document.documentElement.classList.toggle('dark', t === 'dark');
+  const label = t === 'dark' ? 'Light paper' : 'Dark paper';
+  document.getElementById('theme-toggle').textContent = label;
+  document.getElementById('theme-toggle-mobile').textContent = label;
+}
+let currentTheme = 'light';
+try{ currentTheme = localStorage.getItem(THEME_KEY) || 'light'; }catch(e){}
+applyTheme(currentTheme);
+function toggleTheme(){
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(currentTheme);
+  try{ localStorage.setItem(THEME_KEY, currentTheme); }catch(e){}
+}
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
+
+/* ============================================================
+   SEARCH
+============================================================ */
+function buildSearchIndex(){
+  return sections.map(sec => ({
+    id: sec.id,
+    title: sec.dataset.title || sec.id,
+    text: sec.textContent.replace(/\s+/g,' ').trim()
+  }));
+}
+const SEARCH_INDEX = buildSearchIndex();
+
+function runSearch(term, resultsEl){
+  term = term.trim().toLowerCase();
+  if(term.length < 2){ resultsEl.classList.remove('show'); resultsEl.innerHTML=''; return; }
+  const hits = SEARCH_INDEX.filter(s => s.text.toLowerCase().includes(term)).slice(0,8);
+  resultsEl.innerHTML = '';
+  if(hits.length === 0){
+    resultsEl.innerHTML = '<div class="search-hit">No matches</div>';
+  } else {
+    hits.forEach(h => {
+      const idx = h.text.toLowerCase().indexOf(term);
+      const start = Math.max(0, idx-30);
+      const snippet = (start>0?'\u2026':'') + h.text.slice(start, idx+term.length+40) + '\u2026';
+      const a = document.createElement('a');
+      a.className = 'search-hit';
+      a.href = '#' + h.id;
+      a.innerHTML = `<b>${h.title}</b><br>${snippet}`;
+      resultsEl.appendChild(a);
+    });
+  }
+  resultsEl.classList.add('show');
+}
+document.getElementById('search-box').addEventListener('input', function(){
+  runSearch(this.value, document.getElementById('search-results'));
+});
+document.getElementById('search-box-mobile').addEventListener('input', function(){
+  runSearch(this.value, document.getElementById('search-results-mobile'));
+});
+document.querySelectorAll('#search-results, #search-results-mobile').forEach(el=>{
+  el.addEventListener('click', e => {
+    if(e.target.closest('a')) mobilePanel.classList.remove('show');
+  });
+});
+
+/* ============================================================
+   KATEX RENDERING
+============================================================ */
+window.addEventListener('load', () => {
+  if(window.renderMathInElement){
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ]
+    });
+  }
+});
+</script>
+
+</body>
+</html>
