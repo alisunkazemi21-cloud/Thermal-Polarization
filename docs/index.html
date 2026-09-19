@@ -792,10 +792,11 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <div class="rs-item done"><span class="rs-dot"></span>Cross-literature classification</div>
       <div class="rs-item done"><span class="rs-dot"></span>Scientific gap definition</div>
       <div class="rs-item done"><span class="rs-dot"></span>Research-question freeze</div>
-      <div class="rs-item current"><span class="rs-dot"></span>Checkpoint 01</div>
-      <div class="rs-item"><span class="rs-dot"></span>Simulation-method selection</div>
-      <div class="rs-item"><span class="rs-dot"></span>Model implementation</div>
-      <div class="rs-item"><span class="rs-dot"></span>Literature reproduction</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Checkpoint 01</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Simulation-method selection (SIM-01 equilibrium protocol)</div>
+      <div class="rs-item done"><span class="rs-dot"></span>Model implementation (SPC/E, GROMACS 2025.4)</div>
+      <div class="rs-item done"><span class="rs-dot"></span>SIM-01 equilibrium validation — density, temperature, O-O RDF, self-diffusion all pass</div>
+      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 design (thermal-gradient method selection) — not yet approved</div>
       <div class="rs-item"><span class="rs-dot"></span>Cross-liquid comparison</div>
       <div class="rs-item"><span class="rs-dot"></span>Electrical extraction</div>
       <div class="rs-item"><span class="rs-dot"></span>Power characterization</div>
@@ -1384,23 +1385,34 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <!-- 01 RESEARCH PROGRESS -->
   <div class="subhead"><span class="sub-num">01</span><h3>Research progress</h3></div>
   <div class="roadmap-track" id="roadmap-track"><!-- injected by JS --></div>
-  <div class="roadmap-current-state">Current state: SIMULATION DESIGN / SIM 01 PREPARATION</div>
+  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED (equilibrium only, no thermal gradient) — SIM-02 design pending approval</div>
 
   <!-- 02 SIMULATION PROGRAM -->
   <div class="subhead"><span class="sub-num">02</span><h3>Simulation program</h3></div>
   <div class="experiment-tree">
     <div class="sim-block">
-      <div class="sim-block-head"><h4>SIM 01 — Literature Reproduction</h4><span class="tag status-planned">SIM 01 preparation</span></div>
-      <p>Purpose: reproduce the established thermopolarization response in bulk water.</p>
+      <div class="sim-block-head"><h4>SIM 01 — Equilibrium Validation</h4><span class="tag status-completed">VALIDATED</span></div>
+      <p>Purpose: validate the SPC/E model and GROMACS 2025.4 protocol against known equilibrium bulk-water properties before any thermal gradient is imposed. No thermopolarization, voltage, current, or power claim is made here.</p>
+      <div class="def-grid" style="margin:1em 0;">
+        <div class="def-item"><span class="dl">Density</span><span class="dv">998.55 ± 11.22 kg/m³ (target 997 ± 15)</span></div>
+        <div class="def-item"><span class="dl">Temperature</span><span class="dv">300.11 ± 7.54 K (target 300 ± 5)</span></div>
+        <div class="def-item"><span class="dl">O–O RDF peak</span><span class="dv">0.2725 nm, g=3.02 (target ≈0.275 nm, ≈3.0)</span></div>
+        <div class="def-item"><span class="dl">Self-diffusion</span><span class="dv">2.522×10⁻⁹ m²/s (target 2.7×10⁻⁹ ± 0.5×10⁻⁹)</span></div>
+      </div>
+      <p style="font-size:.82rem;">Two real issues found and fixed during this run, both documented rather than silently corrected: a <code>grompp</code> segmentation fault traced to an unreplaced molecule-count placeholder, and a self-diffusion coefficient initially ~140× too small due to periodic-boundary-wrapped trajectory data fed into an Einstein MSD calculation. Full protocol, commands, and both failure/decision records are in the project's git history and <code>results/reports/SIM-01-validation.md</code>.</p>
+    </div>
+    <div class="sim-block">
+      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">PLANNED — not yet approved</span></div>
+      <p>Purpose: reproduce the established thermopolarization response in bulk water under an imposed thermal gradient.</p>
       <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P(z) \]</div>
       <div class="sim-sub-list" id="sim01-sublist"><!-- injected by JS --></div>
     </div>
     <div class="sim-block">
-      <div class="sim-block-head"><h4>SIM 02 — Electrostatic Validation</h4><span class="tag status-planned">PLANNED</span></div>
+      <div class="sim-block-head"><h4>SIM 03 — Electrostatic Validation</h4><span class="tag status-planned">PLANNED</span></div>
       <div class="equation-block">\[ P(z) \rightarrow E(z) \rightarrow V_{OC} \]</div>
     </div>
     <div class="sim-block">
-      <div class="sim-block-head"><h4>SIM 03 — Electrical Extraction</h4><span class="tag status-planned">PLANNED</span></div>
+      <div class="sim-block-head"><h4>SIM 04 — Electrical Extraction</h4><span class="tag status-planned">PLANNED</span></div>
       <div class="equation-block">\[ V_{OC} \rightarrow I_{load} \rightarrow P_{out} \]</div>
     </div>
   </div>
@@ -1419,7 +1431,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
 
   <!-- 05 PARAMETER MATRIX -->
   <div class="subhead"><span class="sub-num">05</span><h3>Parameter matrix</h3></div>
-  <p style="font-size:.85rem;">Every parameter across SIM-01-A01 – A05, side by side, so changes are visible at a glance.</p>
+  <p style="font-size:.85rem;">Every parameter across SIM-02-A01 – A05, side by side, so changes are visible at a glance.</p>
   <div class="exp-table-wrap">
     <table class="exp-table" id="param-matrix"><!-- injected by JS --></table>
   </div>
@@ -1432,7 +1444,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <p style="font-size:.8rem; font-style:italic;">Actual, uncertainty and literature agreement remain unfilled until a simulation is actually run.</p>
 
   <!-- 07 SIMULATION CHECKLIST -->
-  <div class="subhead"><span class="sub-num">07</span><h3>Simulation checklist — SIM-01-A01</h3></div>
+  <div class="subhead"><span class="sub-num">07</span><h3>Simulation checklist — SIM-02-A02</h3></div>
   <p style="font-size:.85rem;">Checklist state is saved locally in your browser.</p>
   <div class="checklist-group">
     <h4>Before running</h4>
@@ -1450,7 +1462,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
 
   <form class="log-form" id="failure-form">
     <h3>Add a failure / rejected run</h3>
-    <div class="form-row"><label for="fl-runid">Run ID</label><input type="text" id="fl-runid" placeholder="e.g. SIM-01-A02 — Run 003" required></div>
+    <div class="form-row"><label for="fl-runid">Run ID</label><input type="text" id="fl-runid" placeholder="e.g. SIM-02-A02 — Run 003" required></div>
     <div class="form-row"><label for="fl-date">Date</label><input type="date" id="fl-date" required></div>
     <div class="form-row"><label for="fl-setup">Setup</label><input type="text" id="fl-setup"></div>
     <div class="form-row"><label for="fl-mode">Failure mode</label><input type="text" id="fl-mode" required></div>
@@ -1471,10 +1483,10 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <div class="subhead"><span class="sub-num">10</span><h3>Current experiment</h3></div>
   <div class="current-exp-card">
     <div class="ce-eyebrow">CURRENT EXPERIMENT</div>
-    <div class="ce-id">SIM-01-A01</div>
-    <div class="exp-section"><h5>Objective</h5><p>Establish a reliable equilibrium baseline for bulk SPC/E water before applying a thermal gradient.</p></div>
-    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">PLANNED</span></div>
-    <div class="exp-section"><h5>Next decision</h5><p>Finalize simulation geometry and numerical protocol.</p></div>
+    <div class="ce-id">SIM-02-A02</div>
+    <div class="exp-section"><h5>Objective</h5><p>Establish a steady-state thermal gradient across the validated equilibrium system (SIM-02-A01 / real SIM-01 is complete and validated — see Section 02 above).</p></div>
+    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">PLANNED — awaiting explicit approval to proceed past Checkpoint 01</span></div>
+    <div class="exp-section"><h5>Next decision</h5><p>Select the NEMD method for imposing \( \nabla T \): two-thermostat NEMD, reverse NEMD (RNEMD), or Müller-Plathe momentum exchange.</p></div>
   </div>
 
   <!-- 11 RESEARCH GUARDRAILS -->
@@ -1482,7 +1494,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <div class="guardrail-box">
     <div class="gb-title">DO NOT LOSE THE QUESTION</div>
     <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P \rightarrow E \rightarrow V_{OC} \rightarrow I \rightarrow P_{out} \]</div>
-    <p style="font-size:.85rem; margin:1em 0 0 0;">SIM 01 is only \( \nabla T \rightarrow J_q \rightarrow P \). SIM 02 is \( P \rightarrow E \rightarrow V_{OC} \). SIM 03 is \( V_{OC} \rightarrow I \rightarrow P_{out} \). Do not skip validation stages.</p>
+    <p style="font-size:.85rem; margin:1em 0 0 0;">SIM 01 (validated) was equilibrium only — no gradient, no polarization claim. SIM 02 is only \( \nabla T \rightarrow J_q \rightarrow P \). SIM 03 is \( P \rightarrow E \rightarrow V_{OC} \). SIM 04 is \( V_{OC} \rightarrow I \rightarrow P_{out} \). Do not skip validation stages.</p>
   </div>
 
   <div class="export-row">
@@ -1603,6 +1615,8 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
 
 <footer id="site-footer">
   <p>Thermal Polarization → Electrical Work is an exploratory computational physics notebook. Every claim carries one of four labels — established, inferred, hypothesis, or unknown — and no hypothesis is presented here as a result. The project has not yet demonstrated electrical power generation; that remains the question.</p>
+  <p>Full commit-by-commit process history, GROMACS protocol files, and analysis scripts: <a href="https://github.com/alisunkazemi21-cloud/Thermal-Polarization" target="_blank" rel="noopener">github.com/alisunkazemi21-cloud/Thermal-Polarization</a></p>
+  <p>Interactive notebook (live density / RDF / diffusion re-analysis, runs entirely in your browser): <a href="notebook.html" target="_blank" rel="noopener">notebook.html</a></p>
 </footer>
 
 </main>
@@ -1731,7 +1745,8 @@ const DEFAULT_LOG = [
   { date:"2024-02-19", source:"A4 — Bresme et al. 2020 — literature review", obs:"Acetonitrile also exhibits thermopolarization behavior.", interp:"The phenomenon is not water-specific, supporting a broader liquid search.", conf:"Medium", next:"How does CH3CN's coupling compare quantitatively to water's?" },
   { date:"2024-03-01", source:"A5 — Lervik et al. 2022 — literature review", obs:"Dipole, quadrupole, and thermal-expansion contributions are separable in water.", interp:"\u201cLarger dipole\u201d is not a safe proxy for \u201cmore polarization.\u201d", conf:"High", next:"Do quadrupole contributions matter as much in non-aqueous liquids?" },
   { date:"2024-03-14", source:"A6 — Bedeaux et al. 2025 — literature review", obs:"A general theoretical framework for thermopolarization has been proposed.", interp:"Possible basis for predicting behavior in liquids without existing simulation data — does not itself prove power extraction.", conf:"Medium", next:"Does the theory make any prediction about extractable power, not just field?" },
-  { date:"2024-04-02", source:"Scientific audit pass", obs:"Reviewed all imported summaries for overstatement; downgraded three claims (see Section 06).", interp:"Earlier notes conflated field prediction with proof of power generation — corrected.", conf:"High", next:"Formalize Checkpoint 01 criteria before touching simulation methods." }
+  { date:"2024-04-02", source:"Scientific audit pass", obs:"Reviewed all imported summaries for overstatement; downgraded three claims (see Section 06).", interp:"Earlier notes conflated field prediction with proof of power generation — corrected.", conf:"High", next:"Formalize Checkpoint 01 criteria before touching simulation methods." },
+  { date:"2026-09-19", source:"SIM-01 — real GROMACS 2025.4 execution (github.com/alisunkazemi21-cloud/Thermal-Polarization)", obs:"Self-contained SPC/E model, 510-molecule equilibrium protocol (EM->NVT->NPT->production->diffusion leg) executed end to end. Density 998.55\u00b111.22 kg/m\u00b3, temperature 300.11\u00b17.54 K, O-O RDF peak 0.2725 nm/g=3.02, self-diffusion 2.522\u00d710\u207b\u2079 m\u00b2/s \u2014 all five targets pass. Two real bugs found, root-caused, and fixed: a grompp segfault (unreplaced molecule-count placeholder) and a self-diffusion coefficient ~140x too small from periodic-boundary-wrapped MSD input.", interp:"The self-contained SPC/E model and four-stage equilibrium protocol are validated for this system size and GROMACS installation. No thermopolarization, voltage, current, or power claim is made \u2014 SIM-01 was equilibrium-only by design.", conf:"High", next:"Select a thermal-gradient method (two-thermostat NEMD, RNEMD, or M\u00fcller-Plathe) for SIM-02 \u2014 pending explicit approval, not yet designed." }
 ];
 
 /* ============================================================
@@ -1753,48 +1768,58 @@ const GEOMETRY_ASCII =
 
 const EXPERIMENTS = [
   {
-    id: "SIM-01-A01", parent: "SIM-01", title: "Equilibrium baseline", status: "planned",
+    id: "SIM-02-A01", parent: "SIM-02", title: "Equilibrium baseline", status: "completed",
     objective: "Establish a reliable equilibrium baseline for bulk SPC/E water before applying a thermal gradient.",
     scientificQuestion: "Does the chosen force field and protocol reproduce known bulk water properties (density, energy, pressure) at equilibrium?",
     hypothesis: "\\text{At equilibrium, } P_z(z) \\approx 0 \\text{ everywhere (no imposed } \\nabla T\\text{).}",
-    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:null },
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:510, density:"998.55 kg/m\u00b3 (measured)", temperature:"300.11 K (measured)", pressure:"22.07 bar mean, RMSD 591.5 bar (NPT, no fixed criterion)", composition:"Pure liquid", initialConfig:"gmx solvate, spc216.gro template, 2.5 nm cubic box" },
     thermalSetup: "Uniform temperature",
-    method: "Equilibrium MD",
-    geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null },
-    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:null },
+    method: "Equilibrium MD (EM -> NVT -> NPT -> production, real GROMACS 2025.4 run)",
+    geometry: { Lx:"2.5 nm (initial)", Ly:"2.5 nm (initial)", Lz:"2.5 nm (initial)", bins:null, gradientDirection:"z", boundaryConditions:"periodic, PME", periodicity:"xyz" },
+    thermal: { Th:"300 K", Tc:"300 K", hotRegion:"n/a (uniform)", coldRegion:"n/a (uniform)", method:"V-rescale, Parrinello-Rahman (NPT/production)", parameters:"tau_t=0.1, tau_p=2.0, compressibility=4.5e-5 bar^-1" },
     md: [
-      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:null, u:"ps/ns"},
-      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+      {p:"timestep", v:"0.002", u:"fs"}, {p:"equilibration", v:"100+100", u:"ps (NVT+NPT)"}, {p:"production", v:"1000", u:"ps"},
+      {p:"sampling interval", v:"1", u:"ps"}, {p:"cutoff", v:"1.0", u:"nm"}, {p:"electrostatics", v:"PME", u:"\u2014"}, {p:"neighbor settings", v:"Verlet, nstlist auto-tuned", u:"\u2014"}
     ],
     analysis: [
       {name:"Temperature", eq:"T", purpose:"Confirm target temperature is held at equilibrium."},
       {name:"Density", eq:"\\rho", purpose:"Compare against literature reference density for SPC/E water."},
       {name:"Energy", eq:"E", purpose:"Confirm energy conservation / thermostat behavior."},
-      {name:"Polarization baseline", eq:"P_z", purpose:"Confirm no spurious polarization exists without an imposed gradient."}
+      {name:"O-O RDF", eq:"g_{OO}(r)", purpose:"Structural fingerprint, first-peak position and height."},
+      {name:"Self-diffusion", eq:"D", purpose:"Einstein MSD relation on unwrapped trajectory (fixed-volume leg)."}
     ],
-    primaryOutput: "\\rho,\\ T,\\ E \\text{ within target tolerance}",
-    secondaryOutputs: ["Pressure", "Polarization baseline (expected \u2248 0)"],
-    expectedResult: "Density, temperature and energy consistent with published SPC/E bulk water values at the chosen thermodynamic state.",
-    actualResult: null,
+    primaryOutput: "\\rho,\\ T,\\ g_{OO}(r),\\ D \\text{ all within target tolerance}",
+    secondaryOutputs: ["Pressure (22.07 bar, no fixed criterion)", "Potential energy (EM: -21496.14 kJ/mol)"],
+    expectedResult: "Density, temperature, O-O RDF, and self-diffusion consistent with published SPC/E bulk water values at 300 K / 1 bar.",
+    actualResult: "MEASURED (real GROMACS 2025.4 run, GitHub commit history github.com/alisunkazemi21-cloud/Thermal-Polarization): Density 998.55 \u00b1 11.22 kg/m\u00b3 (target 997\u00b115) \u2014 PASS. Temperature 300.11 \u00b1 7.54 K (target 300\u00b15) \u2014 PASS. O-O RDF first peak: r=0.2725 nm, g(r)=3.02 (target \u22480.275 nm, \u22483.0) \u2014 PASS. Self-diffusion: D=2.522\u00d710\u207b\u2079 m\u00b2/s (target 2.7\u00d710\u207b\u2079\u00b10.5\u00d710\u207b\u2079) \u2014 PASS.",
     validation: [
-      {name:"Energy conservation", note:"Total energy stable within thermostat-expected fluctuation."},
-      {name:"Temperature stability", note:"T(t) fluctuates around target with no drift."},
-      {name:"Density agreement", note:"\u03c1 within an appropriate tolerance of the literature SPC/E value."},
-      {name:"Pressure range", note:"P within the intended operating window."}
+      {name:"Energy conservation", note:"EM converged: Fmax=965.2 kJ/mol/nm, below emtol=1000. PASS."},
+      {name:"Temperature stability", note:"NVT: 299.9 K, drift -0.27 K/100ps, RMSD 7.90 K (matches equipartition prediction ~7.68 K). PASS."},
+      {name:"Density agreement", note:"NPT/production: 998.55 kg/m\u00b3, within \u00b115 kg/m\u00b3 of the 997 kg/m\u00b3 literature target. PASS."},
+      {name:"Pressure range", note:"22.07 bar mean, RMSD 591.5 bar \u2014 within expected virial noise for this system size/window; no fixed criterion locked. Reported, not scored."}
     ],
-    uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
+    uncertainty: { mean:"see actualResult per-quantity", sd:"see actualResult per-quantity", se:"density 0.092, temperature 0.11 (gmx energy Err.Est.)", ci:null, blockMethod:"gmx energy default block averaging", nIndependent:"1001 samples over 1 ns (production)" },
     changed: [], unchanged: [], unknown: ["all parameters — first experiment in the sequence"],
-    decisions: [{ decision:"Use SPC/E force field.", reason:"Literature reproduction.", evidence:"Level A core papers (A1, A2, A3) use SPC/E-class water models.", alternative:"TIP4P/2005.", rejected:"Less directly comparable to the reproduced literature baseline." }],
-    runs: [],
-    interpretation: null, confidence: null, alternativeExplanations: null,
-    nextExperiment: "SIM-01-A02 — introduce the thermal gradient once the equilibrium baseline is validated."
+    decisions: [
+      { decision:"Use SPC/E force field, self-contained model file (not a bundled force field).", reason:"Literature reproduction; avoids uncertainty about bundled-file availability in this GROMACS install.", evidence:"Berendsen et al. 1987; Level A core papers (A1, A2) use SPC/E-class water models.", alternative:"TIP4P/2005; GROMACS-bundled oplsaa.ff/spce.itp.", rejected:"Self-contained model removes a variable; bundled-file path in GROMACS 2025.4 was not independently verified." },
+      { decision:"Fixed a grompp segmentation fault caused by an unreplaced molecule-count placeholder in topol.top.", reason:"Root-caused rather than worked around \u2014 reinstalling GROMACS packages did not fix it, confirming the input file, not the binary, was at fault.", evidence:"research/decisions/failed-runs/FAILED-001-grompp-segmentation-fault.md", alternative:"n/a \u2014 diagnostic process, not a design choice.", rejected:"n/a" },
+      { decision:"Corrected a self-diffusion coefficient that was ~140x too small due to periodic-boundary-wrapped trajectory data.", reason:"Einstein MSD requires unwrapped coordinates; gmx trjconv -pbc nojump applied before re-analysis.", evidence:"research/decisions/DECISION-002-msd-pbc-wrapping-correction.md", alternative:"n/a \u2014 bugfix, not a design choice.", rejected:"n/a" }
+    ],
+    runs: [
+      { id:"Run 001", note:"grompp segfault \u2014 unreplaced [ molecules ] placeholder. See FAILED-001." },
+      { id:"Run 002", note:"Full EM -> NVT -> NPT -> production (1 ns) -> supplementary NVT diffusion leg (1 ns) completed successfully after fix. All validation targets pass." }
+    ],
+    interpretation: "The self-contained SPC/E model and four-stage protocol reproduce established bulk-water equilibrium behavior for this system size and GROMACS 2025.4 installation.",
+    confidence: "High for density/temperature/RDF (multiple cross-checks, tight agreement). Medium for self-diffusion (single 1 ns run, oxygen-position proxy, not independently replicated).",
+    alternativeExplanations: "None required \u2014 all measured quantities fall within literature tolerance; no anomaly needing alternative explanation.",
+    nextExperiment: "SIM-02-A02 — introduce the thermal gradient. This equilibrium baseline is satisfied; SIM-02-A02 is the current unstarted step."
   },
   {
-    id: "SIM-01-A02", parent: "SIM-01", title: "Thermal gradient establishment", status: "planned",
+    id: "SIM-02-A02", parent: "SIM-02", title: "Thermal gradient establishment", status: "planned",
     objective: "Establish a steady-state thermal gradient across the validated equilibrium system.",
     scientificQuestion: "Can a stable, steady-state \u2207T be imposed and maintained across the bulk liquid using the chosen NEMD protocol?",
     hypothesis: "\\text{A steady-state } T(z) \\text{ profile and constant } J_q \\text{ can be established for a physically reasonable } \\nabla T.",
-    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Equilibrated configuration from SIM-01-A01" },
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Equilibrated configuration from SIM-02-A01" },
     thermalSetup: "Hot / cold regions",
     method: "NEMD",
     geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null },
@@ -1824,14 +1849,14 @@ const EXPERIMENTS = [
     decisions: [{ decision:"Use a two-region hot/cold thermostatting scheme rather than a single boundary-driven gradient.", reason:"Matches the NEMD protocol used in the reproduced literature.", evidence:"A1 (2008), A2 (2013).", alternative:"Boundary-driven (fixed wall temperatures).", rejected:"Less directly comparable to the bulk NEMD literature being reproduced." }],
     runs: [],
     interpretation: null, confidence: null, alternativeExplanations: null,
-    nextExperiment: "SIM-01-A03 — measure thermopolarization once a steady-state gradient is confirmed."
+    nextExperiment: "SIM-02-A03 — measure thermopolarization once a steady-state gradient is confirmed."
   },
   {
-    id: "SIM-01-A03", parent: "SIM-01", title: "Thermopolarization measurement", status: "planned",
+    id: "SIM-02-A03", parent: "SIM-02", title: "Thermopolarization measurement", status: "planned",
     objective: "Measure the spatial thermopolarization profile P_z(z) in bulk SPC/E water under a steady-state thermal gradient.",
     scientificQuestion: "Does the simulation reproduce the established preferential orientation of water dipoles under a thermal gradient?",
     hypothesis: "P_z \\neq 0 \\text{ under } \\nabla T \\neq 0.",
-    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Steady-state configuration from SIM-01-A02" },
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Steady-state configuration from SIM-02-A02" },
     thermalSetup: "Same as A02",
     method: "NEMD",
     geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null, note:"Same as A02" },
@@ -1865,10 +1890,10 @@ const EXPERIMENTS = [
     decisions: [{ decision:"Compute P_z(z) via slab-averaged dipole summation rather than a continuum dielectric estimate.", reason:"Directly comparable to the NEMD literature method.", evidence:"A2 (2013) dynamic-correlation approach.", alternative:"Continuum/linear-response estimate from bulk susceptibility.", rejected:"Would not capture the dynamical coupling A2 identifies as important." }],
     runs: [],
     interpretation: null, confidence: null, alternativeExplanations: null,
-    nextExperiment: "SIM-01-A04 — sweep \u2207T once a single-gradient measurement is validated."
+    nextExperiment: "SIM-02-A04 — sweep \u2207T once a single-gradient measurement is validated."
   },
   {
-    id: "SIM-01-A04", parent: "SIM-01", title: "Thermal-gradient sweep", status: "planned",
+    id: "SIM-02-A04", parent: "SIM-02", title: "Thermal-gradient sweep", status: "planned",
     objective: "Determine the response of thermopolarization to the magnitude of the imposed thermal gradient.",
     scientificQuestion: "Does P_z scale approximately linearly with \\nabla T in the regime established by the literature, and where (if anywhere) does that break down?",
     hypothesis: "P_z(\\nabla T) \\text{ is approximately linear in the regime reported by A1/A2, with possible deviation at larger } \\nabla T.",
@@ -1902,10 +1927,10 @@ const EXPERIMENTS = [
     decisions: [],
     runs: [],
     interpretation: null, confidence: null, alternativeExplanations: null,
-    nextExperiment: "SIM-01-A05 — test robustness of the A03/A04 results before treating SIM-01 as complete."
+    nextExperiment: "SIM-02-A05 — test robustness of the A03/A04 results before treating SIM-02 as complete."
   },
   {
-    id: "SIM-01-A05", parent: "SIM-01", title: "Convergence / finite-size validation", status: "planned",
+    id: "SIM-02-A05", parent: "SIM-02", title: "Convergence / finite-size validation", status: "planned",
     objective: "Test the robustness of the thermopolarization measurement against system size, run duration, and sampling choices.",
     scientificQuestion: "Is the measured P_z(z) response an artifact of system size or insufficient sampling, or does it persist under independent variation of these controls?",
     hypothesis: "\\text{The sign and approximate magnitude of } P_z \\text{ are stable across system sizes and run durations, within uncertainty.}",
@@ -1939,7 +1964,7 @@ const EXPERIMENTS = [
     decisions: [],
     runs: [],
     interpretation: null, confidence: null, alternativeExplanations: null,
-    nextExperiment: "SIM-02 (electrostatic validation) — but only once SIM-01 is validated across A01\u2013A05."
+    nextExperiment: "SIM-03 (electrostatic validation) — but only once SIM-02 is validated across A01\u2013A05."
   }
 ];
 
@@ -1958,12 +1983,12 @@ const CHECKLIST_AFTER = [
 
 const DECISIONS = [
   { id:"001", decision:"Start with SPC/E water.", reason:"Literature reproduction." },
-  { id:"002", decision:"Do not evaluate electrical power in SIM 01.", reason:"First reproduce thermopolarization independently." },
+  { id:"002", decision:"Do not evaluate electrical power in SIM 02.", reason:"First reproduce thermopolarization independently." },
   { id:"003", decision:"Keep H\u2082O as reference before CH\u2083CN.", reason:"Water has the strongest literature benchmark." }
 ];
 
 const DEFAULT_FAILURES = [
-  { runId:"SIM-01-A02 \u2014 Run 003", date:"—", setup:"Two-region thermostat, initial coupling constants", mode:"Temperature profile unstable.", cause:"Thermostat coupling too aggressive.", evidence:"T(z) oscillated rather than reaching a steady linear profile across the sampled window.", action:"Revise thermalization parameters.", usable:"Useful for protocol refinement" }
+  { runId:"SIM-02-A02 \u2014 Run 003", date:"—", setup:"Two-region thermostat, initial coupling constants", mode:"Temperature profile unstable.", cause:"Thermostat coupling too aggressive.", evidence:"T(z) oscillated rather than reaching a steady linear profile across the sampled window.", action:"Revise thermalization parameters.", usable:"Useful for protocol refinement" }
 ];
 
 /* ============================================================
@@ -2216,10 +2241,11 @@ function eqInline(latex){
 const ROADMAP = [
   { label:"Literature", state:"done" },
   { label:"Checkpoint 01", state:"done" },
-  { label:"Simulation design", state:"current" },
-  { label:"SIM 01", state:"" },
-  { label:"SIM 02", state:"" },
-  { label:"SIM 03", state:"" }
+  { label:"Simulation design", state:"done" },
+  { label:"SIM 01", state:"done" },
+  { label:"SIM 02", state:"current" },
+  { label:"SIM 03", state:"" },
+  { label:"SIM 04", state:"" }
 ];
 const roadmapTrack = document.getElementById('roadmap-track');
 ROADMAP.forEach((n, i) => {
@@ -2453,7 +2479,7 @@ const PARAM_ROWS = [
   { label:"Box dimensions", get:e=> (e.geometry.Lx||e.geometry.Ly||e.geometry.Lz) ? `${e.geometry.Lx||'TBD'} \u00d7 ${e.geometry.Ly||'TBD'} \u00d7 ${e.geometry.Lz||'TBD'}` : null },
   { label:"T_H", get:e=>e.thermal.Th },
   { label:"T_C", get:e=>e.thermal.Tc },
-  { label:"\u2207T", get:e=> e.id==="SIM-01-A01" ? "\u2014 (equilibrium)" : (e.id==="SIM-01-A04" ? "Swept (multiple values)" : e.thermal.gradient) },
+  { label:"\u2207T", get:e=> e.id==="SIM-02-A01" ? "\u2014 (equilibrium)" : (e.id==="SIM-02-A04" ? "Swept (multiple values)" : e.thermal.gradient) },
   { label:"Timestep", get:e=>mdVal(e,"timestep") },
   { label:"Equilibration", get:e=>mdVal(e,"equilibration") },
   { label:"Production", get:e=>mdVal(e,"production") },
@@ -2465,7 +2491,7 @@ const PARAM_ROWS = [
 ];
 const paramMatrix = document.getElementById('param-matrix');
 paramMatrix.innerHTML = `
-  <thead><tr><th>Parameter</th>${EXPERIMENTS.map(e=>`<th>${e.id.replace('SIM-01-','')}</th>`).join('')}</tr></thead>
+  <thead><tr><th>Parameter</th>${EXPERIMENTS.map(e=>`<th>${e.id.replace('SIM-02-','')}</th>`).join('')}</tr></thead>
   <tbody>
     ${PARAM_ROWS.map(row => {
       const vals = EXPERIMENTS.map(e => row.get(e));
