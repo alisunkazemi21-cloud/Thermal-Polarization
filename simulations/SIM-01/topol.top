@@ -1,0 +1,19 @@
+; simulations/SIM-01/topol.top
+; SIM-01: SPC/E equilibrium validation (Checkpoint 01)
+;
+; [ESTABLISHED] nbfunc=1 (Lennard-Jones), comb-rule=2 (Lorentz-Berthelot,
+; sigma/epsilon form, matching models/SPC-E/spce.itp), gen-pairs=no
+; (no 1-4 pairs exist in a system with only rigid 3-site water).
+
+[ defaults ]
+; nbfunc   comb-rule   gen-pairs
+  1        2           no
+
+#include "../../models/SPC-E/spce.itp"
+
+[ system ]
+SPC/E water — SIM-01 equilibrium validation
+
+[ molecules ]
+; Compound        #mols
+  SOL             510
