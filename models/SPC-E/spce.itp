@@ -1,0 +1,58 @@
+; models/SPC-E/spce.itp
+;
+; SPC/E water model — self-contained (no external force field required).
+;
+; [ESTABLISHED] Parameters reproduced from:
+;   H.J.C. Berendsen, J.R. Grigera, T.P. Straatsma,
+;   "The missing term in effective pair potentials",
+;   J. Phys. Chem. 1987, 91, 6269-6271.
+;
+; Geometry (rigid, enforced via SETTLE, not via [ bonds ]/[ angles ]):
+;   r(O-H)      = 0.1000 nm
+;   angle(H-O-H)= 109.47 deg
+;   -> d(H-H) = 2 * r(OH) * sin(angle/2) = 0.16330 nm
+;
+; Charges:      q(O) = -0.8476 e   q(H) = +0.4238 e
+; Lennard-Jones: on oxygen only (hydrogens have zero LJ)
+;   sigma(O-O)   = 0.316557 nm
+;   epsilon(O-O) = 0.650194 kJ/mol
+;
+; [INFERRED] Engineering choice, not a literature claim: because this
+; project does not include any other force field, [ defaults ] must be
+; declared once, before this file is #included, at the top of
+; simulations/SIM-01/topol.top (GROMACS requires exactly one [ defaults ]
+; block, appearing first in the fully preprocessed topology).
+; comb-rule = 2 (Lorentz-Berthelot, sigma/epsilon form) is used here
+; purely as a convention: with only one LJ-active atom type (OW) in the
+; whole system, no mixing rule is ever actually invoked.
+
+[ atomtypes ]
+; name   at.num   mass       charge    ptype   sigma         epsilon
+  OW     8        15.99940   0.0000    A       3.16557e-01   6.50194e-01
+  HW     1         1.00800   0.0000    A       0.00000e+00   0.00000e+00
+
+[ moleculetype ]
+; molname   nrexcl
+  SOL       2
+
+[ atoms ]
+; id   at type   res nr   res name   at name   cg nr   charge     mass
+  1    OW        1        SOL        OW        1       -0.8476    15.99940
+  2    HW        1        SOL        HW1       1        0.4238     1.00800
+  3    HW        1        SOL        HW2       1        0.4238     1.00800
+
+#ifndef FLEXIBLE
+[ settles ]
+; OW_atom_index   funct   doh      dhh
+  1               1       0.1      0.16330
+
+[ exclusions ]
+  1   2   3
+  2   1   3
+  3   1   2
+#else
+; [OPEN] Flexible SPC/E (bond/angle force constants) is not part of the
+; SIM-01 protocol (SIM-01 uses the rigid SETTLE model above). This branch
+; is left as an explicit placeholder rather than fabricated force
+; constants, and must not be enabled without a separate decision record.
+#endif
