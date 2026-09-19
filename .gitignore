@@ -1,0 +1,23 @@
+# Large regenerable GROMACS binary output — reproducible from .mdp/.top + commands
+*.trr
+*.edr
+*.cpt
+*.tpr
+*.xtc
+*.log
+
+# GROMACS auto-generated / backup artifacts
+mdout.mdp
+"#*#"
+
+# GROMACS energy output — raw text, kept ignored in favor of the derived .csv summaries
+*.xvg
+
+# MDAnalysis trajectory index cache
+*_offsets.lock
+*_offsets.npz
+
+# Python
+__pycache__/
+*.pyc
+.venv/
