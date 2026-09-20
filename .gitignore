@@ -21,3 +21,5 @@ mdout.mdp
 __pycache__/
 *.pyc
 .venv/
+
+notebooks/__marimo__/
