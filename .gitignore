@@ -23,3 +23,4 @@ __pycache__/
 .venv/
 
 notebooks/__marimo__/
+docs/CLAUDE.md
