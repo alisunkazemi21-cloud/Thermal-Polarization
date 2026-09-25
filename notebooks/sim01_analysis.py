@@ -18,9 +18,8 @@ def _():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from pathlib import Path
 
-    return Path, np, pd, plt
+    return np, pd, plt
 
 
 @app.cell
@@ -31,11 +30,11 @@ def _(mo):
     Thermal Polarization → Electrical Work — SPC/E equilibrium
     validation, GROMACS 2025.4.
 
-    This notebook reads the **real** output files already committed to
-    this repository under `results/tables/` — it does not recompute
-    anything from raw trajectories, and it does not fabricate any
-    number. If a file is missing, the corresponding section below will
-    say so plainly rather than showing a placeholder value.
+    This notebook reads the **real** output files bundled with it under
+    `public/` — it does not recompute anything from raw trajectories,
+    and it does not fabricate any number. If a file is missing, the
+    corresponding section below will say so plainly rather than
+    showing a placeholder value.
 
     Repository: [github.com/alisunkazemi21-cloud/Thermal-Polarization](https://github.com/alisunkazemi21-cloud/Thermal-Polarization)
     """)
@@ -43,12 +42,21 @@ def _(mo):
 
 
 @app.cell
-def _(Path):
-    # Resolve paths relative to the repo root, regardless of where this
-    # notebook is launched from (assumes the standard notebooks/ location).
-    REPO_ROOT = Path(__file__).resolve().parent.parent
-    TABLES = REPO_ROOT / "results" / "tables"
-    return (TABLES,)
+def _(mo, pd):
+    def load_repo_csv(filename):
+        """Works both in `marimo edit` (real filesystem path) and in a
+        WASM/browser export (mo.notebook_location() becomes a URL there;
+        pandas.read_csv fetches it directly either way). This is the
+        pattern documented at https://docs.marimo.io/guides/wasm/ — no
+        manual pyodide fetch code needed."""
+        path = mo.notebook_location() / "public" / filename
+        try:
+            df = pd.read_csv(str(path))
+            return df, mo.md(f"Loaded `{filename}` — {len(df)} row(s).")
+        except Exception as e:
+            return None, mo.md(f"**[TO MEASURE]** Could not load `{filename}`: {e}")
+
+    return (load_repo_csv,)
 
 
 @app.cell
@@ -60,17 +68,8 @@ def _(mo):
 
 
 @app.cell
-def _(TABLES, mo, pd):
-    _dt_path = TABLES / "density_temperature_summary.csv"
-    if _dt_path.exists():
-        df_dt = pd.read_csv(_dt_path)
-        dt_status = mo.md(f"Loaded `{_dt_path.name}` — {len(df_dt)} row(s).")
-    else:
-        df_dt = None
-        dt_status = mo.md(
-            f"**[TO MEASURE]** `{_dt_path}` not found. Run "
-            f"`scripts/analysis/analyze_density_temperature.py` first."
-        )
+def _(load_repo_csv):
+    df_dt, dt_status = load_repo_csv("density_temperature_summary.csv")
     return df_dt, dt_status
 
 
@@ -100,17 +99,8 @@ def _(mo):
 
 
 @app.cell
-def _(TABLES, mo, pd):
-    _rdf_path = TABLES / "oo_rdf.csv"
-    if _rdf_path.exists():
-        df_rdf = pd.read_csv(_rdf_path)
-        rdf_status = mo.md(f"Loaded `{_rdf_path.name}` — {len(df_rdf)} bin(s).")
-    else:
-        df_rdf = None
-        rdf_status = mo.md(
-            f"**[TO MEASURE]** `{_rdf_path}` not found. Run "
-            f"`scripts/analysis/analyze_oo_rdf.py` first."
-        )
+def _(load_repo_csv):
+    df_rdf, rdf_status = load_repo_csv("oo_rdf.csv")
     return df_rdf, rdf_status
 
 
@@ -166,19 +156,8 @@ def _(mo):
 
 
 @app.cell
-def _(TABLES, mo, pd):
-    _msd_path = TABLES / "msd_oxygen.csv"
-    if _msd_path.exists():
-        df_msd = pd.read_csv(_msd_path)
-        msd_status = mo.md(f"Loaded `{_msd_path.name}` — {len(df_msd)} sample(s).")
-    else:
-        df_msd = None
-        msd_status = mo.md(
-            f"**[TO MEASURE]** `{_msd_path}` not found. Run "
-            f"`scripts/analysis/analyze_diffusion.py` first "
-            f"(remember: on an **unwrapped** trajectory — "
-            f"`gmx trjconv -pbc nojump` — see DECISION-002)."
-        )
+def _(load_repo_csv):
+    df_msd, msd_status = load_repo_csv("msd_oxygen.csv")
     return df_msd, msd_status
 
 
