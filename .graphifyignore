@@ -1,0 +1,20 @@
+# Generated site/vendor assets and duplicate exports do not explain the science.
+docs/
+thermal-polarization-sim01/
+.venv/
+.git/
+.claude/
+.agents/
+graphify-out/
+results/figures/
+notebooks/public/
+*.gro
+*.xvg
+*.csv
+*.trr
+*.xtc
+*.edr
+*.cpt
+*.tpr
+*.log
+mdout.mdp

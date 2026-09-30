@@ -1,0 +1,55 @@
+; npt.mdp — SIM-01 NPT equilibration
+; GROMACS 2025.4
+; Purpose: relax the box to the correct density at 300 K / 1 bar,
+; continuing from the NVT state (requires the NVT checkpoint file at
+; grompp time, see Stage 2 command list: `gmx grompp ... -t nvt.cpt`).
+
+integrator                 = md
+dt                         = 0.002
+nsteps                     = 50000      ; 50000 * 0.002 ps = 100 ps, provisional
+
+; Neighbor searching
+cutoff-scheme              = Verlet
+nstlist                    = 10
+rlist                       = 1.0
+pbc                         = xyz
+
+; Electrostatics
+coulombtype                 = PME
+rcoulomb                    = 1.0
+
+; Van der Waals
+rvdw                        = 1.0
+DispCorr                    = EnerPres
+
+; Constraints
+constraints                 = h-bonds
+constraint-algorithm        = lincs
+lincs_iter                  = 1
+lincs_order                 = 4
+
+; Temperature coupling — continues from NVT
+tcoupl                      = V-rescale
+tc-grps                     = System
+tau_t                       = 0.1
+ref_t                       = 300
+
+; Pressure coupling
+; [ESTABLISHED, standard practice] Parrinello-Rahman requires a
+; reasonably equilibrated starting configuration, which is why it is
+; introduced only here (after NVT), not from a raw solvated structure.
+pcoupl                      = Parrinello-Rahman
+pcoupltype                  = isotropic
+tau_p                       = 2.0
+ref_p                       = 1.0
+compressibility             = 4.5e-5   ; bar^-1 — [ESTABLISHED] standard literature/tutorial value for water near 300 K
+
+; Continuation from NVT — do not regenerate velocities
+continuation                = yes
+gen_vel                     = no
+
+; Output
+nstxout                     = 500
+nstvout                     = 500
+nstenergy                   = 500
+nstlog                      = 500

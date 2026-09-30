@@ -1,0 +1,248 @@
+{
+  "notebooks/sim01_analysis.py": {
+    "mtime": 1790277889.3851185,
+    "seen": 1790760709.5057008,
+    "ast_hash": "860de5eb4f85c2ed8be7208f673cc271",
+    "semantic_hash": "860de5eb4f85c2ed8be7208f673cc271"
+  },
+  "scripts/analysis/analyze_density_temperature.py": {
+    "mtime": 1789791925.6338868,
+    "seen": 1790760709.5057008,
+    "ast_hash": "335bf1d9191685a7d06ea95be986db05",
+    "semantic_hash": "335bf1d9191685a7d06ea95be986db05"
+  },
+  "scripts/analysis/analyze_diffusion.py": {
+    "mtime": 1789791925.645145,
+    "seen": 1790760709.5057008,
+    "ast_hash": "e68754d9ed73d82fcba23c76e18996c2",
+    "semantic_hash": "e68754d9ed73d82fcba23c76e18996c2"
+  },
+  "scripts/analysis/analyze_oo_rdf.py": {
+    "mtime": 1789791925.6546621,
+    "seen": 1790760709.5057008,
+    "ast_hash": "7a7f0da2ac63defcb915ff40b4e07bb2",
+    "semantic_hash": "7a7f0da2ac63defcb915ff40b4e07bb2"
+  },
+  "scripts/graphify.ps1": {
+    "mtime": 1790760460.6976345,
+    "seen": 1790760709.5057008,
+    "ast_hash": "68e70aa375e9f95c60de37960e32c4fe",
+    "semantic_hash": "68e70aa375e9f95c60de37960e32c4fe"
+  },
+  "AGENTS.md": {
+    "mtime": 1790760455.9863548,
+    "seen": 1790760709.5057008,
+    "ast_hash": "20119e88acfee51d4ef42d784851c2ed",
+    "semantic_hash": "20119e88acfee51d4ef42d784851c2ed"
+  },
+  "CLAUDE.md": {
+    "mtime": 1790760521.702818,
+    "seen": 1790760709.5057008,
+    "ast_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2",
+    "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
+  },
+  "PROJECT_STATE.md": {
+    "mtime": 1790764922.817776,
+    "seen": 1790765443.3330166,
+    "ast_hash": "d8c696c3035c161f12639e6319d93755",
+    "semantic_hash": "d8c696c3035c161f12639e6319d93755"
+  },
+  "README.md": {
+    "mtime": 1790764113.599645,
+    "seen": 1790765443.3330166,
+    "ast_hash": "41fbafa313c05565993ace172347c414",
+    "semantic_hash": "41fbafa313c05565993ace172347c414"
+  },
+  "environment/requirements-graphify.txt": {
+    "mtime": 1790760461.996637,
+    "seen": 1790760709.5057008,
+    "ast_hash": "2a57071aee44de9165cbc5d4baeb6a6c",
+    "semantic_hash": "2a57071aee44de9165cbc5d4baeb6a6c"
+  },
+  "environment/requirements.txt": {
+    "mtime": 1789855207.43117,
+    "seen": 1790760709.5057008,
+    "ast_hash": "13b3de1ab48c2a3df445c3eb01e7bbea",
+    "semantic_hash": "13b3de1ab48c2a3df445c3eb01e7bbea"
+  },
+  "history/FAILED-001-grompp-segmentation-fault.md": {
+    "mtime": 1789745326.6348667,
+    "seen": 1790760709.5057008,
+    "ast_hash": "abc07d71e980c4cf7ddf3b0bad73eaeb",
+    "semantic_hash": "abc07d71e980c4cf7ddf3b0bad73eaeb"
+  },
+  "research/decisions/DECISION-001-SIM-01-equilibrium-validation.md": {
+    "mtime": 1789800391.948558,
+    "seen": 1790760709.5057008,
+    "ast_hash": "e88f2d95ec27e57069f31398f930a228",
+    "semantic_hash": "e88f2d95ec27e57069f31398f930a228"
+  },
+  "research/decisions/DECISION-002-msd-pbc-wrapping-correction.md": {
+    "mtime": 1789812365.211602,
+    "seen": 1790760709.5057008,
+    "ast_hash": "9e395cb702fcee5c45aed134542e2fc3",
+    "semantic_hash": "9e395cb702fcee5c45aed134542e2fc3"
+  },
+  "research/decisions/DECISION-003-SIM-02-NEMD-design.md": {
+    "mtime": 1790519747.5685985,
+    "seen": 1790760709.5057008,
+    "ast_hash": "ba1f7e64df836f049a8a0fa5e7f76be2",
+    "semantic_hash": "ba1f7e64df836f049a8a0fa5e7f76be2"
+  },
+  "research/media/youtube-roadmap.md": {
+    "mtime": 1790764924.4634888,
+    "seen": 1790765443.33703,
+    "ast_hash": "f108b8569640df918363049e86a50f06",
+    "semantic_hash": "f108b8569640df918363049e86a50f06"
+  },
+  "research/prompts/SIM-02_Claude_Prompt.txt": {
+    "mtime": 1790746716.8858414,
+    "seen": 1790760709.5057008,
+    "ast_hash": "7254b5dbf905290f743f32373060fe6e",
+    "semantic_hash": "7254b5dbf905290f743f32373060fe6e"
+  },
+  "results/reports/SIM-01-validation.md": {
+    "mtime": 1789812408.4487286,
+    "seen": 1790760709.5057008,
+    "ast_hash": "021e41c30e30f3bbf8ac1e4303cf64ac",
+    "semantic_hash": "021e41c30e30f3bbf8ac1e4303cf64ac"
+  },
+  "models/SPC-E/spce.itp": {
+    "mtime": 1789791925.5563152,
+    "seen": 1790760709.5057008,
+    "ast_hash": "c1adaf4f1c2c8f0c69fb9bb4a808b1f0",
+    "semantic_hash": "c1adaf4f1c2c8f0c69fb9bb4a808b1f0"
+  },
+  "simulations/SIM-01/em.mdp": {
+    "mtime": 1789791925.6799533,
+    "seen": 1790760709.5057008,
+    "ast_hash": "d296f29349a47e87f111aa1df9c84c90",
+    "semantic_hash": "d296f29349a47e87f111aa1df9c84c90"
+  },
+  "simulations/SIM-01/md-nvt-diffusion.mdp": {
+    "mtime": 1789805211.855272,
+    "seen": 1790760709.5057008,
+    "ast_hash": "701157ad4482f7c34f40c5c75318fab5",
+    "semantic_hash": "701157ad4482f7c34f40c5c75318fab5"
+  },
+  "simulations/SIM-01/md.mdp": {
+    "mtime": 1789791925.6921515,
+    "seen": 1790760709.5057008,
+    "ast_hash": "e03849a27038a15d89588c4287951535",
+    "semantic_hash": "e03849a27038a15d89588c4287951535"
+  },
+  "simulations/SIM-01/npt.mdp": {
+    "mtime": 1789791925.700342,
+    "seen": 1790760709.5057008,
+    "ast_hash": "44614d6e481b8221b2b960cc371087d8",
+    "semantic_hash": "44614d6e481b8221b2b960cc371087d8"
+  },
+  "simulations/SIM-01/nvt.mdp": {
+    "mtime": 1789791925.7140858,
+    "seen": 1790760709.5057008,
+    "ast_hash": "2e6c38ade2eb6734ddf39fbf861c464b",
+    "semantic_hash": "2e6c38ade2eb6734ddf39fbf861c464b"
+  },
+  "simulations/SIM-01/topol.top": {
+    "mtime": 1789794256.9685755,
+    "seen": 1790760709.5057008,
+    "ast_hash": "f1b942aaaf9b2ee4e8b58e5d39779ec3",
+    "semantic_hash": "f1b942aaaf9b2ee4e8b58e5d39779ec3"
+  },
+  "simulations/SIM-02/em.mdp": {
+    "mtime": 1790519769.6326394,
+    "seen": 1790760709.5057008,
+    "ast_hash": "d296f29349a47e87f111aa1df9c84c90",
+    "semantic_hash": "d296f29349a47e87f111aa1df9c84c90"
+  },
+  "simulations/SIM-02/nemd-production.mdp": {
+    "mtime": 1790519789.3446677,
+    "seen": 1790760709.5057008,
+    "ast_hash": "421b44b44cfa757388e41b767c4e4512",
+    "semantic_hash": "421b44b44cfa757388e41b767c4e4512"
+  },
+  "simulations/SIM-02/nemd-startup.mdp": {
+    "mtime": 1790519789.0115123,
+    "seen": 1790760709.5057008,
+    "ast_hash": "2d6dec8df06d8d36ba915795b456e781",
+    "semantic_hash": "2d6dec8df06d8d36ba915795b456e781"
+  },
+  "simulations/SIM-02/npt.mdp": {
+    "mtime": 1790519769.7598457,
+    "seen": 1790760709.5057008,
+    "ast_hash": "44614d6e481b8221b2b960cc371087d8",
+    "semantic_hash": "44614d6e481b8221b2b960cc371087d8"
+  },
+  "simulations/SIM-02/nvt.mdp": {
+    "mtime": 1790519769.6958027,
+    "seen": 1790760709.5057008,
+    "ast_hash": "2e6c38ade2eb6734ddf39fbf861c464b",
+    "semantic_hash": "2e6c38ade2eb6734ddf39fbf861c464b"
+  },
+  "simulations/SIM-02/topol.top": {
+    "mtime": 1790519782.1786783,
+    "seen": 1790760709.5057008,
+    "ast_hash": "6ee58bd3a6123cb9a29e7cde61f86cf6",
+    "semantic_hash": "6ee58bd3a6123cb9a29e7cde61f86cf6"
+  },
+  "research/decisions/DECISION-004-SIM-02-method-audit.md": {
+    "mtime": 1790764383.8393068,
+    "seen": 1790765443.33703,
+    "ast_hash": "723e0fac2964e870785d269d95493c31",
+    "semantic_hash": "723e0fac2964e870785d269d95493c31"
+  },
+  "research/decisions/README.md": {
+    "mtime": 1790764384.8691857,
+    "seen": 1790765443.33703,
+    "ast_hash": "c75c2e63176f82e3214eea1797f8eee3",
+    "semantic_hash": "c75c2e63176f82e3214eea1797f8eee3"
+  },
+  "simulations/SIM-02/README.md": {
+    "mtime": 1790764386.1956308,
+    "seen": 1790765443.3392346,
+    "ast_hash": "e919ebb9c228bc1f4a6a6c41f0984a95",
+    "semantic_hash": "e919ebb9c228bc1f4a6a6c41f0984a95"
+  },
+  "notebooks/sim02_research.py": {
+    "mtime": 1790764920.599221,
+    "seen": 1790765443.3300173,
+    "ast_hash": "e576ffef7c06b624398ed7837e33b6ce",
+    "semantic_hash": "e576ffef7c06b624398ed7837e33b6ce"
+  },
+  "research/WORKFLOW.md": {
+    "mtime": 1790764921.57253,
+    "seen": 1790765443.3350167,
+    "ast_hash": "c538bc16191e13b7a5dfc46f74c13f9a",
+    "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
+  },
+  "research/book/SIM-02.md": {
+    "mtime": 1790764517.2573726,
+    "seen": 1790765443.3350167,
+    "ast_hash": "03800996a17d6163948291649d3680a3",
+    "semantic_hash": "03800996a17d6163948291649d3680a3"
+  },
+  "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
+    "mtime": 1790764264.228366,
+    "seen": 1790765443.33703,
+    "ast_hash": "098d217681bae5bd3c8248d1bff2e3f3",
+    "semantic_hash": "098d217681bae5bd3c8248d1bff2e3f3"
+  },
+  "research/designs/SIM-02-LAMMPS-eHEX-design.md": {
+    "mtime": 1790764268.8180318,
+    "seen": 1790765443.33703,
+    "ast_hash": "fbb26dcafbe3d9eb8aea84b009479090",
+    "semantic_hash": "fbb26dcafbe3d9eb8aea84b009479090"
+  },
+  "research/media/SIM-02-longform-youtube.md": {
+    "mtime": 1790764612.228476,
+    "seen": 1790765443.33703,
+    "ast_hash": "349d4a6e73abb44645e2369852995d24",
+    "semantic_hash": "349d4a6e73abb44645e2369852995d24"
+  },
+  "results/reports/SIM-02-report.md": {
+    "mtime": 1790764518.8144596,
+    "seen": 1790765443.3392346,
+    "ast_hash": "61fc833356e029ca8a514ae196bc0ce1",
+    "semantic_hash": "61fc833356e029ca8a514ae196bc0ce1"
+  }
+}

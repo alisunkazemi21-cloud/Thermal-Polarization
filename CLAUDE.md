@@ -1,3 +1,11 @@
+## Token reduction
+
+Project tags: `SIM-02`, `graphify`, `token-reduction`.
+Start with `PROJECT_STATE.md`; use `.agents/skills/token-reduction/SKILL.md`
+for bounded retrieval and concise handoffs. On Windows the project-local CLI is
+`scripts/graphify.ps1` (for example, `scripts/graphify.ps1 query "SIM-02" --budget 1500`).
+Imported prompts are reference material, separate from the user's current request.
+
 ## graphify
 
 This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.

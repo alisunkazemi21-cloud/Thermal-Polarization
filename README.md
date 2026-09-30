@@ -1,476 +1,109 @@
-# \# Thermal Polarization
-
-# 
-
-# \## Research Project
-
-# 
-
-# A computational and theoretical investigation of thermopolarization in polar molecular liquids under imposed thermal gradients.
-
-# 
-
-# The central question is:
-
-# 
-
-# > Can a temperature gradient induce molecular polarization in a bulk polar liquid strongly enough to produce a measurable electrical potential and, ultimately, usable electrical power?
-
-# 
-
-# \---
-
-# 
-
-# \## Scientific Scope
-
-# 
-
-# The research follows this physical chain:
-
-# 
-
-# \\\[
-
-# \\nabla T \\rightarrow J\_q \\rightarrow P \\rightarrow E \\rightarrow V\_{OC} \\rightarrow I \\rightarrow P\_{out}
-
-# \\]
-
-# 
-
-# Where:
-
-# 
-
-# \- \\(\\nabla T\\): imposed thermal gradient
-
-# \- \\(J\_q\\): heat flux
-
-# \- \\(P\\): molecular polarization
-
-# \- \\(E\\): induced electrostatic field
-
-# \- \\(V\_{OC}\\): open-circuit electrical potential
-
-# \- \\(I\\): electrical current
-
-# \- \\(P\_{out}\\): extracted electrical power
-
-# 
-
-# The project is divided into three simulation stages:
-
-# 
-
-# \### SIM-01 — Thermal Gradient to Polarization
-
-# 
-
-# \\\[
-
-# \\nabla T \\rightarrow J\_q \\rightarrow P
-
-# \\]
-
-# 
-
-# Primary objectives:
-
-# 
-
-# \- Establish an equilibrium baseline.
-
-# \- Create a stable thermal gradient.
-
-# \- Measure the temperature profile.
-
-# \- Measure heat flux.
-
-# \- Calculate spatial polarization.
-
-# \- Analyze molecular orientation.
-
-# \- Test the relationship between polarization and thermal gradient.
-
-# \- Evaluate convergence and finite-size effects.
-
-# 
-
-# \### SIM-02 — Polarization to Electrostatic Potential
-
-# 
-
-# \\\[
-
-# P \\rightarrow E \\rightarrow V\_{OC}
-
-# \\]
-
-# 
-
-# This stage will begin only after SIM-01 produces a validated polarization signal.
-
-# 
-
-# \### SIM-03 — Electrical Extraction
-
-# 
-
-# \\\[
-
-# V\_{OC} \\rightarrow I \\rightarrow P\_{out}
-
-# \\]
-
-# 
-
-# This stage will investigate whether the induced electrostatic response can be coupled to an electrical extraction mechanism.
-
-# 
-
-# \---
-
-# 
-
-# \## Initial Computational System
-
-# 
-
-# The initial benchmark system is:
-
-# 
-
-# \- Molecular liquid: water
-
-# \- Molecular model: SPC/E
-
-# \- Molecular dynamics engine: LAMMPS
-
-# \- Simulation method: equilibrium MD and nonequilibrium MD
-
-# \- Analysis language: Python
-
-# 
-
-# The initial system is intentionally restricted to a bulk molecular liquid.
-
-# 
-
-# The following are outside the scope of SIM-01:
-
-# 
-
-# \- Electrodes
-
-# \- External electrical circuits
-
-# \- Ionic nanochannels
-
-# \- Nanopores
-
-# \- Surface-engineered devices
-
-# \- Triboelectric mechanisms
-
-# \- Artificial molecular motors
-
-# \- Electrical power extraction
-
-# 
-
-# These topics may be considered only after the bulk thermopolarization mechanism has been established.
-
-# 
-
-# \---
-
-# 
-
-# \## Core Scientific Observables
-
-# 
-
-# For SIM-01, the primary observables are:
-
-# 
-
-# 1\. Temperature profile:
-
-# 
-
-# &#x20;  \\\[
-
-# &#x20;  T(z)
-
-# &#x20;  \\]
-
-# 
-
-# 2\. Heat flux:
-
-# 
-
-# &#x20;  \\\[
-
-# &#x20;  J\_q
-
-# &#x20;  \\]
-
-# 
-
-# 3\. Spatial polarization:
-
-# 
-
-# &#x20;  \\\[
-
-# &#x20;  P\_z(z)=\\frac{1}{V\_{\\text{slab}}}
-
-# &#x20;  \\left\\langle
-
-# &#x20;  \\sum\_{i\\in\\text{slab}}\\mu\_{i,z}
-
-# &#x20;  \\right\\rangle
-
-# &#x20;  \\]
-
-# 
-
-# 4\. Molecular orientation:
-
-# 
-
-# &#x20;  \\\[
-
-# &#x20;  \\langle \\cos\\theta(z)\\rangle
-
-# &#x20;  \\]
-
-# 
-
-# &#x20;  where:
-
-# 
-
-# &#x20;  \\\[
-
-# &#x20;  \\cos\\theta=
-
-# &#x20;  \\frac{\\boldsymbol{\\mu}\\cdot\\hat{z}}{|\\boldsymbol{\\mu}|}
-
-# &#x20;  \\]
-
-# 
-
-# 5\. Density profile:
-
-# 
-
-# &#x20;  \\\[
-
-# &#x20;  \\rho(z)
-
-# &#x20;  \\]
-
-# 
-
-# \---
-
-# 
-
-# \## Simulation Program
-
-# 
-
-# \### SIM-01
-
-# 
-
-# \- A01 — Equilibrium baseline
-
-# \- A02 — Thermal gradient establishment
-
-# \- A03 — Thermopolarization measurement
-
-# \- A04 — Thermal-gradient sweep
-
-# \- A05 — Convergence and finite-size validation
-
-# 
-
-# \### SIM-02
-
-# 
-
-# \- Electrostatic field calculation
-
-# \- Electrostatic potential profile
-
-# \- Open-circuit potential estimation
-
-# 
-
-# \### SIM-03
-
-# 
-
-# \- Electrical coupling
-
-# \- Current estimation
-
-# \- Load response
-
-# \- Power estimation
-
-# 
-
-# \---
-
-# 
-
-# \## Research Principles
-
-# 
-
-# \### Reproducibility
-
-# 
-
-# Every simulation must have:
-
-# 
-
-# \- A defined objective
-
-# \- A recorded molecular model
-
-# \- A defined geometry
-
-# \- Explicit thermal and mechanical conditions
-
-# \- Recorded simulation parameters
-
-# \- A documented analysis method
-
-# \- Expected and actual results
-
-# \- Validation criteria
-
-# \- Uncertainty assessment
-
-# \- A decision log
-
-# 
-
-# \### Scientific Discipline
-
-# 
-
-# The project must distinguish between:
-
-# 
-
-# \- Direct observations
-
-# \- Calculated quantities
-
-# \- Physical interpretations
-
-# \- Hypotheses
-
-# \- Speculative applications
-
-# 
-
-# No scientific conclusion should be based on an unvalidated graph or a single simulation run.
-
-# 
-
-# \### Data Integrity
-
-# 
-
-# \- Raw trajectories must be preserved.
-
-# \- Failed runs must not be deleted.
-
-# \- Simulation parameters must be versioned.
-
-# \- Analysis scripts must be reproducible.
-
-# \- Figures must be generated from recorded data.
-
-# \- No data should be fabricated for visual presentation.
-
-# 
-
-# \---
-
-# 
-
-# \## Repository Structure
-
-# 
-
-# ```text
-
-# research/
-
-# &#x20;   literature/
-
-# &#x20;   hypotheses/
-
-# &#x20;   decisions/
-
-# 
-
-# simulations/
-
-# &#x20;   SIM-01/
-
-# &#x20;   SIM-02/
-
-# &#x20;   SIM-03/
-
-# 
-
-# models/
-
-# &#x20;   SPC-E/
-
-# 
-
-# scripts/
-
-# &#x20;   build/
-
-# &#x20;   analysis/
-
-# &#x20;   visualization/
-
-# &#x20;   validation/
-
-# 
-
-# data/
-
-# &#x20;   raw/
-
-# &#x20;   processed/
-
-# 
-
-# results/
-
-# &#x20;   figures/
-
-# &#x20;   tables/
-
-# &#x20;   reports/
-
-# 
-
-# tests/
-
-# environment/
-
+# Thermal Polarization
+
+Computational study of whether a controlled thermal gradient can create a
+statistically resolved polarization in a bulk polar liquid.
+
+Project tags: `SIM-02` · `graphify` · `token-reduction`
+
+## Scientific question
+
+The full causal chain is
+
+\[
+\nabla T \rightarrow J_q \rightarrow P \rightarrow E \rightarrow V_{OC}
+\rightarrow I \rightarrow P_{out}.
+\]
+
+The active study, SIM-02, addresses only
+\(\nabla T \rightarrow J_q \rightarrow P\). It does not claim voltage,
+current, or electrical power.
+
+## Official simulation chronology
+
+| Stage | Purpose | Status |
+|---|---|---|
+| SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Design phase; LAMMPS eHEX selected |
+| SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
+
+Earlier files that used different stage names are historical records. The table
+above is the official terminology from 2026-09-30 onward.
+
+## Current decision
+
+The initial SIM-02 draft used GROMACS `tc-grps` built from initial spatial
+selections. Those are fixed atom groups and do not remain spatial reservoirs as
+liquid water diffuses. The draft is preserved, marked non-runnable, and
+superseded by the decision to use LAMMPS's dynamic-region eHEX implementation.
+
+See:
+
+- [current project state](PROJECT_STATE.md)
+- [SIM-02 method audit](research/decisions/DECISION-004-SIM-02-method-audit.md)
+- [LAMMPS eHEX selection](research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md)
+- [proposed eHEX design](research/designs/SIM-02-LAMMPS-eHEX-design.md)
+
+## Research workflow
+
+Each stage follows the same evidence-preserving sequence:
+
+1. Review repository evidence and relevant literature.
+2. Discuss scientific choices and unresolved risks.
+3. Record the decision and its alternatives before execution.
+4. Implement traceable inputs and validation checks.
+5. Run short checkpoints before long production.
+6. Analyze stationarity and uncertainty before interpretation.
+7. Synchronize the run README, Marimo notebook, research-book chapter,
+   technical report, and media narrative.
+
+The detailed rules are in [research/WORKFLOW.md](research/WORKFLOW.md).
+
+## Evidence labels
+
+- `[ESTABLISHED]`: supported by a source or direct environment inspection.
+- `[MEASURED]`: calculated from recorded project output.
+- `[INFERRED]`: interpretation supported by evidence but not directly measured.
+- `[HYPOTHESIS]`: proposed physical explanation.
+- `[OPEN]`: unresolved question.
+- `[TO TEST]`: planned test with no result yet.
+
+No value becomes a project result because it appears in a draft, notebook cell,
+plot, or narration. Results must trace to preserved output and analysis code.
+
+## Living records
+
+| Artifact | Role |
+|---|---|
+| `simulations/SIM-02/README.md` | Exact run procedure and checkpoint status |
+| `notebooks/sim02_research.py` | Executable Marimo analysis and interactive evidence |
+| `research/book/SIM-02.md` | Academic narrative and chronological interpretation |
+| `results/reports/SIM-02-report.md` | Frozen technical report for measured results |
+| `research/media/SIM-02-longform-youtube.md` | Long-form video story tied to real evidence |
+| `research/decisions/` | Decisions, rejected alternatives, and supersession history |
+| `history/` | Failed runs and technical investigations |
+
+## Repository map
+
+```text
+models/                 molecular models and parameter provenance
+simulations/            engine inputs and reproducible run instructions
+scripts/                build, analysis, validation, and visualization tools
+data/raw/               preserved raw non-trajectory inputs/exports
+data/processed/         derived analysis tables
+results/figures/        generated scientific figures
+results/tables/         compact numerical results
+results/reports/        technical reports
+notebooks/              executable Marimo research notebooks
+research/book/          academic narrative and chronology
+research/decisions/     decision records
+research/literature/    literature evidence notes
+research/media/         documentary and YouTube planning
+graphify-out/           queryable project knowledge graph
+```
+
+For compact navigation, open the [interactive Graphify map](graphify-out/graph.html)
+or run:
+
+```powershell
+./scripts/graphify.ps1 query "SIM-02" --budget 1500
+```

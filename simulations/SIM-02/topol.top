@@ -1,0 +1,15 @@
+; simulations/SIM-02/topol.top
+; SIM-02: two-thermostat NEMD, bulk SPC/E water
+
+[ defaults ]
+; nbfunc   comb-rule   gen-pairs
+  1        2           no
+
+#include "../../models/SPC-E/spce.itp"
+
+[ system ]
+SPC/E water — SIM-02 NEMD (hot/cold thermostat groups)
+
+[ molecules ]
+; Compound        #mols
+  SOL             __N_SOL_TBD__   ; <-- [TO MEASURE] replace with the real count from gmx solvate before grompp

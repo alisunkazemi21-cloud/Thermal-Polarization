@@ -24,3 +24,7 @@ __pycache__/
 
 notebooks/__marimo__/
 docs/CLAUDE.md
+
+# Graphify machine-local interpreter paths, extraction scratch, and caches
+graphify-out/.*
+graphify-out/cache/

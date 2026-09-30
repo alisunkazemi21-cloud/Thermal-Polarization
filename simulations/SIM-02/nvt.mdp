@@ -1,0 +1,53 @@
+; nvt.mdp — SIM-01 NVT equilibration
+; GROMACS 2025.4
+; Purpose: bring the system to 300 K at fixed volume, starting from the
+; energy-minimized configuration, before pressure coupling is introduced.
+; 100 ps is a provisional duration for a small (~500-molecule) water box;
+; it is NOT asserted to be sufficient until the temperature time series
+; is actually inspected (gmx energy -> visual/statistical check for drift).
+
+integrator                = md
+dt                        = 0.002
+nsteps                    = 50000      ; 50000 * 0.002 ps = 100 ps
+
+; Neighbor searching
+cutoff-scheme             = Verlet
+nstlist                   = 10
+rlist                     = 1.0
+pbc                       = xyz
+
+; Electrostatics
+coulombtype               = PME
+rcoulomb                  = 1.0
+
+; Van der Waals
+rvdw                      = 1.0
+DispCorr                  = EnerPres
+
+; Constraints
+constraints                = h-bonds
+constraint-algorithm       = lincs
+lincs_iter                 = 1
+lincs_order                = 4
+
+; Temperature coupling
+tcoupl                     = V-rescale
+tc-grps                    = System
+tau_t                      = 0.1
+ref_t                      = 300
+
+; Pressure coupling — deliberately off during NVT
+pcoupl                     = no
+
+; Initial velocities — generated here since this is the first dynamics run
+gen_vel                    = yes
+gen_temp                   = 300
+gen_seed                   = -1
+
+continuation               = no
+
+; Output
+nstxout                    = 500
+nstvout                    = 500
+nstenergy                  = 500
+nstlog                     = 500

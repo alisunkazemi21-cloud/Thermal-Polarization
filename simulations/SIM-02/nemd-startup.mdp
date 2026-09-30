@@ -1,0 +1,51 @@
+; nemd-startup.mdp — SIM-02, short NEMD startup transient
+; GROMACS 2025.4
+; Purpose: bring the imposed thermal gradient to approximate steady state
+; before any window is treated as production. 500 ps is provisional —
+; checked against real T(z)/rho(z) output, not assumed sufficient.
+;
+; [INFERRED — see DECISION-003] Three thermostat groups: Hot (center
+; slab, 320 K), Cold (boundary slab, split across periodic wrap, 280 K),
+; Rest (everything else, weakly coupled at the 300 K mean so it satisfies
+; GROMACS's group-coverage requirement without materially constraining
+; the bulk T(z) profile that is the actual measured observable).
+
+integrator                = md
+dt                        = 0.002
+nsteps                    = 250000      ; 250000 * 0.002 ps = 500 ps
+
+cutoff-scheme             = Verlet
+nstlist                   = 10
+rlist                     = 1.0
+pbc                       = xyz
+
+coulombtype               = PME
+rcoulomb                  = 1.0
+rvdw                      = 1.0
+DispCorr                  = EnerPres
+
+constraints               = h-bonds
+constraint-algorithm      = lincs
+lincs_iter                = 1
+lincs_order               = 4
+
+; Temperature coupling — three spatial groups (see make_spatial_groups.md)
+tcoupl                    = V-rescale
+tc-grps                   = Hot   Cold  Rest
+tau_t                     = 0.5   0.5   5.0
+ref_t                     = 320   280   300
+
+; Pressure coupling OFF — see DECISION-003
+pcoupl                    = no
+
+; Continuation from the new box's NPT equilibration
+continuation              = yes
+gen_vel                   = no
+
+nstxout                   = 0
+nstvout                   = 0
+nstfout                   = 0
+nstxout-compressed        = 500
+compressed-x-grps         = System
+nstenergy                 = 500
+nstlog                    = 500
