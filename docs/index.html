@@ -798,7 +798,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <div class="rs-item done"><span class="rs-dot"></span>SIM-01 equilibrium validation — density, temperature, O-O RDF, self-diffusion all pass</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-02 engine decision — LAMMPS eHEX approved</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-02 checkpoint 07 gate 1 — zero-step audit passed</div>
-      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 gate 2 — equilibrium bridge</div>
+      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 checkpoint 08 — equilibrium bridge proposed; zero-step parse passed</div>
       <div class="rs-item"><span class="rs-dot"></span>Cross-liquid comparison</div>
       <div class="rs-item"><span class="rs-dot"></span>Electrical extraction</div>
       <div class="rs-item"><span class="rs-dot"></span>Power characterization</div>
@@ -833,10 +833,10 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <div class="cover-eyebrow"><span class="line"></span> Computational physics — molecular simulation research · Research Book v0.3</div>
   <h1 class="cover-title">Thermal Polarization<br><span class="accent">→ Electrical Work</span></h1>
   <p class="cover-sub">Can a bulk polar liquid subjected to a thermal gradient produce a measurable electrical potential and, ultimately, deliver net electrical power to an external load?</p>
-  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 checkpoint 07 approved. The 4,500-water structure and modern LAMMPS input passed independent structure and zero-step audits. The equilibrium bridge is next; no NEMD trajectory or polarization result exists.</p>
+  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 gate 1 passed. Checkpoint 08 now freezes a 1.52 ns fixed-volume PPPM equilibrium bridge, its acceptance tests, restart behavior, and bounded outputs. The input passed a zero-step LAMMPS parse; the physical trajectory has not started.</p>
   <div class="cover-status">
     <span class="tag hypothesis"><span class="dot"></span>Exploratory research — no result yet claimed</span>
-    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: equilibrium-bridge design</span>
+    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: checkpoint 08 review</span>
   </div>
 
   <div class="cover-diagram">
@@ -1387,7 +1387,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <!-- 01 RESEARCH PROGRESS -->
   <div class="subhead"><span class="sub-num">01</span><h3>Research progress</h3></div>
   <div class="roadmap-track" id="roadmap-track"><!-- injected by JS --></div>
-  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — checkpoint 07 APPROVED — gate 1 zero-step audit PASSED — zero trajectory steps advanced — gate 2 equilibrium bridge NEXT</div>
+  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — gate 1 PASSED — checkpoint 08 PROPOSED — equilibrium input ZERO-STEP PARSE PASSED — 1.52 ns trajectory NOT STARTED</div>
 
   <!-- 02 SIMULATION PROGRAM -->
   <div class="subhead"><span class="sub-num">02</span><h3>Simulation program</h3></div>
@@ -1404,8 +1404,9 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <p style="font-size:.82rem;">Two real issues found and fixed during this run, both documented rather than silently corrected: a <code>grompp</code> segmentation fault traced to an unreplaced molecule-count placeholder, and a self-diffusion coefficient initially ~140× too small due to periodic-boundary-wrapped trajectory data fed into an Einstein MSD calculation. Full protocol, commands, and both failure/decision records are in the project's git history and <code>results/reports/SIM-01-validation.md</code>.</p>
     </div>
     <div class="sim-block">
-      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">GATE 1 PASSED — equilibrium bridge next</span></div>
+      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">CHECKPOINT 08 — REVIEW</span></div>
       <p>Purpose: reproduce the established thermopolarization response in bulk water under an imposed thermal gradient.</p>
+      <p style="font-size:.82rem;">The proposed bridge replaces the imported nonequilibrium velocities, keeps the exact 0.934 g/cm³ box, and schedules 20 ps direct rescaling, 500 ps NVT, and 1 ns NVE at 1 fs. The source paper does not report its NpT pressure target, so the project does not invent one.</p>
       <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P(z) \]</div>
       <div class="sim-sub-list" id="sim01-sublist"><!-- injected by JS --></div>
     </div>
@@ -1487,8 +1488,8 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
     <div class="ce-eyebrow">CURRENT EXPERIMENT</div>
     <div class="ce-id">SIM-02-A02</div>
     <div class="exp-section"><h5>Objective</h5><p>Establish a steady-state thermal gradient across the validated equilibrium system (SIM-02-A01 / real SIM-01 is complete and validated — see Section 02 above).</p></div>
-    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">LAMMPS eHEX AND TWO-CONDITION PATH APPROVED — implementation pending</span></div>
-    <div class="exp-section"><h5>Next action</h5><p>Construct and validate the LAMMPS SPC/E equilibrium bridge, then run a short eHEX pilot at the approved 400 K validation condition. The 300 K target follows only after the pilot gates pass.</p></div>
+    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">CHECKPOINT 08 PROPOSED — INPUT PARSE PASSED — TRAJECTORY NOT STARTED</span></div>
+    <div class="exp-section"><h5>Next action</h5><p>Review and execute the 20 ps rescale + 500 ps NVT + 1 ns NVE bridge. Only a passing gate 2 releases the 100 ps eHEX pilot at the approved 400 K validation condition.</p></div>
   </div>
 
   <!-- 11 RESEARCH GUARDRAILS -->
@@ -1563,9 +1564,9 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   </ul>
 
   <h3>What happens next</h3>
-  <p>The engine and validation path are now selected. The next controlled step is:</p>
+  <p>The engine, equilibrium input, and gate-2 acceptance tests are now documented. The next controlled step is:</p>
   <div class="equation-block">
-    \[ \boxed{\text{Implement and validate the LAMMPS SPC/E + eHEX pilot before production.}} \]
+    \[ \boxed{\text{Review and execute the 1.52 ns PPPM equilibrium bridge before eHEX.}} \]
   </div>
 
   <div class="note-box">
@@ -1751,7 +1752,8 @@ const DEFAULT_LOG = [
   { date:"2026-09-19", source:"SIM-01 — real GROMACS 2025.4 execution (github.com/alisunkazemi21-cloud/Thermal-Polarization)", obs:"Self-contained SPC/E model, 510-molecule equilibrium protocol (EM->NVT->NPT->production->diffusion leg) executed end to end. Density 998.55\u00b111.22 kg/m\u00b3, temperature 300.11\u00b17.54 K, O-O RDF peak 0.2725 nm/g=3.02, self-diffusion 2.522\u00d710\u207b\u2079 m\u00b2/s \u2014 all five targets pass. Two real bugs found, root-caused, and fixed: a grompp segfault (unreplaced molecule-count placeholder) and a self-diffusion coefficient ~140x too small from periodic-boundary-wrapped MSD input.", interp:"The self-contained SPC/E model and four-stage equilibrium protocol are validated for this system size and GROMACS installation. No thermopolarization, voltage, current, or power claim is made \u2014 SIM-01 was equilibrium-only by design.", conf:"High", next:"Audit and select the SIM-02 thermal-gradient method." },
   { date:"2026-09-30", source:"SIM-02 method audit and DECISION-005", obs:"Static initial Hot/Cold/Rest atom groups were rejected as spatial reservoirs for diffusing water. The local LAMMPS 10 Dec 2025 build exposes eHEX, RIGID, SHAKE/RATTLE, and PPPM support.", interp:"LAMMPS eHEX provides dynamic geometric reservoirs and traceable energy exchange for the SIM-02 bulk-water question.", conf:"High", next:"Recover and review the exact published 400 K benchmark." },
   { date:"2026-09-30", source:"Wirnsberger et al. 2016 paper, author package, and checkpoint 07", obs:"The audited benchmark contains 4,500 SPC/E waters in a 36.35343 × 36.35343 × 109.06058 Å³ box. The hot reservoir is split across the periodic edges (4 Å + 4 Å), the cold reservoir is the central 8 Å slab, and the exchange rate is ±0.1614 kcal mol⁻¹ fs⁻¹.", interp:"The exact reference replaces approximate draft values. PPPM and the staged 1 fs → 2 fs bridge remain explicit project translations.", conf:"High", next:"Run the approved zero-step gate." },
-  { date:"2026-09-30", source:"DECISION-007 and checkpoint 07 gate 1 evidence", obs:"The structure audit passed for 4,500 neutral waters at 933.993861 kg/m³. LAMMPS 10 Dec 2025 read 13,500 atoms and velocities, created 4,500 RATTLE clusters, accepted current eHEX syntax, initialized PPPM at 9.136047×10⁻⁶ relative accuracy, and completed run 0.", interp:"The exact input is structurally consistent and parses under the modern LAMMPS build. The 404.21051 K step-zero temperature is diagnostic; no trajectory step, gradient, or polarization was measured.", conf:"High", next:"Freeze and execute the equilibrium bridge before any eHEX trajectory." }
+  { date:"2026-09-30", source:"DECISION-007 and checkpoint 07 gate 1 evidence", obs:"The structure audit passed for 4,500 neutral waters at 933.993861 kg/m³. LAMMPS 10 Dec 2025 read 13,500 atoms and velocities, created 4,500 RATTLE clusters, accepted current eHEX syntax, initialized PPPM at 9.136047×10⁻⁶ relative accuracy, and completed run 0.", interp:"The exact input is structurally consistent and parses under the modern LAMMPS build. The 404.21051 K step-zero temperature is diagnostic; no trajectory step, gradient, or polarization was measured.", conf:"High", next:"Freeze and execute the equilibrium bridge before any eHEX trajectory." },
+  { date:"2026-10-01", source:"SIM-02 checkpoint 08 equilibrium-bridge proposal", obs:"A fixed-volume bridge was frozen: replace inherited NEMD velocities with seed 20260930, run 20 ps direct rescaling, 500 ps NVT, an exact 400 K adjustment, and 1 ns NVE at 1 fs. LAMMPS parsed all stages with zero trajectory steps and no warnings after correcting RATTLE ordering and constrained-temperature rescaling.", interp:"The exact published box is retained because the paper omits its NpT pressure target and the project starts from the shared steady-state snapshot rather than the paper's lattice. Temperature, fitted energy drift, constraints, z-temperature flattening, O-O stationarity, and momentum have frozen acceptance tests.", conf:"High", next:"Review checkpoint 08, then execute its 1.52 ns trajectory. Passing gate 2 releases only the 100 ps eHEX smoke test." }
 ];
 
 /* ============================================================
