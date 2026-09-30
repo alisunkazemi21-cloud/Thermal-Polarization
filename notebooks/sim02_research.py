@@ -82,6 +82,12 @@ def _(mo):
                 "evidence": "DECISION-008; outcome not yet measured",
             },
             {
+                "date": "2026-10-03",
+                "stage": "Production-path check",
+                "event": "The MPI RATTLE correction and 1e-6 Å/fs no-growth threshold were approved for relaunch from step zero.",
+                "evidence": "measured initialization record + user approval",
+            },
+            {
                 "date": "future",
                 "stage": "Pilot and production",
                 "event": "Execution begins only after inputs and acceptance criteria are approved.",
@@ -241,7 +247,9 @@ def _(mo):
             mean with block SE ≤ 0.5 K; fitted relative energy drift ≤ 0.005%;
             exact system integrity; bounded geometry errors and no O–O contact
             below 2.2 Å; no resolved z-temperature slope; stationary O–O first
-            peak and coordination; and reported center-of-mass momentum.
+            peak and coordination; and COM speed ≤ 1e-6 Å/fs with no systematic
+            growth. The COM threshold was fixed before step 1 from the measured
+            four-rank RATTLE initialization floor.
             """
         ),
     ])

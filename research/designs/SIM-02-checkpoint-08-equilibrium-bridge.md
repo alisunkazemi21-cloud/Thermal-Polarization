@@ -88,8 +88,12 @@ Gate 2 passes only if all primary criteria pass:
 7. **Structural stationarity:** between the first and second 500 ps NVE halves,
    the O–O first-peak position differs by no more than `0.05 Å` and the
    coordination number at the first minimum differs by no more than `0.10`.
-8. **Momentum:** the final center-of-mass speed is reported and remains within
-   numerical noise; no periodic momentum-removal fix may hide a drift.
+8. **Momentum:** the final center-of-mass speed is reported, is at most
+   `1e-6 Å/fs`, and shows no systematic growth relative to the stage-start
+   four-rank RATTLE floor. No periodic momentum-removal fix may hide a drift.
+   This numerical threshold was frozen before step 1 after the MPI execution
+   path reproducibly gave `5.9e-7 Å/fs` at constraint initialization; its COM
+   kinetic energy is about `1e-8` of the system thermal kinetic energy.
 
 Pressure is reported but is not a pass/fail target because volume is fixed and
 the source does not document an NpT pressure. Density is an integrity invariant,

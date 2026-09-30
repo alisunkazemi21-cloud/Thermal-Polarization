@@ -55,6 +55,11 @@ velocity        all create 400.0 ${seed} mom yes rot yes dist gaussian
 # rescaling. The paper does not report its cadence; 100 fs is frozen here.
 fix             integrate all nve
 fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+# Initialize RATTLE before the final momentum removal. Parallel constraint
+# initialization can otherwise leave a small resolved COM velocity.
+run             0 post no
+velocity        all zero angular
+velocity        all zero linear
 fix             initial_rescale all temp/rescale 100 400.0 400.0 0.0 1.0
 run             20000
 unfix           initial_rescale
@@ -65,6 +70,8 @@ unfix           constraints
 unfix           integrate
 fix             integrate all nvt temp 400.0 400.0 1000.0
 fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             0 post no
+velocity        all zero linear
 run             500000
 unfix           constraints
 unfix           integrate
@@ -74,7 +81,10 @@ write_restart   ${out}/stage-b-500ps-nvt.restart
 # kinetic-energy adjustment uses the constrained system degrees of freedom.
 fix             integrate all nve
 fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             0 post no
 velocity        all scale 400.0
+velocity        all zero angular
+velocity        all zero linear
 compute         oo_rdf all rdf 200 2 2
 fix             rdf_blocks all ave/time 1000 100 100000 c_oo_rdf[*] file ${out}/oo-rdf-100ps-blocks.dat mode vector ave one
 run             1000000

@@ -153,6 +153,12 @@ showing any result: temperature, fitted energy drift, molecular constraints,
 flat z-temperature, O–O stationarity, and center-of-mass momentum. The audience
 therefore knows what counts as success before seeing the curve.
 
+Preserve the real first-launch correction: the one-rank zero-step parse looked
+clean, but the four-rank optimized launch showed a small center-of-mass velocity
+after RATTLE initialization. The run was stopped before step 1. Show the raw
+diagnostic and the correction—initialize RATTLE first, then remove momentum—so
+the video demonstrates why production-path checks matter beyond syntax checks.
+
 ### 9. The eHEX pilot
 
 Required footage/data: reservoir occupancy, energy ledger, unfolded T(z), ρ(z),

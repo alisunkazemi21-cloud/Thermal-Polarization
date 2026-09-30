@@ -67,6 +67,13 @@ remain fixed. The proposal, acceptance criteria, restart rules, and bounded
 output plan are in
 `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md`.
 
+The first four-rank production-path launch stopped before step 1 when MPI
+RATTLE initialization exposed a `5.9e-7 Å/fs` COM-velocity floor. The corrected
+input initializes constraints before explicit stage-boundary momentum removal;
+the frozen criterion is at most `1e-6 Å/fs` with no systematic growth. Raw
+initialization evidence is under
+`history/SIM-02-checkpoint-08-mpi-momentum-init/`.
+
 ## Documentation contract
 
 - This README records exact commands and checkpoint state.

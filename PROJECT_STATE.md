@@ -50,6 +50,9 @@ LAMMPS design.
   trajectory step.
 - [APPROVED] Checkpoint 08: fixed-box 20 ps velocity-rescaling warm-up, 500 ps
   NVT, and 1 ns NVE at 400 K with deterministic seed `20260930`.
+- [MEASURED] The first four-rank launch stopped before step 1 after establishing
+  the MPI RATTLE COM-velocity floor. Stage-boundary momentum removal and the
+  `1e-6 Å/fs` no-growth criterion were approved on 2026-10-03 before relaunch.
 - [NEXT] Execute and analyze the equilibrium bridge before any eHEX trajectory.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.

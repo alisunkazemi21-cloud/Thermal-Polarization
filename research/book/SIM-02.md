@@ -37,6 +37,8 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-09-30 | Gate 1 zero-step audit executed | Measured | Structure and modern LAMMPS parse/force initialization passed; zero steps advanced |
 | 2026-09-30 | Checkpoint 08 equilibrium bridge prepared | Proposed | Exact input, acceptance criteria, restart behavior, and bounded outputs are ready for review; trajectory not started |
 | 2026-10-01 | DECISION-008 approved | Approved decision | Fixed-volume PPPM bridge released for execution; outcome remains to be measured |
+| 2026-10-01 | First four-rank launch stopped at step zero | Measured implementation failure | RATTLE initialization left a resolved COM velocity; input corrected to remove momentum after constraint initialization |
+| 2026-10-03 | MPI initialization correction approved | Approved decision | `1e-6 Å/fs` COM-speed ceiling plus no-growth requirement frozen; relaunch authorized from step zero |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
