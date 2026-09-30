@@ -41,6 +41,7 @@ See:
 - [current project state](PROJECT_STATE.md)
 - [SIM-02 method audit](research/decisions/DECISION-004-SIM-02-method-audit.md)
 - [LAMMPS eHEX selection](research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md)
+- [400 K → 300 K validation sequence](research/decisions/DECISION-006-SIM-02-temperature-path.md)
 - [proposed eHEX design](research/designs/SIM-02-LAMMPS-eHEX-design.md)
 
 ## Research workflow

@@ -42,16 +42,16 @@
     "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
   },
   "PROJECT_STATE.md": {
-    "mtime": 1790764922.817776,
-    "seen": 1790765443.3330166,
-    "ast_hash": "d8c696c3035c161f12639e6319d93755",
-    "semantic_hash": "d8c696c3035c161f12639e6319d93755"
+    "mtime": 1790768593.7107277,
+    "seen": 1790768850.1792643,
+    "ast_hash": "c41aed0c8f80af6a91d55e5ff57335b3",
+    "semantic_hash": "c41aed0c8f80af6a91d55e5ff57335b3"
   },
   "README.md": {
-    "mtime": 1790764113.599645,
-    "seen": 1790765443.3330166,
-    "ast_hash": "41fbafa313c05565993ace172347c414",
-    "semantic_hash": "41fbafa313c05565993ace172347c414"
+    "mtime": 1790768749.9332461,
+    "seen": 1790768850.1792643,
+    "ast_hash": "7773e1a43e80ef71fe915377694a4e90",
+    "semantic_hash": "7773e1a43e80ef71fe915377694a4e90"
   },
   "environment/requirements-graphify.txt": {
     "mtime": 1790760461.996637,
@@ -192,22 +192,22 @@
     "semantic_hash": "723e0fac2964e870785d269d95493c31"
   },
   "research/decisions/README.md": {
-    "mtime": 1790764384.8691857,
-    "seen": 1790765443.33703,
-    "ast_hash": "c75c2e63176f82e3214eea1797f8eee3",
-    "semantic_hash": "c75c2e63176f82e3214eea1797f8eee3"
+    "mtime": 1790768590.7122886,
+    "seen": 1790768850.1826322,
+    "ast_hash": "7d23dcce31f3dee5a27dc41c2d22f11b",
+    "semantic_hash": "7d23dcce31f3dee5a27dc41c2d22f11b"
   },
   "simulations/SIM-02/README.md": {
-    "mtime": 1790764386.1956308,
-    "seen": 1790765443.3392346,
-    "ast_hash": "e919ebb9c228bc1f4a6a6c41f0984a95",
-    "semantic_hash": "e919ebb9c228bc1f4a6a6c41f0984a95"
+    "mtime": 1790768750.8731825,
+    "seen": 1790768850.1848195,
+    "ast_hash": "37c0f8df9fb3ab9d26898f163413243a",
+    "semantic_hash": "37c0f8df9fb3ab9d26898f163413243a"
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1790764920.599221,
-    "seen": 1790765443.3300173,
-    "ast_hash": "e576ffef7c06b624398ed7837e33b6ce",
-    "semantic_hash": "e576ffef7c06b624398ed7837e33b6ce"
+    "mtime": 1790768762.7976263,
+    "seen": 1790768850.176001,
+    "ast_hash": "cd2511dbb619f56f8b359ec3fbce624b",
+    "semantic_hash": "cd2511dbb619f56f8b359ec3fbce624b"
   },
   "research/WORKFLOW.md": {
     "mtime": 1790764921.57253,
@@ -216,10 +216,10 @@
     "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
   },
   "research/book/SIM-02.md": {
-    "mtime": 1790764517.2573726,
-    "seen": 1790765443.3350167,
-    "ast_hash": "03800996a17d6163948291649d3680a3",
-    "semantic_hash": "03800996a17d6163948291649d3680a3"
+    "mtime": 1790768613.2283113,
+    "seen": 1790768850.1810813,
+    "ast_hash": "bc878cbece8deb90f9955b8c9e6999f7",
+    "semantic_hash": "bc878cbece8deb90f9955b8c9e6999f7"
   },
   "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
     "mtime": 1790764264.228366,
@@ -228,10 +228,10 @@
     "semantic_hash": "098d217681bae5bd3c8248d1bff2e3f3"
   },
   "research/designs/SIM-02-LAMMPS-eHEX-design.md": {
-    "mtime": 1790764268.8180318,
-    "seen": 1790765443.33703,
-    "ast_hash": "fbb26dcafbe3d9eb8aea84b009479090",
-    "semantic_hash": "fbb26dcafbe3d9eb8aea84b009479090"
+    "mtime": 1790768592.3057225,
+    "seen": 1790768850.1826322,
+    "ast_hash": "c8003c1d7742ae9e9f458bbaf0af5ecf",
+    "semantic_hash": "c8003c1d7742ae9e9f458bbaf0af5ecf"
   },
   "research/media/SIM-02-longform-youtube.md": {
     "mtime": 1790764612.228476,
@@ -244,5 +244,11 @@
     "seen": 1790765443.3392346,
     "ast_hash": "61fc833356e029ca8a514ae196bc0ce1",
     "semantic_hash": "61fc833356e029ca8a514ae196bc0ce1"
+  },
+  "research/decisions/DECISION-006-SIM-02-temperature-path.md": {
+    "mtime": 1790768589.455459,
+    "seen": 1790768850.1826322,
+    "ast_hash": "53e7120c5bfa86fea8bf98ff204352b2",
+    "semantic_hash": "53e7120c5bfa86fea8bf98ff204352b2"
   }
 }

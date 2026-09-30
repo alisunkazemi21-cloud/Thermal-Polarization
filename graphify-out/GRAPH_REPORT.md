@@ -4,11 +4,11 @@
 # Graph Report - Thermal-Polarization  (2026-09-30)
 
 ## Corpus Check
-- Corpus is ~13,652 words - fits in a single context window. You may not need a graph.
+- Corpus is ~13,970 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 132 nodes · 147 edges · 12 communities (9 shown, 3 thin omitted)
-- Extraction: 90% EXTRACTED · 9% INFERRED · 1% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.95)
+- 133 nodes · 149 edges · 12 communities (9 shown, 3 thin omitted)
+- Extraction: 91% EXTRACTED · 9% INFERRED · 1% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.95)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -27,10 +27,10 @@
 1. `SIM-01 validation report: five criteria reported passing; not independently rerun in this extraction` - 13 edges
 2. `Research question: reproducible spatial polarization under a controlled thermal gradient` - 12 edges
 3. `SIM-02 two-region thermostat NEMD draft design` - 8 edges
-4. `Pinned Python analysis and notebook environment` - 7 edges
-5. `Supplied SIM-02 Claude prompt: reference proposal and workflow, not present authorization` - 7 edges
-6. `SETTLE rigid water geometry: OH=0.1000 nm, HH=0.16330 nm` - 7 edges
-7. `DECISION-005 selects LAMMPS eHEX for SIM-02` - 7 edges
+4. `DECISION-005 selects LAMMPS eHEX for SIM-02` - 8 edges
+5. `Pinned Python analysis and notebook environment` - 7 edges
+6. `Supplied SIM-02 Claude prompt: reference proposal and workflow, not present authorization` - 7 edges
+7. `SETTLE rigid water geometry: OH=0.1000 nm, HH=0.16330 nm` - 7 edges
 8. `read_xvg()` - 5 edges
 9. `SPC/E rigid water topology: qO=-0.8476 e, qH=+0.4238 e; oxygen LJ sigma=0.316557 nm, epsilon=0.650194 kJ/mol` - 5 edges
 10. `SIM-01 equilibrium SPC/E validation baseline` - 4 edges
@@ -65,7 +65,7 @@ Nodes (15): SIM-01 configured steepest-descent minimization: max 50000 steps, em
 
 ### Community 3 - "NEMD design and literature"
 Cohesion: 0.17
-Nodes (11): Project guidance: SIM-02, graphify, token-reduction, Graphify bounded retrieval guidance, DECISION-005 selects LAMMPS eHEX for SIM-02, Local LAMMPS build provides eHEX rigid SHAKE RATTLE and PPPM, Pinned Graphify dependency: graphifyy 0.9.72, SIM-02 current state: LAMMPS eHEX selected and design choices open, SIM-02 LAMMPS eHEX design discussion, SIM-02 production requires equilibrium energy and stationary-profile pilot gates (+3 more)
+Nodes (12): Project guidance: SIM-02, graphify, token-reduction, Graphify bounded retrieval guidance, DECISION-005 selects LAMMPS eHEX for SIM-02, Local LAMMPS build provides eHEX rigid SHAKE RATTLE and PPPM, DECISION-006 approves 400 K validation before 300 K target, Pinned Graphify dependency: graphifyy 0.9.72, SIM-02 current state: LAMMPS eHEX selected and design choices open, SIM-02 LAMMPS eHEX design discussion (+4 more)
 
 ### Community 4 - "Polarization observables and hypotheses"
 Cohesion: 0.15
@@ -96,8 +96,8 @@ Nodes (5): SIM-02 configured NEMD production: provisional 1.5 ns, 2 fs timestep,
   research/decisions/DECISION-003-SIM-02-NEMD-design.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **48 isolated node(s):** `Pinned Graphify dependency: graphifyy 0.9.72`, `MDAnalysis 2.10.0`, `NumPy 2.5.3`, `pandas 3.0.6`, `SciPy 1.18.1` (+43 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 77 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **47 isolated node(s):** `Pinned Graphify dependency: graphifyy 0.9.72`, `MDAnalysis 2.10.0`, `NumPy 2.5.3`, `pandas 3.0.6`, `SciPy 1.18.1` (+42 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 76 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -106,13 +106,13 @@ _Questions this graph is uniquely positioned to answer:_
 - **What is the exact relationship between `SIM-02 two-region thermostat NEMD draft design` and `SIM-02 scope: thermal-gradient NEMD and spatial polarization evidence`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **Why does `SIM-02 two-region thermostat NEMD draft design` connect `Polarization observables and hypotheses` to `SPC/E topology and molecule count`?**
-  _High betweenness centrality (0.076) - this node is a cross-community bridge._
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
 - **Why does `Supplied SIM-02 Claude prompt: reference proposal and workflow, not present authorization` connect `Polarization observables and hypotheses` to `Project handoff and retrieval`?**
-  _High betweenness centrality (0.066) - this node is a cross-community bridge._
-- **Why does `SIM-02 scope: thermal-gradient NEMD and spatial polarization evidence` connect `SPC/E topology and molecule count` to `Polarization observables and hypotheses`?**
-  _High betweenness centrality (0.062) - this node is a cross-community bridge._
+  _High betweenness centrality (0.067) - this node is a cross-community bridge._
+- **Why does `SIM-02 chronological academic narrative` connect `SPC/E topology and molecule count` to `NEMD design and literature`?**
+  _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **What connects `Pinned Graphify dependency: graphifyy 0.9.72`, `MDAnalysis 2.10.0`, `NumPy 2.5.3` to the rest of the system?**
-  _48 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _47 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Validation and historical decisions` be split into smaller, more focused modules?**
   _Cohesion score 0.13438735177865613 - nodes in this community are weakly interconnected._
 - **Should `Analysis code dependencies` be split into smaller, more focused modules?**

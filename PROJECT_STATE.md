@@ -22,7 +22,8 @@ remain open before implementation.
 | SIM-02 design | `research/decisions/DECISION-003-SIM-02-NEMD-design.md` | Historical record says approved; date still placeholder; full prior conversation unavailable |
 | SIM-02 method audit | `research/decisions/DECISION-004-SIM-02-method-audit.md` | Stock-GROMACS `tc-grps` approach rejected |
 | SIM-02 engine decision | `research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md` | LAMMPS eHEX approved; local build has eHEX/RIGID/SHAKE/PPPM |
-| SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Discussion draft; mean temperature, heat rate, exact box/count, and replication remain open |
+| SIM-02 temperature path | `research/decisions/DECISION-006-SIM-02-temperature-path.md` | 400 K validation followed by 300 K target approved |
+| SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Temperature sequence approved; heat rate, exact box/count, and replication remain open |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/README.md` | Empty; citations in supplied prompt are leads, not verified literature evidence |
 
@@ -34,8 +35,8 @@ LAMMPS design.
 
 ## Open items before a runnable experiment
 - [DECIDED] Use LAMMPS eHEX; do not run the static GROMACS initial-slab groups.
-- [OPEN] Approve the two-condition validation path (400 K literature benchmark,
-  then 300 K target) or choose one condition.
+- [DECIDED] Validate at 400 K, then run the 300 K target only after the pilot
+  gates pass (DECISION-006).
 - [OPEN] Approve the exact molecule count, box dimensions, reservoir widths,
   profile bin width, seeds, heat rate, run lengths, and replication plan.
 - [TO IMPLEMENT] LAMMPS system construction, run workflow, analysis, and raw

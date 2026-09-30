@@ -1,6 +1,7 @@
 # SIM-02 — thermal-gradient NEMD
 
-Status: **LAMMPS eHEX selected; detailed design discussion in progress.**
+Status: **LAMMPS eHEX and the 400 K → 300 K sequence are approved; detailed
+input design is in progress.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. New approved implementation files will live under `lammps/` after the
@@ -33,6 +34,9 @@ spatial-group generator does not exist.
 See `research/decisions/DECISION-004-SIM-02-method-audit.md` for the audit,
 `research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md` for the approved engine
 choice, and `research/designs/SIM-02-LAMMPS-eHEX-design.md` for the open design.
+The condition order is recorded in
+`research/decisions/DECISION-006-SIM-02-temperature-path.md`. Exact geometry,
+heat rate, sampling, duration, and replication remain gated.
 
 ## Preserved draft parameters
 

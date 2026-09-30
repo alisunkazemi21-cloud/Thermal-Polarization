@@ -19,7 +19,8 @@ def _(mo):
         r"""
         # SIM-02 — Thermal-gradient NEMD research record
 
-        **Status: design discussion. No SIM-02 trajectory or measured result exists yet.**
+        **Status: engine and 400 K → 300 K sequence approved; detailed inputs
+        remain under discussion. No SIM-02 trajectory or measured result exists yet.**
 
         This notebook is the executable companion to the SIM-02 research book.
         It keeps the chronological record, decisions, expected evidence, and later
@@ -55,7 +56,7 @@ def _(pd):
             {
                 "date": "current",
                 "stage": "Design discussion",
-                "event": "Temperature path, heat rate, box geometry, replication, and pilot gates remain open.",
+                "event": "The 400 K validation → 300 K target sequence was approved; heat rate, geometry, and replication remain open.",
                 "evidence": "SIM-02 eHEX design",
             },
             {
@@ -118,7 +119,7 @@ def _(pd):
         [
             ["engine", "LAMMPS eHEX", "approved", "DECISION-005"],
             ["water model", "rigid SPC/E", "approved project model", "SIM-01 / model files"],
-            ["temperature path", "400 K benchmark, then 300 K target", "proposed", "design discussion"],
+            ["temperature path", "400 K benchmark, then 300 K target", "approved", "DECISION-006"],
             ["time step", "1 fs", "proposed", "pilot validation required"],
             ["reservoir width", "4 Å at each boundary region", "proposed", "sensitivity check required"],
             ["profile bin width", "about 0.5 Å", "proposed", "occupancy check required"],

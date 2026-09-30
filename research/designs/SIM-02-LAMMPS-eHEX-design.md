@@ -1,7 +1,7 @@
 # SIM-02 LAMMPS eHEX design — discussion draft
 
 - **Date opened:** 2026-09-30
-- **Status:** Proposed; not approved for production
+- **Status:** Temperature sequence approved; detailed inputs and production remain gated
 - **Engine decision:** DECISION-005
 
 ## Research question
@@ -38,13 +38,14 @@ unfolded agreement.
 
 ### Mean temperature
 
-`[OPEN]` A direct method-validation run near 400 K offers the clearest comparison
+`[DECIDED]` A direct method-validation run near 400 K offers the clearest comparison
 with the 2013 SPC/E study. A 300 K run is more relevant to the project's ambient
 goal but intersects the later literature on temperature-dependent sign inversion.
 
-**Recommendation:** first validate the eHEX implementation against one published
+**Approved path:** first validate the eHEX implementation against one published
 400 K condition, then run one 300 K target condition only if the method-validation
-checkpoint passes. This is a two-condition validation path, not a parameter sweep.
+checkpoint passes. This is a two-condition validation path, not a parameter sweep
+(DECISION-006).
 
 ### Heat rate
 

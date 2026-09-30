@@ -10,6 +10,8 @@
   resolved by DECISION-005.
 - `DECISION-005-SIM-02-LAMMPS-eHEX.md` — approved selection of LAMMPS eHEX,
   subject to an equilibrium bridge check and detailed design approval.
+- `DECISION-006-SIM-02-temperature-path.md` — approved 400 K method validation
+  followed by the 300 K target after the pilot gates pass.
 
 Decision records preserve what was believed at the time. Later records may
 supersede an assumption without rewriting its history.

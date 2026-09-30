@@ -7,8 +7,12 @@ stationary temperature gradient and a signed molecular polarization profile that
 is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
-Status on 2026-09-30: **method selected; detailed design under discussion; no
-SIM-02 run or result exists.**
+Status on 2026-09-30: **method and temperature sequence selected; detailed
+inputs under discussion; no SIM-02 run or result exists.**
+
+The approved sequence is a 400 K method-validation condition followed by the
+300 K target only after the equilibrium and eHEX pilot gates pass
+(DECISION-006).
 
 ## Why this experiment follows SIM-01
 

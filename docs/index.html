@@ -786,7 +786,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
     <div id="search-results"></div>
 
     <div class="research-state">
-      <div class="rs-title">Research state — v0.2</div>
+      <div class="rs-title">Research state — v0.3</div>
       <div class="rs-item done"><span class="rs-dot"></span>Literature discovery</div>
       <div class="rs-item done"><span class="rs-dot"></span>Literature synthesis</div>
       <div class="rs-item done"><span class="rs-dot"></span>Cross-literature classification</div>
@@ -796,7 +796,8 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <div class="rs-item done"><span class="rs-dot"></span>Simulation-method selection (SIM-01 equilibrium protocol)</div>
       <div class="rs-item done"><span class="rs-dot"></span>Model implementation (SPC/E, GROMACS 2025.4)</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-01 equilibrium validation — density, temperature, O-O RDF, self-diffusion all pass</div>
-      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 design (thermal-gradient method selection) — not yet approved</div>
+      <div class="rs-item done"><span class="rs-dot"></span>SIM-02 engine decision — LAMMPS eHEX approved</div>
+      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 detailed design — 400 K validation, then 300 K target</div>
       <div class="rs-item"><span class="rs-dot"></span>Cross-liquid comparison</div>
       <div class="rs-item"><span class="rs-dot"></span>Electrical extraction</div>
       <div class="rs-item"><span class="rs-dot"></span>Power characterization</div>
@@ -828,13 +829,13 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
 
 <!-- ================= 00 COVER ================= -->
 <section class="section wide" id="cover" data-title="Cover">
-  <div class="cover-eyebrow"><span class="line"></span> Computational physics — molecular simulation research · Research Book v0.2</div>
+  <div class="cover-eyebrow"><span class="line"></span> Computational physics — molecular simulation research · Research Book v0.3</div>
   <h1 class="cover-title">Thermal Polarization<br><span class="accent">→ Electrical Work</span></h1>
   <p class="cover-sub">Can a bulk polar liquid subjected to a thermal gradient produce a measurable electrical potential and, ultimately, deliver net electrical power to an external load?</p>
-  <p class="cover-meta">Stage: literature synthesis → scientific checkpoint. Not yet at simulation-method selection. This notebook classifies, reconciles and audits the literature reviewed so far, and brings the research to a defined checkpoint immediately before choosing simulation methods.</p>
+  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 thermal-gradient design in progress. The static GROMACS slab-group proposal was audited and rejected, LAMMPS eHEX was selected, and detailed physical parameters remain under an explicit design gate before execution.</p>
   <div class="cover-status">
     <span class="tag hypothesis"><span class="dot"></span>Exploratory research — no result yet claimed</span>
-    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: Checkpoint 01</span>
+    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: SIM-02 detailed design</span>
   </div>
 
   <div class="cover-diagram">
@@ -1385,7 +1386,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <!-- 01 RESEARCH PROGRESS -->
   <div class="subhead"><span class="sub-num">01</span><h3>Research progress</h3></div>
   <div class="roadmap-track" id="roadmap-track"><!-- injected by JS --></div>
-  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED (equilibrium only, no thermal gradient) — SIM-02 design pending approval</div>
+  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — SIM-02 LAMMPS eHEX method APPROVED — 400 K validation followed by 300 K target APPROVED — implementation not yet started</div>
 
   <!-- 02 SIMULATION PROGRAM -->
   <div class="subhead"><span class="sub-num">02</span><h3>Simulation program</h3></div>
@@ -1402,7 +1403,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <p style="font-size:.82rem;">Two real issues found and fixed during this run, both documented rather than silently corrected: a <code>grompp</code> segmentation fault traced to an unreplaced molecule-count placeholder, and a self-diffusion coefficient initially ~140× too small due to periodic-boundary-wrapped trajectory data fed into an Einstein MSD calculation. Full protocol, commands, and both failure/decision records are in the project's git history and <code>results/reports/SIM-01-validation.md</code>.</p>
     </div>
     <div class="sim-block">
-      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">PLANNED — not yet approved</span></div>
+      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">DESIGN APPROVED — implementation pending</span></div>
       <p>Purpose: reproduce the established thermopolarization response in bulk water under an imposed thermal gradient.</p>
       <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P(z) \]</div>
       <div class="sim-sub-list" id="sim01-sublist"><!-- injected by JS --></div>
@@ -1485,8 +1486,8 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
     <div class="ce-eyebrow">CURRENT EXPERIMENT</div>
     <div class="ce-id">SIM-02-A02</div>
     <div class="exp-section"><h5>Objective</h5><p>Establish a steady-state thermal gradient across the validated equilibrium system (SIM-02-A01 / real SIM-01 is complete and validated — see Section 02 above).</p></div>
-    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">PLANNED — awaiting explicit approval to proceed past Checkpoint 01</span></div>
-    <div class="exp-section"><h5>Next decision</h5><p>Select the NEMD method for imposing \( \nabla T \): two-thermostat NEMD, reverse NEMD (RNEMD), or Müller-Plathe momentum exchange.</p></div>
+    <div class="exp-section"><h5>Status</h5><span class="tag status-planned">LAMMPS eHEX AND TWO-CONDITION PATH APPROVED — implementation pending</span></div>
+    <div class="exp-section"><h5>Next action</h5><p>Construct and validate the LAMMPS SPC/E equilibrium bridge, then run a short eHEX pilot at the approved 400 K validation condition. The 300 K target follows only after the pilot gates pass.</p></div>
   </div>
 
   <!-- 11 RESEARCH GUARDRAILS -->
@@ -1561,13 +1562,13 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   </ul>
 
   <h3>What happens next</h3>
-  <p>Not device design. Not nanochannels. Not ratchets. Not optimization. First:</p>
+  <p>The engine and validation path are now selected. The next controlled step is:</p>
   <div class="equation-block">
-    \[ \boxed{\text{Choose the simulation methodology capable of answering the bulk question rigorously.}} \]
+    \[ \boxed{\text{Implement and validate the LAMMPS SPC/E + eHEX pilot before production.}} \]
   </div>
 
   <div class="note-box">
-    <p>We have finished asking what the literature says. We now know exactly what we need to simulate.</p>
+    <p>The method decision is documented. Proposed values remain distinct from measured results until the equilibrium bridge and eHEX pilot pass.</p>
   </div>
 </section>
 
@@ -1616,7 +1617,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
 <footer id="site-footer">
   <p>Thermal Polarization → Electrical Work is an exploratory computational physics notebook. Every claim carries one of four labels — established, inferred, hypothesis, or unknown — and no hypothesis is presented here as a result. The project has not yet demonstrated electrical power generation; that remains the question.</p>
   <p>Full commit-by-commit process history, GROMACS protocol files, and analysis scripts: <a href="https://github.com/alisunkazemi21-cloud/Thermal-Polarization" target="_blank" rel="noopener">github.com/alisunkazemi21-cloud/Thermal-Polarization</a></p>
-  <p>Interactive notebook (live density / RDF / diffusion re-analysis, runs entirely in your browser): <a href="notebook.html" target="_blank" rel="noopener">notebook.html</a></p>
+  <p>Interactive notebooks: <a href="notebook.html" target="_blank" rel="noopener">SIM-01 validation</a> · <a href="sim02-notebook.html" target="_blank" rel="noopener">SIM-02 research record</a></p>
 </footer>
 
 </main>
@@ -1746,7 +1747,8 @@ const DEFAULT_LOG = [
   { date:"2024-03-01", source:"A5 — Lervik et al. 2022 — literature review", obs:"Dipole, quadrupole, and thermal-expansion contributions are separable in water.", interp:"\u201cLarger dipole\u201d is not a safe proxy for \u201cmore polarization.\u201d", conf:"High", next:"Do quadrupole contributions matter as much in non-aqueous liquids?" },
   { date:"2024-03-14", source:"A6 — Bedeaux et al. 2025 — literature review", obs:"A general theoretical framework for thermopolarization has been proposed.", interp:"Possible basis for predicting behavior in liquids without existing simulation data — does not itself prove power extraction.", conf:"Medium", next:"Does the theory make any prediction about extractable power, not just field?" },
   { date:"2024-04-02", source:"Scientific audit pass", obs:"Reviewed all imported summaries for overstatement; downgraded three claims (see Section 06).", interp:"Earlier notes conflated field prediction with proof of power generation — corrected.", conf:"High", next:"Formalize Checkpoint 01 criteria before touching simulation methods." },
-  { date:"2026-09-19", source:"SIM-01 — real GROMACS 2025.4 execution (github.com/alisunkazemi21-cloud/Thermal-Polarization)", obs:"Self-contained SPC/E model, 510-molecule equilibrium protocol (EM->NVT->NPT->production->diffusion leg) executed end to end. Density 998.55\u00b111.22 kg/m\u00b3, temperature 300.11\u00b17.54 K, O-O RDF peak 0.2725 nm/g=3.02, self-diffusion 2.522\u00d710\u207b\u2079 m\u00b2/s \u2014 all five targets pass. Two real bugs found, root-caused, and fixed: a grompp segfault (unreplaced molecule-count placeholder) and a self-diffusion coefficient ~140x too small from periodic-boundary-wrapped MSD input.", interp:"The self-contained SPC/E model and four-stage equilibrium protocol are validated for this system size and GROMACS installation. No thermopolarization, voltage, current, or power claim is made \u2014 SIM-01 was equilibrium-only by design.", conf:"High", next:"Select a thermal-gradient method (two-thermostat NEMD, RNEMD, or M\u00fcller-Plathe) for SIM-02 \u2014 pending explicit approval, not yet designed." }
+  { date:"2026-09-19", source:"SIM-01 — real GROMACS 2025.4 execution (github.com/alisunkazemi21-cloud/Thermal-Polarization)", obs:"Self-contained SPC/E model, 510-molecule equilibrium protocol (EM->NVT->NPT->production->diffusion leg) executed end to end. Density 998.55\u00b111.22 kg/m\u00b3, temperature 300.11\u00b17.54 K, O-O RDF peak 0.2725 nm/g=3.02, self-diffusion 2.522\u00d710\u207b\u2079 m\u00b2/s \u2014 all five targets pass. Two real bugs found, root-caused, and fixed: a grompp segfault (unreplaced molecule-count placeholder) and a self-diffusion coefficient ~140x too small from periodic-boundary-wrapped MSD input.", interp:"The self-contained SPC/E model and four-stage equilibrium protocol are validated for this system size and GROMACS installation. No thermopolarization, voltage, current, or power claim is made \u2014 SIM-01 was equilibrium-only by design.", conf:"High", next:"Audit and select the SIM-02 thermal-gradient method." },
+  { date:"2026-09-30", source:"SIM-02 method audit and DECISION-005", obs:"Static initial Hot/Cold/Rest atom groups were rejected as spatial reservoirs for diffusing water. The local LAMMPS 10 Dec 2025 build exposes eHEX, RIGID, SHAKE/RATTLE, and PPPM support.", interp:"LAMMPS eHEX provides dynamic geometric reservoirs and traceable energy exchange for the SIM-02 bulk-water question.", conf:"High", next:"Implement the approved 400 K validation pilot, then proceed to the 300 K target only after acceptance gates pass." }
 ];
 
 /* ============================================================
@@ -1821,12 +1823,12 @@ const EXPERIMENTS = [
     hypothesis: "\\text{A steady-state } T(z) \\text{ profile and constant } J_q \\text{ can be established for a physically reasonable } \\nabla T.",
     system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Equilibrated configuration from SIM-02-A01" },
     thermalSetup: "Hot / cold regions",
-    method: "NEMD",
-    geometry: { Lx:null, Ly:null, Lz:null, bins:null, gradientDirection:"z", boundaryConditions:null, periodicity:null },
-    thermal: { Th:null, Tc:null, hotRegion:null, coldRegion:null, method:null, parameters:"Thermostat coupling constants: TBD" },
+    method: "LAMMPS enhanced heat exchange (eHEX), NVE production",
+    geometry: { Lx:"open", Ly:"open", Lz:"about 110 Å (proposed)", bins:"about 0.5 Å (proposed)", gradientDirection:"z", boundaryConditions:"periodic", periodicity:"xyz" },
+    thermal: { Th:"400 K mean validation first", Tc:"300 K mean target second", hotRegion:"central z reservoir", coldRegion:"split across periodic z boundary", method:"fix ehex, dynamic region membership", parameters:"Heat rate and exact geometry remain open until implementation derivation" },
     md: [
-      {p:"timestep", v:null, u:"fs"}, {p:"equilibration", v:null, u:"ps/ns"}, {p:"production", v:null, u:"ps/ns"},
-      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:null, u:"\u00c5"}, {p:"electrostatics", v:null, u:"\u2014"}, {p:"neighbor settings", v:null, u:"\u2014"}
+      {p:"timestep", v:"1 (proposed)", u:"fs"}, {p:"startup", v:"at least 1 (proposed)", u:"ns"}, {p:"production", v:"up to 10 in checkpoints", u:"ns"},
+      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:"10", u:"\u00c5"}, {p:"electrostatics", v:"PPPM", u:"\u2014"}, {p:"constraints", v:"RATTLE + eHEX constrain com", u:"\u2014"}
     ],
     analysis: [
       {name:"Temperature profile", eq:"T(z)", purpose:"Verify the thermal gradient is linear and steady in time."},
@@ -1843,10 +1845,10 @@ const EXPERIMENTS = [
       {name:"Density artifact check", note:"Any \u03c1(z) gradient is consistent with expected thermal expansion, not a boundary artifact."}
     ],
     uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
-    changed: ["thermal setup (uniform \u2192 hot/cold regions)", "method (equilibrium MD \u2192 NEMD)"],
-    unchanged: ["force field", "density", "box dimensions", "timestep", "electrostatics"],
-    unknown: ["thermostat coupling parameters", "T_H, T_C values"],
-    decisions: [{ decision:"Use a two-region hot/cold thermostatting scheme rather than a single boundary-driven gradient.", reason:"Matches the NEMD protocol used in the reproduced literature.", evidence:"A1 (2008), A2 (2013).", alternative:"Boundary-driven (fixed wall temperatures).", rejected:"Less directly comparable to the bulk NEMD literature being reproduced." }],
+    changed: ["engine (GROMACS draft \u2192 LAMMPS)", "thermal mechanism (static atom groups \u2192 dynamic eHEX regions)", "time step (2 fs draft \u2192 1 fs proposed pilot)"],
+    unchanged: ["rigid SPC/E model", "long-range electrostatics intent", "bulk periodic geometry"],
+    unknown: ["exact molecule count and transverse dimensions", "heat rate", "sampling interval", "replication count"],
+    decisions: [{ decision:"Use LAMMPS eHEX with dynamic geometric reservoirs and constrain-com handling for rigid water.", reason:"Static atom membership does not remain a spatial reservoir as water diffuses.", evidence:"DECISION-004 and DECISION-005, 2026-09-30.", alternative:"Custom GROMACS dynamic reservoirs or restrained fixed molecules.", rejected:"Higher implementation burden or additional interface artifacts." }],
     runs: [],
     interpretation: null, confidence: null, alternativeExplanations: null,
     nextExperiment: "SIM-02-A03 — measure thermopolarization once a steady-state gradient is confirmed."
@@ -1984,12 +1986,12 @@ const CHECKLIST_AFTER = [
 const DECISIONS = [
   { id:"001", decision:"Start with SPC/E water.", reason:"Literature reproduction." },
   { id:"002", decision:"Do not evaluate electrical power in SIM 02.", reason:"First reproduce thermopolarization independently." },
-  { id:"003", decision:"Keep H\u2082O as reference before CH\u2083CN.", reason:"Water has the strongest literature benchmark." }
+  { id:"003", decision:"Keep H\u2082O as reference before CH\u2083CN.", reason:"Water has the strongest literature benchmark." },
+  { id:"004", decision:"Reject the inherited static GROMACS Hot/Cold/Rest groups.", reason:"Fixed atom membership does not implement spatial reservoirs for diffusing liquid water." },
+  { id:"005", decision:"Use LAMMPS eHEX and validate at 400 K before the 300 K target.", reason:"Dynamic spatial reservoirs, traceable heat exchange, and direct comparison with the published SPC/E method." }
 ];
 
-const DEFAULT_FAILURES = [
-  { runId:"SIM-02-A02 \u2014 Run 003", date:"—", setup:"Two-region thermostat, initial coupling constants", mode:"Temperature profile unstable.", cause:"Thermostat coupling too aggressive.", evidence:"T(z) oscillated rather than reaching a steady linear profile across the sampled window.", action:"Revise thermalization parameters.", usable:"Useful for protocol refinement" }
-];
+const DEFAULT_FAILURES = [];
 
 /* ============================================================
    RENDER: LITERATURE CARDS (Level A) + COMPACT LISTS (B, C)
