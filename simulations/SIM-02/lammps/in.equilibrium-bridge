@@ -1,0 +1,84 @@
+# SIM-02 checkpoint 08: fixed-volume PPPM equilibrium bridge.
+# Run from the repository root. This file advances 1,520,000 steps.
+
+units           real
+dimension       3
+boundary        p p p
+atom_style      full
+
+read_data       simulations/SIM-02/lammps/data.spce-4500.ness-ewald
+
+group           oxygen type 2
+group           hydrogen type 1
+
+pair_style      lj/cut/coul/long 11.0 18.176715436271188
+pair_coeff      1 1 0.0 0.0
+pair_coeff      1 2 0.0 0.0
+pair_coeff      2 2 0.15535 3.166
+pair_modify     tail yes
+kspace_style    pppm 1.0e-5
+
+bond_style      harmonic
+bond_coeff      1 1000.0 1.0
+angle_style     harmonic
+angle_coeff     1 100.0 109.47
+
+neighbor        4.0 bin
+neigh_modify    one 7500
+timestep        1.0
+reset_timestep  0
+
+variable        out string results/raw/SIM-02/checkpoint-08-equilibrium
+variable        seed equal 20260930
+
+compute         bridge_temp all temp
+compute         bridge_pressure all pressure bridge_temp
+variable        vcomx equal vcm(all,x)
+variable        vcomy equal vcm(all,y)
+variable        vcomz equal vcm(all,z)
+
+thermo_style    custom step time atoms temp press pe ke etotal vol lx ly lz v_vcomx v_vcomy v_vcomz
+thermo_modify   temp bridge_temp press bridge_pressure flush yes
+thermo          1000
+restart         50000 ${out}/restart.1 ${out}/restart.2
+
+dump            bridge_frames all custom/gz 10000 ${out}/bridge-*.lammpstrj.gz id mol type x y z vx vy vz
+dump_modify     bridge_frames sort id
+
+print           "SIM02_GATE2 seed=${seed} timestep_fs=1 warmup_ps=20 nvt_ps=500 nve_ps=1000"
+print           "SIM02_GATE2 fixed_box=yes ehex=no"
+
+# The imported file is a NEMD state. Do not retain its velocity field.
+velocity        all create 400.0 ${seed} mom yes rot yes dist gaussian
+
+# Stage A: explicit operational translation of the paper's 20 ps velocity
+# rescaling. The paper does not report its cadence; 100 fs is frozen here.
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+fix             initial_rescale all temp/rescale 100 400.0 400.0 0.0 1.0
+run             20000
+unfix           initial_rescale
+write_restart   ${out}/stage-a-20ps.restart
+
+# Stage B: fixed-volume Nosé-Hoover relaxation at the paper's 1 ps damping.
+unfix           constraints
+unfix           integrate
+fix             integrate all nvt temp 400.0 400.0 1000.0
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             500000
+unfix           constraints
+unfix           integrate
+write_restart   ${out}/stage-b-500ps-nvt.restart
+
+# Stages C and D: install the NVE integrator and RATTLE first so the exact
+# kinetic-energy adjustment uses the constrained system degrees of freedom.
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+velocity        all scale 400.0
+compute         oo_rdf all rdf 200 2 2
+fix             rdf_blocks all ave/time 1000 100 100000 c_oo_rdf[*] file ${out}/oo-rdf-100ps-blocks.dat mode vector ave one
+run             1000000
+
+write_data      ${out}/equilibrium-bridge-final.data pair ij
+write_restart   ${out}/equilibrium-bridge-final.restart
+print           "SIM02_GATE2 trajectory_complete=yes final_step=$(step)"

@@ -1,8 +1,8 @@
 # SIM-02 technical report — pre-execution record
 
-Status: **gate 1 zero-step audit passed; no NEMD trajectory or polarization
-result exists.** Proposed values belong in the design document until their gate
-is released.
+Status: **gate 1 zero-step audit passed; checkpoint 08 equilibrium bridge is
+proposed; no gate-2 or NEMD trajectory and no polarization result exists.**
+Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
 
@@ -24,8 +24,11 @@ deterministic structure audit and LAMMPS 10 Dec 2025 `run 0` passed. See
 
 ## 4. Equilibrium bridge
 
-`[TO TEST]` Density, temperature, O–O RDF, constraint stability, and energy
-behavior after translating SPC/E from the GROMACS baseline to LAMMPS.
+`[PROPOSED]` Checkpoint 08 keeps the exact author box, replaces the imported
+steady-state velocities using seed `20260930`, and schedules 20 ps direct
+rescaling, 500 ps NVT, and 1 ns NVE at 1 fs. Temperature, O–O RDF, constraint
+stability, energy drift, z-temperature flattening, and momentum have frozen
+acceptance tests. No checkpoint-08 trajectory has run.
 
 ## 5. eHEX pilot
 

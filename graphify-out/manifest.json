@@ -42,16 +42,16 @@
     "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
   },
   "PROJECT_STATE.md": {
-    "mtime": 1790791170.2526872,
-    "seen": 1790791588.068509,
-    "ast_hash": "a3483020c1fb90a4781dee45035d9848",
-    "semantic_hash": "a3483020c1fb90a4781dee45035d9848"
+    "mtime": 1790800243.518818,
+    "seen": 1790800295.3219638,
+    "ast_hash": "7b469e55bb0182d978539d70214ffba9",
+    "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1790768749.9332461,
-    "seen": 1790768850.1792643,
-    "ast_hash": "7773e1a43e80ef71fe915377694a4e90",
-    "semantic_hash": "7773e1a43e80ef71fe915377694a4e90"
+    "mtime": 1790793376.2040336,
+    "seen": 1790793450.257505,
+    "ast_hash": "b55afd54048ffdc4c21b5c3637f5797e",
+    "semantic_hash": ""
   },
   "environment/requirements-graphify.txt": {
     "mtime": 1790760461.996637,
@@ -107,84 +107,6 @@
     "ast_hash": "021e41c30e30f3bbf8ac1e4303cf64ac",
     "semantic_hash": "021e41c30e30f3bbf8ac1e4303cf64ac"
   },
-  "models/SPC-E/spce.itp": {
-    "mtime": 1789791925.5563152,
-    "seen": 1790760709.5057008,
-    "ast_hash": "c1adaf4f1c2c8f0c69fb9bb4a808b1f0",
-    "semantic_hash": "c1adaf4f1c2c8f0c69fb9bb4a808b1f0"
-  },
-  "simulations/SIM-01/em.mdp": {
-    "mtime": 1789791925.6799533,
-    "seen": 1790760709.5057008,
-    "ast_hash": "d296f29349a47e87f111aa1df9c84c90",
-    "semantic_hash": "d296f29349a47e87f111aa1df9c84c90"
-  },
-  "simulations/SIM-01/md-nvt-diffusion.mdp": {
-    "mtime": 1789805211.855272,
-    "seen": 1790760709.5057008,
-    "ast_hash": "701157ad4482f7c34f40c5c75318fab5",
-    "semantic_hash": "701157ad4482f7c34f40c5c75318fab5"
-  },
-  "simulations/SIM-01/md.mdp": {
-    "mtime": 1789791925.6921515,
-    "seen": 1790760709.5057008,
-    "ast_hash": "e03849a27038a15d89588c4287951535",
-    "semantic_hash": "e03849a27038a15d89588c4287951535"
-  },
-  "simulations/SIM-01/npt.mdp": {
-    "mtime": 1789791925.700342,
-    "seen": 1790760709.5057008,
-    "ast_hash": "44614d6e481b8221b2b960cc371087d8",
-    "semantic_hash": "44614d6e481b8221b2b960cc371087d8"
-  },
-  "simulations/SIM-01/nvt.mdp": {
-    "mtime": 1789791925.7140858,
-    "seen": 1790760709.5057008,
-    "ast_hash": "2e6c38ade2eb6734ddf39fbf861c464b",
-    "semantic_hash": "2e6c38ade2eb6734ddf39fbf861c464b"
-  },
-  "simulations/SIM-01/topol.top": {
-    "mtime": 1789794256.9685755,
-    "seen": 1790760709.5057008,
-    "ast_hash": "f1b942aaaf9b2ee4e8b58e5d39779ec3",
-    "semantic_hash": "f1b942aaaf9b2ee4e8b58e5d39779ec3"
-  },
-  "simulations/SIM-02/em.mdp": {
-    "mtime": 1790519769.6326394,
-    "seen": 1790760709.5057008,
-    "ast_hash": "d296f29349a47e87f111aa1df9c84c90",
-    "semantic_hash": "d296f29349a47e87f111aa1df9c84c90"
-  },
-  "simulations/SIM-02/nemd-production.mdp": {
-    "mtime": 1790519789.3446677,
-    "seen": 1790760709.5057008,
-    "ast_hash": "421b44b44cfa757388e41b767c4e4512",
-    "semantic_hash": "421b44b44cfa757388e41b767c4e4512"
-  },
-  "simulations/SIM-02/nemd-startup.mdp": {
-    "mtime": 1790519789.0115123,
-    "seen": 1790760709.5057008,
-    "ast_hash": "2d6dec8df06d8d36ba915795b456e781",
-    "semantic_hash": "2d6dec8df06d8d36ba915795b456e781"
-  },
-  "simulations/SIM-02/npt.mdp": {
-    "mtime": 1790519769.7598457,
-    "seen": 1790760709.5057008,
-    "ast_hash": "44614d6e481b8221b2b960cc371087d8",
-    "semantic_hash": "44614d6e481b8221b2b960cc371087d8"
-  },
-  "simulations/SIM-02/nvt.mdp": {
-    "mtime": 1790519769.6958027,
-    "seen": 1790760709.5057008,
-    "ast_hash": "2e6c38ade2eb6734ddf39fbf861c464b",
-    "semantic_hash": "2e6c38ade2eb6734ddf39fbf861c464b"
-  },
-  "simulations/SIM-02/topol.top": {
-    "mtime": 1790519782.1786783,
-    "seen": 1790760709.5057008,
-    "ast_hash": "6ee58bd3a6123cb9a29e7cde61f86cf6",
-    "semantic_hash": "6ee58bd3a6123cb9a29e7cde61f86cf6"
-  },
   "research/decisions/DECISION-004-SIM-02-method-audit.md": {
     "mtime": 1790764383.8393068,
     "seen": 1790765443.33703,
@@ -198,16 +120,16 @@
     "semantic_hash": "278103a10a62dde8d9f88205a01dd599"
   },
   "simulations/SIM-02/README.md": {
-    "mtime": 1790791220.5081477,
-    "seen": 1790791588.0948827,
-    "ast_hash": "38fe25da19b297b69a8c357ce288210c",
-    "semantic_hash": "38fe25da19b297b69a8c357ce288210c"
+    "mtime": 1790793281.6600988,
+    "seen": 1790793450.257505,
+    "ast_hash": "39ee366555f648628fd255caac3681e0",
+    "semantic_hash": ""
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1790791418.1003118,
-    "seen": 1790791588.0448952,
-    "ast_hash": "5c743d42cef5b7e659843b1655f9ff56",
-    "semantic_hash": "5c743d42cef5b7e659843b1655f9ff56"
+    "mtime": 1790800364.6198163,
+    "seen": 1790800398.84373,
+    "ast_hash": "f75accc92e0fe6da73daa066c091d073",
+    "semantic_hash": ""
   },
   "research/WORKFLOW.md": {
     "mtime": 1790764921.57253,
@@ -216,10 +138,10 @@
     "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
   },
   "research/book/SIM-02.md": {
-    "mtime": 1790791264.533231,
-    "seen": 1790791588.0785048,
-    "ast_hash": "d6f2457eb8931bf727cbf9c42d395670",
-    "semantic_hash": "d6f2457eb8931bf727cbf9c42d395670"
+    "mtime": 1790793300.2379255,
+    "seen": 1790793450.257505,
+    "ast_hash": "ae9f05dcc444b5b9e8144c1c4a7d1dcf",
+    "semantic_hash": ""
   },
   "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
     "mtime": 1790764264.228366,
@@ -234,16 +156,16 @@
     "semantic_hash": "14d9ae2aa5f2e13f1b0c4605691eae8c"
   },
   "research/media/SIM-02-longform-youtube.md": {
-    "mtime": 1790791447.91396,
-    "seen": 1790791588.092885,
-    "ast_hash": "48186594650f35b4c39afa3f55660d8c",
-    "semantic_hash": "48186594650f35b4c39afa3f55660d8c"
+    "mtime": 1790793301.1937757,
+    "seen": 1790793450.257505,
+    "ast_hash": "21be6b2079790370143b8c80d122bb76",
+    "semantic_hash": ""
   },
   "results/reports/SIM-02-report.md": {
-    "mtime": 1790791221.5533986,
-    "seen": 1790791588.0948827,
-    "ast_hash": "e5004ca22d69a21d75a6d556da2d5f47",
-    "semantic_hash": "e5004ca22d69a21d75a6d556da2d5f47"
+    "mtime": 1790793377.2229283,
+    "seen": 1790793450.257505,
+    "ast_hash": "a06e17c0245af847a998b30c97f121fa",
+    "semantic_hash": ""
   },
   "research/decisions/DECISION-006-SIM-02-temperature-path.md": {
     "mtime": 1790768589.455459,
@@ -264,14 +186,14 @@
     "semantic_hash": "7c88d06cdfba51103ae6aff1d8d921e8"
   },
   "results/raw/SIM-02/checkpoint-07-zero-step/lammps-zero-step.json": {
-    "mtime": 1790790945.21386,
-    "seen": 1790791588.0448952,
+    "mtime": 1790791770.1834643,
+    "seen": 1790793450.257505,
     "ast_hash": "611477a5a419dac19f5d4255886db1cc",
     "semantic_hash": "611477a5a419dac19f5d4255886db1cc"
   },
   "results/raw/SIM-02/checkpoint-07-zero-step/structural-audit.json": {
-    "mtime": 1790790945.037355,
-    "seen": 1790791588.0448952,
+    "mtime": 1790791770.0484664,
+    "seen": 1790793450.257505,
     "ast_hash": "937ca4ca3ec1582d57fb864dd1e41066",
     "semantic_hash": "937ca4ca3ec1582d57fb864dd1e41066"
   },
@@ -298,5 +220,173 @@
     "seen": 1790791588.0948827,
     "ast_hash": "02da3e9cad2d8d1ea977e564c9e01a06",
     "semantic_hash": "02da3e9cad2d8d1ea977e564c9e01a06"
+  },
+  "data/README.md": {
+    "mtime": 1789723687.7023094,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "data/processed/README.md": {
+    "mtime": 1789723687.7043042,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "data/raw/README.md": {
+    "mtime": 1789723687.7033057,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "environment/README.md": {
+    "mtime": 1789723687.71189,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "models/README.md": {
+    "mtime": 1789723687.691306,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "models/SPC-E/README.md": {
+    "mtime": 1789723687.6923058,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "research/README.md": {
+    "mtime": 1789723687.6743226,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "research/book/README.md": {
+    "mtime": 1790764515.6806557,
+    "seen": 1790793450.257505,
+    "ast_hash": "1d1d18c568f8b4d83365a4c05ea0b933",
+    "semantic_hash": ""
+  },
+  "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md": {
+    "mtime": 1790800242.323658,
+    "seen": 1790800295.3219638,
+    "ast_hash": "82237262d537eb7e53307d833ee994e9",
+    "semantic_hash": ""
+  },
+  "research/hypotheses/README.md": {
+    "mtime": 1789723687.6833057,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "research/literature/README.md": {
+    "mtime": 1790787992.7210605,
+    "seen": 1790793450.257505,
+    "ast_hash": "980fe718068a5db0dd941163bd905330",
+    "semantic_hash": ""
+  },
+  "results/README.md": {
+    "mtime": 1789723687.706876,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "results/raw/SIM-02/checkpoint-07-zero-step/stdout.txt": {
+    "mtime": 1790790785.6328676,
+    "seen": 1790793450.257505,
+    "ast_hash": "ab17803e9e58fe7e967758977a7f8dd4",
+    "semantic_hash": ""
+  },
+  "results/raw/SIM-02/checkpoint-07-zero-step/structural-audit.md": {
+    "mtime": 1790791770.0484664,
+    "seen": 1790793450.257505,
+    "ast_hash": "422823203eb413cca9b4af0e723b43b4",
+    "semantic_hash": ""
+  },
+  "results/raw/SIM-02/checkpoint-08-equilibrium/README.md": {
+    "mtime": 1790800129.8645077,
+    "seen": 1790800295.3219638,
+    "ast_hash": "9b03f6c7749bc10acacdc41f28d21660",
+    "semantic_hash": ""
+  },
+  "results/reports/README.md": {
+    "mtime": 1789723687.7098927,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "results/tables/README.md": {
+    "mtime": 1789723687.70889,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "scripts/README.md": {
+    "mtime": 1789723687.6933115,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "scripts/analysis/README.md": {
+    "mtime": 1789723687.6993072,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "scripts/validation/README.md": {
+    "mtime": 1789723687.7013075,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "scripts/visualization/README.md": {
+    "mtime": 1789723687.6993072,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "simulations/README.md": {
+    "mtime": 1789723687.686308,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "simulations/SIM-01/README.md": {
+    "mtime": 1789723687.68731,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "simulations/SIM-02/lammps/README.md": {
+    "mtime": 1790800244.7444298,
+    "seen": 1790800295.3219638,
+    "ast_hash": "1a96b1dd8a89cca2db012e9ee43a39de",
+    "semantic_hash": ""
+  },
+  "simulations/SIM-02/lammps/metadata.yaml": {
+    "mtime": 1790790706.1730564,
+    "seen": 1790793450.257505,
+    "ast_hash": "47ae3c8be9f74705278bb362e9a22c67",
+    "semantic_hash": ""
+  },
+  "simulations/SIM-03/README.md": {
+    "mtime": 1789723687.6903048,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "tests/README.md": {
+    "mtime": 1789723687.7108958,
+    "seen": 1790793450.257505,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "results/raw/SIM-02/checkpoint-08-equilibrium/dry-run-stdout.txt": {
+    "mtime": 1790800179.7702425,
+    "seen": 1790800295.3219638,
+    "ast_hash": "9b0fdab79cc19848f81b5abdf0984f15",
+    "semantic_hash": ""
   }
 }

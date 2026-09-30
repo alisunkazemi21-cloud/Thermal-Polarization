@@ -1,8 +1,8 @@
 # SIM-02 LAMMPS implementation
 
-Status: checkpoint 07 gate 1 implementation. The files here define and audit
-the exact published 400 K reference configuration. No equilibration or NEMD
-trajectory is authorized by this gate.
+Status: checkpoint 07 gate 1 passed. Checkpoint 08 proposes the fixed-volume
+equilibrium bridge and its zero-step input parse passed. No equilibrium or NEMD
+trajectory has run under checkpoint 08.
 
 ## Provenance
 
@@ -50,3 +50,21 @@ Convert the LAMMPS log to a structured audit record with:
   results\raw\SIM-02\checkpoint-07-zero-step\log.lammps `
   --json results\raw\SIM-02\checkpoint-07-zero-step\lammps-zero-step.json
 ```
+
+## Proposed gate 2 command
+
+`in.equilibrium-bridge` replaces the imported NEMD velocities, then schedules
+20 ps direct rescaling, 500 ps NVT, and 1 ns NVE at 1 fs. Its full scientific
+contract is `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md`.
+
+After checkpoint review, run from the repository root under WSL:
+
+```bash
+mkdir -p results/raw/SIM-02/checkpoint-08-equilibrium
+lmp -in simulations/SIM-02/lammps/in.equilibrium-bridge \
+  -log results/raw/SIM-02/checkpoint-08-equilibrium/log.lammps
+```
+
+The checked-in dry-run logs used the same input with all three `run` durations
+set to zero. They verify syntax, output styles, PPPM, and RATTLE ordering; they
+are not equilibrium evidence.

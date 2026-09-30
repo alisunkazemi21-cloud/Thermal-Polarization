@@ -15,19 +15,18 @@ def _():
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
-        # SIM-02 — Thermal-gradient NEMD research record
+    mo.md(r"""
+    # SIM-02 — Thermal-gradient NEMD research record
 
-        **Status: checkpoint 07 approved. Gate 1 structure and LAMMPS zero-step
-        audits passed. No NEMD trajectory or polarization result exists yet.**
+    **Status: checkpoint 07 approved and gate 1 passed. Checkpoint 08 now
+    proposes the exact equilibrium bridge and acceptance tests. Its 1.52 ns
+    trajectory has not started, and no NEMD or polarization result exists.**
 
-        This notebook is the executable companion to the SIM-02 research book.
-        It keeps the chronological record, decisions, expected evidence, and later
-        analysis in one place. Values marked **proposed** are not approved inputs;
-        values marked **measured** must be traceable to preserved output.
-        """
-    )
+    This notebook is the executable companion to the SIM-02 research book.
+    It keeps the chronological record, decisions, expected evidence, and later
+    analysis in one place. Values marked **proposed** are not approved inputs;
+    values marked **measured** must be traceable to preserved output.
+    """)
     return
 
 
@@ -77,6 +76,12 @@ def _(mo):
                 "evidence": "measured zero-step audit",
             },
             {
+                "date": "2026-09-30",
+                "stage": "Checkpoint 08",
+                "event": "The fixed-volume PPPM equilibrium bridge, acceptance tests, and restart contract were frozen for review.",
+                "evidence": "proposed; trajectory not started",
+            },
+            {
                 "date": "future",
                 "stage": "Pilot and production",
                 "event": "Execution begins only after inputs and acceptance criteria are approved.",
@@ -84,26 +89,24 @@ def _(mo):
             },
         ]
     mo.ui.table(timeline)
-    return (timeline,)
+    return
 
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
-        ## Scientific chain and scope
+    mo.md(r"""
+    ## Scientific chain and scope
 
-        The long-term project asks whether a temperature gradient in water can
-        create useful electrical behavior:
+    The long-term project asks whether a temperature gradient in water can
+    create useful electrical behavior:
 
-        $$\nabla T \rightarrow J_Q \rightarrow P(z) \rightarrow E(z)
-        \rightarrow \Delta\phi \rightarrow V_\mathrm{OC}$$
+    $$\nabla T \rightarrow J_Q \rightarrow P(z) \rightarrow E(z)
+    \rightarrow \Delta\phi \rightarrow V_\mathrm{OC}$$
 
-        SIM-02 establishes the thermal-gradient molecular-dynamics experiment and
-        its stationary spatial observables. It does **not** yet establish voltage,
-        current, or extractable power.
-        """
-    )
+    SIM-02 establishes the thermal-gradient molecular-dynamics experiment and
+    its stationary spatial observables. It does **not** yet establish voltage,
+    current, or extractable power.
+    """)
     return
 
 
@@ -124,7 +127,7 @@ def _(mo):
             },
         ]
     mo.ui.table(method_comparison)
-    return (method_comparison,)
+    return
 
 
 @app.cell
@@ -141,9 +144,10 @@ def _(mo):
         {"item": "pilot duration", "value": "100 ps smoke test, then 1 ns stationarity", "status": "proposed", "basis": "checkpoint 07"},
         {"item": "published reference", "value": "10 ns transient + 60 ns production", "status": "established", "basis": "not yet authorized for execution"},
         {"item": "replicates", "value": "independent seed before reproducible positive claim", "status": "proposed", "basis": "checkpoint 07"},
+        {"item": "equilibrium bridge", "value": "20 ps rescale + 500 ps NVT + 1 ns NVE at 1 fs", "status": "checkpoint 08 proposed", "basis": "fixed published box; seed 20260930"},
     ]
     mo.ui.table(design_register)
-    return (design_register,)
+    return
 
 
 @app.cell
@@ -159,7 +163,7 @@ def _(mo):
         {"quantity": "heat flux per branch", "value": branch_flux_w_m2, "unit": "W m⁻²", "derivation": "F / (2 A)"},
     ]
     mo.ui.table(benchmark_calculation)
-    return (benchmark_calculation,)
+    return
 
 
 @app.cell
@@ -168,6 +172,9 @@ def _(Path, mo):
     expected_paths = [
         ("LAMMPS zero-step input", "simulations/SIM-02/lammps/in.zero-step"),
         ("zero-step audit", "results/reports/SIM-02-checkpoint-07-zero-step.md"),
+        ("equilibrium-bridge input", "simulations/SIM-02/lammps/in.equilibrium-bridge"),
+        ("checkpoint-08 proposal", "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md"),
+        ("checkpoint-08 zero-step parse", "results/raw/SIM-02/checkpoint-08-equilibrium/dry-run-log.lammps"),
         ("run metadata", "results/raw/SIM-02/run-metadata.json"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
         ("energy audit", "results/tables/SIM-02-energy-audit.csv"),
@@ -183,7 +190,7 @@ def _(Path, mo):
         for label, path in expected_paths
     ]
     mo.ui.table(evidence_registry)
-    return evidence_registry, repo_root
+    return (repo_root,)
 
 
 @app.cell
@@ -204,30 +211,63 @@ def _(json, mo, repo_root):
         {"measurement": "trajectory steps", "value": "0", "evidence": "LAMMPS log"},
     ]
     mo.ui.table(gate_1_results)
-    return (gate_1_results,)
+    return
 
 
 @app.cell
 def _(mo):
-    mo.md(
-        r"""
-        ## Checkpoint 07 release gates
+    bridge_stages = [
+        {"stage": "A", "control": "NVE + direct rescale / 100 fs", "duration": "20 ps", "purpose": "erase inherited NEMD velocities"},
+        {"stage": "B", "control": "Nosé–Hoover NVT, 400 K, τ = 1 ps", "duration": "500 ps", "purpose": "relax PPPM liquid at exact volume"},
+        {"stage": "C", "control": "exact velocity scale", "duration": "instant", "purpose": "set 400 K before NVE"},
+        {"stage": "D", "control": "NVE", "duration": "1 ns", "purpose": "measure equilibrium acceptance"},
+    ]
+    mo.vstack([
+        mo.md(
+            r"""
+            ## Checkpoint 08 proposal — equilibrium bridge
 
-        1. **PASS — build and zero-step audit:** count, box, neutrality,
-           geometry, regions, RATTLE, eHEX syntax, and PPPM initialization.
-        2. Equilibrium bridge: NVE temperature, density, O–O structure,
-           constraints, and energy behavior.
-        3. 100 ps eHEX smoke test at 1 fs: energy ledger, occupancy, profile
-           direction, and absence of cavitation.
-        4. Matched 1 fs versus 2 fs test from the same prepared state.
-        5. 1 ns stationarity pilot with unfolded branches and block evolution.
-        6. Production release only when those records justify the allocation;
-           an independent seed is required before a positive reproducibility claim.
+            The supplied author file is a steady-state NEMD snapshot. Its
+            velocities must be replaced before it can become the equilibrium
+            reference. The source does not report its NpT pressure target, so
+            this bridge preserves the exact published box instead of inventing
+            one. **All values below are proposed; no gate-2 data exist yet.**
+            """
+        ),
+        mo.ui.table(bridge_stages),
+        mo.md(
+            r"""
+            Primary acceptance tests are frozen before execution: 400 ± 1 K NVE
+            mean with block SE ≤ 0.5 K; fitted relative energy drift ≤ 0.005%;
+            exact system integrity; bounded geometry errors and no O–O contact
+            below 2.2 Å; no resolved z-temperature slope; stationary O–O first
+            peak and coordination; and reported center-of-mass momentum.
+            """
+        ),
+    ])
+    return
 
-        A failed gate is a recorded result. It triggers a documented change and a
-        new pilot; it cannot be silently tuned away.
-        """
-    )
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    ## Checkpoint 07 release gates
+
+    1. **PASS — build and zero-step audit:** count, box, neutrality,
+       geometry, regions, RATTLE, eHEX syntax, and PPPM initialization.
+    2. **PROPOSED — equilibrium bridge:** replace the inherited NEMD
+       velocities; run 20 ps rescale + 500 ps NVT + 1 ns NVE; test
+       temperature, energy, structure, constraints, and gradient removal.
+    3. 100 ps eHEX smoke test at 1 fs: energy ledger, occupancy, profile
+       direction, and absence of cavitation.
+    4. Matched 1 fs versus 2 fs test from the same prepared state.
+    5. 1 ns stationarity pilot with unfolded branches and block evolution.
+    6. Production release only when those records justify the allocation;
+       an independent seed is required before a positive reproducibility claim.
+
+    A failed gate is a recorded result. It triggers a documented change and a
+    new pilot; it cannot be silently tuned away.
+    """)
     return
 
 
@@ -243,6 +283,7 @@ def _(mo, repo_root):
         - Checkpoint 07: `{repo_root / 'research' / 'designs' / 'SIM-02-checkpoint-07-protocol-freeze.md'}`
         - Protocol decision: `{repo_root / 'research' / 'decisions' / 'DECISION-007-SIM-02-protocol-freeze.md'}`
         - Gate 1 report: `{repo_root / 'results' / 'reports' / 'SIM-02-checkpoint-07-zero-step.md'}`
+        - Checkpoint 08: `{repo_root / 'research' / 'designs' / 'SIM-02-checkpoint-08-equilibrium-bridge.md'}`
         - Published benchmark audit: `{repo_root / 'research' / 'literature' / 'Wirnsberger-2016-reproduction-notes.md'}`
         - Academic narrative: `{repo_root / 'research' / 'book' / 'SIM-02.md'}`
         - Technical report: `{repo_root / 'results' / 'reports' / 'SIM-02-report.md'}`

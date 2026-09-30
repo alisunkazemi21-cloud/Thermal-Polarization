@@ -8,8 +8,8 @@ is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
 Status on 2026-09-30: **method, temperature sequence, and exact 400 K protocol
-approved; gate 1 zero-step audit passed; no NEMD trajectory or polarization
-result exists.**
+approved; gate 1 zero-step audit passed; checkpoint 08 equilibrium design is
+proposed; no gate-2 or NEMD trajectory and no polarization result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -35,6 +35,7 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-09-30 | Checkpoint 07 prepared | Proposed | Staged build, equilibrium, timestep, and stationarity gates await approval |
 | 2026-09-30 | DECISION-007 approved | Approved decision | Exact benchmark and staged release gates frozen |
 | 2026-09-30 | Gate 1 zero-step audit executed | Measured | Structure and modern LAMMPS parse/force initialization passed; zero steps advanced |
+| 2026-09-30 | Checkpoint 08 equilibrium bridge prepared | Proposed | Exact input, acceptance criteria, restart behavior, and bounded outputs are ready for review; trajectory not started |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -78,6 +79,24 @@ clusters, accepted the current eHEX syntax, initialized PPPM to an estimated
 relative force accuracy of 9.136047 × 10⁻⁶, and completed `run 0`. The diagnostic
 step-zero temperature was 404.21051 K. No trajectory step was advanced, so this
 does not test equilibrium, energy conservation, a gradient, or polarization.
+
+## Checkpoint 08 — removing the inherited nonequilibrium state
+
+`[ESTABLISHED]` The author data file is a steady-state NEMD configuration. Its
+positions are valuable, but its velocity field carries the experiment we are
+trying to reset. The paper began from a lattice and used 20 ps velocity
+rescaling, 200 ps NpT, a return to the target box, 500 ps NVT, and 1 ns NVE. It
+does not report the NpT pressure target or rescaling cadence.
+
+`[PROPOSED]` The bridge keeps the exact published box, replaces all velocities
+with a seeded 400 K Maxwell distribution, performs 20 ps direct rescaling and
+500 ps NVT, rescales once to 400 K, and measures 1 ns NVE. This preserves the
+known density while avoiding an invented pressure parameter. Temperature,
+energy drift, constraints, center-of-mass momentum, thermal-gradient removal,
+and O–O structural stationarity have thresholds frozen before execution.
+
+`[OPEN]` Until those 1.52 million steps run and the evidence is analyzed, gate 2
+has no outcome. Passing it would release only the 100 ps eHEX smoke test.
 
 ## Evidence that must exist before a claim
 

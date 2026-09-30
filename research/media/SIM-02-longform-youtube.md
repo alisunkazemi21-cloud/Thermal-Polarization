@@ -140,6 +140,19 @@ diagnostic temperature as an equilibrium or thermopolarization result.
 Required footage/data: construction count, density relaxation, constraints,
 energy behavior, temperature, O–O RDF, and comparison with the baseline.
 
+The checkpoint-08 story begins with a scientific trap: the imported coordinates
+are valid, but the attached velocities come from a driven steady state. Show the
+404.21 K step-zero diagnostic, then wipe the velocity arrows while leaving every
+molecule in place. Explain why the team did not blindly copy the paper's NpT
+stage: the paper never states its target pressure, and it began from a lattice
+rather than this shared snapshot.
+
+Animate the proposed bridge as a time bar: 20 ps direct rescaling, 500 ps NVT,
+one exact 400 K adjustment, then 1 ns NVE. Put the pass criteria on screen before
+showing any result: temperature, fitted energy drift, molecular constraints,
+flat z-temperature, O–O stationarity, and center-of-mass momentum. The audience
+therefore knows what counts as success before seeing the curve.
+
 ### 9. The eHEX pilot
 
 Required footage/data: reservoir occupancy, energy ledger, unfolded T(z), ρ(z),
