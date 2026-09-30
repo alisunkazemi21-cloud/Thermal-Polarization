@@ -42,15 +42,15 @@
     "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
   },
   "PROJECT_STATE.md": {
-    "mtime": 1790800243.518818,
-    "seen": 1790800295.3219638,
-    "ast_hash": "7b469e55bb0182d978539d70214ffba9",
+    "mtime": 1790801916.7388136,
+    "seen": 1790802007.938915,
+    "ast_hash": "e1cb8dd6f539c1efcac86901e30d5289",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1790793376.2040336,
-    "seen": 1790793450.257505,
-    "ast_hash": "b55afd54048ffdc4c21b5c3637f5797e",
+    "mtime": 1790801977.2774012,
+    "seen": 1790802007.938915,
+    "ast_hash": "bde236160da50f52ffe9e9db1f918830",
     "semantic_hash": ""
   },
   "environment/requirements-graphify.txt": {
@@ -114,21 +114,21 @@
     "semantic_hash": "723e0fac2964e870785d269d95493c31"
   },
   "research/decisions/README.md": {
-    "mtime": 1790791122.6720648,
-    "seen": 1790791588.090888,
-    "ast_hash": "278103a10a62dde8d9f88205a01dd599",
-    "semantic_hash": "278103a10a62dde8d9f88205a01dd599"
+    "mtime": 1790801914.1767273,
+    "seen": 1790802007.938915,
+    "ast_hash": "72b5725b71fd6968054a75cb2e746b7b",
+    "semantic_hash": ""
   },
   "simulations/SIM-02/README.md": {
-    "mtime": 1790793281.6600988,
-    "seen": 1790793450.257505,
-    "ast_hash": "39ee366555f648628fd255caac3681e0",
+    "mtime": 1790801919.8615544,
+    "seen": 1790802007.938915,
+    "ast_hash": "5ce6f4c3c9a2555fd74568b610f239de",
     "semantic_hash": ""
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1790800364.6198163,
-    "seen": 1790800398.84373,
-    "ast_hash": "f75accc92e0fe6da73daa066c091d073",
+    "mtime": 1790801922.0741725,
+    "seen": 1790802007.938915,
+    "ast_hash": "b66471a1232328108713b4b6dd7a88bd",
     "semantic_hash": ""
   },
   "research/WORKFLOW.md": {
@@ -138,9 +138,9 @@
     "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
   },
   "research/book/SIM-02.md": {
-    "mtime": 1790793300.2379255,
-    "seen": 1790793450.257505,
-    "ast_hash": "ae9f05dcc444b5b9e8144c1c4a7d1dcf",
+    "mtime": 1790801917.8225641,
+    "seen": 1790802007.938915,
+    "ast_hash": "8bbc19e84651af12bf2e61b0b8ac97c8",
     "semantic_hash": ""
   },
   "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "results/reports/SIM-02-report.md": {
-    "mtime": 1790793377.2229283,
-    "seen": 1790793450.257505,
-    "ast_hash": "a06e17c0245af847a998b30c97f121fa",
+    "mtime": 1790801918.8852577,
+    "seen": 1790802007.938915,
+    "ast_hash": "614141d3f3c8603673fe549f6ee96d3c",
     "semantic_hash": ""
   },
   "research/decisions/DECISION-006-SIM-02-temperature-path.md": {
@@ -270,9 +270,9 @@
     "semantic_hash": ""
   },
   "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md": {
-    "mtime": 1790800242.323658,
-    "seen": 1790800295.3219638,
-    "ast_hash": "82237262d537eb7e53307d833ee994e9",
+    "mtime": 1790801915.6037433,
+    "seen": 1790802007.938915,
+    "ast_hash": "44e50f5c672fb6add613b68e484cc0e9",
     "semantic_hash": ""
   },
   "research/hypotheses/README.md": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "simulations/SIM-02/lammps/README.md": {
-    "mtime": 1790800244.7444298,
-    "seen": 1790800295.3219638,
-    "ast_hash": "1a96b1dd8a89cca2db012e9ee43a39de",
+    "mtime": 1790801921.0894969,
+    "seen": 1790802007.938915,
+    "ast_hash": "6f1b201739047c855e7b59fe8c9d01da",
     "semantic_hash": ""
   },
   "simulations/SIM-02/lammps/metadata.yaml": {
@@ -384,9 +384,15 @@
     "semantic_hash": ""
   },
   "results/raw/SIM-02/checkpoint-08-equilibrium/dry-run-stdout.txt": {
-    "mtime": 1790800179.7702425,
-    "seen": 1790800295.3219638,
-    "ast_hash": "9b0fdab79cc19848f81b5abdf0984f15",
+    "mtime": 1790800645.6470163,
+    "seen": 1790802007.938915,
+    "ast_hash": "a996a759cbf30261a4cddc7bfc1fa83b",
+    "semantic_hash": ""
+  },
+  "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md": {
+    "mtime": 1790801913.1749897,
+    "seen": 1790802007.938915,
+    "ast_hash": "47f0e995a20286f2851b5fd897e36161",
     "semantic_hash": ""
   }
 }

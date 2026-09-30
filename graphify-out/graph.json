@@ -179,6 +179,18 @@
       "source_location": "L12"
     },
     {
+      "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge",
+      "label": "SIM-02-checkpoint-08-equilibrium-bridge.md",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "DECISION-005 selects LAMMPS eHEX for SIM-02",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "sim-02-checkpoint-08-equilibrium-bridge.md",
+      "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
+      "source_location": "L1"
+    },
+    {
       "id": "dataframe",
       "label": "DataFrame",
       "_origin": "ast",
@@ -311,18 +323,6 @@
       "source_location": "L1"
     },
     {
-      "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge",
-      "label": "SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "SIM-02 checkpoint 08 \u2014 PPPM equilibrium bridge",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "sim-02-checkpoint-08-equilibrium-bridge.md",
-      "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L1"
-    },
-    {
       "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_acceptance_criteria_frozen_before_execution",
       "label": "Acceptance criteria frozen before execution",
       "_origin": "ast",
@@ -332,7 +332,7 @@
       "node_kind": "heading",
       "norm_label": "acceptance criteria frozen before execution",
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L66"
+      "source_location": "L68"
     },
     {
       "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_checkpoint_question",
@@ -356,7 +356,7 @@
       "node_kind": "heading",
       "norm_label": "frozen evidence and output plan",
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L52"
+      "source_location": "L54"
     },
     {
       "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_proposed_bridge",
@@ -368,7 +368,7 @@
       "node_kind": "heading",
       "norm_label": "proposed bridge",
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L31"
+      "source_location": "L33"
     },
     {
       "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_release_consequence",
@@ -380,7 +380,7 @@
       "node_kind": "heading",
       "norm_label": "release consequence",
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L108"
+      "source_location": "L110"
     },
     {
       "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_restart_and_colab_contract",
@@ -392,7 +392,7 @@
       "node_kind": "heading",
       "norm_label": "restart and colab contract",
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L96"
+      "source_location": "L98"
     },
     {
       "id": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_sim_02_checkpoint_08_pppm_equilibrium_bridge",
@@ -416,7 +416,7 @@
       "node_kind": "heading",
       "norm_label": "why a bridge is required",
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L13"
+      "source_location": "L15"
     },
     {
       "id": "results_raw_sim_02_checkpoint_07_zero_step_structural_audit",
@@ -479,6 +479,18 @@
       "source_location": "L1"
     },
     {
+      "id": "simulations_sim_02_lammps_readme_approved_gate_2_command",
+      "label": "Approved gate 2 command",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "SIM-02 LAMMPS implementation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "approved gate 2 command",
+      "source_file": "simulations/SIM-02/lammps/README.md",
+      "source_location": "L54"
+    },
+    {
       "id": "simulations_sim_02_lammps_readme_gate_1_commands",
       "label": "Gate 1 commands",
       "_origin": "ast",
@@ -489,18 +501,6 @@
       "norm_label": "gate 1 commands",
       "source_file": "simulations/SIM-02/lammps/README.md",
       "source_location": "L20"
-    },
-    {
-      "id": "simulations_sim_02_lammps_readme_proposed_gate_2_command",
-      "label": "Proposed gate 2 command",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "SIM-02 LAMMPS implementation",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "proposed gate 2 command",
-      "source_file": "simulations/SIM-02/lammps/README.md",
-      "source_location": "L54"
     },
     {
       "id": "simulations_sim_02_lammps_readme_provenance",
@@ -893,6 +893,66 @@
       "source_location": "L1"
     },
     {
+      "id": "research_decisions_decision_008_sim_02_equilibrium_bridge",
+      "label": "DECISION-008-SIM-02-equilibrium-bridge.md",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "DECISION-008 \u2014 approve the PPPM equilibrium bridge",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "decision-008-sim-02-equilibrium-bridge.md",
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision",
+      "label": "Decision",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "DECISION-008 \u2014 approve the PPPM equilibrium bridge",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "decision",
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L8"
+    },
+    {
+      "id": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision_008_approve_the_pppm_equilibrium_bridge",
+      "label": "DECISION-008 \u2014 approve the PPPM equilibrium bridge",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "DECISION-008 \u2014 approve the PPPM equilibrium bridge",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "decision-008 \u2014 approve the pppm equilibrium bridge",
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "research_decisions_decision_008_sim_02_equilibrium_bridge_pre_execution_evidence",
+      "label": "Pre-execution evidence",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "DECISION-008 \u2014 approve the PPPM equilibrium bridge",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "pre-execution evidence",
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L24"
+    },
+    {
+      "id": "research_decisions_decision_008_sim_02_equilibrium_bridge_release_condition",
+      "label": "Release condition",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "DECISION-008 \u2014 approve the PPPM equilibrium bridge",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "release condition",
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L31"
+    },
+    {
       "id": "decision_007_protocol_freeze",
       "label": "DECISION-007 approves the exact 400 K benchmark and staged release gates",
       "_origin": "semantic",
@@ -1043,6 +1103,21 @@
       "source_url": null
     },
     {
+      "id": "readme_sim02_electrostatic_potential",
+      "label": "SIM-02 scope: thermal-gradient NEMD and spatial polarization evidence",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "DECISION-005 selects LAMMPS eHEX for SIM-02",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "sim-02 scope: thermal-gradient nemd and spatial polarization evidence",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "research_media_youtube_roadmap_sim02",
       "label": "YouTube roadmap links SIM-02 evidence-led long-form treatment",
       "_origin": "semantic",
@@ -1159,6 +1234,21 @@
       "file_type": "document",
       "norm_label": "pinned graphify dependency: graphifyy 0.9.72",
       "source_file": "environment/requirements-graphify.txt",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "project_readme_official_chronology",
+      "label": "Thermal-Polarization official project chronology",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "DECISION-005 selects LAMMPS eHEX for SIM-02",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "thermal-polarization official project chronology",
+      "source_file": "README.md",
       "source_location": null,
       "source_url": null
     },
@@ -1311,36 +1401,6 @@
       "file_type": "rationale",
       "norm_label": "decision log preserves history and records supersession",
       "source_file": "research/decisions/README.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "readme_sim02_electrostatic_potential",
-      "label": "SIM-02 scope: thermal-gradient NEMD and spatial polarization evidence",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "SIM-02 checkpoint 08 \u2014 PPPM equilibrium bridge",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "sim-02 scope: thermal-gradient nemd and spatial polarization evidence",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "project_readme_official_chronology",
-      "label": "Thermal-Polarization official project chronology",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "SIM-02 checkpoint 08 \u2014 PPPM equilibrium bridge",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "thermal-polarization official project chronology",
-      "source_file": "README.md",
       "source_location": null,
       "source_url": null
     },
@@ -2630,18 +2690,6 @@
       "source_url": null
     },
     {
-      "id": "argparse",
-      "label": "argparse",
-      "_origin": "semantic",
-      "community": 1,
-      "community_name": "analyze_density_temperature.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "argparse",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "matplotlib",
       "label": "matplotlib",
       "_origin": "semantic",
@@ -2758,6 +2806,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "marimo",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "argparse",
+      "label": "argparse",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "audit_sim02_lammps_data.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "argparse",
       "source_file": "",
       "type": "external"
     },
@@ -3459,6 +3519,50 @@
       "weight": 1.0
     },
     {
+      "source": "research_decisions_decision_008_sim_02_equilibrium_bridge",
+      "target": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision_008_approve_the_pppm_equilibrium_bridge",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision_008_approve_the_pppm_equilibrium_bridge",
+      "target": "research_decisions_decision_008_sim_02_equilibrium_bridge_pre_execution_evidence",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision_008_approve_the_pppm_equilibrium_bridge",
+      "target": "research_decisions_decision_008_sim_02_equilibrium_bridge_release_condition",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision_008_approve_the_pppm_equilibrium_bridge",
+      "target": "research_decisions_decision_008_sim_02_equilibrium_bridge_decision",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "research_designs_sim_02_checkpoint_08_equilibrium_bridge",
       "target": "research_designs_sim_02_checkpoint_08_equilibrium_bridge_sim_02_checkpoint_08_pppm_equilibrium_bridge",
       "relation": "contains",
@@ -3477,7 +3581,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L108",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -3488,7 +3592,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L13",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -3499,7 +3603,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -3510,7 +3614,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L52",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -3521,7 +3625,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L66",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -3543,7 +3647,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md",
-      "source_location": "L96",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -3768,7 +3872,7 @@
     },
     {
       "source": "simulations_sim_02_lammps_readme_sim_02_lammps_implementation",
-      "target": "simulations_sim_02_lammps_readme_proposed_gate_2_command",
+      "target": "simulations_sim_02_lammps_readme_approved_gate_2_command",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3885,6 +3989,17 @@
       "confidence_score": 1.0,
       "source_file": "README.md",
       "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "project_readme_official_chronology",
+      "target": "research_decisions_decision_008_sim_02_equilibrium_bridge",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L47",
       "weight": 1.0
     },
     {

@@ -14,6 +14,8 @@
   followed by the 300 K target after the pilot gates pass.
 - `DECISION-007-SIM-02-protocol-freeze.md` — approved exact 400 K benchmark and
   staged release gates; gate 1 zero-step audit passed.
+- `DECISION-008-SIM-02-equilibrium-bridge.md` — approved the fixed-volume 400 K
+  PPPM equilibrium bridge and its frozen gate-2 acceptance criteria.
 
 Decision records preserve what was believed at the time. Later records may
 supersede an assumption without rewriting its history.

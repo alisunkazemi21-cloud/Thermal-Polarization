@@ -18,9 +18,9 @@ def _(mo):
     mo.md(r"""
     # SIM-02 — Thermal-gradient NEMD research record
 
-    **Status: checkpoint 07 approved and gate 1 passed. Checkpoint 08 now
-    proposes the exact equilibrium bridge and acceptance tests. Its 1.52 ns
-    trajectory has not started, and no NEMD or polarization result exists.**
+    **Status: checkpoint 07 gate 1 passed. Checkpoint 08 and its exact
+    equilibrium-bridge acceptance tests are approved in DECISION-008. Execution
+    is released; no gate-2 or polarization result exists yet.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -76,10 +76,10 @@ def _(mo):
                 "evidence": "measured zero-step audit",
             },
             {
-                "date": "2026-09-30",
+                "date": "2026-10-01",
                 "stage": "Checkpoint 08",
-                "event": "The fixed-volume PPPM equilibrium bridge, acceptance tests, and restart contract were frozen for review.",
-                "evidence": "proposed; trajectory not started",
+                "event": "The fixed-volume PPPM equilibrium bridge and acceptance tests were approved for execution.",
+                "evidence": "DECISION-008; outcome not yet measured",
             },
             {
                 "date": "future",
@@ -144,7 +144,7 @@ def _(mo):
         {"item": "pilot duration", "value": "100 ps smoke test, then 1 ns stationarity", "status": "proposed", "basis": "checkpoint 07"},
         {"item": "published reference", "value": "10 ns transient + 60 ns production", "status": "established", "basis": "not yet authorized for execution"},
         {"item": "replicates", "value": "independent seed before reproducible positive claim", "status": "proposed", "basis": "checkpoint 07"},
-        {"item": "equilibrium bridge", "value": "20 ps rescale + 500 ps NVT + 1 ns NVE at 1 fs", "status": "checkpoint 08 proposed", "basis": "fixed published box; seed 20260930"},
+        {"item": "equilibrium bridge", "value": "20 ps rescale + 500 ps NVT + 1 ns NVE at 1 fs", "status": "approved; to test", "basis": "DECISION-008; fixed box; seed 20260930"},
     ]
     mo.ui.table(design_register)
     return
@@ -225,13 +225,13 @@ def _(mo):
     mo.vstack([
         mo.md(
             r"""
-            ## Checkpoint 08 proposal — equilibrium bridge
+            ## Checkpoint 08 approved — equilibrium bridge
 
             The supplied author file is a steady-state NEMD snapshot. Its
             velocities must be replaced before it can become the equilibrium
             reference. The source does not report its NpT pressure target, so
             this bridge preserves the exact published box instead of inventing
-            one. **All values below are proposed; no gate-2 data exist yet.**
+            one. **DECISION-008 approves this protocol; no gate-2 data exist yet.**
             """
         ),
         mo.ui.table(bridge_stages),
@@ -255,7 +255,7 @@ def _(mo):
 
     1. **PASS — build and zero-step audit:** count, box, neutrality,
        geometry, regions, RATTLE, eHEX syntax, and PPPM initialization.
-    2. **PROPOSED — equilibrium bridge:** replace the inherited NEMD
+    2. **APPROVED; TO TEST — equilibrium bridge:** replace the inherited NEMD
        velocities; run 20 ps rescale + 500 ps NVT + 1 ns NVE; test
        temperature, energy, structure, constraints, and gradient removal.
     3. 100 ps eHEX smoke test at 1 fs: energy ledger, occupancy, profile
@@ -284,6 +284,7 @@ def _(mo, repo_root):
         - Protocol decision: `{repo_root / 'research' / 'decisions' / 'DECISION-007-SIM-02-protocol-freeze.md'}`
         - Gate 1 report: `{repo_root / 'results' / 'reports' / 'SIM-02-checkpoint-07-zero-step.md'}`
         - Checkpoint 08: `{repo_root / 'research' / 'designs' / 'SIM-02-checkpoint-08-equilibrium-bridge.md'}`
+        - Equilibrium decision: `{repo_root / 'research' / 'decisions' / 'DECISION-008-SIM-02-equilibrium-bridge.md'}`
         - Published benchmark audit: `{repo_root / 'research' / 'literature' / 'Wirnsberger-2016-reproduction-notes.md'}`
         - Academic narrative: `{repo_root / 'research' / 'book' / 'SIM-02.md'}`
         - Technical report: `{repo_root / 'results' / 'reports' / 'SIM-02-report.md'}`

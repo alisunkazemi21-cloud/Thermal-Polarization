@@ -1,7 +1,7 @@
 # SIM-02 checkpoint 08 — PPPM equilibrium bridge
 
 - **Prepared:** 2026-09-30
-- **Status:** `[PROPOSED — INPUT ZERO-STEP PARSE PASSED; AWAITING REVIEW]`
+- **Status:** `[APPROVED — DECISION-008; INPUT ZERO-STEP PARSE PASSED]`
 - **Depends on:** DECISION-007 and gate 1
 - **Execution status:** the 1.52 ns trajectory has not started
 
@@ -9,6 +9,8 @@
 
 Should SIM-02 erase the velocity field in the imported nonequilibrium author
 snapshot and build a fixed-volume 400 K PPPM reference before eHEX is applied?
+
+**Decision:** approved by the user on 2026-10-01 and recorded in DECISION-008.
 
 ## Why a bridge is required
 

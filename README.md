@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 equilibrium bridge proposed |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 equilibrium bridge approved |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -44,6 +44,7 @@ See:
 - [400 K → 300 K validation sequence](research/decisions/DECISION-006-SIM-02-temperature-path.md)
 - [proposed eHEX design](research/designs/SIM-02-LAMMPS-eHEX-design.md)
 - [checkpoint 08 equilibrium bridge](research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md)
+- [checkpoint 08 approval](research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md)
 
 ## Research workflow
 

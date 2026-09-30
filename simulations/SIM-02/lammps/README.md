@@ -1,8 +1,8 @@
 # SIM-02 LAMMPS implementation
 
-Status: checkpoint 07 gate 1 passed. Checkpoint 08 proposes the fixed-volume
-equilibrium bridge and its zero-step input parse passed. No equilibrium or NEMD
-trajectory has run under checkpoint 08.
+Status: checkpoint 07 gate 1 passed. DECISION-008 approves the checkpoint-08
+fixed-volume equilibrium bridge, and its zero-step input parse passed. Execution
+is released; no gate-2 result exists yet.
 
 ## Provenance
 
@@ -51,13 +51,13 @@ Convert the LAMMPS log to a structured audit record with:
   --json results\raw\SIM-02\checkpoint-07-zero-step\lammps-zero-step.json
 ```
 
-## Proposed gate 2 command
+## Approved gate 2 command
 
 `in.equilibrium-bridge` replaces the imported NEMD velocities, then schedules
 20 ps direct rescaling, 500 ps NVT, and 1 ns NVE at 1 fs. Its full scientific
 contract is `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md`.
 
-After checkpoint review, run from the repository root under WSL:
+Run from the repository root under WSL:
 
 ```bash
 mkdir -p results/raw/SIM-02/checkpoint-08-equilibrium

@@ -1,0 +1,36 @@
+# DECISION-008 — approve the PPPM equilibrium bridge
+
+- **Date:** 2026-10-01
+- **Status:** Approved
+- **Decision source:** user approval of checkpoint 08
+- **Depends on:** DECISION-007 and gate 1
+
+## Decision
+
+Approve the fixed-volume 400 K PPPM equilibrium bridge defined in
+`research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` and implemented by
+`simulations/SIM-02/lammps/in.equilibrium-bridge`.
+
+The run replaces the imported nonequilibrium velocity field using deterministic
+seed `20260930`, performs 20 ps of direct velocity rescaling, 500 ps NVT with a
+1 ps Nosé–Hoover damping time, an exact constrained-system kinetic-energy
+adjustment to 400 K, and 1 ns NVE at a 1 fs timestep. The exact published box
+and density remain fixed.
+
+The paper's 200 ps NpT stage is not copied because its target pressure is not
+reported and the project begins from the supplied steady-state configuration,
+not the paper's lattice. This boundary must remain explicit in comparisons.
+
+## Pre-execution evidence
+
+LAMMPS 10 Dec 2025 parsed every stage with all run durations replaced by zero.
+The final parse had no warning or error, initialized PPPM at the gate-1 force
+accuracy, applied RATTLE after each integrator, evaluated the final constrained
+temperature as 400 K, and advanced zero trajectory steps.
+
+## Release condition
+
+Execution is released. Gate 2 passes only through the acceptance criteria frozen
+in checkpoint 08. Approval does not predetermine its outcome and does not release
+eHEX until the equilibrium evidence has been analyzed and documented.
+

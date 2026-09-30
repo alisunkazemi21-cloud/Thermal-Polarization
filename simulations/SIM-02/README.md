@@ -1,7 +1,7 @@
 # SIM-02 — thermal-gradient NEMD
 
-Status: **checkpoint 07 is approved and its zero-step gate passed. Checkpoint 08
-defines the proposed equilibrium bridge; no gate-2 trajectory has run.**
+Status: **checkpoint 07 gate 1 passed. Checkpoint 08 is approved in
+DECISION-008 and released for execution; no gate-2 result exists yet.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -53,9 +53,9 @@ The gate 1 audit is a measured implementation result, recorded in
 `results/reports/SIM-02-checkpoint-07-zero-step.md`. It advanced zero trajectory
 steps and is not evidence of a gradient or polarization.
 
-## Checkpoint 08 proposal
+## Checkpoint 08 approved protocol
 
-`lammps/in.equilibrium-bridge` proposes a fixed-volume bridge from the imported
+`lammps/in.equilibrium-bridge` defines the approved fixed-volume bridge from the imported
 author NEMD state to a 400 K PPPM equilibrium reference. It replaces the source
 velocities with deterministic seed `20260930`, runs 20 ps of explicit velocity
 rescaling, 500 ps NVT, an exact kinetic-energy adjustment, and 1 ns NVE at 1 fs.

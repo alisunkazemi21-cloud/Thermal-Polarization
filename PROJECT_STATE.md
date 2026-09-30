@@ -9,8 +9,8 @@ guidance are established. The method audit found that the drafted static
 `Hot/Cold/Rest` GROMACS groups do not implement spatial reservoirs for diffusing
 water. On 2026-09-30 the user approved LAMMPS eHEX. The exact published 400 K
 benchmark and staged gates were approved in DECISION-007. Gate 1, the build and
-zero-step audit, passed. Checkpoint 08 now proposes the exact equilibrium bridge
-and frozen acceptance criteria; its 1.52 ns trajectory has not started.
+zero-step audit, passed. Checkpoint 08 and its frozen equilibrium-bridge
+acceptance criteria were approved in DECISION-008; execution is released.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -29,7 +29,7 @@ and frozen acceptance criteria; its 1.52 ns trajectory has not started.
 | Protocol checkpoint | `research/designs/SIM-02-checkpoint-07-protocol-freeze.md` | Exact 400 K implementation and release gates approved in DECISION-007 |
 | Protocol decision | `research/decisions/DECISION-007-SIM-02-protocol-freeze.md` | Exact benchmark and staged gates approved; gate 1 passed |
 | Gate 1 evidence | `results/reports/SIM-02-checkpoint-07-zero-step.md` | Structure audit and LAMMPS `run 0` passed; zero trajectory steps |
-| Gate 2 proposal | `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` | Fixed-volume bridge and acceptance criteria proposed; zero-step input parse passed; trajectory not started |
+| Gate 2 protocol | `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` | Fixed-volume bridge approved in DECISION-008; zero-step input parse passed; execution released |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -48,17 +48,16 @@ LAMMPS design.
 - [PASSED] Gate 1: imported-system structure, COM reservoir accounting, current
   eHEX syntax, RATTLE clusters, and PPPM initialization; `run 0` advanced no
   trajectory step.
-- [PROPOSED] Checkpoint 08: fixed-box 20 ps velocity-rescaling warm-up, 500 ps
+- [APPROVED] Checkpoint 08: fixed-box 20 ps velocity-rescaling warm-up, 500 ps
   NVT, and 1 ns NVE at 400 K with deterministic seed `20260930`.
-- [NEXT] Review checkpoint 08, then run the equilibrium bridge before any eHEX
-  trajectory.
+- [NEXT] Execute and analyze the equilibrium bridge before any eHEX trajectory.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: review the frozen checkpoint-08 equilibrium input and
-acceptance criteria, then execute gate 2. The source paper omits its NpT target
+Next scientific step: execute the frozen checkpoint-08 equilibrium input and
+evaluate every acceptance criterion. The source paper omits its NpT target
 pressure, so this bridge keeps the exact published box rather than inventing
 that parameter. No temperature-gradient or polarization result is claimed here.
 

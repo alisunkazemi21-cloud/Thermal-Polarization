@@ -9,7 +9,7 @@ is reproducible across time blocks. It covers
 
 Status on 2026-09-30: **method, temperature sequence, and exact 400 K protocol
 approved; gate 1 zero-step audit passed; checkpoint 08 equilibrium design is
-proposed; no gate-2 or NEMD trajectory and no polarization result exists.**
+approved in DECISION-008; no gate-2 result or polarization result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -36,6 +36,7 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-09-30 | DECISION-007 approved | Approved decision | Exact benchmark and staged release gates frozen |
 | 2026-09-30 | Gate 1 zero-step audit executed | Measured | Structure and modern LAMMPS parse/force initialization passed; zero steps advanced |
 | 2026-09-30 | Checkpoint 08 equilibrium bridge prepared | Proposed | Exact input, acceptance criteria, restart behavior, and bounded outputs are ready for review; trajectory not started |
+| 2026-10-01 | DECISION-008 approved | Approved decision | Fixed-volume PPPM bridge released for execution; outcome remains to be measured |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -88,7 +89,7 @@ trying to reset. The paper began from a lattice and used 20 ps velocity
 rescaling, 200 ps NpT, a return to the target box, 500 ps NVT, and 1 ns NVE. It
 does not report the NpT pressure target or rescaling cadence.
 
-`[PROPOSED]` The bridge keeps the exact published box, replaces all velocities
+`[DECIDED]` The bridge keeps the exact published box, replaces all velocities
 with a seeded 400 K Maxwell distribution, performs 20 ps direct rescaling and
 500 ps NVT, rescales once to 400 K, and measures 1 ns NVE. This preserves the
 known density while avoiding an invented pressure parameter. Temperature,
