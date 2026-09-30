@@ -121,28 +121,38 @@ benchmark, while keeping the project proposal visibly distinct from literature:
 Explain why 400 K is a method-validation condition and 300 K is the target, and
 why this pair is not a fishing expedition or large sweep.
 
-## Act V — execution chapters to fill with real footage, 43:00 onward
+## Act V — execution begins, 43:00 onward
 
-These chapters remain locked until the work occurs.
+### 7. Gate 1 — proving the input exists before simulating
 
-### 7. Equilibrium bridge
+`[MEASURED]` Checkpoint 07 was approved and the zero-step gate passed. Show the
+independent parser verifying 4,500 neutral waters, exact geometry, and COM
+reservoir populations. Then show LAMMPS 10 Dec 2025 reading all atoms and
+velocities, constructing 4,500 RATTLE clusters, initializing PPPM at
+9.136047 × 10⁻⁶ relative accuracy, and completing zero steps.
+
+The narration must state why zero steps matter: this proves that the imported
+structure and modern syntax are internally runnable without presenting a
+diagnostic temperature as an equilibrium or thermopolarization result.
+
+### 8. Equilibrium bridge
 
 Required footage/data: construction count, density relaxation, constraints,
 energy behavior, temperature, O–O RDF, and comparison with the baseline.
 
-### 8. The eHEX pilot
+### 9. The eHEX pilot
 
 Required footage/data: reservoir occupancy, energy ledger, unfolded T(z), ρ(z),
 symmetry, and any failed parameter choice. Preserve terminal footage of real
 errors; do not recreate them later.
 
-### 9. Is there a polarization signal?
+### 10. Is there a polarization signal?
 
 Reveal Pz(z) only after T(z) and stationarity. Show block profiles and uncertainty
 before a folded mean. Compare orientation and density to separate observation
 from mechanism.
 
-### 10. Ending logic
+### 11. Ending logic
 
 - If resolved: state magnitude, sign convention, uncertainty, replication, and
   limitations; do not jump to power generation.
@@ -161,6 +171,7 @@ from mechanism.
 | eHEX energy ledger animation | DECISION-005/LAMMPS docs | To create |
 | decision timeline | research book | Ready |
 | LAMMPS capability terminal capture | environment check | Repeat on camera if desired |
+| gate 1 structure and `run 0` audit | checkpoint 07 report and raw log | Existing measured evidence |
 | T(z), ρ(z), Pz(z), orientation | SIM-02 notebook | Awaiting measured data |
 | block uncertainty view | SIM-02 notebook | Awaiting measured data |
 

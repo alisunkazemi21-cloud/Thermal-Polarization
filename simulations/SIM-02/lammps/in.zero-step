@@ -1,0 +1,57 @@
+# SIM-02 checkpoint 07, gate 1: modern LAMMPS parse and zero-step audit.
+# This input performs no time integration and produces no physical result.
+
+units           real
+dimension       3
+boundary        p p p
+atom_style      full
+
+read_data       data.spce-4500.ness-ewald
+
+group           oxygen type 2
+group           hydrogen type 1
+
+variable        exchange_rate equal 0.1614
+variable        timestep_fs equal 1.0
+
+pair_style      lj/cut/coul/long 11.0 18.176715436271188
+pair_coeff      1 1 0.0 0.0
+pair_coeff      1 2 0.0 0.0
+pair_coeff      2 2 0.15535 3.166
+pair_modify     tail yes
+kspace_style    pppm 1.0e-5
+
+bond_style      harmonic
+bond_coeff      1 1000.0 1.0
+angle_style     harmonic
+angle_coeff     1 100.0 109.47
+
+neighbor        4.0 bin
+neigh_modify    one 7500
+timestep        ${timestep_fs}
+reset_timestep  0
+
+# Published geometry: the hot reservoir is periodic and split across the two
+# z edges; the cold reservoir is centered at z=0. All bounds are in angstrom.
+region          hot_lower block INF INF INF INF -54.530289399133082 -50.530289399133082 units box
+region          hot_upper block INF INF INF INF  50.530289399133082  54.530289399133082 units box
+region          hot union 2 hot_lower hot_upper
+region          cold block INF INF INF INF -4.0 4.0 units box
+
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+fix             source all ehex 1  ${exchange_rate} region hot constrain com
+fix             sink all ehex 1 -${exchange_rate} region cold constrain com
+
+compute         audit_temp all temp
+compute         audit_pressure all pressure audit_temp
+thermo_style    custom step atoms temp press pe ke etotal vol lx ly lz
+thermo_modify   temp audit_temp press audit_pressure flush yes
+thermo          1
+
+print           "SIM02_AUDIT expected_molecules=4500 expected_atoms=13500"
+print           "SIM02_AUDIT exchange_rate_kcal_mol_fs=${exchange_rate} timestep_fs=${timestep_fs}"
+print           "SIM02_AUDIT hot_total_width_A=8 cold_width_A=8"
+
+run             0 post no
+

@@ -1,0 +1,35 @@
+checkpoint: SIM-02-checkpoint-07
+gate: 1
+status: approved_for_zero_step_audit
+evidence_date: 2026-09-30
+system:
+  model: rigid_SPC_E
+  molecules: 4500
+  atoms: 13500
+  box_angstrom:
+    x: 36.353430872542376
+    y: 36.353430872542376
+    z: 109.06057879826616
+  target_density_g_cm3: 0.934
+source:
+  description: author-supplied steady-state Ewald configuration
+  repository_doi: 10.17863/CAM.118
+  data_file: data.spce-4500.ness-ewald
+  data_sha256: e7a84f120dc7e01479fe2fc0b8aed9fcaf4b8178cbfa0629923e83bdf8945e66
+  license: GPL-3.0
+translation:
+  original_lammps: 9Dec14 modified build
+  project_lammps: 10Dec2025 distribution build
+  original_long_range: Ewald_1e-5
+  project_long_range: PPPM_1e-5
+  original_timestep_fs: 2.0
+  gate_1_timestep_fs: 1.0
+reservoirs:
+  hot: periodic_edges_4A_each
+  cold: central_8A
+  exchange_rate_kcal_mol_fs: 0.1614
+  branch_heat_flux_W_m2: 4.242516113e10
+execution:
+  gate_1_run_steps: 0
+  physical_result_expected: false
+

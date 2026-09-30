@@ -1,8 +1,8 @@
 # SIM-02 technical report — pre-execution record
 
-Status: **no SIM-02 results yet**. This report will freeze the approved method
-and measured results after checkpoint validation. Proposed values belong in the
-design document, not in the results sections below.
+Status: **gate 1 zero-step audit passed; no NEMD trajectory or polarization
+result exists.** Proposed values belong in the design document until their gate
+is released.
 
 ## 1. Research question
 
@@ -17,7 +17,10 @@ statistically resolved signed polarization profile?
 
 ## 3. Configuration
 
-`[OPEN]` Pending detailed design approval and generated metadata.
+`[MEASURED]` The imported author configuration contains 4,500 neutral SPC/E
+molecules in a 36.3534308725 × 36.3534308725 × 109.060578798 Å³ box. The
+deterministic structure audit and LAMMPS 10 Dec 2025 `run 0` passed. See
+`SIM-02-checkpoint-07-zero-step.md`; no trajectory step was advanced.
 
 ## 4. Equilibrium bridge
 

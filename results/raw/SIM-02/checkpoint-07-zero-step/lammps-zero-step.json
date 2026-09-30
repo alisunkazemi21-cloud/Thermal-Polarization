@@ -1,0 +1,37 @@
+{
+  "evidence_class": "MEASURED_ZERO_STEP_LAMMPS_AUDIT",
+  "date": "2026-09-30",
+  "source_log": "results\\raw\\SIM-02\\checkpoint-07-zero-step\\log.lammps",
+  "passed": true,
+  "checks": {
+    "no_lammps_error": true,
+    "zero_steps": true,
+    "atom_and_velocity_counts": true,
+    "topology_counts": true,
+    "element_groups": true,
+    "rattle_clusters": true,
+    "ehex_current_syntax": true,
+    "pppm_accuracy": true
+  },
+  "observations": {
+    "lammps_version": "10 Dec 2025",
+    "steps_advanced": 0,
+    "atoms": 13500,
+    "oxygen_atoms": 4500,
+    "hydrogen_atoms": 9000,
+    "rattle_frozen_angles": 4500,
+    "pppm_relative_force_accuracy": 9.136047e-06,
+    "temperature_K": 404.21051,
+    "pressure_atm": 504.58835,
+    "potential_energy_kcal_mol": -44166.098,
+    "kinetic_energy_kcal_mol": 10842.668,
+    "total_energy_kcal_mol": -33323.43,
+    "volume_angstrom3": 144131.4,
+    "box_angstrom": {
+      "x": 36.353431,
+      "y": 36.353431,
+      "z": 109.06058
+    }
+  },
+  "interpretation": "Parser and force initialization only; no trajectory step was advanced."
+}

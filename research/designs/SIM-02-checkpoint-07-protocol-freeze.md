@@ -1,7 +1,7 @@
 # SIM-02 checkpoint 07 — published protocol recovery and pilot freeze
 
 - **Prepared:** 2026-09-30
-- **Status:** `[PROPOSED — AWAITING USER DECISION]`
+- **Status:** `[APPROVED — DECISION-007; GATE 1 PASSED]`
 - **Depends on:** DECISION-005 and DECISION-006
 - **Execution status:** no SIM-02 run has started
 
@@ -82,8 +82,7 @@ These are source facts, not measured project results.
 
 ## Decision requested
 
-Approve, revise, or reject this exact 400 K protocol and staged release plan.
-Approval authorizes creation of the LAMMPS build/equilibration inputs and the
-zero-step audit; it does not authorize skipping later gates or claiming a SIM-02
-result.
-
+The exact 400 K protocol and staged release plan were approved on 2026-09-30 and
+recorded in DECISION-007. Gate 1 passed; its evidence is in
+`results/reports/SIM-02-checkpoint-07-zero-step.md`. Later gates remain separate
+and cannot be skipped or treated as completed SIM-02 results.

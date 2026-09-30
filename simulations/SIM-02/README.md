@@ -1,11 +1,11 @@
 # SIM-02 — thermal-gradient NEMD
 
-Status: **LAMMPS eHEX and the 400 K → 300 K sequence are approved; detailed
-input design is in progress.**
+Status: **checkpoint 07 is approved and its zero-step gate passed. The
+equilibrium bridge is next.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
-drafts**. New approved implementation files will live under `lammps/` after the
-design parameters and pilot criteria are accepted.
+drafts**. The approved implementation and imported reference configuration live
+under `lammps/`.
 
 SIM-02 asks whether bulk SPC/E water develops a statistically resolved spatial
 polarization under a controlled thermal gradient. Its scope is
@@ -33,10 +33,11 @@ spatial-group generator does not exist.
 
 See `research/decisions/DECISION-004-SIM-02-method-audit.md` for the audit,
 `research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md` for the approved engine
-choice, and `research/designs/SIM-02-LAMMPS-eHEX-design.md` for the open design.
+choice, and `research/designs/SIM-02-LAMMPS-eHEX-design.md` for the active design.
 The condition order is recorded in
-`research/decisions/DECISION-006-SIM-02-temperature-path.md`. Exact geometry,
-heat rate, sampling, duration, and replication remain gated.
+`research/decisions/DECISION-006-SIM-02-temperature-path.md`. The exact benchmark
+and staged gates are frozen in DECISION-007. Production sampling and allocation
+remain gated.
 
 ## Preserved draft parameters
 
@@ -48,7 +49,9 @@ These are proposals, not validated settings or measured results:
 - 500 ps startup and 1.5 ns production;
 - symmetric center/periodic-edge reservoir geometry along z.
 
-No SIM-02 trajectory or result is currently claimed.
+The gate 1 audit is a measured implementation result, recorded in
+`results/reports/SIM-02-checkpoint-07-zero-step.md`. It advanced zero trajectory
+steps and is not evidence of a gradient or polarization.
 
 ## Documentation contract
 

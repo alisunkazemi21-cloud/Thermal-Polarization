@@ -1,0 +1,3 @@
+# Preserve imported replication artifacts byte-for-byte so recorded hashes remain valid.
+simulations/SIM-02/lammps/data.spce-4500.ness-ewald -text
+simulations/SIM-02/lammps/reference/** -text

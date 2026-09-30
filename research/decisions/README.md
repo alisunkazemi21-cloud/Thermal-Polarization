@@ -12,6 +12,8 @@
   subject to an equilibrium bridge check and detailed design approval.
 - `DECISION-006-SIM-02-temperature-path.md` — approved 400 K method validation
   followed by the 300 K target after the pilot gates pass.
+- `DECISION-007-SIM-02-protocol-freeze.md` — approved exact 400 K benchmark and
+  staged release gates; gate 1 zero-step audit passed.
 
 Decision records preserve what was believed at the time. Later records may
 supersede an assumption without rewriting its history.

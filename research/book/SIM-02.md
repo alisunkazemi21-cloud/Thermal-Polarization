@@ -7,8 +7,8 @@ stationary temperature gradient and a signed molecular polarization profile that
 is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
-Status on 2026-09-30: **method and temperature sequence selected; the published
-400 K protocol has been recovered and awaits project approval; no SIM-02 run or
+Status on 2026-09-30: **method, temperature sequence, and exact 400 K protocol
+approved; gate 1 zero-step audit passed; no NEMD trajectory or polarization
 result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
@@ -33,6 +33,8 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-09-30 | Local LAMMPS capabilities inspected | Established | Installed build exposes eHEX, RIGID, SHAKE/RATTLE, and PPPM |
 | 2026-09-30 | 2016 paper and author replication package audited | Established | Exact 4,500-water geometry, reservoirs, exchange rate, and reference run were recovered |
 | 2026-09-30 | Checkpoint 07 prepared | Proposed | Staged build, equilibrium, timestep, and stationarity gates await approval |
+| 2026-09-30 | DECISION-007 approved | Approved decision | Exact benchmark and staged release gates frozen |
+| 2026-09-30 | Gate 1 zero-step audit executed | Measured | Structure and modern LAMMPS parse/force initialization passed; zero steps advanced |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -58,10 +60,24 @@ thickness. The exchange rate is ±0.1614 kcal mol⁻¹ fs⁻¹, corresponding to
 4.243 × 10¹⁰ W m⁻² along each branch. These details correct the approximate
 geometry in the first project draft.
 
-`[PROPOSED]` Checkpoint 07 adopts that reference through short release gates: a
+`[DECIDED]` Checkpoint 07 adopts that reference through short release gates: a
 zero-step audit, an equilibrium bridge, a 100 ps 1 fs smoke test, a matched
 1 fs/2 fs comparison, and a 1 ns stationarity pilot. The published 10 ns
 transient and 60 ns production remain blocked until these checks justify them.
+
+## Gate 1 result — build and zero-step audit
+
+`[MEASURED]` The imported source configuration contains 13,500 atoms in 4,500
+neutral three-site molecules at 933.993861 kg m⁻³. The constrained geometry
+matches 1.0 Å O–H bonds and a 109.47° H–O–H angle within numerical precision.
+COM accounting placed 282 molecules in the periodic hot reservoir, 369 in the
+central cold reservoir, and 3,849 in the bulk.
+
+LAMMPS 10 Dec 2025 read all coordinates and velocities, formed 4,500 RATTLE
+clusters, accepted the current eHEX syntax, initialized PPPM to an estimated
+relative force accuracy of 9.136047 × 10⁻⁶, and completed `run 0`. The diagnostic
+step-zero temperature was 404.21051 K. No trajectory step was advanced, so this
+does not test equilibrium, energy conservation, a gradient, or polarization.
 
 ## Evidence that must exist before a claim
 

@@ -8,8 +8,8 @@ Resume SIM-02 from Claude's drafts. Graphify and the token-efficient project
 guidance are established. The method audit found that the drafted static
 `Hot/Cold/Rest` GROMACS groups do not implement spatial reservoirs for diffusing
 water. On 2026-09-30 the user approved LAMMPS eHEX. The exact published 400 K
-benchmark has now been recovered; checkpoint 07 awaits approval before
-implementation.
+benchmark and staged gates were approved in DECISION-007. Gate 1, the build and
+zero-step audit, passed; the equilibrium bridge is next.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -25,7 +25,9 @@ implementation.
 | SIM-02 engine decision | `research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md` | LAMMPS eHEX approved; local build has eHEX/RIGID/SHAKE/PPPM |
 | SIM-02 temperature path | `research/decisions/DECISION-006-SIM-02-temperature-path.md` | 400 K validation followed by 300 K target approved |
 | SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Exact published box, reservoirs, and heat rate recovered; staged pilot awaits approval |
-| Protocol checkpoint | `research/designs/SIM-02-checkpoint-07-protocol-freeze.md` | Proposed exact 400 K implementation and release gates |
+| Protocol checkpoint | `research/designs/SIM-02-checkpoint-07-protocol-freeze.md` | Exact 400 K implementation and release gates approved in DECISION-007 |
+| Protocol decision | `research/decisions/DECISION-007-SIM-02-protocol-freeze.md` | Exact benchmark and staged gates approved; gate 1 passed |
+| Gate 1 evidence | `results/reports/SIM-02-checkpoint-07-zero-step.md` | Structure audit and LAMMPS `run 0` passed; zero trajectory steps |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -39,19 +41,20 @@ LAMMPS design.
 - [DECIDED] Use LAMMPS eHEX; do not run the static GROMACS initial-slab groups.
 - [DECIDED] Validate at 400 K, then run the 300 K target only after the pilot
   gates pass (DECISION-006).
-- [OPEN] Approve checkpoint 07: the recovered 4,500-water box, 8 Å hot/cold
-  reservoirs, ±0.1614 kcal mol⁻¹ fs⁻¹ exchange, PPPM translation, and staged
-  1 fs → 2 fs validation plan.
-- [TO IMPLEMENT] LAMMPS system construction, run workflow, analysis, and raw
-  result directory. No SIM-02 run output currently exists.
+- [DECIDED] Checkpoint 07 exact benchmark and staged plan approved
+  (DECISION-007).
+- [PASSED] Gate 1: imported-system structure, COM reservoir accounting, current
+  eHEX syntax, RATTLE clusters, and PPPM initialization; `run 0` advanced no
+  trajectory step.
+- [NEXT] Design and run the equilibrium bridge before any eHEX trajectory.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: approve or revise
-`research/designs/SIM-02-checkpoint-07-protocol-freeze.md`, then implement the
-build and zero-step audit. No SIM-02 results are claimed here.
+Next scientific step: freeze the equilibrium-bridge input and acceptance
+criteria, then execute gate 2. No temperature-gradient or polarization result is
+claimed here.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.

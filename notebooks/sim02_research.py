@@ -6,10 +6,11 @@ app = marimo.App(width="medium")
 
 @app.cell
 def _():
+    import json
     import marimo as mo
     from pathlib import Path
 
-    return Path, mo
+    return Path, json, mo
 
 
 @app.cell
@@ -18,9 +19,8 @@ def _(mo):
         r"""
         # SIM-02 — Thermal-gradient NEMD research record
 
-        **Status: engine and 400 K → 300 K sequence approved. The exact published
-        400 K benchmark and staged pilot are proposed at checkpoint 07. No SIM-02
-        trajectory or measured result exists yet.**
+        **Status: checkpoint 07 approved. Gate 1 structure and LAMMPS zero-step
+        audits passed. No NEMD trajectory or polarization result exists yet.**
 
         This notebook is the executable companion to the SIM-02 research book.
         It keeps the chronological record, decisions, expected evidence, and later
@@ -66,9 +66,15 @@ def _(mo):
             },
             {
                 "date": "current",
-                "stage": "Protocol checkpoint",
-                "event": "Checkpoint 07 proposes the exact 400 K benchmark through staged release gates.",
-                "evidence": "awaiting approval",
+                "stage": "Protocol decision",
+                "event": "Checkpoint 07 exact benchmark and staged release gates were approved.",
+                "evidence": "DECISION-007",
+            },
+            {
+                "date": "2026-09-30",
+                "stage": "Gate 1",
+                "event": "The independent structure audit and LAMMPS run 0 passed without advancing the trajectory.",
+                "evidence": "measured zero-step audit",
             },
             {
                 "date": "future",
@@ -127,11 +133,11 @@ def _(mo):
         {"item": "engine", "value": "LAMMPS eHEX", "status": "approved", "basis": "DECISION-005"},
         {"item": "water model", "value": "rigid SPC/E", "status": "approved project model", "basis": "SIM-01 / model files"},
         {"item": "temperature path", "value": "400 K benchmark, then 300 K target", "status": "approved", "basis": "DECISION-006"},
-        {"item": "benchmark system", "value": "4,500 waters; 36.35343 × 36.35343 × 109.06058 Å³", "status": "published / proposed", "basis": "author package"},
+        {"item": "benchmark system", "value": "4,500 waters; 36.35343 × 36.35343 × 109.06058 Å³", "status": "approved; gate 1 passed", "basis": "DECISION-007 / audit"},
         {"item": "time step", "value": "1 fs pilot; test 2 fs", "status": "proposed", "basis": "published production used 2 fs"},
-        {"item": "reservoirs", "value": "hot: edge 4+4 Å; cold: central 8 Å", "status": "published / proposed", "basis": "author input"},
+        {"item": "reservoirs", "value": "hot: edge 4+4 Å; cold: central 8 Å", "status": "approved; syntax passed", "basis": "DECISION-007 / run 0"},
         {"item": "profile acquisition", "value": "120 bins; Δz = 0.9088 Å", "status": "published / proposed", "basis": "merge for reported views"},
-        {"item": "heat rate", "value": "±0.1614 kcal mol⁻¹ fs⁻¹", "status": "published / proposed", "basis": "4.243 × 10¹⁰ W m⁻² per branch"},
+        {"item": "heat rate", "value": "±0.1614 kcal mol⁻¹ fs⁻¹", "status": "approved; not yet applied", "basis": "4.243 × 10¹⁰ W m⁻² per branch"},
         {"item": "pilot duration", "value": "100 ps smoke test, then 1 ns stationarity", "status": "proposed", "basis": "checkpoint 07"},
         {"item": "published reference", "value": "10 ns transient + 60 ns production", "status": "established", "basis": "not yet authorized for execution"},
         {"item": "replicates", "value": "independent seed before reproducible positive claim", "status": "proposed", "basis": "checkpoint 07"},
@@ -160,7 +166,8 @@ def _(mo):
 def _(Path, mo):
     repo_root = Path(__file__).resolve().parents[1]
     expected_paths = [
-        ("LAMMPS input", "simulations/SIM-02/lammps/in.sim02"),
+        ("LAMMPS zero-step input", "simulations/SIM-02/lammps/in.zero-step"),
+        ("zero-step audit", "results/reports/SIM-02-checkpoint-07-zero-step.md"),
         ("run metadata", "results/raw/SIM-02/run-metadata.json"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
         ("energy audit", "results/tables/SIM-02-energy-audit.csv"),
@@ -180,12 +187,34 @@ def _(Path, mo):
 
 
 @app.cell
+def _(json, mo, repo_root):
+    structural = json.loads(
+        (repo_root / "results/raw/SIM-02/checkpoint-07-zero-step/structural-audit.json").read_text()
+    )
+    lammps_audit = json.loads(
+        (repo_root / "results/raw/SIM-02/checkpoint-07-zero-step/lammps-zero-step.json").read_text()
+    )
+    gate_1_results = [
+        {"measurement": "gate outcome", "value": "PASS", "evidence": "two independent audit records"},
+        {"measurement": "molecules / atoms", "value": "4,500 / 13,500", "evidence": "data parse + LAMMPS"},
+        {"measurement": "density", "value": f"{structural['observations']['density_kg_m3']:.6f} kg m⁻³", "evidence": "count, mass, and box"},
+        {"measurement": "reservoir COM counts", "value": str(structural['observations']['reservoir_molecule_counts_by_com']), "evidence": "independent geometry audit"},
+        {"measurement": "PPPM relative accuracy", "value": f"{lammps_audit['observations']['pppm_relative_force_accuracy']:.7g}", "evidence": "LAMMPS initialization"},
+        {"measurement": "diagnostic temperature", "value": f"{lammps_audit['observations']['temperature_K']:.5f} K", "evidence": "step 0; not equilibrium acceptance"},
+        {"measurement": "trajectory steps", "value": "0", "evidence": "LAMMPS log"},
+    ]
+    mo.ui.table(gate_1_results)
+    return (gate_1_results,)
+
+
+@app.cell
 def _(mo):
     mo.md(
         r"""
         ## Checkpoint 07 release gates
 
-        1. Build and zero-step audit: count, box, neutrality, geometry, regions.
+        1. **PASS — build and zero-step audit:** count, box, neutrality,
+           geometry, regions, RATTLE, eHEX syntax, and PPPM initialization.
         2. Equilibrium bridge: NVE temperature, density, O–O structure,
            constraints, and energy behavior.
         3. 100 ps eHEX smoke test at 1 fs: energy ledger, occupancy, profile
@@ -212,6 +241,8 @@ def _(mo, repo_root):
         - Engine decision: `{repo_root / 'research' / 'decisions' / 'DECISION-005-SIM-02-LAMMPS-eHEX.md'}`
         - Design discussion: `{repo_root / 'research' / 'designs' / 'SIM-02-LAMMPS-eHEX-design.md'}`
         - Checkpoint 07: `{repo_root / 'research' / 'designs' / 'SIM-02-checkpoint-07-protocol-freeze.md'}`
+        - Protocol decision: `{repo_root / 'research' / 'decisions' / 'DECISION-007-SIM-02-protocol-freeze.md'}`
+        - Gate 1 report: `{repo_root / 'results' / 'reports' / 'SIM-02-checkpoint-07-zero-step.md'}`
         - Published benchmark audit: `{repo_root / 'research' / 'literature' / 'Wirnsberger-2016-reproduction-notes.md'}`
         - Academic narrative: `{repo_root / 'research' / 'book' / 'SIM-02.md'}`
         - Technical report: `{repo_root / 'results' / 'reports' / 'SIM-02-report.md'}`
