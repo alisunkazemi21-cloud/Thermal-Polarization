@@ -797,7 +797,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <div class="rs-item done"><span class="rs-dot"></span>Model implementation (SPC/E, GROMACS 2025.4)</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-01 equilibrium validation — density, temperature, O-O RDF, self-diffusion all pass</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-02 engine decision — LAMMPS eHEX approved</div>
-      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 detailed design — 400 K validation, then 300 K target</div>
+      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 checkpoint 07 — exact 400 K protocol awaiting approval</div>
       <div class="rs-item"><span class="rs-dot"></span>Cross-liquid comparison</div>
       <div class="rs-item"><span class="rs-dot"></span>Electrical extraction</div>
       <div class="rs-item"><span class="rs-dot"></span>Power characterization</div>
@@ -832,10 +832,10 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <div class="cover-eyebrow"><span class="line"></span> Computational physics — molecular simulation research · Research Book v0.3</div>
   <h1 class="cover-title">Thermal Polarization<br><span class="accent">→ Electrical Work</span></h1>
   <p class="cover-sub">Can a bulk polar liquid subjected to a thermal gradient produce a measurable electrical potential and, ultimately, deliver net electrical power to an external load?</p>
-  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 thermal-gradient design in progress. The static GROMACS slab-group proposal was audited and rejected, LAMMPS eHEX was selected, and detailed physical parameters remain under an explicit design gate before execution.</p>
+  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 thermal-gradient protocol review in progress. The 2016 paper and author package now fix the 4,500-water benchmark geometry, reservoirs, exchange rate, and reference duration. Checkpoint 07 keeps those published facts separate from the proposed staged LAMMPS execution.</p>
   <div class="cover-status">
     <span class="tag hypothesis"><span class="dot"></span>Exploratory research — no result yet claimed</span>
-    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: SIM-02 detailed design</span>
+    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: checkpoint 07 protocol review</span>
   </div>
 
   <div class="cover-diagram">
@@ -1386,7 +1386,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <!-- 01 RESEARCH PROGRESS -->
   <div class="subhead"><span class="sub-num">01</span><h3>Research progress</h3></div>
   <div class="roadmap-track" id="roadmap-track"><!-- injected by JS --></div>
-  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — SIM-02 LAMMPS eHEX method APPROVED — 400 K validation followed by 300 K target APPROVED — implementation not yet started</div>
+  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — LAMMPS eHEX and 400 K → 300 K path APPROVED — exact published 400 K protocol RECOVERED — checkpoint 07 awaiting approval — implementation not yet started</div>
 
   <!-- 02 SIMULATION PROGRAM -->
   <div class="subhead"><span class="sub-num">02</span><h3>Simulation program</h3></div>
@@ -1403,7 +1403,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <p style="font-size:.82rem;">Two real issues found and fixed during this run, both documented rather than silently corrected: a <code>grompp</code> segmentation fault traced to an unreplaced molecule-count placeholder, and a self-diffusion coefficient initially ~140× too small due to periodic-boundary-wrapped trajectory data fed into an Einstein MSD calculation. Full protocol, commands, and both failure/decision records are in the project's git history and <code>results/reports/SIM-01-validation.md</code>.</p>
     </div>
     <div class="sim-block">
-      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">DESIGN APPROVED — implementation pending</span></div>
+      <div class="sim-block-head"><h4>SIM 02 — Thermal-Gradient Reproduction</h4><span class="tag status-planned">PROTOCOL CHECKPOINT — awaiting approval</span></div>
       <p>Purpose: reproduce the established thermopolarization response in bulk water under an imposed thermal gradient.</p>
       <div class="equation-block">\[ \nabla T \rightarrow J_q \rightarrow P(z) \]</div>
       <div class="sim-sub-list" id="sim01-sublist"><!-- injected by JS --></div>
@@ -1748,7 +1748,8 @@ const DEFAULT_LOG = [
   { date:"2024-03-14", source:"A6 — Bedeaux et al. 2025 — literature review", obs:"A general theoretical framework for thermopolarization has been proposed.", interp:"Possible basis for predicting behavior in liquids without existing simulation data — does not itself prove power extraction.", conf:"Medium", next:"Does the theory make any prediction about extractable power, not just field?" },
   { date:"2024-04-02", source:"Scientific audit pass", obs:"Reviewed all imported summaries for overstatement; downgraded three claims (see Section 06).", interp:"Earlier notes conflated field prediction with proof of power generation — corrected.", conf:"High", next:"Formalize Checkpoint 01 criteria before touching simulation methods." },
   { date:"2026-09-19", source:"SIM-01 — real GROMACS 2025.4 execution (github.com/alisunkazemi21-cloud/Thermal-Polarization)", obs:"Self-contained SPC/E model, 510-molecule equilibrium protocol (EM->NVT->NPT->production->diffusion leg) executed end to end. Density 998.55\u00b111.22 kg/m\u00b3, temperature 300.11\u00b17.54 K, O-O RDF peak 0.2725 nm/g=3.02, self-diffusion 2.522\u00d710\u207b\u2079 m\u00b2/s \u2014 all five targets pass. Two real bugs found, root-caused, and fixed: a grompp segfault (unreplaced molecule-count placeholder) and a self-diffusion coefficient ~140x too small from periodic-boundary-wrapped MSD input.", interp:"The self-contained SPC/E model and four-stage equilibrium protocol are validated for this system size and GROMACS installation. No thermopolarization, voltage, current, or power claim is made \u2014 SIM-01 was equilibrium-only by design.", conf:"High", next:"Audit and select the SIM-02 thermal-gradient method." },
-  { date:"2026-09-30", source:"SIM-02 method audit and DECISION-005", obs:"Static initial Hot/Cold/Rest atom groups were rejected as spatial reservoirs for diffusing water. The local LAMMPS 10 Dec 2025 build exposes eHEX, RIGID, SHAKE/RATTLE, and PPPM support.", interp:"LAMMPS eHEX provides dynamic geometric reservoirs and traceable energy exchange for the SIM-02 bulk-water question.", conf:"High", next:"Implement the approved 400 K validation pilot, then proceed to the 300 K target only after acceptance gates pass." }
+  { date:"2026-09-30", source:"SIM-02 method audit and DECISION-005", obs:"Static initial Hot/Cold/Rest atom groups were rejected as spatial reservoirs for diffusing water. The local LAMMPS 10 Dec 2025 build exposes eHEX, RIGID, SHAKE/RATTLE, and PPPM support.", interp:"LAMMPS eHEX provides dynamic geometric reservoirs and traceable energy exchange for the SIM-02 bulk-water question.", conf:"High", next:"Recover and review the exact published 400 K benchmark." },
+  { date:"2026-09-30", source:"Wirnsberger et al. 2016 paper, author package, and checkpoint 07", obs:"The audited benchmark contains 4,500 SPC/E waters in a 36.35343 × 36.35343 × 109.06058 Å³ box. The hot reservoir is split across the periodic edges (4 Å + 4 Å), the cold reservoir is the central 8 Å slab, and the exchange rate is ±0.1614 kcal mol⁻¹ fs⁻¹.", interp:"The exact reference replaces approximate draft values. PPPM and the staged 1 fs → 2 fs bridge remain proposed project translations, not measured results.", conf:"High for source transcription; proposal awaiting approval", next:"Approve or revise checkpoint 07 before creating runnable LAMMPS inputs." }
 ];
 
 /* ============================================================
@@ -1759,13 +1760,15 @@ const GEOMETRY_ASCII =
             \u2191
 
     \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
-    \u2502  HOT RESERVOIR  \u2502
+    \u2502 HOT EDGE (4 \u00c5)  \u2502
     \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
-    \u2502                 \u2502
     \u2502    BULK H\u2082O     \u2502
-    \u2502                 \u2502
     \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
-    \u2502 COLD RESERVOIR  \u2502
+    \u2502 COLD CENTER (8 \u00c5)\u2502
+    \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
+    \u2502    BULK H\u2082O     \u2502
+    \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
+    \u2502 HOT EDGE (4 \u00c5)  \u2502
     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518`;
 
 const EXPERIMENTS = [
@@ -1821,14 +1824,14 @@ const EXPERIMENTS = [
     objective: "Establish a steady-state thermal gradient across the validated equilibrium system.",
     scientificQuestion: "Can a stable, steady-state \u2207T be imposed and maintained across the bulk liquid using the chosen NEMD protocol?",
     hypothesis: "\\text{A steady-state } T(z) \\text{ profile and constant } J_q \\text{ can be established for a physically reasonable } \\nabla T.",
-    system: { species:"H\u2082O", forceField:"SPC/E", molecules:null, density:null, temperature:null, pressure:null, composition:"Pure liquid", initialConfig:"Equilibrated configuration from SIM-02-A01" },
+    system: { species:"H\u2082O", forceField:"SPC/E", molecules:4500, density:"0.934 g/cm³ (published target)", temperature:"400 K benchmark", pressure:"fixed-volume NEMD", composition:"Pure liquid", initialConfig:"Published geometry; project equilibrium bridge required" },
     thermalSetup: "Hot / cold regions",
     method: "LAMMPS enhanced heat exchange (eHEX), NVE production",
-    geometry: { Lx:"open", Ly:"open", Lz:"about 110 Å (proposed)", bins:"about 0.5 Å (proposed)", gradientDirection:"z", boundaryConditions:"periodic", periodicity:"xyz" },
-    thermal: { Th:"400 K mean validation first", Tc:"300 K mean target second", hotRegion:"central z reservoir", coldRegion:"split across periodic z boundary", method:"fix ehex, dynamic region membership", parameters:"Heat rate and exact geometry remain open until implementation derivation" },
+    geometry: { Lx:"36.3534308725 Å", Ly:"36.3534308725 Å", Lz:"109.060578798 Å", bins:"120 acquisition bins; 0.9088 Å", gradientDirection:"z", boundaryConditions:"periodic", periodicity:"xyz" },
+    thermal: { Th:"400 K mean validation first", Tc:"300 K mean target second", hotRegion:"4 Å at each periodic z edge (8 Å total)", coldRegion:"central 8 Å slab", method:"fix ehex, dynamic region membership", parameters:"±0.1614 kcal mol⁻¹ fs⁻¹; 4.243×10¹⁰ W m⁻² per branch" },
     md: [
-      {p:"timestep", v:"1 (proposed)", u:"fs"}, {p:"startup", v:"at least 1 (proposed)", u:"ns"}, {p:"production", v:"up to 10 in checkpoints", u:"ns"},
-      {p:"sampling interval", v:null, u:"fs/ps"}, {p:"cutoff", v:"10", u:"\u00c5"}, {p:"electrostatics", v:"PPPM", u:"\u2014"}, {p:"constraints", v:"RATTLE + eHEX constrain com", u:"\u2014"}
+      {p:"timestep", v:"1 pilot; matched test at 2", u:"fs"}, {p:"smoke test", v:"100", u:"ps"}, {p:"stationarity pilot", v:"1", u:"ns"},
+      {p:"published reference", v:"10 transient + 60 production", u:"ns"}, {p:"cutoff", v:"11", u:"\u00c5"}, {p:"electrostatics", v:"PPPM 10⁻⁵ (proposed translation)", u:"\u2014"}, {p:"constraints", v:"RATTLE 10⁻¹⁰ + eHEX constrain com", u:"\u2014"}
     ],
     analysis: [
       {name:"Temperature profile", eq:"T(z)", purpose:"Verify the thermal gradient is linear and steady in time."},
@@ -1845,9 +1848,9 @@ const EXPERIMENTS = [
       {name:"Density artifact check", note:"Any \u03c1(z) gradient is consistent with expected thermal expansion, not a boundary artifact."}
     ],
     uncertainty: { mean:null, sd:null, se:null, ci:null, blockMethod:null, nIndependent:null },
-    changed: ["engine (GROMACS draft \u2192 LAMMPS)", "thermal mechanism (static atom groups \u2192 dynamic eHEX regions)", "time step (2 fs draft \u2192 1 fs proposed pilot)"],
+    changed: ["engine (GROMACS draft \u2192 LAMMPS)", "thermal mechanism (static atom groups \u2192 dynamic eHEX regions)", "exact published 4,500-water benchmark recovered", "1 fs pilot before testing published 2 fs step"],
     unchanged: ["rigid SPC/E model", "long-range electrostatics intent", "bulk periodic geometry"],
-    unknown: ["exact molecule count and transverse dimensions", "heat rate", "sampling interval", "replication count"],
+    unknown: ["checkpoint 07 approval", "production trajectory storage cadence", "final replication allocation"],
     decisions: [{ decision:"Use LAMMPS eHEX with dynamic geometric reservoirs and constrain-com handling for rigid water.", reason:"Static atom membership does not remain a spatial reservoir as water diffuses.", evidence:"DECISION-004 and DECISION-005, 2026-09-30.", alternative:"Custom GROMACS dynamic reservoirs or restrained fixed molecules.", rejected:"Higher implementation burden or additional interface artifacts." }],
     runs: [],
     interpretation: null, confidence: null, alternativeExplanations: null,

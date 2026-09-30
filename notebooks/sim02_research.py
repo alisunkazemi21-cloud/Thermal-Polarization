@@ -7,10 +7,9 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     import marimo as mo
-    import pandas as pd
     from pathlib import Path
 
-    return Path, mo, pd
+    return Path, mo
 
 
 @app.cell
@@ -19,8 +18,9 @@ def _(mo):
         r"""
         # SIM-02 — Thermal-gradient NEMD research record
 
-        **Status: engine and 400 K → 300 K sequence approved; detailed inputs
-        remain under discussion. No SIM-02 trajectory or measured result exists yet.**
+        **Status: engine and 400 K → 300 K sequence approved. The exact published
+        400 K benchmark and staged pilot are proposed at checkpoint 07. No SIM-02
+        trajectory or measured result exists yet.**
 
         This notebook is the executable companion to the SIM-02 research book.
         It keeps the chronological record, decisions, expected evidence, and later
@@ -32,9 +32,8 @@ def _(mo):
 
 
 @app.cell
-def _(pd):
-    timeline = pd.DataFrame(
-        [
+def _(mo):
+    timeline = [
             {
                 "date": "before 2026-09-30",
                 "stage": "Inherited draft",
@@ -54,10 +53,22 @@ def _(pd):
                 "evidence": "DECISION-005",
             },
             {
+                "date": "2026-09-30",
+                "stage": "Temperature decision",
+                "event": "The 400 K validation → 300 K target sequence was approved.",
+                "evidence": "DECISION-006",
+            },
+            {
+                "date": "2026-09-30",
+                "stage": "Source audit",
+                "event": "The 2016 paper and author package fixed the benchmark geometry, reservoirs, heat rate, and reference duration.",
+                "evidence": "Wirnsberger reproduction notes",
+            },
+            {
                 "date": "current",
-                "stage": "Design discussion",
-                "event": "The 400 K validation → 300 K target sequence was approved; heat rate, geometry, and replication remain open.",
-                "evidence": "SIM-02 eHEX design",
+                "stage": "Protocol checkpoint",
+                "event": "Checkpoint 07 proposes the exact 400 K benchmark through staged release gates.",
+                "evidence": "awaiting approval",
             },
             {
                 "date": "future",
@@ -66,8 +77,7 @@ def _(pd):
                 "evidence": "to test",
             },
         ]
-    )
-    timeline
+    mo.ui.table(timeline)
     return (timeline,)
 
 
@@ -92,9 +102,8 @@ def _(mo):
 
 
 @app.cell
-def _(pd):
-    method_comparison = pd.DataFrame(
-        [
+def _(mo):
+    method_comparison = [
             {
                 "method": "GROMACS tc-grps with initial slab groups",
                 "spatial membership": "fixed atom identity",
@@ -108,33 +117,47 @@ def _(pd):
                 "reason": "implements controlled heat exchange in spatial reservoirs",
             },
         ]
-    )
-    method_comparison
+    mo.ui.table(method_comparison)
     return (method_comparison,)
 
 
 @app.cell
-def _(pd):
-    design_register = pd.DataFrame(
-        [
-            ["engine", "LAMMPS eHEX", "approved", "DECISION-005"],
-            ["water model", "rigid SPC/E", "approved project model", "SIM-01 / model files"],
-            ["temperature path", "400 K benchmark, then 300 K target", "approved", "DECISION-006"],
-            ["time step", "1 fs", "proposed", "pilot validation required"],
-            ["reservoir width", "4 Å at each boundary region", "proposed", "sensitivity check required"],
-            ["profile bin width", "about 0.5 Å", "proposed", "occupancy check required"],
-            ["production duration", "up to 10 ns in checkpoints", "proposed", "stationarity decides usable window"],
-            ["heat rate", "undecided", "open", "pilot sweep required"],
-            ["replicates", "undecided", "open", "uncertainty design required"],
-        ],
-        columns=["item", "value", "status", "basis"],
-    )
-    design_register
+def _(mo):
+    design_register = [
+        {"item": "engine", "value": "LAMMPS eHEX", "status": "approved", "basis": "DECISION-005"},
+        {"item": "water model", "value": "rigid SPC/E", "status": "approved project model", "basis": "SIM-01 / model files"},
+        {"item": "temperature path", "value": "400 K benchmark, then 300 K target", "status": "approved", "basis": "DECISION-006"},
+        {"item": "benchmark system", "value": "4,500 waters; 36.35343 × 36.35343 × 109.06058 Å³", "status": "published / proposed", "basis": "author package"},
+        {"item": "time step", "value": "1 fs pilot; test 2 fs", "status": "proposed", "basis": "published production used 2 fs"},
+        {"item": "reservoirs", "value": "hot: edge 4+4 Å; cold: central 8 Å", "status": "published / proposed", "basis": "author input"},
+        {"item": "profile acquisition", "value": "120 bins; Δz = 0.9088 Å", "status": "published / proposed", "basis": "merge for reported views"},
+        {"item": "heat rate", "value": "±0.1614 kcal mol⁻¹ fs⁻¹", "status": "published / proposed", "basis": "4.243 × 10¹⁰ W m⁻² per branch"},
+        {"item": "pilot duration", "value": "100 ps smoke test, then 1 ns stationarity", "status": "proposed", "basis": "checkpoint 07"},
+        {"item": "published reference", "value": "10 ns transient + 60 ns production", "status": "established", "basis": "not yet authorized for execution"},
+        {"item": "replicates", "value": "independent seed before reproducible positive claim", "status": "proposed", "basis": "checkpoint 07"},
+    ]
+    mo.ui.table(design_register)
     return (design_register,)
 
 
 @app.cell
-def _(Path, pd):
+def _(mo):
+    exchange_kcal_mol_fs = 0.1614
+    lx_angstrom = 36.3534308725
+    watts = exchange_kcal_mol_fs * 4184 / 6.02214076e23 / 1e-15
+    area_m2 = (lx_angstrom * 1e-10) ** 2
+    branch_flux_w_m2 = watts / (2 * area_m2)
+    benchmark_calculation = [
+        {"quantity": "exchange power", "value": watts, "unit": "W", "derivation": "converted from author input"},
+        {"quantity": "transverse area", "value": area_m2, "unit": "m²", "derivation": "published box"},
+        {"quantity": "heat flux per branch", "value": branch_flux_w_m2, "unit": "W m⁻²", "derivation": "F / (2 A)"},
+    ]
+    mo.ui.table(benchmark_calculation)
+    return (benchmark_calculation,)
+
+
+@app.cell
+def _(Path, mo):
     repo_root = Path(__file__).resolve().parents[1]
     expected_paths = [
         ("LAMMPS input", "simulations/SIM-02/lammps/in.sim02"),
@@ -143,17 +166,16 @@ def _(Path, pd):
         ("energy audit", "results/tables/SIM-02-energy-audit.csv"),
         ("production report", "results/reports/SIM-02-report.md"),
     ]
-    evidence_registry = pd.DataFrame(
+    evidence_registry = [
         {
-            "artifact": [label for label, _ in expected_paths],
-            "path": [path for _, path in expected_paths],
-            "state": [
+            "artifact": label,
+            "path": path,
+            "state":
                 "present" if (repo_root / path).exists() else "missing / not yet produced"
-                for _, path in expected_paths
-            ],
         }
-    )
-    evidence_registry
+        for label, path in expected_paths
+    ]
+    mo.ui.table(evidence_registry)
     return evidence_registry, repo_root
 
 
@@ -161,19 +183,17 @@ def _(Path, pd):
 def _(mo):
     mo.md(
         r"""
-        ## Pilot acceptance gates
+        ## Checkpoint 07 release gates
 
-        1. The constructed system has the recorded molecule count, dimensions,
-           mass density, and charge neutrality.
-        2. Constraints remain stable and equilibrium quantities are compatible
-           with the validated SIM-01 baseline at the chosen condition.
-        3. The imposed hot/cold exchange is equal and opposite within documented
-           numerical tolerance, with no unacceptable secular energy drift.
-        4. Regional membership follows molecular position and treats each rigid
-           water molecule consistently.
-        5. The temperature profile becomes stationary over documented time blocks.
-        6. Any reported gradient includes block uncertainty and sensitivity to
-           excluded reservoir/interface bins.
+        1. Build and zero-step audit: count, box, neutrality, geometry, regions.
+        2. Equilibrium bridge: NVE temperature, density, O–O structure,
+           constraints, and energy behavior.
+        3. 100 ps eHEX smoke test at 1 fs: energy ledger, occupancy, profile
+           direction, and absence of cavitation.
+        4. Matched 1 fs versus 2 fs test from the same prepared state.
+        5. 1 ns stationarity pilot with unfolded branches and block evolution.
+        6. Production release only when those records justify the allocation;
+           an independent seed is required before a positive reproducibility claim.
 
         A failed gate is a recorded result. It triggers a documented change and a
         new pilot; it cannot be silently tuned away.
@@ -191,6 +211,8 @@ def _(mo, repo_root):
         - Workflow: `{repo_root / 'research' / 'WORKFLOW.md'}`
         - Engine decision: `{repo_root / 'research' / 'decisions' / 'DECISION-005-SIM-02-LAMMPS-eHEX.md'}`
         - Design discussion: `{repo_root / 'research' / 'designs' / 'SIM-02-LAMMPS-eHEX-design.md'}`
+        - Checkpoint 07: `{repo_root / 'research' / 'designs' / 'SIM-02-checkpoint-07-protocol-freeze.md'}`
+        - Published benchmark audit: `{repo_root / 'research' / 'literature' / 'Wirnsberger-2016-reproduction-notes.md'}`
         - Academic narrative: `{repo_root / 'research' / 'book' / 'SIM-02.md'}`
         - Technical report: `{repo_root / 'results' / 'reports' / 'SIM-02-report.md'}`
         - Long-form video treatment: `{repo_root / 'research' / 'media' / 'SIM-02-longform-youtube.md'}`

@@ -7,8 +7,9 @@ Inspected: 2026-09-30. This is a navigation summary, not simulation evidence.
 Resume SIM-02 from Claude's drafts. Graphify and the token-efficient project
 guidance are established. The method audit found that the drafted static
 `Hot/Cold/Rest` GROMACS groups do not implement spatial reservoirs for diffusing
-water. On 2026-09-30 the user approved LAMMPS eHEX; detailed design choices
-remain open before implementation.
+water. On 2026-09-30 the user approved LAMMPS eHEX. The exact published 400 K
+benchmark has now been recovered; checkpoint 07 awaits approval before
+implementation.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -23,9 +24,10 @@ remain open before implementation.
 | SIM-02 method audit | `research/decisions/DECISION-004-SIM-02-method-audit.md` | Stock-GROMACS `tc-grps` approach rejected |
 | SIM-02 engine decision | `research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md` | LAMMPS eHEX approved; local build has eHEX/RIGID/SHAKE/PPPM |
 | SIM-02 temperature path | `research/decisions/DECISION-006-SIM-02-temperature-path.md` | 400 K validation followed by 300 K target approved |
-| SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Temperature sequence approved; heat rate, exact box/count, and replication remain open |
+| SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Exact published box, reservoirs, and heat rate recovered; staged pilot awaits approval |
+| Protocol checkpoint | `research/designs/SIM-02-checkpoint-07-protocol-freeze.md` | Proposed exact 400 K implementation and release gates |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
-| Literature notes | `research/literature/README.md` | Empty; citations in supplied prompt are leads, not verified literature evidence |
+| Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
 ## Historical SIM-02 draft (rejected method, not validated behavior)
 The inherited GROMACS draft proposed 500 ps startup, 1500 ps production,
@@ -37,8 +39,9 @@ LAMMPS design.
 - [DECIDED] Use LAMMPS eHEX; do not run the static GROMACS initial-slab groups.
 - [DECIDED] Validate at 400 K, then run the 300 K target only after the pilot
   gates pass (DECISION-006).
-- [OPEN] Approve the exact molecule count, box dimensions, reservoir widths,
-  profile bin width, seeds, heat rate, run lengths, and replication plan.
+- [OPEN] Approve checkpoint 07: the recovered 4,500-water box, 8 Å hot/cold
+  reservoirs, ±0.1614 kcal mol⁻¹ fs⁻¹ exchange, PPPM translation, and staged
+  1 fs → 2 fs validation plan.
 - [TO IMPLEMENT] LAMMPS system construction, run workflow, analysis, and raw
   result directory. No SIM-02 run output currently exists.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
@@ -46,9 +49,9 @@ LAMMPS design.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: discuss and approve the design in
-`research/designs/SIM-02-LAMMPS-eHEX-design.md`, then implement the equilibrium
-bridge and eHEX pilot. No SIM-02 results are claimed here.
+Next scientific step: approve or revise
+`research/designs/SIM-02-checkpoint-07-protocol-freeze.md`, then implement the
+build and zero-step audit. No SIM-02 results are claimed here.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.

@@ -106,12 +106,14 @@ question.”
 
 ## Act IV — designing the experiment before touching Run, 34:00–43:00
 
-Walk through the open design table without pretending the proposals are final:
+Show how the author replication package replaced estimates with a reproducible
+benchmark, while keeping the project proposal visibly distinct from literature:
 
-- roughly 1800 waters and an elongated box;
-- 1 fs conservative timestep;
-- PPPM electrostatics and rigid SPC/E;
-- 4 Å reservoirs;
+- 4,500 waters in the exact published elongated box;
+- hot slabs at the periodic edges and a cold central slab, 8 Å total each;
+- ±0.1614 kcal mol⁻¹ fs⁻¹, including the factor of two in branch heat flux;
+- a 1 fs conservative pilot before testing the published 2 fs timestep;
+- PPPM as a documented translation from the published Ewald calculation;
 - equilibrium preparation followed by NVE+eHEX;
 - 400 K literature benchmark versus 300 K target;
 - block uncertainty and an independent seed requirement.

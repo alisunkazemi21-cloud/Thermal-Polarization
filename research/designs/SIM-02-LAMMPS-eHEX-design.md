@@ -11,8 +11,8 @@ reproducible signed polarization profile that exceeds block uncertainty?
 
 ## Minimal experiment shape
 
-Use a periodic elongated water box. Add energy in a central z reservoir and
-remove the same amount in a cold reservoir split across the periodic z boundary.
+Use a periodic elongated water box. Add energy in a hot reservoir split across
+the periodic z boundary and remove the same amount in a central cold reservoir.
 This creates two mirror-related transport branches. Run NVE plus eHEX after
 equilibrium preparation, then fold the two branches only after checking their
 unfolded agreement.
@@ -24,15 +24,15 @@ unfolded agreement.
 | Model | rigid SPC/E | Reuse SIM-01 parameters; official LAMMPS recipe available |
 | Integrator | velocity Verlet + RATTLE | Required for highest eHEX constraint accuracy |
 | Timestep | 1 fs initially | Conservative literature-compatible choice; 2 fs may be tested later |
-| Electrostatics | `lj/cut/coul/long` + PPPM, 10 Å real-space cutoff | Consistent with SIM-01 long-range electrostatics intent |
-| System size | about 1800 waters in an elongated box | Literature scale; exact transverse dimensions derive from target density |
-| Long dimension | about 110 Å along z | Resolves two gradients and reservoirs |
-| Reservoir thickness | 4 Å hot and 4 Å total cold region | Armstrong/Bresme protocol scale |
+| Electrostatics | `lj/cut/coul/long` + PPPM, 11 Å real-space cutoff, accuracy 10⁻⁵ | Deliberate modern translation from the published Ewald benchmark |
+| System size | 4,500 waters; 36.3534308725 × 36.3534308725 × 109.060578798 Å³ | Exact author-package benchmark |
+| Long dimension | 109.060578798 Å along z | Exact author-package benchmark |
+| Reservoir thickness | hot: 4 Å at each periodic edge; cold: central 8 Å | Exact author-package benchmark |
 | Ensemble | NPT preparation → fixed-volume NVE+eHEX | Avoid barostatting a nonequilibrium gradient |
 | eHEX options | every step, `constrain com` | Dynamic molecular membership with constrained water |
-| Spatial bins | start near 0.5 Å, merge for statistics if needed | Literature resolution; acceptance depends on occupancy/noise |
-| Startup | at least 1 ns, extended until profile stationarity | Literature baseline; stationarity decides |
-| Production | plan up to 10 ns, released in blocks | Literature baseline; pilot signal/noise decides |
+| Spatial bins | acquire at 0.9088 Å; report merged 2.73 Å and 5.45 Å views | Author input and published presentation resolutions |
+| Startup | staged 100 ps smoke test then 1 ns stationarity pilot | Checkpoint release before published-scale allocation |
+| Published reference | 10 ns transient plus 60 ns production | Target only after pilot evidence justifies it |
 
 ## Decisions still open
 
@@ -49,16 +49,15 @@ checkpoint passes. This is a two-condition validation path, not a parameter swee
 
 ### Heat rate
 
-`[OPEN]` Select one published heat-flux condition after the final cross-sectional
-area is known. In LAMMPS real units, `fix ehex` takes energy per time, so the
-conversion from heat flux must include the transverse area and the two symmetric
-transport branches. Record the derivation and verify it independently before use.
+`[PROPOSED]` Use the recovered benchmark rate of ±0.1614 kcal mol⁻¹ fs⁻¹.
+Dividing by twice the published transverse area gives
+4.243 × 10¹⁰ W m⁻² per symmetric transport branch, matching the paper.
 
 ### Exact dimensions and molecule count
 
-`[OPEN]` Prefer approximately 1800 molecules and Lz ≈ 110 Å. Derive Lx=Ly from
-the chosen mean-temperature density rather than copying a dimension that implies
-the wrong density. Confirm the realized count and density after construction.
+`[PROPOSED]` Reproduce the author-package system: 4,500 molecules and the exact
+box listed above. The recovered count and volume independently give the
+published density of 0.934 g cm⁻³.
 
 ### Replication
 
@@ -107,3 +106,6 @@ notebooks/
 ```
 
 No simulation result is asserted in this design document.
+
+The exact staged proposal is recorded in
+`research/designs/SIM-02-checkpoint-07-protocol-freeze.md`.
