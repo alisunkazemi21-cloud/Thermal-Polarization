@@ -8,12 +8,11 @@ Resume SIM-02 from Claude's drafts. Graphify and the token-efficient project
 guidance are established. The method audit found that the drafted static
 `Hot/Cold/Rest` GROMACS groups do not implement spatial reservoirs for diffusing
 water. On 2026-09-30 the user approved LAMMPS eHEX. The exact published 400 K
-benchmark and staged gates were approved in DECISION-007. Gate 1, the build and
-zero-step audit, passed. Checkpoint 08 and its frozen equilibrium-bridge
-acceptance criteria were approved in DECISION-008. The corrected four-rank
-equilibrium bridge started from commit `a1da7bb` on 2026-10-03 and was stopped
-at its first integrated diagnostic: Stage-A COM speed exceeded the frozen
-ceiling. Gate 2 failed at 2 ps and requires a new momentum-control decision.
+benchmark and staged gates were approved in DECISION-007. Gate 1 passed.
+Checkpoint 08 was stopped at 2 ps after its COM criterion failed. The user then
+approved DECISION-009: preparation-only momentum control with zero-step, 2 ps,
+20 ps, NVT-transition, and uncorrected-NVE checks. The first two checks passed;
+the 20 ps Stage-A diagnostic is in progress.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -34,7 +33,8 @@ ceiling. Gate 2 failed at 2 ps and requires a new momentum-control decision.
 | Gate 1 evidence | `results/reports/SIM-02-checkpoint-07-zero-step.md` | Structure audit and LAMMPS `run 0` passed; zero trajectory steps |
 | Gate 2 protocol | `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` | Fixed-volume bridge approved in DECISION-008; first integrated attempt failed the COM criterion |
 | Gate 2 failure | `results/reports/SIM-02-checkpoint-08-stage-a-com-drift.md` | Step 1000: 1.0278e-5 Å/fs; step 2000: 1.2511e-5 Å/fs versus 1e-6 ceiling; stopped |
-| Checkpoint 09 proposal | `research/designs/SIM-02-checkpoint-09-preparation-momentum-control.md` | Preparation-only momentum correction and bounded retest proposed; not approved |
+| Checkpoint 09 decision | `research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md` | User approved preparation-only momentum control and bounded diagnostics |
+| Checkpoint 09 diagnostics | `results/raw/SIM-02/checkpoint-09-diagnostics/` | Four-rank zero-step passed; 2 ps Stage-A passed at 400 K with COM removed every 100 steps; 20 ps Stage-A is running |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -64,17 +64,24 @@ LAMMPS design.
   `1.25105105e-5 Å/fs` at step 2000. Both exceed the `1e-6 Å/fs` ceiling, and
   the increase violates the no-growth condition. The run was stopped during
   Stage A; no LAMMPS warning or error occurred.
-- [NEXT CHECKPOINT] Decide and validate preparation-stage momentum control before
-  relaunch. No eHEX trajectory is released.
+- [APPROVED / IN PROGRESS] DECISION-009 applies `fix momentum 100 linear 1 1 1
+  rescale` in Stage A and B only, places RATTLE after velocity-changing fixes,
+  and removes the momentum fix before NVE. Four-rank zero-step initialization
+  passed. A 2 ps Stage-A diagnostic completed at exactly 400 K with all sampled
+  COM speeds many orders below `1e-6 Å/fs`; the 20 ps Stage-A check is running.
+- [NEXT] Complete 20 ps Stage A, then the short Stage-B transition and uncorrected
+  NVE diagnostic. A full bridge relaunch depends on those checks passing.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: review the checkpoint-08 Stage-A COM-drift failure and
-approve a bounded momentum-control correction before relaunch. The source paper omits its NpT target
-pressure, so this bridge keeps the exact published box rather than inventing
-that parameter. No temperature-gradient or polarization result is claimed here.
+Next scientific step: complete the checkpoint-09 20 ps Stage-A check, then the
+short NVT-transition and NVE-without-periodic-momentum diagnostics. A full bridge
+relaunch depends on those checks passing. The source paper omits its NpT target
+pressure, so the bridge keeps the exact published box rather than inventing
+that parameter. No equilibrium, temperature-gradient, or polarization result
+is claimed here.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.

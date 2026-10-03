@@ -1,0 +1,51 @@
+{
+  "record_type": "bounded_diagnostic_status",
+  "checkpoint": "SIM-02-09",
+  "status_at": "2026-10-03T21:29:30+03:30",
+  "decision": "DECISION-009",
+  "input": "simulations/SIM-02/lammps/in.equilibrium-bridge",
+  "execution": {
+    "engine": "LAMMPS 10 Dec 2025",
+    "mpi_ranks": 4,
+    "suffix": "opt",
+    "timestep_fs": 1
+  },
+  "diagnostics": [
+    {
+      "name": "production_path_zero_step",
+      "status": "passed",
+      "final_step": 0,
+      "notes": "PPPM and RATTLE initialized; full input completed without LAMMPS warning or error."
+    },
+    {
+      "name": "stage_a_2ps",
+      "status": "passed",
+      "steps": 2000,
+      "thermo_interval_steps": 100,
+      "temperature_K": 400.0,
+      "max_sampled_com_speed_angstrom_per_fs": 6.5634249714037e-19,
+      "com_speed_limit_angstrom_per_fs": 1.0e-6,
+      "loop_time_seconds": 643.946,
+      "steps_per_second": 3.106,
+      "notes": "20 integrated samples from steps 100 through 2000; temperature was exactly 400 K in each."
+    },
+    {
+      "name": "stage_a_20ps",
+      "status": "running",
+      "planned_steps": 20000,
+      "last_observed_step": 1600,
+      "thermo_interval_steps": 100,
+      "max_sampled_com_speed_angstrom_per_fs_at_last_check": 6.5634249714037e-19,
+      "notes": "16 samples observed; all at 400 K and below the COM limit."
+    },
+    {
+      "name": "stage_b_transition",
+      "status": "pending"
+    },
+    {
+      "name": "nve_without_periodic_momentum_control",
+      "status": "pending"
+    }
+  ],
+  "scientific_interpretation": "Implementation diagnostics only. The full equilibrium bridge has not passed; NVT and NVE transition diagnostics are pending."
+}

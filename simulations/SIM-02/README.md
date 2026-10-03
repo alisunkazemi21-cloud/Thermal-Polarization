@@ -2,7 +2,9 @@
 
 Status: **checkpoint 07 gate 1 passed. The approved checkpoint 08 equilibrium
 bridge was stopped at 2 ps because Stage-A COM speed exceeded the frozen
-criterion. Gate 2 failed; no polarization result exists.**
+criterion. DECISION-009 approved a preparation-only correction; zero-step and
+2 ps checks pass, and the 20 ps Stage-A revalidation is running. No equilibrium
+or polarization result exists.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -83,6 +85,14 @@ LAMMPS emitted no warning or error; this is a scientific acceptance failure.
 The compact record is `results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json`
 and the preserved evidence is under
 `history/SIM-02-checkpoint-08-stage-a-com-drift/`.
+
+Checkpoint 09 adds `fix momentum 100 linear 1 1 1 rescale` in Stages A and B,
+places RATTLE after velocity-changing fixes, and removes periodic momentum
+control before Stage D NVE. The first bounded 2 ps Stage-A test held 400 K and
+reported COM components near round-off at 100-step intervals. The full 20 ps
+Stage-A diagnostic is now running; see DECISION-009 and the checkpoint-09 raw
+diagnostic directory. This is implementation validation only, not an equilibrium
+bridge pass.
 
 ## Documentation contract
 

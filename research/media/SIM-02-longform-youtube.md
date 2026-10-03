@@ -165,8 +165,11 @@ predeclared ceiling. Then reveal the first integrated records: `1.0278e-5 Å/fs`
 at 1 ps and `1.2511e-5 Å/fs` at 2 ps. Temperature stayed exactly 400 K, yet the
 momentum criterion failed without a LAMMPS error. Stop the on-screen run there.
 This is the story's second implementation failure and shows why passing step zero
-is necessary but insufficient. The next checkpoint must decide preparation-stage
-momentum control before any full relaunch.
+is necessary but insufficient. The user approved DECISION-009. Show the
+preparation-only momentum correction, the 2 ps diagnostic at 400 K with COM near
+round-off, and the 20 ps extension as it completes. Keep the gate labeled
+**revalidation in progress** until the Stage-B transition and uncorrected NVE
+diagnostic also pass.
 
 ### 9. The eHEX pilot
 

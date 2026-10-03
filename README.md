@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 stopped at 2 ps on COM-drift criterion |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 failed its COM criterion; checkpoint 09 revalidation is underway |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -47,6 +47,7 @@ See:
 - [checkpoint 08 approval](research/decisions/DECISION-008-SIM-02-equilibrium-bridge.md)
 - [checkpoint 08 Stage-A failure report](results/reports/SIM-02-checkpoint-08-stage-a-com-drift.md)
 - [checkpoint 09 momentum-control proposal](research/designs/SIM-02-checkpoint-09-preparation-momentum-control.md)
+- [checkpoint 09 approval](research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md)
 
 ## Research workflow
 

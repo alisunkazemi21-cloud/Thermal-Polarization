@@ -6,7 +6,8 @@ Should checkpoint 08 be revised to remove whole-system linear momentum every
 100 steps during thermostatted preparation only, with kinetic-energy rescaling,
 then disable that operation before the NVE acceptance stage?
 
-Status: **proposed for review; not approved; input unchanged.**
+Status: **approved by the user on 2026-10-03; zero-step and 2 ps Stage-A checks
+passed; 20 ps Stage-A check running.**
 
 ## Triggering evidence
 
@@ -52,7 +53,7 @@ velocity correction, parallel round-off, and the current fix ordering permits
 small global momentum errors to accumulate. The short record does not isolate
 one component as the sole cause.
 
-`[DECISION NEEDED]` Periodic momentum removal would be confined to preparation,
+`[APPROVED]` Periodic momentum removal is confined to preparation,
 where velocities are already deliberately changed by temperature control. It
 would be absent from Stage D so the NVE no-growth test remains an unmasked
 integrator/constraint diagnostic.
@@ -83,9 +84,17 @@ integrator/constraint diagnostic.
    COM ceiling and no-growth condition.
 6. Only then relaunch the full 1.52 ns bridge from step zero.
 
+## Progress record
+
+- Four-rank OPT production-path zero-step check: **passed**; all stages parsed,
+  PPPM and RATTLE initialized, and the input completed at step 0.
+- Four-rank OPT Stage-A 2 ps diagnostic: **passed**; all samples every 100
+  steps reported 400 K and COM components at approximately `1e-19 Å/fs`.
+- Four-rank OPT Stage-A 20 ps diagnostic: **running**; outcome pending.
+
 ## Approval boundary
 
-Approval of this checkpoint would authorize only the input revision and bounded
-diagnostic sequence above. It would not approve eHEX, change the frozen box,
+The user approved only the input revision and bounded diagnostic sequence above.
+This does not approve eHEX, change the frozen box,
 temperature path, timestep, force field, electrostatics, or gate-2 acceptance
 tests.

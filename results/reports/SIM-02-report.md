@@ -1,7 +1,8 @@
 # SIM-02 technical report — execution record
 
-Status: **gate 1 zero-step audit passed; checkpoint 08 failed at 2 ps because
-Stage-A COM speed exceeded the frozen criterion; no polarization result exists.**
+Status: **gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
+checkpoint 09 zero-step and 2 ps checks passed, with the 20 ps Stage-A check
+running. No equilibrium or polarization result exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -38,6 +39,16 @@ step 2,000. The run was stopped because both values exceed the ceiling and the
 increase violates the no-growth condition. No LAMMPS warning or error occurred.
 See
 `results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json`.
+
+`[CHECKPOINT 09 IMPLEMENTATION CHECKS]` The approved input now applies
+`fix momentum 100 linear 1 1 1 rescale` only during Stage A and Stage B, with
+RATTLE defined after velocity-changing fixes. Periodic momentum control is
+removed before Stage D. The four-rank production-path zero-step check passed.
+The 2 ps Stage-A diagnostic completed with 20 samples every 100 steps, each at
+400 K; the maximum sampled COM speed was `6.5634e-19 Å/fs`. The 20 ps Stage-A
+extension is running; its latest checked step is 1,600. These diagnostics do not
+establish an equilibrium bridge pass. See
+`results/raw/SIM-02/checkpoint-09-diagnostics/checkpoint-09-summary.json`.
 
 ## 5. eHEX pilot
 

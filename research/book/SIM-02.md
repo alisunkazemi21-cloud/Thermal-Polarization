@@ -8,9 +8,9 @@ is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
 Status on 2026-10-03: **method, temperature sequence, and exact 400 K protocol
-approved; gate 1 zero-step audit passed; checkpoint 08 was stopped at 2 ps when
-Stage-A COM speed exceeded its frozen ceiling. Gate 2 failed; no polarization
-result exists.**
+approved; gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
+checkpoint 09 zero-step and 2 ps checks passed, and the 20 ps Stage-A
+revalidation is running. No equilibrium or polarization result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -41,7 +41,9 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-01 | First four-rank launch stopped at step zero | Measured implementation failure | RATTLE initialization left a resolved COM velocity; input corrected to remove momentum after constraint initialization |
 | 2026-10-03 | MPI initialization correction approved | Approved decision | `1e-6 Å/fs` COM-speed ceiling plus no-growth requirement frozen; relaunch authorized from step zero |
 | 2026-10-03 | Corrected checkpoint 08 bridge launched and stopped | Measured acceptance failure | Initialization passed, but COM speed reached `1.0278e-5 Å/fs` at 1 ps and `1.2511e-5 Å/fs` at 2 ps versus the `1e-6 Å/fs` ceiling |
-| 2026-10-03 | Checkpoint 09 prepared | Proposed | Preparation-only linear-momentum removal with energy rescaling and corrected RATTLE ordering awaits review |
+| 2026-10-03 | DECISION-009 approved | Approved decision | Preparation-only momentum control and bounded revalidation sequence authorized |
+| 2026-10-03 | Checkpoint 09 zero-step and 2 ps checks | Measured implementation evidence | Corrected input initialized; Stage A was 400 K and maximum sampled COM speed was `6.5634e-19 Å/fs` every 100 steps |
+| 2026-10-03 | Checkpoint 09 20 ps Stage-A check | Running | Extension is in progress; Stage-B and NVE diagnostics remain pending |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -116,7 +118,7 @@ does not measure equilibrium energy drift, structure, or stationarity. The
 compact provenance record is
 `results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json`.
 
-`[PROPOSED]` Checkpoint 09 confines periodic linear-momentum removal to the
+`[DECIDED]` Checkpoint 09 confines periodic linear-momentum removal to the
 already thermostatted preparation stages, uses kinetic-energy rescaling, and
 removes the operation before NVE. This preserves the original NVE no-growth test
 rather than hiding drift inside the measured stage. The proposal also corrects
