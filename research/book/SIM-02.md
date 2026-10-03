@@ -7,9 +7,10 @@ stationary temperature gradient and a signed molecular polarization profile that
 is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
-Status on 2026-09-30: **method, temperature sequence, and exact 400 K protocol
-approved; gate 1 zero-step audit passed; checkpoint 08 equilibrium design is
-approved in DECISION-008; no gate-2 result or polarization result exists.**
+Status on 2026-10-03: **method, temperature sequence, and exact 400 K protocol
+approved; gate 1 zero-step audit passed; checkpoint 08 was stopped at 2 ps when
+Stage-A COM speed exceeded its frozen ceiling. Gate 2 failed; no polarization
+result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -39,6 +40,8 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-01 | DECISION-008 approved | Approved decision | Fixed-volume PPPM bridge released for execution; outcome remains to be measured |
 | 2026-10-01 | First four-rank launch stopped at step zero | Measured implementation failure | RATTLE initialization left a resolved COM velocity; input corrected to remove momentum after constraint initialization |
 | 2026-10-03 | MPI initialization correction approved | Approved decision | `1e-6 Å/fs` COM-speed ceiling plus no-growth requirement frozen; relaunch authorized from step zero |
+| 2026-10-03 | Corrected checkpoint 08 bridge launched and stopped | Measured acceptance failure | Initialization passed, but COM speed reached `1.0278e-5 Å/fs` at 1 ps and `1.2511e-5 Å/fs` at 2 ps versus the `1e-6 Å/fs` ceiling |
+| 2026-10-03 | Checkpoint 09 prepared | Proposed | Preparation-only linear-momentum removal with energy rescaling and corrected RATTLE ordering awaits review |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -100,6 +103,25 @@ and O–O structural stationarity have thresholds frozen before execution.
 
 `[OPEN]` Until those 1.52 million steps run and the evidence is analyzed, gate 2
 has no outcome. Passing it would release only the 100 ps eHEX smoke test.
+
+`[MEASURED FAILURE]` The corrected bridge launched at 20:22:39 +03:30 on
+2026-10-03 with four MPI ranks and the LAMMPS OPT suffix. At the corrected
+step-zero boundary, the COM velocity was
+`(-4.1019714e-7, -1.4053665e-7, 6.9854399e-8) Å/fs`, giving a speed of
+`4.3903e-7 Å/fs`. After integration it rose to `1.02778929e-5 Å/fs` at 1 ps
+and `1.25105105e-5 Å/fs` at 2 ps. Both exceed the frozen ceiling and the growth
+condition failed, so the run was stopped during Stage A. Temperature was 400 K
+at both records and LAMMPS reported no warning or error. This short failed run
+does not measure equilibrium energy drift, structure, or stationarity. The
+compact provenance record is
+`results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json`.
+
+`[PROPOSED]` Checkpoint 09 confines periodic linear-momentum removal to the
+already thermostatted preparation stages, uses kinetic-energy rescaling, and
+removes the operation before NVE. This preserves the original NVE no-growth test
+rather than hiding drift inside the measured stage. The proposal also corrects
+Stage A's fix ordering so RATTLE is defined after velocity-modifying fixes, as
+required by the LAMMPS documentation. No input has been changed pending review.
 
 ## Evidence that must exist before a claim
 

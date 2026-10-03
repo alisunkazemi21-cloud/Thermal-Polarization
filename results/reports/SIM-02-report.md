@@ -1,7 +1,7 @@
-# SIM-02 technical report — pre-execution record
+# SIM-02 technical report — execution record
 
-Status: **gate 1 zero-step audit passed; checkpoint 08 equilibrium bridge is
-approved in DECISION-008; no gate-2 result or polarization result exists.**
+Status: **gate 1 zero-step audit passed; checkpoint 08 failed at 2 ps because
+Stage-A COM speed exceeded the frozen criterion; no polarization result exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -24,11 +24,20 @@ deterministic structure audit and LAMMPS 10 Dec 2025 `run 0` passed. See
 
 ## 4. Equilibrium bridge
 
-`[APPROVED; TO TEST]` Checkpoint 08 keeps the exact author box, replaces the imported
+`[FAILED AT 2 PS]` Checkpoint 08 keeps the exact author box, replaces the imported
 steady-state velocities using seed `20260930`, and schedules 20 ps direct
 rescaling, 500 ps NVT, and 1 ns NVE at 1 fs. Temperature, O–O RDF, constraint
 stability, energy drift, z-temperature flattening, and momentum have frozen
-acceptance tests. No checkpoint-08 trajectory has run.
+acceptance tests.
+
+`[MEASURED FAILURE]` The corrected four-rank OPT launch began at
+2026-10-03T20:22:39+03:30 from commit `a1da7bb`. Its corrected step-zero COM
+speed was `4.3903e-7 Å/fs`, below the approved `1e-6 Å/fs` ceiling. The speed
+then reached `1.02778929e-5 Å/fs` at step 1,000 and `1.25105105e-5 Å/fs` at
+step 2,000. The run was stopped because both values exceed the ceiling and the
+increase violates the no-growth condition. No LAMMPS warning or error occurred.
+See
+`results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json`.
 
 ## 5. eHEX pilot
 

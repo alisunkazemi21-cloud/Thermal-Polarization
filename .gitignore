@@ -30,7 +30,9 @@ results/raw/SIM-02/checkpoint-08-equilibrium/*
 !results/raw/SIM-02/checkpoint-08-equilibrium/README.md
 !results/raw/SIM-02/checkpoint-08-equilibrium/dry-run-stdout.txt
 !results/raw/SIM-02/checkpoint-08-equilibrium/dry-run-log.lammps
+!results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json
 
 # Graphify machine-local interpreter paths, extraction scratch, and caches
 graphify-out/.*
 graphify-out/cache/
+graphify-out/20*/

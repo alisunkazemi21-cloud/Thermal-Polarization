@@ -1,7 +1,8 @@
 # SIM-02 — thermal-gradient NEMD
 
-Status: **checkpoint 07 gate 1 passed. Checkpoint 08 is approved in
-DECISION-008 and released for execution; no gate-2 result exists yet.**
+Status: **checkpoint 07 gate 1 passed. The approved checkpoint 08 equilibrium
+bridge was stopped at 2 ps because Stage-A COM speed exceeded the frozen
+criterion. Gate 2 failed; no polarization result exists.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -73,6 +74,15 @@ input initializes constraints before explicit stage-boundary momentum removal;
 the frozen criterion is at most `1e-6 Å/fs` with no systematic growth. Raw
 initialization evidence is under
 `history/SIM-02-checkpoint-08-mpi-momentum-init/`.
+
+The corrected production run started on 2026-10-03 at 20:22:39 +03:30 with
+four MPI ranks and the LAMMPS OPT suffix. Its corrected step-zero COM speed was
+`4.3903e-7 Å/fs`, below the frozen ceiling. At steps 1,000 and 2,000 it rose to
+`1.02778929e-5` and `1.25105105e-5 Å/fs`. The run was stopped during Stage A.
+LAMMPS emitted no warning or error; this is a scientific acceptance failure.
+The compact record is `results/raw/SIM-02/checkpoint-08-equilibrium/run-start.json`
+and the preserved evidence is under
+`history/SIM-02-checkpoint-08-stage-a-com-drift/`.
 
 ## Documentation contract
 

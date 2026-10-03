@@ -10,7 +10,10 @@ guidance are established. The method audit found that the drafted static
 water. On 2026-09-30 the user approved LAMMPS eHEX. The exact published 400 K
 benchmark and staged gates were approved in DECISION-007. Gate 1, the build and
 zero-step audit, passed. Checkpoint 08 and its frozen equilibrium-bridge
-acceptance criteria were approved in DECISION-008; execution is released.
+acceptance criteria were approved in DECISION-008. The corrected four-rank
+equilibrium bridge started from commit `a1da7bb` on 2026-10-03 and was stopped
+at its first integrated diagnostic: Stage-A COM speed exceeded the frozen
+ceiling. Gate 2 failed at 2 ps and requires a new momentum-control decision.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -29,7 +32,9 @@ acceptance criteria were approved in DECISION-008; execution is released.
 | Protocol checkpoint | `research/designs/SIM-02-checkpoint-07-protocol-freeze.md` | Exact 400 K implementation and release gates approved in DECISION-007 |
 | Protocol decision | `research/decisions/DECISION-007-SIM-02-protocol-freeze.md` | Exact benchmark and staged gates approved; gate 1 passed |
 | Gate 1 evidence | `results/reports/SIM-02-checkpoint-07-zero-step.md` | Structure audit and LAMMPS `run 0` passed; zero trajectory steps |
-| Gate 2 protocol | `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` | Fixed-volume bridge approved in DECISION-008; zero-step input parse passed; execution released |
+| Gate 2 protocol | `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` | Fixed-volume bridge approved in DECISION-008; first integrated attempt failed the COM criterion |
+| Gate 2 failure | `results/reports/SIM-02-checkpoint-08-stage-a-com-drift.md` | Step 1000: 1.0278e-5 Å/fs; step 2000: 1.2511e-5 Å/fs versus 1e-6 ceiling; stopped |
+| Checkpoint 09 proposal | `research/designs/SIM-02-checkpoint-09-preparation-momentum-control.md` | Preparation-only momentum correction and bounded retest proposed; not approved |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -53,14 +58,21 @@ LAMMPS design.
 - [MEASURED] The first four-rank launch stopped before step 1 after establishing
   the MPI RATTLE COM-velocity floor. Stage-boundary momentum removal and the
   `1e-6 Å/fs` no-growth criterion were approved on 2026-10-03 before relaunch.
-- [NEXT] Execute and analyze the equilibrium bridge before any eHEX trajectory.
+- [FAILED] The corrected four-rank OPT bridge launched at 20:22:39 +03:30 on
+  2026-10-03 from commit `a1da7bb`. Initialization passed at `4.3903e-7 Å/fs`,
+  but COM speed reached `1.02778929e-5 Å/fs` at step 1000 and
+  `1.25105105e-5 Å/fs` at step 2000. Both exceed the `1e-6 Å/fs` ceiling, and
+  the increase violates the no-growth condition. The run was stopped during
+  Stage A; no LAMMPS warning or error occurred.
+- [NEXT CHECKPOINT] Decide and validate preparation-stage momentum control before
+  relaunch. No eHEX trajectory is released.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: execute the frozen checkpoint-08 equilibrium input and
-evaluate every acceptance criterion. The source paper omits its NpT target
+Next scientific step: review the checkpoint-08 Stage-A COM-drift failure and
+approve a bounded momentum-control correction before relaunch. The source paper omits its NpT target
 pressure, so this bridge keeps the exact published box rather than inventing
 that parameter. No temperature-gradient or polarization result is claimed here.
 

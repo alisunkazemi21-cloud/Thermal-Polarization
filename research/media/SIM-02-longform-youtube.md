@@ -159,6 +159,15 @@ after RATTLE initialization. The run was stopped before step 1. Show the raw
 diagnostic and the correction—initialize RATTLE first, then remove momentum—so
 the video demonstrates why production-path checks matter beyond syntax checks.
 
+Then show the corrected relaunch from commit `a1da7bb`: four active MPI ranks,
+the OPT path, and a corrected step-zero COM speed of `4.3903e-7 Å/fs`, below the
+predeclared ceiling. Then reveal the first integrated records: `1.0278e-5 Å/fs`
+at 1 ps and `1.2511e-5 Å/fs` at 2 ps. Temperature stayed exactly 400 K, yet the
+momentum criterion failed without a LAMMPS error. Stop the on-screen run there.
+This is the story's second implementation failure and shows why passing step zero
+is necessary but insufficient. The next checkpoint must decide preparation-stage
+momentum control before any full relaunch.
+
 ### 9. The eHEX pilot
 
 Required footage/data: reservoir occupancy, energy ledger, unfolded T(z), ρ(z),

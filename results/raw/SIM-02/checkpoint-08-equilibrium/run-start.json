@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "record_type": "run_start",
+  "scientific_status": "stopped_failed_predeclared_com_criterion",
+  "run_id": "SIM-02-checkpoint-08-equilibrium-2026-10-03",
+  "started_at": "2026-10-03T20:22:39+03:30",
+  "last_checked_at": "2026-10-03T20:39:47+03:30",
+  "stopped_at": "2026-10-03T20:38:00+03:30",
+  "stop_reason": "The first integrated records exceeded the approved 1e-6 Å/fs COM-speed ceiling and showed growth relative to initialization.",
+  "git_commit": "a1da7bb",
+  "input": "simulations/SIM-02/lammps/in.equilibrium-bridge",
+  "command": "mpirun --oversubscribe -np 4 lmp -sf opt -in simulations/SIM-02/lammps/in.equilibrium-bridge -log results/raw/SIM-02/checkpoint-08-equilibrium/log.lammps -screen results/raw/SIM-02/checkpoint-08-equilibrium/stdout.txt",
+  "engine": {
+    "name": "LAMMPS",
+    "version": "10 Dec 2025",
+    "mpi_ranks": 4,
+    "suffix": "opt"
+  },
+  "host_process": {
+    "launcher": "wsl.exe",
+    "windows_pid_at_launch": 5332
+  },
+  "initialization_observation": {
+    "step": 0,
+    "temperature_K": 411.10151,
+    "pressure_atm": 410.35915,
+    "center_of_mass_velocity_angstrom_per_fs": [
+      -4.1019714e-7,
+      -1.4053665e-7,
+      6.9854399e-8
+    ],
+    "center_of_mass_speed_angstrom_per_fs": 4.3903e-7,
+    "approved_ceiling_angstrom_per_fs": 1.0e-6,
+    "ceiling_check": "pass_at_initialization"
+  },
+  "runtime_observation": {
+    "mpi_rank_state": "four LAMMPS ranks were active near full CPU before termination",
+    "lammps_errors_or_warnings_seen": false,
+    "last_recorded_step": 2000,
+    "integrated_thermo_records": [
+      {
+        "step": 1000,
+        "time_fs": 1000,
+        "temperature_K": 400.0,
+        "center_of_mass_velocity_angstrom_per_fs": [-1.4368104e-6, -5.1631888e-6, -8.7699567e-6],
+        "center_of_mass_speed_angstrom_per_fs": 1.02778929e-5,
+        "ceiling_check": "fail"
+      },
+      {
+        "step": 2000,
+        "time_fs": 2000,
+        "temperature_K": 400.0,
+        "center_of_mass_velocity_angstrom_per_fs": [8.131361e-6, -6.6821929e-6, -6.7632936e-6],
+        "center_of_mass_speed_angstrom_per_fs": 1.25105105e-5,
+        "ceiling_check": "fail"
+      }
+    ],
+    "output_note": "The run was terminated after the first buffered thermo records became visible. No equilibrium, energy-drift, structure, or stationarity result is claimed."
+  },
+  "planned_steps": 1520000,
+  "planned_duration_ps": 1520,
+  "restart_interval_steps": 50000,
+  "provisional_wall_time_estimate_hours": 89,
+  "provisional_estimate_basis": "short local four-rank OPT benchmark; not a scientific result"
+}
