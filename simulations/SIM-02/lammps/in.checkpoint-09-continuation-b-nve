@@ -1,0 +1,44 @@
+units           real
+atom_style      full
+read_restart    results/raw/SIM-02/checkpoint-09-diagnostics/stage-a-20ps/stage-a-20ps.restart
+kspace_style    pppm 1.0e-5
+neighbor        4.0 bin
+neigh_modify    one 7500
+
+variable        out index results/raw/SIM-02/checkpoint-09-diagnostics
+variable        thermo_interval index 100
+variable        stage_b_steps index 2000
+variable        nve_steps index 2000
+compute         bridge_temp all temp
+variable        vcomx equal vcm(all,x)
+variable        vcomy equal vcm(all,y)
+variable        vcomz equal vcm(all,z)
+
+thermo_style    custom step time atoms temp press pe ke etotal vol lx ly lz v_vcomx v_vcomy v_vcomz
+thermo_modify   temp bridge_temp flush yes
+thermo          ${thermo_interval}
+
+# Short Stage-B transition from the completed 20 ps Stage-A checkpoint.
+fix             integrate all nvt temp 400.0 400.0 1000.0
+fix             prep_momentum all momentum 100 linear 1 1 1 rescale
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             0 post no
+velocity        all zero linear
+run             ${stage_b_steps}
+unfix           prep_momentum
+unfix           constraints
+unfix           integrate
+write_restart   ${out}/stage-b-2ps.restart
+print           "SIM02_GATE2 stage_b_complete=yes final_step=$(step)"
+
+# Stage-C transition and uncorrected NVE diagnostic, following the frozen
+# production ordering and exact 400 K rescale. No periodic momentum fix here.
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             0 post no
+velocity        all scale 400.0
+velocity        all zero angular
+velocity        all zero linear
+run             ${nve_steps}
+write_restart   ${out}/stage-b-nve-final.restart
+print           "SIM02_GATE2 nve_complete=yes final_step=$(step)"

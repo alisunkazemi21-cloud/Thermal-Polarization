@@ -34,6 +34,7 @@ results/raw/SIM-02/checkpoint-08-equilibrium/*
 results/raw/SIM-02/checkpoint-09-diagnostics/*
 !results/raw/SIM-02/checkpoint-09-diagnostics/README.md
 !results/raw/SIM-02/checkpoint-09-diagnostics/checkpoint-09-summary.json
+!results/raw/SIM-02/checkpoint-09-diagnostics/sha256-manifest.json
 
 # Graphify machine-local interpreter paths, extraction scratch, and caches
 graphify-out/.*

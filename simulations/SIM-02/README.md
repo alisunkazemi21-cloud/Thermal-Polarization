@@ -1,10 +1,10 @@
 # SIM-02 — thermal-gradient NEMD
 
-Status: **checkpoint 07 gate 1 passed. The approved checkpoint 08 equilibrium
-bridge was stopped at 2 ps because Stage-A COM speed exceeded the frozen
-criterion. DECISION-009 approved a preparation-only correction; zero-step and
-2 ps checks pass, and the 20 ps Stage-A revalidation is running. No equilibrium
-or polarization result exists.**
+Status: **checkpoint 07 gate 1 passed. The checkpoint 08 equilibrium bridge
+failed its Stage-A COM criterion. Under DECISION-009, Stage A passed at 2 ps and
+20 ps, and the short Stage-B transition passed. The uncorrected NVE diagnostic
+exceeded the frozen COM ceiling at 100 fs and stopped at 400 fs. The full bridge
+is on hold pending DECISION-010. No equilibrium or polarization result exists.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -88,11 +88,17 @@ and the preserved evidence is under
 
 Checkpoint 09 adds `fix momentum 100 linear 1 1 1 rescale` in Stages A and B,
 places RATTLE after velocity-changing fixes, and removes periodic momentum
-control before Stage D NVE. The first bounded 2 ps Stage-A test held 400 K and
-reported COM components near round-off at 100-step intervals. The full 20 ps
-Stage-A diagnostic is now running; see DECISION-009 and the checkpoint-09 raw
-diagnostic directory. This is implementation validation only, not an equilibrium
-bridge pass.
+control before Stage D NVE. The 20 ps Stage-A diagnostic completed 200 samples
+at 400 K with maximum sampled COM speed `9.65e-19 Å/fs`. The 2 ps Stage-B
+transition ended at 399.81 K with COM below the frozen ceiling. In the
+uncorrected NVE check, COM reached `7.14e-6 Å/fs` at 100 fs, above the approved
+`1e-6 Å/fs` limit; the partial run was stopped at 400 fs. This is an
+implementation failure, not an equilibrium result. See the
+[diagnostic report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md)
+and pending [DECISION-010](../../research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md).
+The reproducible continuation and Stage-C zero-step input files are tracked as
+`in.checkpoint-09-continuation-b-nve` and
+`in.checkpoint-09-stage-c-zero-step` in this directory.
 
 ## Documentation contract
 

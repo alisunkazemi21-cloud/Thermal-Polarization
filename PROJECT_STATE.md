@@ -11,8 +11,10 @@ water. On 2026-09-30 the user approved LAMMPS eHEX. The exact published 400 K
 benchmark and staged gates were approved in DECISION-007. Gate 1 passed.
 Checkpoint 08 was stopped at 2 ps after its COM criterion failed. The user then
 approved DECISION-009: preparation-only momentum control with zero-step, 2 ps,
-20 ps, NVT-transition, and uncorrected-NVE checks. The first two checks passed;
-the 20 ps Stage-A diagnostic is in progress.
+20 ps, NVT-transition, and uncorrected-NVE checks. Stage A passed at 2 ps and
+20 ps; Stage B passed at 2 ps. The uncorrected NVE diagnostic failed the frozen
+COM ceiling at 100 fs and stopped at 400 fs. The full bridge remains on hold
+pending the user's next decision about NVE momentum drift.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -34,7 +36,8 @@ the 20 ps Stage-A diagnostic is in progress.
 | Gate 2 protocol | `research/designs/SIM-02-checkpoint-08-equilibrium-bridge.md` | Fixed-volume bridge approved in DECISION-008; first integrated attempt failed the COM criterion |
 | Gate 2 failure | `results/reports/SIM-02-checkpoint-08-stage-a-com-drift.md` | Step 1000: 1.0278e-5 Å/fs; step 2000: 1.2511e-5 Å/fs versus 1e-6 ceiling; stopped |
 | Checkpoint 09 decision | `research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md` | User approved preparation-only momentum control and bounded diagnostics |
-| Checkpoint 09 diagnostics | `results/raw/SIM-02/checkpoint-09-diagnostics/` | Four-rank zero-step passed; 2 ps Stage-A passed at 400 K with COM removed every 100 steps; 20 ps Stage-A is running |
+| Checkpoint 09 results | `results/reports/SIM-02-checkpoint-09-diagnostics.md` | 20 ps Stage A passed (400 K; max COM `9.65e-19 Å/fs`); 2 ps Stage B ended at `399.81 K`; uncorrected NVE exceeded the COM ceiling at 100 fs |
+| Checkpoint 10 review | `research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md` | Open user decision; MPI/RATTLE mechanism unconfirmed; full bridge not relaunched |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -64,24 +67,30 @@ LAMMPS design.
   `1.25105105e-5 Å/fs` at step 2000. Both exceed the `1e-6 Å/fs` ceiling, and
   the increase violates the no-growth condition. The run was stopped during
   Stage A; no LAMMPS warning or error occurred.
-- [APPROVED / IN PROGRESS] DECISION-009 applies `fix momentum 100 linear 1 1 1
-  rescale` in Stage A and B only, places RATTLE after velocity-changing fixes,
-  and removes the momentum fix before NVE. Four-rank zero-step initialization
-  passed. A 2 ps Stage-A diagnostic completed at exactly 400 K with all sampled
-  COM speeds many orders below `1e-6 Å/fs`; the 20 ps Stage-A check is running.
-- [NEXT] Complete 20 ps Stage A, then the short Stage-B transition and uncorrected
-  NVE diagnostic. A full bridge relaunch depends on those checks passing.
+- [PASSED] DECISION-009 Stage A: 20 ps; 200 samples at 400 K; max sampled COM
+  speed `9.654782345768524e-19 Å/fs`; 4-rank OPT, 1:39:34.
+- [PASSED] DECISION-009 Stage B: 2 ps from the saved Stage-A restart; endpoint
+  temperature `399.81022 K`; max sampled COM `8.507873362730173e-19 Å/fs`.
+- [FAILED] Uncorrected NVE exceeded the frozen `1e-6 Å/fs` ceiling at 100 fs
+  (`7.144552366951081e-6 Å/fs`). Four samples were captured through 400 fs;
+  peak `8.357269209836094e-6 Å/fs`. This is an implementation diagnostic,
+  not an equilibrium result.
+- [MEASURED / OPEN] A Stage-C zero-step replay left COM at `4.8768857346949e-8
+  Å/fs` after the final zero-linear command. The jump occurred during NVE
+  integration; RATTLE/MPI is an unconfirmed mechanism hypothesis.
+- [NEXT / DECISION REQUIRED] Review DECISION-010 and choose a bounded diagnostic
+  for the NVE COM excursion. Do not relaunch the full bridge or change the
+  accepted COM ceiling until a follow-up decision is recorded.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: complete the checkpoint-09 20 ps Stage-A check, then the
-short NVT-transition and NVE-without-periodic-momentum diagnostics. A full bridge
-relaunch depends on those checks passing. The source paper omits its NpT target
-pressure, so the bridge keeps the exact published box rather than inventing
-that parameter. No equilibrium, temperature-gradient, or polarization result
-is claimed here.
+Next scientific step: resolve the failed uncorrected NVE momentum diagnostic
+through DECISION-010. The full equilibrium bridge has not been relaunched. The
+source paper omits its NpT target pressure, so the bridge keeps the exact
+published box rather than inventing that parameter. No equilibrium,
+temperature-gradient, or polarization result is claimed here.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.

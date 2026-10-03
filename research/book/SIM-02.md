@@ -9,8 +9,10 @@ is reproducible across time blocks. It covers
 
 Status on 2026-10-03: **method, temperature sequence, and exact 400 K protocol
 approved; gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
-checkpoint 09 zero-step and 2 ps checks passed, and the 20 ps Stage-A
-revalidation is running. No equilibrium or polarization result exists.**
+checkpoint 09 Stage A (2 ps and 20 ps) and Stage B (2 ps) passed their
+implementation checks, but the uncorrected NVE diagnostic exceeded the COM
+ceiling at 100 fs. The full equilibrium bridge is on hold. No equilibrium or
+polarization result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -42,8 +44,11 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-03 | MPI initialization correction approved | Approved decision | `1e-6 Å/fs` COM-speed ceiling plus no-growth requirement frozen; relaunch authorized from step zero |
 | 2026-10-03 | Corrected checkpoint 08 bridge launched and stopped | Measured acceptance failure | Initialization passed, but COM speed reached `1.0278e-5 Å/fs` at 1 ps and `1.2511e-5 Å/fs` at 2 ps versus the `1e-6 Å/fs` ceiling |
 | 2026-10-03 | DECISION-009 approved | Approved decision | Preparation-only momentum control and bounded revalidation sequence authorized |
-| 2026-10-03 | Checkpoint 09 zero-step and 2 ps checks | Measured implementation evidence | Corrected input initialized; Stage A was 400 K and maximum sampled COM speed was `6.5634e-19 Å/fs` every 100 steps |
-| 2026-10-03 | Checkpoint 09 20 ps Stage-A check | Running | Extension is in progress; Stage-B and NVE diagnostics remain pending |
+| 2026-10-03 | Checkpoint 09 zero-step and 2 ps checks | Measured implementation evidence | Corrected input initialized; the 2 ps Stage-A sample maximum COM speed was `6.5634e-19 Å/fs` |
+| 2026-10-03 | Checkpoint 09 20 ps Stage-A check | Measured implementation pass | 200 samples at 400 K; maximum sampled COM speed `9.6548e-19 Å/fs`; completed 20,000 steps |
+| 2026-10-03 | Checkpoint 09 Stage-B transition | Measured implementation pass | 2,000 NVT steps; temperature returned to `399.81022 K`; COM remained below `1e-6 Å/fs` |
+| 2026-10-03 | Checkpoint 09 uncorrected NVE diagnostic | Measured implementation failure | COM speed was `7.1446e-6 Å/fs` at 100 fs; run was interrupted at 400 fs; full bridge held |
+| 2026-10-03 | Stage-C zero-step replay | Measured diagnostic | After the final zero-linear command COM was `4.8769e-8 Å/fs`; the mechanism of subsequent NVE drift remains open |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -123,7 +128,29 @@ already thermostatted preparation stages, uses kinetic-energy rescaling, and
 removes the operation before NVE. This preserves the original NVE no-growth test
 rather than hiding drift inside the measured stage. The proposal also corrects
 Stage A's fix ordering so RATTLE is defined after velocity-modifying fixes, as
-required by the LAMMPS documentation. No input has been changed pending review.
+required by the LAMMPS documentation.
+
+## Checkpoint 09 outcome
+
+`[MEASURED PASS]` Four-rank LAMMPS OPT completed 20,000 Stage-A steps in
+1:39:34. The 200 unique integrated samples (100–20,000) reported 400 K and had
+a maximum COM speed of `9.654782345768524e-19 Å/fs`. Stage B then advanced
+2,000 NVT steps from the Stage-A restart. Its 20 samples ranged from 395.59333
+to 408.00767 K and ended at 399.81022 K; the maximum sampled COM speed was
+`8.507873362730173e-19 Å/fs`.
+
+`[MEASURED FAILURE]` With periodic momentum control removed, NVE exceeded the
+preapproved `1e-6 Å/fs` ceiling at the first 100 fs sample (`7.144552366951081e-6
+Å/fs`). The interrupted run reached 400 fs and captured four samples; the peak
+was `8.357269209836094e-6 Å/fs`. It did not measure equilibrium energy drift,
+structure, or stationarity.
+
+`[MEASURED DIAGNOSTIC]` A zero-step replay of the Stage-C adjustments ended at
+`4.8768857346949e-8 Å/fs`, below the ceiling. The excursion therefore appeared
+during subsequent integration; RATTLE/MPI behavior is a hypothesis to test, not
+an established cause. DECISION-010 records the open options. Until then, no full
+bridge relaunch, periodic NVE momentum correction, or threshold change is
+approved.
 
 ## Evidence that must exist before a claim
 
@@ -150,3 +177,7 @@ result remains scientifically valuable.
 - `simulations/SIM-02/README.md`: run status
 - `notebooks/sim02_research.py`: executable research record
 - `results/reports/SIM-02-report.md`: technical report shell
+- `results/reports/SIM-02-checkpoint-09-diagnostics.md`: bounded diagnostic results
+- DECISION-010: pending review of uncorrected NVE COM drift
+- `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
+- `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input

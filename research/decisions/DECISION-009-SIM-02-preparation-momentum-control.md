@@ -40,3 +40,22 @@ Sources: <https://docs.lammps.org/fix_momentum.html> and
 This decision does not release eHEX, alter the frozen physical protocol, or
 declare the equilibrium bridge passed. Each diagnostic outcome must be recorded
 before the next sequence step.
+
+## Measured outcome (2026-10-03)
+
+- The production-path and continuation zero-step checks passed.
+- Stage A passed at 2 ps and 20 ps. The 20 ps check completed 20,000 steps;
+  its 200 integrated samples were 400 K, with maximum sampled COM speed
+  `9.654782345768524e-19 Å/fs`.
+- The 2 ps Stage-B transition completed at 399.81022 K with maximum sampled
+  COM speed `8.507873362730173e-19 Å/fs`.
+- The uncorrected NVE check exceeded the `1e-6 Å/fs` ceiling at 100 fs
+  (`7.144552366951081e-6 Å/fs`) and was interrupted at 400 fs. The full bridge
+  was not relaunched because the NVE gate did not pass.
+
+The Stage-C zero-step replay left COM speed at `4.8768857346949e-8 Å/fs` after
+the final velocity cleanup. This does not prove why the speed rose during NVE.
+The mechanism and any corrective action remain open in DECISION-010.
+
+Detailed evidence: `results/reports/SIM-02-checkpoint-09-diagnostics.md` and
+the raw files in `results/raw/SIM-02/checkpoint-09-diagnostics/`.

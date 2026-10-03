@@ -1,0 +1,29 @@
+units           real
+atom_style      full
+read_restart    results/raw/SIM-02/checkpoint-09-diagnostics/stage-b-nve/stage-b-2ps.restart
+kspace_style    pppm 1.0e-5
+neighbor        4.0 bin
+neigh_modify    one 7500
+
+compute         bridge_temp all temp
+variable        vcomx equal vcm(all,x)
+variable        vcomy equal vcm(all,y)
+variable        vcomz equal vcm(all,z)
+thermo_style    custom step time atoms temp press pe ke etotal vol lx ly lz v_vcomx v_vcomy v_vcomz
+thermo_modify   temp bridge_temp flush yes
+thermo          1
+
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+print           "STAGE_C_ZERO before_velocity_adjustment"
+run             0 post no
+velocity        all scale 400.0
+print           "STAGE_C_ZERO after_temperature_scale"
+run             0 post no
+velocity        all zero angular
+print           "STAGE_C_ZERO after_zero_angular"
+run             0 post no
+velocity        all zero linear
+print           "STAGE_C_ZERO after_zero_linear"
+run             0 post no
+print           "STAGE_C_ZERO complete_without_integrated_steps=yes step=$(step)"

@@ -6,8 +6,9 @@ Should checkpoint 08 be revised to remove whole-system linear momentum every
 100 steps during thermostatted preparation only, with kinetic-energy rescaling,
 then disable that operation before the NVE acceptance stage?
 
-Status: **approved by the user on 2026-10-03; zero-step and 2 ps Stage-A checks
-passed; 20 ps Stage-A check running.**
+Status: **approved by the user on 2026-10-03; Stage-A (2 ps and 20 ps) and
+Stage-B (2 ps) diagnostics passed; the uncorrected NVE diagnostic failed the
+COM ceiling at 100 fs. See DECISION-010 for the pending follow-up.**
 
 ## Triggering evidence
 
@@ -34,8 +35,24 @@ perturbations.
 
 The LAMMPS RATTLE documentation states that `fix rattle` modifies forces and
 velocities and should be defined after other fixes that modify forces or
-velocities. The current Stage-A order defines RATTLE before `fix temp/rescale`;
-that ordering should be corrected in the same bounded test.
+velocities. The corrected Stage-A and Stage-B ordering defines RATTLE after
+velocity-changing fixes.
+
+## Measured checkpoint-09 outcome
+
+Stage A completed 20,000 steps at 400 K. Its 200 integrated samples had maximum
+COM speed `9.654782345768524e-19 Å/fs`. The 2,000-step Stage-B transition
+finished at 399.81022 K with maximum sampled COM speed
+`8.507873362730173e-19 Å/fs`.
+
+The subsequent NVE check, with periodic momentum control disabled as approved,
+first exceeded the `1e-6 Å/fs` ceiling at 100 fs (`7.144552366951081e-6
+Å/fs`). It was interrupted after 400 fs; peak sampled speed was
+`8.357269209836094e-6 Å/fs`. The Stage-C zero-step replay ended at
+`4.8768857346949e-8 Å/fs` after the final velocity cleanup, so the cause of the
+later excursion remains unconfirmed. The full equilibrium bridge was not
+relaunched. See the [results report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md)
+and pending [DECISION-010](../decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md).
 
 Primary sources:
 
@@ -45,32 +62,29 @@ Primary sources:
 
 ## Interpretation
 
-`[MEASURED]` Stage-A COM speed exceeded the frozen ceiling and grew from the
-corrected initialization value.
+`[MEASURED — CHECKPOINT 08]` Without periodic momentum control, Stage-A COM
+speed exceeded the frozen ceiling and rose from the corrected initialization
+value. That failure triggered DECISION-009.
 
-`[INFERRED]` The combination of repeated velocity rescaling, constrained
-velocity correction, parallel round-off, and the current fix ordering permits
-small global momentum errors to accumulate. The short record does not isolate
-one component as the sole cause.
+`[MEASURED — CHECKPOINT 09]` The approved preparation-only correction passed
+both Stage-A durations and the short Stage-B transition. Once the correction
+was removed for NVE, COM speed exceeded the same ceiling at 100 fs. A Stage-C
+zero-step replay ended below the ceiling after the final velocity cleanup, so
+the excursion occurred during integration; its mechanism is unresolved.
 
-`[APPROVED]` Periodic momentum removal is confined to preparation,
-where velocities are already deliberately changed by temperature control. It
-would be absent from Stage D so the NVE no-growth test remains an unmasked
-integrator/constraint diagnostic.
+`[INFERRED / UNCONFIRMED]` RATTLE and parallel reduction behavior may contribute
+to the NVE COM excursion. The current measurements do not establish a cause.
 
-## Options
+`[APPROVED]` DECISION-009 confines periodic momentum removal to preparation.
+No periodic correction is active in NVE, preserving the original momentum
+acceptance test. The test failed, so the full bridge remains on hold.
 
-1. **Recommended — bounded preparation-only correction.** Define
-   `fix momentum 100 linear 1 1 1 rescale` before RATTLE in Stages A and B;
-   define temperature-control and integration fixes before RATTLE; remove the
-   momentum fix before Stage C/D. Keep the one-time Stage-D linear and angular
-   removal and the original `1e-6 Å/fs` plus no-growth NVE criterion.
-2. Run on one MPI rank. This avoids relying on the observed four-rank path but
-   greatly increases wall time and does not establish that integrated COM drift
-   will remain below the criterion.
-3. Raise the COM threshold. This is rejected as an immediate response because
-   it would relax a frozen criterion after seeing a failure without an
-   independent physical justification.
+## Follow-up choices
+
+DECISION-010 records the open review. Candidate diagnostics include testing a
+short NVE segment with one MPI rank to check rank sensitivity, then isolating
+the Stage-C initialization ordering if needed. The frozen COM threshold remains
+unchanged unless the user approves a justified revision.
 
 ## Verification sequence after approval
 
@@ -79,10 +93,12 @@ integrator/constraint diagnostic.
 3. If every preparation record is at or below `1e-6 Å/fs`, extend the test to
    the full 20 ps Stage A.
 4. Run a short Stage-B transition diagnostic and verify temperature, constraints,
-   and COM behavior.
+   and COM behavior. **Passed:** 2 ps; final temperature 399.81022 K.
 5. Enter an NVE diagnostic with the periodic fix removed. Require the original
-   COM ceiling and no-growth condition.
-6. Only then relaunch the full 1.52 ns bridge from step zero.
+   COM ceiling and no-growth condition. **Failed:** first sample at 100 fs was
+   `7.144552366951081e-6 Å/fs`; interrupted at 400 fs.
+6. A full 1.52 ns bridge relaunch is **not authorized by this failed sequence**;
+   DECISION-010 must resolve the next diagnostic first.
 
 ## Progress record
 
@@ -90,7 +106,13 @@ integrator/constraint diagnostic.
   PPPM and RATTLE initialized, and the input completed at step 0.
 - Four-rank OPT Stage-A 2 ps diagnostic: **passed**; all samples every 100
   steps reported 400 K and COM components at approximately `1e-19 Å/fs`.
-- Four-rank OPT Stage-A 20 ps diagnostic: **running**; outcome pending.
+- Four-rank OPT Stage-A 20 ps diagnostic: **passed**; 200 samples at 400 K,
+  maximum COM `9.654782345768524e-19 Å/fs`.
+- Four-rank OPT Stage-B 2 ps continuation: **passed**; endpoint 399.81022 K,
+  maximum COM `8.507873362730173e-19 Å/fs`.
+- Four-rank OPT uncorrected NVE: **failed** at 100 fs; maximum sampled COM
+  `8.357269209836094e-6 Å/fs` through 400 fs.
+- Full bridge: **on hold** pending DECISION-010.
 
 ## Approval boundary
 

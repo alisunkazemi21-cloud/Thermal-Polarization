@@ -1,8 +1,9 @@
 # SIM-02 technical report — execution record
 
 Status: **gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
-checkpoint 09 zero-step and 2 ps checks passed, with the 20 ps Stage-A check
-running. No equilibrium or polarization result exists.**
+checkpoint 09 Stage A and Stage B diagnostics passed, but uncorrected NVE failed
+the frozen COM-speed ceiling at 100 fs. The full bridge is on hold. No
+equilibrium or polarization result exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -44,11 +45,19 @@ See
 `fix momentum 100 linear 1 1 1 rescale` only during Stage A and Stage B, with
 RATTLE defined after velocity-changing fixes. Periodic momentum control is
 removed before Stage D. The four-rank production-path zero-step check passed.
-The 2 ps Stage-A diagnostic completed with 20 samples every 100 steps, each at
-400 K; the maximum sampled COM speed was `6.5634e-19 Å/fs`. The 20 ps Stage-A
-extension is running; its latest checked step is 1,600. These diagnostics do not
-establish an equilibrium bridge pass. See
-`results/raw/SIM-02/checkpoint-09-diagnostics/checkpoint-09-summary.json`.
+The 2 ps Stage-A check passed with 20 samples and maximum COM speed
+`6.5634e-19 Å/fs`. The 20 ps extension passed all 20,000 steps: 200 samples at
+400 K and maximum COM speed `9.6548e-19 Å/fs`. The 2 ps Stage-B continuation
+ended at 399.81022 K; maximum COM speed was `8.5079e-19 Å/fs`.
+
+`[MEASURED FAILURE]` With periodic momentum control disabled, the NVE check
+exceeded the `1e-6 Å/fs` ceiling at the first 100 fs sample
+(`7.1446e-6 Å/fs`). It was interrupted after 400 fs; the maximum of four
+samples was `8.3573e-6 Å/fs`. A Stage-C zero-step replay ended at
+`4.8769e-8 Å/fs` after the final velocity cleanup, so the excursion developed
+during integration, but its mechanism remains unknown. The full bridge was not
+relaunched. See
+`results/reports/SIM-02-checkpoint-09-diagnostics.md` and pending DECISION-010.
 
 ## 5. eHEX pilot
 

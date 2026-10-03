@@ -1,7 +1,7 @@
 {
   "record_type": "bounded_diagnostic_status",
   "checkpoint": "SIM-02-09",
-  "status_at": "2026-10-03T21:29:30+03:30",
+  "status_at": "2026-10-03T23:35:46.0397176+03:30",
   "decision": "DECISION-009",
   "input": "simulations/SIM-02/lammps/in.equilibrium-bridge",
   "execution": {
@@ -23,29 +23,90 @@
       "steps": 2000,
       "thermo_interval_steps": 100,
       "temperature_K": 400.0,
-      "max_sampled_com_speed_angstrom_per_fs": 6.5634249714037e-19,
-      "com_speed_limit_angstrom_per_fs": 1.0e-6,
+      "max_sampled_com_speed_angstrom_per_fs": 6.5634249714037E-19,
+      "com_speed_limit_angstrom_per_fs": 1E-06,
       "loop_time_seconds": 643.946,
       "steps_per_second": 3.106,
       "notes": "20 integrated samples from steps 100 through 2000; temperature was exactly 400 K in each."
     },
     {
       "name": "stage_a_20ps",
-      "status": "running",
+      "status": "passed",
       "planned_steps": 20000,
-      "last_observed_step": 1600,
+      "last_observed_step": 20000,
+      "max_sampled_com_speed_angstrom_per_fs_at_last_check": 9.654782345768524E-19,
+      "notes": "200 unique integrated samples from steps 100 through 20000; every Stage-A temperature prints as 400 K; all sampled COM speeds below the frozen limit. Transition run-zero rows at the same final timestep are excluded.",
+      "samples_observed": 200,
+      "steps": 20000,
       "thermo_interval_steps": 100,
-      "max_sampled_com_speed_angstrom_per_fs_at_last_check": 6.5634249714037e-19,
-      "notes": "16 samples observed; all at 400 K and below the COM limit."
+      "temperature_K": 400.0,
+      "temperature_min_K": 400.0,
+      "temperature_max_K": 400.0,
+      "max_sampled_com_speed_angstrom_per_fs": 9.654782345768524E-19,
+      "com_speed_limit_angstrom_per_fs": 1E-06,
+      "loop_time_seconds": 5974.0
     },
     {
       "name": "stage_b_transition",
-      "status": "pending"
+      "status": "passed",
+      "planned_steps": 2000,
+      "last_observed_step": 22000,
+      "samples_observed": 20,
+      "max_com_speed_angstrom_per_fs_at_last_check": 8.507873362730173E-19,
+      "temperature_min_K_at_last_check": 395.59333,
+      "temperature_max_K_at_last_check": 408.00767,
+      "temperature_min_K": 395.59333,
+      "temperature_max_K": 408.00767,
+      "temperature_endpoint_K": 399.81022,
+      "max_sampled_com_speed_angstrom_per_fs": 8.507873362730173E-19,
+      "com_speed_limit_angstrom_per_fs": 1E-06,
+      "notes": "20 unique integrated NVT samples from steps 20100 to 22000 completed; temperature was 399.81022 K at the final Stage-B sample; no LAMMPS error."
     },
     {
       "name": "nve_without_periodic_momentum_control",
-      "status": "pending"
+      "status": "failed",
+      "first_exceedance_step": 22100,
+      "first_exceedance_time_ps": 0.1,
+      "first_exceedance_com_speed_angstrom_per_fs": 7.144552366951081E-06,
+      "max_sampled_com_speed_angstrom_per_fs": 8.357269209836094E-06,
+      "com_speed_limit_angstrom_per_fs": 1E-06,
+      "steps_completed": 400,
+      "last_observed_step": 22400,
+      "samples_observed": 4,
+      "temperature_min_K": 401.67902,
+      "temperature_max_K": 403.89642,
+      "notes": "Periodic momentum control was absent as planned. Ceiling first exceeded at 100 fs; run was interrupted at 400 fs after capturing four NVE samples. Not an equilibrium result."
+    },
+    {
+      "name": "restart_continuation_zero_step",
+      "status": "passed",
+      "final_step": 20000,
+      "notes": "Stage-A restart loaded; PPPM, RATTLE, Stage-B NVT, and the NVE transition initialized with zero additional trajectory steps."
+    },
+    {
+      "name": "stage_c_zero_step",
+      "status": "passed",
+      "final_step": 22000,
+      "observations": [
+        {
+          "point": "before_velocity_adjustment",
+          "com_speed_angstrom_per_fs": 7.92799078249691E-08
+        },
+        {
+          "point": "after_temperature_scale",
+          "com_speed_angstrom_per_fs": 2.12671130309823E-08
+        },
+        {
+          "point": "after_zero_angular",
+          "com_speed_angstrom_per_fs": 7.26492412660105E-08
+        },
+        {
+          "point": "after_zero_linear",
+          "com_speed_angstrom_per_fs": 4.8768857346949E-08
+        }
+      ],
+      "notes": "Stage-C setup completed at run 0. The COM speed after final zero-linear command remained below the ceiling; its later excursion occurred during integrated NVE."
     }
   ],
-  "scientific_interpretation": "Implementation diagnostics only. The full equilibrium bridge has not passed; NVT and NVE transition diagnostics are pending."
+  "scientific_interpretation": "Stage-A and Stage-B implementation diagnostics passed. The uncorrected NVE implementation diagnostic failed the frozen COM-speed ceiling at 100 fs; the full equilibrium bridge was not relaunched."
 }

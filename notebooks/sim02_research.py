@@ -19,9 +19,10 @@ def _(mo):
     # SIM-02 — Thermal-gradient NEMD research record
 
     **Status: checkpoint 07 gate 1 passed. Checkpoint 08 failed the frozen
-    Stage-A COM criterion. After user approval of DECISION-009, the corrected
-    zero-step and 2 ps checks passed; the 20 ps Stage-A revalidation is running.
-    No equilibrium or polarization result exists.**
+    Stage-A COM criterion. Under DECISION-009, checkpoint 09 Stage A (2 ps and
+    20 ps) and the short Stage-B transition passed. The uncorrected NVE check
+    failed the COM ceiling at 100 fs and was stopped at 400 fs. The full bridge
+    remains on hold; no equilibrium or polarization result exists.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -97,8 +98,20 @@ def _(mo):
             {
                 "date": "2026-10-03",
                 "stage": "Checkpoint 09",
-                "event": "DECISION-009 approved preparation-only momentum control; zero-step and 2 ps checks passed, with the 20 ps Stage-A revalidation running.",
+                "event": "DECISION-009 approved preparation-only momentum control; zero-step, 2 ps, and 20 ps Stage-A checks passed.",
                 "evidence": "approved decision + measured implementation diagnostics",
+            },
+            {
+                "date": "2026-10-03",
+                "stage": "Checkpoint 09 NVT transition",
+                "event": "The 2 ps Stage-B continuation completed; final sample was 399.81 K with COM below the frozen ceiling.",
+                "evidence": "measured continuation from Stage-A restart",
+            },
+            {
+                "date": "2026-10-03",
+                "stage": "Checkpoint 09 NVE diagnostic",
+                "event": "The uncorrected NVE segment crossed the 1e-6 Å/fs ceiling at 100 fs and was interrupted at 400 fs.",
+                "evidence": "measured acceptance failure; full bridge held",
             },
         ]
     mo.ui.table(timeline)
@@ -158,7 +171,7 @@ def _(mo):
         {"item": "published reference", "value": "10 ns transient + 60 ns production", "status": "established", "basis": "not yet authorized for execution"},
         {"item": "replicates", "value": "independent seed before reproducible positive claim", "status": "proposed", "basis": "checkpoint 07"},
         {"item": "equilibrium bridge", "value": "20 ps rescale + 500 ps NVT + 1 ns NVE at 1 fs", "status": "failed at 2 ps; revision required", "basis": "Stage-A COM speed exceeded frozen ceiling"},
-        {"item": "preparation momentum control", "value": "every 100 steps with kinetic-energy rescaling; off before NVE", "status": "proposed; not approved", "basis": "checkpoint 09 + LAMMPS fix momentum/RATTLE documentation"},
+        {"item": "preparation momentum control", "value": "every 100 steps with kinetic-energy rescaling in Stages A/B; off before NVE", "status": "approved; Stage A/B checks passed", "basis": "DECISION-009"},
     ]
     mo.ui.table(design_register)
     return
@@ -194,6 +207,10 @@ def _(Path, mo):
         ("checkpoint-09 proposal", "research/designs/SIM-02-checkpoint-09-preparation-momentum-control.md"),
         ("checkpoint-09 approval", "research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md"),
         ("checkpoint-09 diagnostic summary", "results/raw/SIM-02/checkpoint-09-diagnostics/checkpoint-09-summary.json"),
+        ("checkpoint-09 diagnostic report", "results/reports/SIM-02-checkpoint-09-diagnostics.md"),
+        ("checkpoint-10 review", "research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md"),
+        ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
+        ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
         ("energy audit", "results/tables/SIM-02-energy-audit.csv"),
         ("production report", "results/reports/SIM-02-report.md"),
@@ -251,18 +268,23 @@ def _(json, mo, repo_root):
         {"field": "checkpoint 08 outcome", "value": "FAIL — stopped during Stage A", "evidence class": "frozen criterion"},
         {"field": "checkpoint 09 zero-step", "value": "PASS", "evidence class": "production-path initialization"},
         {"field": "checkpoint 09 Stage A, 2 ps", "value": "PASS — 400 K; COM within ceiling", "evidence class": "bounded diagnostic"},
-        {"field": "checkpoint 09 Stage A, 20 ps", "value": "RUNNING", "evidence class": "bounded diagnostic"},
-        {"field": "full gate-2 outcome", "value": "OPEN — Stage B and NVE diagnostics pending", "evidence class": "not yet evaluated"},
+        {"field": "checkpoint 09 Stage A, 20 ps", "value": "PASS — 200 samples; max COM 9.65e-19 Å/fs", "evidence class": "bounded diagnostic"},
+        {"field": "checkpoint 09 Stage B, 2 ps", "value": "PASS — endpoint 399.81 K; COM below ceiling", "evidence class": "bounded diagnostic"},
+        {"field": "checkpoint 09 NVE, 0.4 ps captured", "value": "FAIL — first sample 7.14e-6 Å/fs at 100 fs", "evidence class": "frozen criterion"},
+        {"field": "full gate-2 outcome", "value": "HOLD — NVE COM criterion failed; DECISION-010 pending", "evidence class": "not released"},
     ]
     mo.vstack([
-        mo.md("## Checkpoint 09 — Stage-A revalidation in progress"),
+        mo.md("## Checkpoint 09 — NVE momentum gate failed"),
         mo.ui.table(gate_2_start),
         mo.md(
             "Checkpoint 08's failure remains in the chronology. DECISION-009 "
             "adds periodic momentum removal only during thermostat preparation "
-            "and defines RATTLE after velocity-changing fixes. The corrected 2 ps "
-            "test passed. Stage B and an NVE diagnostic without periodic momentum "
-            "control must pass before a full bridge relaunch."
+            "and defines RATTLE after velocity-changing fixes. Stage A passed at "
+            "2 ps and 20 ps; the 2 ps Stage-B transition returned to 399.81 K. "
+            "With periodic correction removed, NVE COM speed reached "
+            "7.14e-6 Å/fs at 100 fs, above the frozen ceiling. The run stopped "
+            "at 400 fs, and the full bridge was not relaunched. DECISION-010 "
+            "records the unresolved diagnostic choice."
         ),
     ])
     return
@@ -279,7 +301,7 @@ def _(mo):
     mo.vstack([
         mo.md(
             r"""
-            ## Checkpoint 08 failure and checkpoint 09 revalidation
+            ## Checkpoint 08 and 09 implementation failures
 
             The supplied author file is a steady-state NEMD snapshot. Its
             velocities must be replaced before it can become the equilibrium
@@ -287,8 +309,11 @@ def _(mo):
             this bridge preserves the exact published box instead of inventing
             one. **DECISION-008 approved this protocol. The first integrated
             attempt failed the frozen COM criterion at 2 ps and was stopped.
-            DECISION-009 approved a preparation-only correction; zero-step and
-            2 ps checks passed, and the 20 ps Stage-A check is running.**
+            DECISION-009 approved a preparation-only correction. Zero-step,
+            2 ps Stage-A, 20 ps Stage-A, and 2 ps Stage-B checks passed. The
+            uncorrected NVE check exceeded the COM ceiling at 100 fs and stopped
+            at 400 fs. The mechanism remains unknown, and the full bridge is on
+            hold pending DECISION-010.**
             """
         ),
         mo.ui.table(bridge_stages),

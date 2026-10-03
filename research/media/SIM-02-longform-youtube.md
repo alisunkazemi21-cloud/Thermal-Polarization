@@ -166,10 +166,25 @@ at 1 ps and `1.2511e-5 Å/fs` at 2 ps. Temperature stayed exactly 400 K, yet the
 momentum criterion failed without a LAMMPS error. Stop the on-screen run there.
 This is the story's second implementation failure and shows why passing step zero
 is necessary but insufficient. The user approved DECISION-009. Show the
-preparation-only momentum correction, the 2 ps diagnostic at 400 K with COM near
-round-off, and the 20 ps extension as it completes. Keep the gate labeled
-**revalidation in progress** until the Stage-B transition and uncorrected NVE
-diagnostic also pass.
+preparation-only momentum correction, the 2 ps check, then the full 20 ps
+Stage-A record: 200 samples at 400 K, peak sampled COM `9.65e-19 Å/fs`, and a
+1:39:34 local four-rank run. Label it **implementation check passed**, not
+equilibrium achieved.
+
+Continue from the saved Stage-A restart. Show the 2 ps NVT transition moving
+between 395.59 and 408.01 K and ending at 399.81 K, with COM below the ceiling.
+Then remove periodic momentum correction and reveal the first NVE sample at
+100 fs: `7.14e-6 Å/fs`, above the frozen `1e-6 Å/fs` criterion. The partial run
+reaches 400 fs, peaks at `8.36e-6 Å/fs`, and is interrupted. LAMMPS reports no
+runtime error; the acceptance check itself fails. Keep the distinction explicit:
+this is an implementation diagnostic, not an equilibrium result.
+
+Show the zero-step Stage-C replay. After the final zero-linear command COM speed
+is `4.88e-8 Å/fs`, below the ceiling; after integration it crosses the threshold.
+Say that this narrows the interval where the problem appears but does not prove
+RATTLE or MPI is the cause. End the segment with the full bridge **on hold** and
+DECISION-010 open for a rank-sensitivity or initialization-order diagnostic.
+Do not show a corrected curve or imply the next choice has already been made.
 
 ### 9. The eHEX pilot
 

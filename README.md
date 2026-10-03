@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 failed its COM criterion; checkpoint 09 revalidation is underway |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 failed; checkpoint 09 Stage A/B checks passed but uncorrected NVE failed the COM ceiling; review pending |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -48,6 +48,8 @@ See:
 - [checkpoint 08 Stage-A failure report](results/reports/SIM-02-checkpoint-08-stage-a-com-drift.md)
 - [checkpoint 09 momentum-control proposal](research/designs/SIM-02-checkpoint-09-preparation-momentum-control.md)
 - [checkpoint 09 approval](research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md)
+- [checkpoint 09 diagnostic results](results/reports/SIM-02-checkpoint-09-diagnostics.md)
+- [checkpoint 10 NVE COM-drift review](research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md)
 
 ## Research workflow
 
@@ -107,8 +109,8 @@ research/media/         documentary and YouTube planning
 graphify-out/           queryable project knowledge graph
 ```
 
-For compact navigation, open the [interactive Graphify map](graphify-out/graph.html)
-or run:
+For compact navigation, open the [interactive Graphify map](docs/project-graph.html)
+in a browser, or query the graph locally:
 
 ```powershell
 ./scripts/graphify.ps1 query "SIM-02" --budget 1500
