@@ -11,10 +11,13 @@ Status on 2026-10-04: **method, temperature sequence, and exact 400 K protocol
 approved; gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
 checkpoint 09 Stage A (2 ps and 20 ps) and Stage B (2 ps) passed their
 implementation checks. Its four-rank uncorrected NVE diagnostic exceeded the
-COM ceiling at 100 fs; the approved one-rank continuation then completed 2 ps
-below the ceiling. This indicates rank-sensitive continuation behavior but
-does not isolate a mechanism. The full equilibrium bridge is on hold. No equilibrium or
-polarization result exists.**
+COM ceiling at 100 fs; checkpoint 10's one-rank continuation then completed 2 ps
+below the ceiling from a separately replayed Stage-B state. Checkpoint 11
+repeated Stage C/NVE at one rank from the exact four-rank Stage-B restart and
+also completed below the ceiling. The same-restart four-rank path failed at
+100 fs, supporting rank-count-sensitive behavior in the sequence without
+identifying its mechanism. The full equilibrium bridge is on hold. No
+equilibrium or polarization result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -53,6 +56,8 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-03 | Stage-C zero-step replay | Measured diagnostic | After the final zero-linear command COM was `4.8769e-8 Å/fs`; the mechanism of subsequent NVE drift remained open |
 | 2026-10-04 | DECISION-010 approved | Approved decision | User authorized the matched one-rank Stage-B/NVE comparison; full bridge and threshold changes remained out of scope |
 | 2026-10-04 | Checkpoint 10 one-rank continuation | Measured implementation diagnostic | Stage B and 2 ps NVE completed; 20 NVE samples had max COM `1.0435e-18 Å/fs`; four-rank path had exceeded the ceiling at 100 fs; cause not isolated |
+| 2026-10-04 | DECISION-011 approved | Approved decision | User authorized a one-rank Stage-C/NVE comparison from the exact four-rank Stage-B restart; local WSL build selected to hold software environment close |
+| 2026-10-04 | Checkpoint 11 same-restart comparison | Measured implementation diagnostic | One-rank Stage C/NVE completed 2 ps (exit 0; max COM `1.2638e-18 Å/fs`); four-rank path from the same restart breached at 100 fs; mechanism unresolved |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -173,10 +178,34 @@ cause to NVE, RATTLE, or MPI reduction. The report also records that a wrapper
 error after LAMMPS completion prevented capture of the process exit status.
 This bounded diagnostic measured no equilibrium energy drift, structure,
 eHEX heat transfer, stationary gradient, or polarization. The full bridge stays
-on hold. A same-Stage-B-restart one-rank Stage-C/NVE comparison is a proposed
-next diagnostic and needs a separate decision.
+on hold. DECISION-011 then authorized a same-Stage-B-restart comparison; see
+checkpoint 11 below.
 
 See `results/reports/SIM-02-checkpoint-10-one-rank-nve.md` and DECISION-010.
+
+## Checkpoint 11 — same-restart rank comparison
+
+`[MEASURED PASS, BOUNDED]` On 2026-10-04, the user-approved one-rank OPT run
+read the exact Stage-B restart written by the four-rank checkpoint-09
+continuation. Stage-C initialization and 2 ps uncorrected NVE completed from
+step 22,000 to 24,000 with exit code 0 in 14:02. The 20 samples ranged from
+395.91302 to 406.10015 K and ended at 400.10536 K. Maximum sampled COM speed was
+`1.2638166834526734e-18 Å/fs` at step 23,600, with no ceiling exceedances.
+
+The four-rank path from the same saved restart crossed `1e-6 Å/fs` at 100 fs
+(`7.144552366951081e-6 Å/fs`). Rank count is now the controlled run-level
+difference for the Stage-C/NVE sequence. The result does not identify whether
+RATTLE, velocity cleanup, PPPM/MPI reductions, or another rank-dependent
+operation is responsible. This remains an implementation diagnostic; the full
+bridge stays on hold, with no equilibrium or polarization result.
+
+The same-restart test used the existing WSL LAMMPS build to keep the software
+environment close to the prior run. Colab is a candidate for longer work, but
+its hardware and runtime availability vary and a hosted GPU does not
+automatically accelerate this CPU OPT configuration.
+
+See `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md` and
+DECISION-011.
 
 ## Evidence that must exist before a claim
 
@@ -204,7 +233,8 @@ result remains scientifically valuable.
 - `notebooks/sim02_research.py`: executable research record
 - `results/reports/SIM-02-report.md`: technical report shell
 - `results/reports/SIM-02-checkpoint-09-diagnostics.md`: four-rank bounded diagnostics
-- `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`: approved one-rank comparison
-- DECISION-010: completed comparison; next isolating test not yet approved
+- `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`: one-rank comparison from replayed Stage B
+- `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`: one-rank comparison from the same four-rank Stage-B restart
+- DECISION-010 and DECISION-011: matched and same-restart comparison records
 - `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
 - `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input

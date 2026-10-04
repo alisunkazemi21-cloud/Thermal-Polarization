@@ -1,10 +1,11 @@
 # SIM-02 technical report — execution record
 
 Status: **gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
-checkpoint 09 four-rank NVE failed at 100 fs, while checkpoint 10 one-rank NVE
-completed 2 ps below the frozen COM ceiling. Rank sensitivity is indicated, but
-the phase-space states differed after the Stage-B replay. The full bridge is on
-hold. No equilibrium or polarization result exists.**
+checkpoint 09 four-rank NVE failed at 100 fs. Checkpoint 11 held the Stage-B
+restart fixed: one-rank Stage-C/NVE passed 2 ps, while the four-rank path from
+that restart failed at 100 fs. Rank-count-sensitive behavior is supported for
+the sequence, but its mechanism remains unresolved. The full bridge is on hold.
+No equilibrium or polarization result exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -68,9 +69,16 @@ NVE. The 20 integrated NVE samples had temperatures from 392.66022 to 402.37766
 K, endpoint 399.69651 K, and maximum COM speed `1.0435411502651417e-18 Å/fs`;
 no sample exceeded the ceiling. The four-rank path exceeded it at 100 fs.
 Because Stage B was replayed under each rank count, the resulting NVE initial
-states differed; the comparison indicates rank-sensitive continuation behavior
-but does not isolate the mechanism. The full bridge remains on hold pending a
-separate decision. See `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`.
+states differed; that comparison indicated rank-sensitive continuation
+behavior but did not isolate the mechanism. Checkpoint 11 then used the exact
+four-rank Stage-B restart. The one-rank Stage-C/NVE path completed 2 ps with
+exit code 0 in 14:02; 20 samples ranged from 395.91302 to 406.10015 K and ended
+at 400.10536 K. Maximum COM speed was `1.2638166834526734e-18 Å/fs` at step
+23,600, with no ceiling exceedance. The four-rank run from this same restart
+first breached at 100 fs (`7.144552366951081e-6 Å/fs`). This supports a
+rank-count-sensitive Stage-C/NVE sequence, while the mechanism remains
+unresolved. See DECISION-011 and
+`results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`.
 
 ## 5. eHEX pilot
 

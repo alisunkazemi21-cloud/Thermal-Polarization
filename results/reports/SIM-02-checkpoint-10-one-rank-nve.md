@@ -55,10 +55,9 @@ eHEX heat transfer, temperature-gradient profiles, or polarization. The full
 equilibrium bridge remains on hold. No acceptance threshold or scientific
 parameter changed; no NVE momentum correction was introduced.
 
-A useful next diagnostic would start from the saved four-rank Stage-B restart
-and execute only Stage C plus NVE at one rank. That would hold the Stage-B
-restart state fixed while comparing decomposition during the tested segment.
-This next step is a proposal only and requires a recorded decision before run.
+The user later approved this same-restart diagnostic in DECISION-011. The
+checkpoint-11 result is recorded in
+`results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`.
 
 ## Reproducibility records
 

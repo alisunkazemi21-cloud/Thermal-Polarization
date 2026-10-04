@@ -1,0 +1,42 @@
+{
+  "record_type": "bounded_simulation_diagnostic",
+  "checkpoint": "SIM-02-11",
+  "date": "2026-10-04",
+  "authorization": "DECISION-011",
+  "starting_restart": "results/raw/SIM-02/checkpoint-09-diagnostics/stage-b-nve/stage-b-2ps.restart",
+  "starting_restart_sha256": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef",
+  "ranks": 1,
+  "openmp_threads": 1,
+  "lammps": "10 Dec 2025",
+  "suffix": "opt",
+  "timestep_fs": 1,
+  "sample_every_steps": 100,
+  "run_start_step": 22000,
+  "run_end_step": 24000,
+  "nve_duration_ps": 2,
+  "nve_sample_count": 20,
+  "nve_sample_steps": [
+    22100,
+    24000
+  ],
+  "temperature_K": {
+    "min": 395.91302,
+    "max": 406.10015,
+    "final": 400.10536
+  },
+  "com_speed_A_per_fs": {
+    "max": 1.2638166834526734e-18,
+    "max_step": 23600,
+    "ceiling": 1e-06,
+    "exceedances": 0
+  },
+  "process_exit_code": 0,
+  "completion_marker": "SIM02_GATE2 nve_complete=yes final_step=24000",
+  "wall_time": "00:14:02",
+  "comparison": {
+    "four_rank_first_nve_sample_fs": 100,
+    "four_rank_com_speed_A_per_fs": 7.144552366951081e-06,
+    "same_starting_restart": true
+  },
+  "interpretation": "Rank-count-sensitive behavior in the Stage-C/NVE sequence; specific mechanism not identified. No equilibrium or polarization result."
+}

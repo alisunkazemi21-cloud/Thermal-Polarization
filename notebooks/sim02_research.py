@@ -18,12 +18,13 @@ def _(mo):
     mo.md(r"""
     # SIM-02 — Thermal-gradient NEMD research record
 
-    **Status: checkpoint 07 gate 1 passed. Checkpoint 08 failed the frozen
-    Stage-A COM criterion. Checkpoint 09's four-rank NVE diagnostic crossed the
-    frozen COM ceiling at 100 fs. The user-approved checkpoint 10 one-rank
-    continuation completed 2 ps of uncorrected NVE below the ceiling. This
-    indicates rank-sensitive continuation behavior, but the cause is not
-    isolated. The full bridge remains on hold; no equilibrium or polarization
+    **Status: checkpoint 07 gate 1 passed; checkpoint 08 failed Stage A. The
+    checkpoint 09 four-rank NVE path breached the frozen COM ceiling at 100 fs.
+    Checkpoint 11 repeated Stage C/NVE at one rank from that exact four-rank
+    Stage-B restart and completed 2 ps below the ceiling. The matching four-
+    rank path from that restart breached at 100 fs. This supports
+    rank-count-sensitive behavior in Stage C/NVE but does not identify a
+    mechanism. The full bridge remains on hold; no equilibrium or polarization
     result exists.**
 
     This notebook is the executable companion to the SIM-02 research book.
@@ -121,6 +122,12 @@ def _(mo):
                 "event": "After replaying Stage B from the same Stage-A restart, the one-rank 2 ps uncorrected NVE segment completed with 20 samples and maximum COM 1.04e-18 Å/fs.",
                 "evidence": "user-approved bounded diagnostic; DECISION-010",
             },
+            {
+                "date": "2026-10-04",
+                "stage": "Checkpoint 11 same-restart comparison",
+                "event": "From the exact four-rank Stage-B restart, the one-rank Stage-C/NVE path completed 2 ps with exit code 0 and maximum COM 1.264e-18 Å/fs; the four-rank path from that restart breached at 100 fs.",
+                "evidence": "user-approved bounded diagnostic; DECISION-011",
+            },
         ]
     mo.ui.table(timeline)
     return
@@ -217,6 +224,10 @@ def _(Path, mo):
         ("checkpoint-09 diagnostic summary", "results/raw/SIM-02/checkpoint-09-diagnostics/checkpoint-09-summary.json"),
         ("checkpoint-09 diagnostic report", "results/reports/SIM-02-checkpoint-09-diagnostics.md"),
         ("checkpoint-10 review", "research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md"),
+        ("checkpoint-11 approval", "research/decisions/DECISION-011-SIM-02-same-restart-rank-diagnostic.md"),
+        ("checkpoint-11 summary", "results/raw/SIM-02/checkpoint-11-same-restart-one-rank/checkpoint-11-summary.json"),
+        ("checkpoint-11 report", "results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md"),
+        ("checkpoint-11 input", "simulations/SIM-02/lammps/in.checkpoint-11-same-restart-one-rank"),
         ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
         ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
@@ -280,7 +291,7 @@ def _(json, mo, repo_root):
         {"field": "checkpoint 09 Stage B, 2 ps", "value": "PASS — endpoint 399.81 K; COM below ceiling", "evidence class": "bounded diagnostic"},
         {"field": "checkpoint 09 four-rank NVE, 0.4 ps captured", "value": "FAIL — first sample 7.14e-6 Å/fs at 100 fs", "evidence class": "frozen criterion"},
         {"field": "checkpoint 10 one-rank NVE, 2 ps", "value": "PASS — 20 samples; max COM 1.04e-18 Å/fs", "evidence class": "bounded cross-rank diagnostic"},
-        {"field": "full gate-2 outcome", "value": "HOLD — rank-sensitive continuation result needs follow-up; no bridge release", "evidence class": "not released"},
+        {"field": "full gate-2 outcome", "value": "HOLD — same-restart diagnostic shows rank sensitivity; no bridge release", "evidence class": "not released"},
     ]
     mo.vstack([
         mo.md("## Checkpoint 09 — NVE momentum gate failed"),
@@ -295,8 +306,11 @@ def _(json, mo, repo_root):
             "The approved one-rank continuation later completed 2 ps with 20 "
             "NVE samples and maximum COM 1.04e-18 Å/fs. Stage B was replayed "
             "under each rank count, so the phase-space states entering NVE "
-            "differed. This indicates rank-sensitive continuation behavior "
-            "but does not identify its cause. The full bridge remains on hold."
+            "differed. Checkpoint 11 then held the Stage-B restart fixed: one "
+            "rank passed 2 ps, while the four-rank path from that restart had "
+            "breached at 100 fs. Rank count is implicated in the Stage-C/NVE "
+            "sequence, but its specific mechanism remains unresolved. The full "
+            "bridge remains on hold."
         ),
     ])
     return
@@ -307,6 +321,7 @@ def _(mo):
     rank_comparison = [
         {"run": "Checkpoint 09; 4 MPI ranks", "NVE duration": "0.4 ps captured", "samples": 4, "first threshold breach": "100 fs; 7.1446e-6 Å/fs", "maximum COM": "8.3573e-6 Å/fs", "outcome": "Ceiling exceeded"},
         {"run": "Checkpoint 10; 1 MPI rank", "NVE duration": "2 ps completed", "samples": 20, "first threshold breach": "None", "maximum COM": "1.0435e-18 Å/fs at 1.9 ps", "outcome": "All sampled COM values below ceiling"},
+        {"run": "Checkpoint 11; 1 MPI rank, same Stage-B restart", "NVE duration": "2 ps completed", "samples": 20, "first threshold breach": "None", "maximum COM": "1.2638e-18 Å/fs at step 23,600", "outcome": "Same-restart continuation below ceiling"},
     ]
     mo.vstack([
         mo.md(r"""
@@ -320,14 +335,34 @@ def _(mo):
 
         This differs from the four-rank run, which first exceeded the ceiling
         at 100 fs. Since Stage B was rerun at each rank count, the NVE starting
-        states were not identical. The result indicates rank-sensitive
-        continuation behavior; it does not isolate an MPI, RATTLE, or NVE cause.
-        The full bridge remains on hold. A same-Stage-B-restart Stage-C/NVE
-        comparison is proposed but not yet approved.
+        states were not identical. The result suggested rank-sensitive
+        continuation behavior but did not isolate an MPI, RATTLE, or NVE cause.
+        Checkpoint 11 followed with the exact four-rank Stage-B restart.
 
         LAMMPS logged completion at step 24,000 and wrote its final restart in
         32:23. A shell-wrapper `printf` error after completion prevented capture
         of the process exit code; the diagnostic report records this limitation.
+        """),
+        mo.md(r"""
+        ## Checkpoint 11 — same-restart rank comparison
+
+        The user approved a one-rank Stage-C/NVE continuation from the exact
+        four-rank Stage-B restart. It completed 2 ps, steps 22,000–24,000, in
+        14:02 with LAMMPS exit code 0. Twenty NVE samples ranged from
+        395.91302 to 406.10015 K and ended at 400.10536 K. Maximum sampled COM
+        speed was `1.2638166834526734e-18 Å/fs` at step 23,600; none exceeded
+        the frozen `1e-6 Å/fs` ceiling.
+
+        The four-rank path from this same restart exceeded the ceiling at
+        100 fs (`7.144552366951081e-6 Å/fs`). This supports rank-count-sensitive
+        behavior in the Stage-C/NVE sequence from a common starting checkpoint.
+        It does not identify a particular RATTLE, velocity-cleanup, PPPM, or
+        reduction mechanism. The full bridge remains on hold; no equilibrium
+        or polarization result follows.
+
+        This diagnostic used the existing Ubuntu-on-WSL LAMMPS 10 Dec 2025
+        build to keep the environment aligned. Google Colab can be evaluated
+        for longer workloads after an environment and performance benchmark.
         """),
         mo.ui.table(rank_comparison),
     ])
@@ -356,10 +391,11 @@ def _(mo):
             DECISION-009 approved a preparation-only correction. Zero-step,
             2 ps Stage-A, 20 ps Stage-A, and 2 ps Stage-B checks passed. The
             four-rank uncorrected NVE check exceeded the COM ceiling at 100 fs
-            and stopped at 400 fs. Checkpoint 10's one-rank NVE comparison
-            completed 2 ps below the ceiling, but Stage B was replayed at each
-            rank count, so the cause is not isolated. The full bridge remains
-            on hold.**
+            and stopped at 400 fs. Checkpoint 11's one-rank Stage-C/NVE
+            comparison from the exact four-rank Stage-B restart completed 2 ps
+            below the ceiling; the four-rank path from that same restart had
+            breached at 100 fs. This indicates rank-count-sensitive behavior,
+            but the mechanism is unresolved. The full bridge remains on hold.**
             """
         ),
         mo.ui.table(bridge_stages),
@@ -421,6 +457,8 @@ def _(mo, repo_root):
         - Technical report: `{repo_root / 'results' / 'reports' / 'SIM-02-report.md'}`
         - Checkpoint 10 one-rank NVE report: `{repo_root / 'results' / 'reports' / 'SIM-02-checkpoint-10-one-rank-nve.md'}`
         - DECISION-010 review: `{repo_root / 'research' / 'decisions' / 'DECISION-010-SIM-02-NVE-COM-drift-review.md'}`
+        - Checkpoint 11 same-restart report: `{repo_root / 'results' / 'reports' / 'SIM-02-checkpoint-11-same-restart-one-rank.md'}`
+        - DECISION-011 approval and outcome: `{repo_root / 'research' / 'decisions' / 'DECISION-011-SIM-02-same-restart-rank-diagnostic.md'}`
         - Long-form video treatment: `{repo_root / 'research' / 'media' / 'SIM-02-longform-youtube.md'}`
         """
     )

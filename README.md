@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 09 four-rank NVE failed COM at 100 fs; checkpoint 10 one-rank 2 ps NVE stayed below the ceiling; rank-sensitive continuation behavior is indicated but cause is not isolated; full bridge held |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 11: from the same Stage-B restart, one-rank Stage-C/NVE passed 2 ps (max COM `1.264e-18 Å/fs`) while the four-rank path breached at 100 fs; rank-sensitive sequence, mechanism unresolved; full bridge held |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -51,6 +51,8 @@ See:
 - [checkpoint 09 diagnostic results](results/reports/SIM-02-checkpoint-09-diagnostics.md)
 - [checkpoint 10 one-rank NVE report](results/reports/SIM-02-checkpoint-10-one-rank-nve.md)
 - [checkpoint 10 NVE COM-drift review](research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md)
+- [checkpoint 11 same-restart diagnostic](results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md)
+- [checkpoint 11 approval and result](research/decisions/DECISION-011-SIM-02-same-restart-rank-diagnostic.md)
 
 ## Research workflow
 

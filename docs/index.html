@@ -800,7 +800,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
       <div class="rs-item done"><span class="rs-dot"></span>SIM-02 checkpoint 07 gate 1 — zero-step audit passed</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-02 checkpoint 08 — stopped at 2 ps; Stage-A COM criterion failed</div>
       <div class="rs-item done"><span class="rs-dot"></span>SIM-02 checkpoint 09 — four-rank NVE COM ceiling failed</div>
-      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 checkpoint 10 — one-rank NVE completed below ceiling; interpretation review</div>
+      <div class="rs-item current"><span class="rs-dot"></span>SIM-02 checkpoint 11 — same-restart one-rank NVE completed; rank-sensitive behavior under review</div>
       <div class="rs-item"><span class="rs-dot"></span>Cross-liquid comparison</div>
       <div class="rs-item"><span class="rs-dot"></span>Electrical extraction</div>
       <div class="rs-item"><span class="rs-dot"></span>Power characterization</div>
@@ -835,10 +835,10 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <div class="cover-eyebrow"><span class="line"></span> Computational physics — molecular simulation research · Research Book v0.3</div>
   <h1 class="cover-title">Thermal Polarization<br><span class="accent">→ Electrical Work</span></h1>
   <p class="cover-sub">Can a bulk polar liquid subjected to a thermal gradient produce a measurable electrical potential and, ultimately, deliver net electrical power to an external load?</p>
-  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 gate 1 passed. Checkpoint 08 failed its Stage-A COM criterion. Checkpoint 09 four-rank NVE exceeded the COM ceiling at 100 fs. The user-approved checkpoint 10 one-rank continuation completed 2 ps of uncorrected NVE below the ceiling, while Stage B was rerun under each rank count. This indicates rank-sensitive continuation behavior but does not isolate a cause. The full bridge remains on hold. No equilibrium or polarization result exists.</p>
+  <p class="cover-meta">Stage: SIM-01 equilibrium validation complete; SIM-02 gate 1 passed. Checkpoint 08 failed its Stage-A COM criterion. Checkpoint 09 four-rank NVE exceeded the COM ceiling at 100 fs. Checkpoint 11 compared one-rank and four-rank Stage-C/NVE continuations from the same Stage-B restart: the one-rank path completed 2 ps below the ceiling; the four-rank path exceeded it at 100 fs. Rank-count-sensitive behavior is supported, but its mechanism is unresolved. The full bridge remains on hold. No equilibrium or polarization result exists.</p>
   <div class="cover-status">
     <span class="tag hypothesis"><span class="dot"></span>Exploratory research — no result yet claimed</span>
-    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: checkpoint 10 interpretation review</span>
+    <span class="tag inferred" style="margin-left:.6em;"><span class="dot"></span>Current: checkpoint 11 interpretation review</span>
   </div>
 
   <div class="cover-diagram">
@@ -1389,7 +1389,7 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   <!-- 01 RESEARCH PROGRESS -->
   <div class="subhead"><span class="sub-num">01</span><h3>Research progress</h3></div>
   <div class="roadmap-track" id="roadmap-track"><!-- injected by JS --></div>
-  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — gate 1 PASSED — checkpoint 08 COM CRITERION FAILED — checkpoint 09 four-rank NVE exceeded COM ceiling at 100 fs — checkpoint 10 one-rank NVE completed 2 ps below ceiling — continuation rank sensitivity indicated; cause not isolated — full bridge held</div>
+  <div class="roadmap-current-state">Current state: SIM-01 VALIDATED — gate 1 PASSED — checkpoint 08 COM CRITERION FAILED — checkpoint 09 four-rank NVE exceeded COM ceiling at 100 fs — checkpoint 11 same-restart comparison: one-rank passed 2 ps; four-rank exceeded at 100 fs — rank-count-sensitive Stage-C/NVE behavior; mechanism unresolved — full bridge held</div>
 
   <!-- 02 SIMULATION PROGRAM -->
   <div class="subhead"><span class="sub-num">02</span><h3>Simulation program</h3></div>
@@ -1490,8 +1490,8 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
     <div class="ce-eyebrow">CURRENT EXPERIMENT</div>
     <div class="ce-id">SIM-02-A02</div>
     <div class="exp-section"><h5>Objective</h5><p>Establish a steady-state thermal gradient across the validated equilibrium system (SIM-02-A01 / real SIM-01 is complete and validated — see Section 02 above).</p></div>
-    <div class="exp-section"><h5>Status</h5><span class="tag status-needsrevision">4-RANK NVE FAILED; 1-RANK NVE PASSED 2 PS COM CHECK</span></div>
-    <div class="exp-section"><h5>Next action</h5><p>Review the checkpoint-10 comparison and DECISION-010. Stage B was replayed at each rank count, so the initial NVE states differed. A same-Stage-B-restart Stage-C/NVE comparison is proposed but not approved. The full equilibrium bridge and eHEX pilot remain on hold.</p></div>
+    <div class="exp-section"><h5>Status</h5><span class="tag status-needsrevision">SAME-RESTART: 1-RANK PASSED 2 PS; 4-RANK BREACHED AT 100 FS</span></div>
+    <div class="exp-section"><h5>Next action</h5><p>Review checkpoint 11 and DECISION-011. The one-rank path passed from the exact four-rank Stage-B restart; the four-rank path from that restart breached at 100 fs. Rank-count-sensitive behavior is supported, but its mechanism is unresolved. The full equilibrium bridge and eHEX pilot remain on hold.</p></div>
   </div>
 
   <!-- 11 RESEARCH GUARDRAILS -->
@@ -1566,9 +1566,9 @@ html.dark .term .tip{ background:var(--paper-raised); border:1px solid var(--bor
   </ul>
 
   <h3>What happens next</h3>
-  <p>The checkpoint-08 and checkpoint-09 NVE COM failures are documented. The next controlled step awaits review:</p>
+  <p>The checkpoint-08 and checkpoint-09 NVE COM failures and the approved checkpoint-11 same-restart comparison are documented. Review the comparison before any bridge release:</p>
   <div class="equation-block">
-    \[ \boxed{\text{Review checkpoint 10; keep the full bridge on hold pending an isolating NVE decision.}} \]
+    \[ \boxed{\text{Review checkpoint 11; keep the full equilibrium bridge on hold.}} \]
   </div>
 
   <div class="note-box">
@@ -1758,7 +1758,8 @@ const DEFAULT_LOG = [
   { date:"2026-10-01", source:"SIM-02 checkpoint 08 and DECISION-008", obs:"The fixed-volume bridge was approved: replace inherited NEMD velocities with seed 20260930, run 20 ps direct rescaling, 500 ps NVT, an exact 400 K adjustment, and 1 ns NVE at 1 fs. LAMMPS parsed all stages with zero trajectory steps and no warnings after correcting RATTLE ordering and constrained-temperature rescaling.", interp:"The exact published box is retained because the paper omits its NpT pressure target and the project starts from the shared steady-state snapshot rather than the paper's lattice. Temperature, fitted energy drift, constraints, z-temperature flattening, O-O stationarity, and momentum have frozen acceptance tests.", conf:"High", next:"Execute and analyze the 1.52 ns trajectory. Passing gate 2 releases only the 100 ps eHEX smoke test." },
   { date:"2026-10-03", source:"SIM-02 checkpoint 08 corrected production run", obs:"The four-rank LAMMPS OPT bridge launched from commit a1da7bb. Step-zero COM speed was 4.3903e-7 Å/fs, but it reached 1.02778929e-5 Å/fs at 1 ps and 1.25105105e-5 Å/fs at 2 ps, exceeding the approved 1e-6 Å/fs ceiling. Temperature was 400 K and LAMMPS emitted no warning or error.", interp:"Gate 2 failed during Stage A and the run was stopped. NVT, NVE, structure, energy drift, stationarity, eHEX, and polarization were not measured.", conf:"High", next:"Approve and validate a bounded preparation-stage momentum-control correction before relaunch." },
   { date:"2026-10-03", source:"SIM-02 checkpoint 09 bounded revalidation", obs:"DECISION-009 authorized momentum control in thermostatted preparation only. Stage A passed 20 ps: 200 samples at 400 K, maximum sampled COM 9.6548e-19 Å/fs. Stage B passed 2 ps and ended at 399.81022 K. Uncorrected NVE exceeded the 1e-6 Å/fs ceiling at 100 fs (7.1446e-6 Å/fs) and was interrupted at 400 fs; the maximum of four samples was 8.3573e-6 Å/fs.", interp:"The COM speed was below the ceiling after the zero-step Stage-C velocity cleanup and rose during NVE integration. RATTLE/MPI behavior is a hypothesis, not an established cause. This is an implementation failure, not an equilibrium or polarization result.", conf:"High for sampled diagnostic values; mechanism unresolved", next:"Review DECISION-010 and select a bounded NVE momentum diagnostic. Keep the full bridge on hold." },
-  { date:"2026-10-04", source:"SIM-02 checkpoint 10 one-rank continuation", obs:"The user-approved one-rank OPT run replayed 2 ps Stage B from the same Stage-A restart, then completed 2 ps uncorrected NVE. Twenty NVE samples ranged from 392.66022 to 402.37766 K and ended at 399.69651 K. Maximum sampled COM speed was 1.0435411502651417e-18 Å/fs at 1.9 ps; no sample exceeded the frozen 1e-6 Å/fs ceiling. LAMMPS logged completion at step 24,000 in 32:23 and wrote a final restart.", interp:"The four-rank continuation breached at 100 fs while the one-rank continuation stayed below the ceiling. This indicates rank-sensitive behavior across the continuation, but Stage B was replayed under each rank count, so the NVE starting states differed; the cause is not isolated. A post-run wrapper printf error prevented capturing the process exit status.", conf:"High for the logged sampled values; mechanism unresolved", next:"Consider a one-rank Stage-C/NVE repeat from the saved four-rank Stage-B restart. This isolating diagnostic is proposed, not approved. Keep the full bridge on hold." },
+  { date:"2026-10-04", source:"SIM-02 checkpoint 10 one-rank continuation", obs:"The user-approved one-rank OPT run replayed 2 ps Stage B from the same Stage-A restart, then completed 2 ps uncorrected NVE. Twenty NVE samples ranged from 392.66022 to 402.37766 K and ended at 399.69651 K. Maximum sampled COM speed was 1.0435411502651417e-18 Å/fs at 1.9 ps; no sample exceeded the frozen 1e-6 Å/fs ceiling. LAMMPS logged completion at step 24,000 in 32:23 and wrote a final restart.", interp:"The four-rank continuation breached at 100 fs while the one-rank continuation stayed below the ceiling. Stage B was replayed under each rank count, so the NVE starting states differed; the cause was not isolated. A post-run wrapper printf error prevented capturing the process exit status.", conf:"High for the logged sampled values; mechanism unresolved", next:"DECISION-011 approved the same-restart follow-up; see checkpoint 11." },
+  { date:"2026-10-04", source:"SIM-02 checkpoint 11 same-restart one-rank diagnostic", obs:"From the exact Stage-B restart written by checkpoint 09's four-rank run, the one-rank Stage-C/NVE path completed 2 ps (steps 22,000–24,000) with exit code 0 in 14:02. Twenty NVE samples ranged from 395.91302 to 406.10015 K and ended at 400.10536 K. Maximum sampled COM speed was 1.2638166834526734e-18 Å/fs at step 23,600; no sample exceeded 1e-6 Å/fs.", interp:"The four-rank path from this same restart breached at 100 fs (7.144552366951081e-6 Å/fs). This supports rank-count-sensitive behavior in Stage C/NVE from a common checkpoint, while the specific mechanism remains unresolved. The full bridge stays on hold; no equilibrium or polarization result was measured.", conf:"High for sampled values and completion record; mechanism unresolved", next:"Review checkpoint 11 before deciding whether to repeat or broaden rank diagnosis. Do not release the full bridge yet." },
   { date:"2026-10-03", source:"SIM-02 four-rank production-path initialization", obs:"The first optimized four-rank launch was stopped before step 1 when MPI RATTLE initialization left a 5.9×10⁻⁷ Å/fs center-of-mass speed. Standard and optimized kernels reproduced the same floor. The corrected stage-boundary momentum removal and 10⁻⁶ Å/fs no-growth threshold were approved for relaunch.", interp:"The residual is about 0.06 m/s and roughly 10⁻⁸ of the thermal kinetic-energy scale. No periodic momentum-removal fix is used, so later drift remains observable.", conf:"High", next:"Relaunch gate 2 from step zero and evaluate every frozen acceptance test." }
 ];
 

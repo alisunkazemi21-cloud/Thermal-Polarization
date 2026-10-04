@@ -2,10 +2,13 @@
 
 Status: **checkpoint 07 gate 1 passed. Checkpoint 08 failed its Stage-A COM
 criterion. Checkpoint 09 passed Stage A/B but the four-rank NVE diagnostic
-exceeded the frozen COM ceiling at 100 fs. Under DECISION-010, the one-rank
-2 ps NVE comparison passed all 20 sampled COM checks. The rank-dependent
-continuation outcome does not isolate a cause. The full bridge remains on hold;
-no equilibrium or polarization result exists.**
+exceeded the frozen COM ceiling at 100 fs. Checkpoint 10's one-rank 2 ps NVE
+comparison passed. Checkpoint 11 then used the exact same four-rank Stage-B
+restart: the one-rank Stage-C/NVE path passed 2 ps with maximum COM
+`1.264e-18 Å/fs`, while the four-rank path breached at 100 fs. This supports
+rank-count-sensitive behavior in the sequence but does not identify its
+mechanism. The full bridge remains on hold; no equilibrium or polarization
+result exists.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -96,10 +99,11 @@ uncorrected NVE check, COM reached `7.14e-6 Å/fs` at 100 fs, above the approved
 `1e-6 Å/fs` limit; the partial run was stopped at 400 fs. This is an
 implementation failure, not an equilibrium result. See the
 [diagnostic report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md)
-and the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md). DECISION-010 records the approved comparison and follow-up boundary.
-The reproducible continuation, Stage-C zero-step, and checkpoint-10 inputs are tracked as
+the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md), and the [checkpoint 11 same-restart report](../../results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md). DECISION-010 and DECISION-011 record the approvals and boundaries.
+The reproducible continuation, Stage-C zero-step, checkpoint-10, and checkpoint-11 inputs are tracked as
 `in.checkpoint-09-continuation-b-nve` and
-`in.checkpoint-09-stage-c-zero-step`, and `in.checkpoint-10-single-rank-nve` in this directory.
+`in.checkpoint-09-stage-c-zero-step`, `in.checkpoint-10-single-rank-nve`, and
+`in.checkpoint-11-same-restart-one-rank` in this directory.
 
 ## Documentation contract
 

@@ -1,0 +1,21 @@
+{
+  "record_type": "execution_provenance",
+  "date": "2026-10-04",
+  "host_environment": "Ubuntu on WSL",
+  "working_directory": "/mnt/c/Users/WebVajhegan/Thermal-Polarization",
+  "wsl_visible_logical_cpus": 4,
+  "wsl_visible_memory_kib": 3949164,
+  "lammps_version": "10 Dec 2025",
+  "mpi_ranks": 1,
+  "openmp_threads": 1,
+  "suffix": "opt",
+  "command": "OMP_NUM_THREADS=1 mpiexec -n 1 /usr/bin/lmp -sf opt -log results/raw/SIM-02/checkpoint-11-same-restart-one-rank/lammps.log -in simulations/SIM-02/lammps/in.checkpoint-11-same-restart-one-rank",
+  "input": "simulations/SIM-02/lammps/in.checkpoint-11-same-restart-one-rank",
+  "input_sha256": "f747a0dc636c99bc31d7556ba1334eadec9e8c6c213331d73c93644143def5a6",
+  "restart_sha256": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "exit_code_file": "lammps-exit-code.txt",
+  "completion_marker": "SIM02_GATE2 nve_complete=yes final_step=24000",
+  "wall_time": "00:14:02"
+}

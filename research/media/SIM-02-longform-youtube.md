@@ -192,9 +192,16 @@ result points to rank-sensitive behavior in the continuation, but does not
 prove RATTLE, an MPI reduction, or NVE alone caused the difference. Show the
 32:23 run and disclose that a shell-wrapper `printf` error prevented capture of
 the LAMMPS exit code even though its completion marker and final restart exist.
-End with the full bridge **on hold** and the next isolated diagnostic proposed,
-not yet approved. Do not show a corrected curve or imply equilibrium was
-established.
+
+Then reveal checkpoint 11: the one-rank Stage-C/NVE test began from the exact
+four-rank Stage-B restart. The one-rank run completed 2 ps with exit code 0,
+20 samples, and a maximum COM speed of `1.26e-18 Å/fs`. The four-rank run from
+that same restart crossed the ceiling at 100 fs. This is a tighter comparison:
+rank count is the controlled difference for Stage C/NVE, while a specific
+mechanism remains unresolved. Show the 14:02 execution and link the raw restart
+hash and logs in the research record. End with the full bridge **on hold** and
+no equilibrium or polarization claim. Do not show a corrected curve or imply
+equilibrium was established.
 
 ### 9. The eHEX pilot
 

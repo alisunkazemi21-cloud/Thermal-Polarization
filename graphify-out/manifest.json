@@ -42,16 +42,16 @@
     "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
   },
   "PROJECT_STATE.md": {
-    "mtime": 1791110993.560781,
-    "seen": 1791111933.0529678,
-    "ast_hash": "80d3997f7683879c34eb591d803bfedb",
-    "semantic_hash": "80d3997f7683879c34eb591d803bfedb"
+    "mtime": 1791138027.1023846,
+    "seen": 1791138268.1419878,
+    "ast_hash": "f4151ddf2a0ccd26f1cb39d265564517",
+    "semantic_hash": "f4151ddf2a0ccd26f1cb39d265564517"
   },
   "README.md": {
-    "mtime": 1791110993.572674,
-    "seen": 1791111933.0529678,
-    "ast_hash": "4eeb6c9dacdb0920c9b4e1f3e3c53cf9",
-    "semantic_hash": "4eeb6c9dacdb0920c9b4e1f3e3c53cf9"
+    "mtime": 1791137253.52177,
+    "seen": 1791138268.1419878,
+    "ast_hash": "94e2e310e79e0caa44b3f2cace1dc041",
+    "semantic_hash": "94e2e310e79e0caa44b3f2cace1dc041"
   },
   "environment/requirements-graphify.txt": {
     "mtime": 1790760461.996637,
@@ -120,16 +120,16 @@
     "semantic_hash": "72b5725b71fd6968054a75cb2e746b7b"
   },
   "simulations/SIM-02/README.md": {
-    "mtime": 1791110993.5947943,
-    "seen": 1791111933.0529678,
-    "ast_hash": "fbf8c92f3296b75ee1d0f4a7de2f66fd",
-    "semantic_hash": "fbf8c92f3296b75ee1d0f4a7de2f66fd"
+    "mtime": 1791137254.812281,
+    "seen": 1791138268.1654313,
+    "ast_hash": "aa157723b8b2a928e29e7073692dbc9e",
+    "semantic_hash": "aa157723b8b2a928e29e7073692dbc9e"
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1791111116.2951086,
-    "seen": 1791111933.0529678,
-    "ast_hash": "6fd0b1a06021cb46aeabbb15bc05693e",
-    "semantic_hash": "6fd0b1a06021cb46aeabbb15bc05693e"
+    "mtime": 1791137552.5840638,
+    "seen": 1791138268.1419878,
+    "ast_hash": "6eb2590fee9ff4d34a64cb2352fb8af9",
+    "semantic_hash": "6eb2590fee9ff4d34a64cb2352fb8af9"
   },
   "research/WORKFLOW.md": {
     "mtime": 1790764921.57253,
@@ -138,10 +138,10 @@
     "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
   },
   "research/book/SIM-02.md": {
-    "mtime": 1791110993.6217656,
-    "seen": 1791111933.0529678,
-    "ast_hash": "25a83fd3f8e12204ef4e4d41b402d06c",
-    "semantic_hash": "25a83fd3f8e12204ef4e4d41b402d06c"
+    "mtime": 1791137257.1422176,
+    "seen": 1791138268.1419878,
+    "ast_hash": "ba0f5c8773dc0be55dfca70e1e37332e",
+    "semantic_hash": "ba0f5c8773dc0be55dfca70e1e37332e"
   },
   "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
     "mtime": 1790764264.228366,
@@ -156,16 +156,16 @@
     "semantic_hash": "14d9ae2aa5f2e13f1b0c4605691eae8c"
   },
   "research/media/SIM-02-longform-youtube.md": {
-    "mtime": 1791110993.622767,
-    "seen": 1791111933.0529678,
-    "ast_hash": "bfdc3f296cf478251a5ad524bb2d0015",
-    "semantic_hash": "bfdc3f296cf478251a5ad524bb2d0015"
+    "mtime": 1791137462.7547188,
+    "seen": 1791138268.162448,
+    "ast_hash": "434cad151ca76d22177f4ec6167d5035",
+    "semantic_hash": "434cad151ca76d22177f4ec6167d5035"
   },
   "results/reports/SIM-02-report.md": {
-    "mtime": 1791110993.6207666,
-    "seen": 1791111933.0529678,
-    "ast_hash": "6a0f8fa534ee8e74b897bf24d6fbeff9",
-    "semantic_hash": "6a0f8fa534ee8e74b897bf24d6fbeff9"
+    "mtime": 1791137411.9143786,
+    "seen": 1791138268.1654313,
+    "ast_hash": "aa6139082714a3a712bf8ae19ba543fe",
+    "semantic_hash": "aa6139082714a3a712bf8ae19ba543fe"
   },
   "research/decisions/DECISION-006-SIM-02-temperature-path.md": {
     "mtime": 1790768589.455459,
@@ -468,10 +468,10 @@
     "semantic_hash": "bc3c6f9dcc0ee7edcfe32f5bc3d370ab"
   },
   "research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md": {
-    "mtime": 1791111678.593007,
-    "seen": 1791111933.0529678,
-    "ast_hash": "1ee5b406bdddc98b76656ab68176ebba",
-    "semantic_hash": "1ee5b406bdddc98b76656ab68176ebba"
+    "mtime": 1791137067.2127252,
+    "seen": 1791138268.160447,
+    "ast_hash": "bcf21592b05814727ef4d26b1b510f6d",
+    "semantic_hash": "bcf21592b05814727ef4d26b1b510f6d"
   },
   "results/reports/SIM-02-checkpoint-09-diagnostics.md": {
     "mtime": 1791058799.7935872,
@@ -484,84 +484,6 @@
     "seen": 1791111933.0529678,
     "ast_hash": "8bd3ef3f5e57e6154fc715ef98ccdad7",
     "semantic_hash": "8bd3ef3f5e57e6154fc715ef98ccdad7"
-  },
-  "models/SPC-E/spce.itp": {
-    "mtime": 1789791925.5563152,
-    "seen": 1791111933.0529678,
-    "ast_hash": "c1adaf4f1c2c8f0c69fb9bb4a808b1f0",
-    "semantic_hash": "c1adaf4f1c2c8f0c69fb9bb4a808b1f0"
-  },
-  "simulations/SIM-01/em.mdp": {
-    "mtime": 1789791925.6799533,
-    "seen": 1791111933.0529678,
-    "ast_hash": "d296f29349a47e87f111aa1df9c84c90",
-    "semantic_hash": "d296f29349a47e87f111aa1df9c84c90"
-  },
-  "simulations/SIM-01/md-nvt-diffusion.mdp": {
-    "mtime": 1789805211.855272,
-    "seen": 1791111933.0529678,
-    "ast_hash": "701157ad4482f7c34f40c5c75318fab5",
-    "semantic_hash": "701157ad4482f7c34f40c5c75318fab5"
-  },
-  "simulations/SIM-01/md.mdp": {
-    "mtime": 1789791925.6921515,
-    "seen": 1791111933.0529678,
-    "ast_hash": "e03849a27038a15d89588c4287951535",
-    "semantic_hash": "e03849a27038a15d89588c4287951535"
-  },
-  "simulations/SIM-01/npt.mdp": {
-    "mtime": 1789791925.700342,
-    "seen": 1791111933.0529678,
-    "ast_hash": "44614d6e481b8221b2b960cc371087d8",
-    "semantic_hash": "44614d6e481b8221b2b960cc371087d8"
-  },
-  "simulations/SIM-01/nvt.mdp": {
-    "mtime": 1789791925.7140858,
-    "seen": 1791111933.0529678,
-    "ast_hash": "2e6c38ade2eb6734ddf39fbf861c464b",
-    "semantic_hash": "2e6c38ade2eb6734ddf39fbf861c464b"
-  },
-  "simulations/SIM-01/topol.top": {
-    "mtime": 1789794256.9685755,
-    "seen": 1791111933.0529678,
-    "ast_hash": "f1b942aaaf9b2ee4e8b58e5d39779ec3",
-    "semantic_hash": "f1b942aaaf9b2ee4e8b58e5d39779ec3"
-  },
-  "simulations/SIM-02/em.mdp": {
-    "mtime": 1790519769.6326394,
-    "seen": 1791111933.0529678,
-    "ast_hash": "d296f29349a47e87f111aa1df9c84c90",
-    "semantic_hash": "d296f29349a47e87f111aa1df9c84c90"
-  },
-  "simulations/SIM-02/nemd-production.mdp": {
-    "mtime": 1790519789.3446677,
-    "seen": 1791111933.0529678,
-    "ast_hash": "421b44b44cfa757388e41b767c4e4512",
-    "semantic_hash": "421b44b44cfa757388e41b767c4e4512"
-  },
-  "simulations/SIM-02/nemd-startup.mdp": {
-    "mtime": 1790519789.0115123,
-    "seen": 1791111933.0529678,
-    "ast_hash": "2d6dec8df06d8d36ba915795b456e781",
-    "semantic_hash": "2d6dec8df06d8d36ba915795b456e781"
-  },
-  "simulations/SIM-02/npt.mdp": {
-    "mtime": 1790519769.7598457,
-    "seen": 1791111933.0529678,
-    "ast_hash": "44614d6e481b8221b2b960cc371087d8",
-    "semantic_hash": "44614d6e481b8221b2b960cc371087d8"
-  },
-  "simulations/SIM-02/nvt.mdp": {
-    "mtime": 1790519769.6958027,
-    "seen": 1791111933.0529678,
-    "ast_hash": "2e6c38ade2eb6734ddf39fbf861c464b",
-    "semantic_hash": "2e6c38ade2eb6734ddf39fbf861c464b"
-  },
-  "simulations/SIM-02/topol.top": {
-    "mtime": 1790519782.1786783,
-    "seen": 1791111933.0529678,
-    "ast_hash": "6ee58bd3a6123cb9a29e7cde61f86cf6",
-    "semantic_hash": "6ee58bd3a6123cb9a29e7cde61f86cf6"
   },
   "results/raw/SIM-02/checkpoint-10-single-rank-nve/checkpoint-10-summary.json": {
     "mtime": 1791110844.1749437,
@@ -588,9 +510,45 @@
     "semantic_hash": "31250ce4fe89ebb2e9f48ec066f43f46"
   },
   "results/reports/SIM-02-checkpoint-10-one-rank-nve.md": {
-    "mtime": 1791110993.4942346,
-    "seen": 1791111933.0529678,
-    "ast_hash": "2cba3f5d3adb47d7376bd858ebe4677c",
-    "semantic_hash": "2cba3f5d3adb47d7376bd858ebe4677c"
+    "mtime": 1791137614.1069627,
+    "seen": 1791138268.1654313,
+    "ast_hash": "42f536c735d13c7e81974478fbb34ebd",
+    "semantic_hash": "42f536c735d13c7e81974478fbb34ebd"
+  },
+  "results/raw/SIM-02/checkpoint-11-same-restart-one-rank/checkpoint-11-summary.json": {
+    "mtime": 1791138408.8732913,
+    "seen": 1791138872.6344616,
+    "ast_hash": "53690347b207288bef233cbb4d4e02af",
+    "semantic_hash": "53690347b207288bef233cbb4d4e02af"
+  },
+  "results/raw/SIM-02/checkpoint-11-same-restart-one-rank/run-metadata.json": {
+    "mtime": 1791137153.7161489,
+    "seen": 1791138268.1419878,
+    "ast_hash": "6135614c05b29375d33d387129520565",
+    "semantic_hash": "6135614c05b29375d33d387129520565"
+  },
+  "results/raw/SIM-02/checkpoint-11-same-restart-one-rank/sha256-manifest.json": {
+    "mtime": 1791138408.896577,
+    "seen": 1791138872.6354616,
+    "ast_hash": "7803a7c56779ab5e69503a7a94850a3b",
+    "semantic_hash": "7803a7c56779ab5e69503a7a94850a3b"
+  },
+  "research/decisions/DECISION-011-SIM-02-same-restart-rank-diagnostic.md": {
+    "mtime": 1791138408.8732913,
+    "seen": 1791138872.6373346,
+    "ast_hash": "a5902d12e4362d136bddb8ca90d387bb",
+    "semantic_hash": "a5902d12e4362d136bddb8ca90d387bb"
+  },
+  "results/raw/SIM-02/checkpoint-11-same-restart-one-rank/README.md": {
+    "mtime": 1791135997.6191046,
+    "seen": 1791138268.164431,
+    "ast_hash": "b8b7f3a1c9cbd21a5bcf3cc3cabe1ace",
+    "semantic_hash": "b8b7f3a1c9cbd21a5bcf3cc3cabe1ace"
+  },
+  "results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md": {
+    "mtime": 1791137153.7161489,
+    "seen": 1791138268.1654313,
+    "ast_hash": "7fb76d4ee0c9898d6badb2930b6f33a8",
+    "semantic_hash": "7fb76d4ee0c9898d6badb2930b6f33a8"
   }
 }

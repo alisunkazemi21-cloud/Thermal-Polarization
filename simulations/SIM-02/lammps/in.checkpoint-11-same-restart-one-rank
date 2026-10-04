@@ -1,0 +1,30 @@
+units           real
+atom_style      full
+read_restart    results/raw/SIM-02/checkpoint-11-same-restart-one-rank/stage-b-2ps-four-rank.restart
+kspace_style    pppm 1.0e-5
+neighbor        4.0 bin
+neigh_modify    one 7500
+
+variable        out index results/raw/SIM-02/checkpoint-11-same-restart-one-rank
+variable        thermo_interval index 100
+variable        nve_steps index 2000
+compute         bridge_temp all temp
+variable        vcomx equal vcm(all,x)
+variable        vcomy equal vcm(all,y)
+variable        vcomz equal vcm(all,z)
+
+thermo_style    custom step time atoms temp press pe ke etotal vol lx ly lz v_vcomx v_vcomy v_vcomz
+thermo_modify   temp bridge_temp flush yes
+thermo          ${thermo_interval}
+
+# Continue from the exact four-rank Stage-B restart. Use the frozen Stage-C
+# initialization and uncorrected NVE settings; no momentum fix is active.
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             0 post no
+velocity        all scale 400.0
+velocity        all zero angular
+velocity        all zero linear
+run             ${nve_steps}
+write_restart   ${out}/same-restart-one-rank-final.restart
+print           "SIM02_GATE2 nve_complete=yes final_step=$(step)"

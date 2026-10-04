@@ -1,7 +1,7 @@
 # DECISION-010 — Review of checkpoint-09 NVE COM drift
 
 - Date opened: 2026-10-03
-- Status: **Approved diagnostic complete; follow-up review pending**
+- Status: **Checkpoint 10 complete; follow-up recorded in DECISION-011**
 - Depends on: DECISION-009 and the checkpoint-09 results report
 
 ## Measured evidence
@@ -50,6 +50,6 @@ The LAMMPS log contains the completion marker and final restart; a shell-wrapper
 ## Boundary and proposed follow-up
 
 The full bridge remains on hold. No scientific parameter, COM threshold, or
-NVE momentum policy changed. A proposed isolating check is to start from the
-saved four-rank Stage-B restart and compare Stage C plus NVE at one rank, so the
-state entering the segment is held fixed. This follow-up is not yet approved.
+NVE momentum policy changed. The user approved a same-restart rank comparison
+on 2026-10-04; its scope and measured outcome are recorded in DECISION-011 and
+`results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`.
