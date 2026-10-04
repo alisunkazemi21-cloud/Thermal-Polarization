@@ -6,9 +6,12 @@ exceeded the frozen COM ceiling at 100 fs. Checkpoint 10's one-rank 2 ps NVE
 comparison passed. Checkpoint 11 then used the exact same four-rank Stage-B
 restart: one-rank Stage-C/NVE passed 2 ps, while the four-rank path breached at
 100 fs. Checkpoint 12 sampled the four-rank path each timestep and halted at
-its first COM-ceiling crossing, 7 fs into NVE. The timing is resolved, but the
-mechanism is not. The full bridge remains on hold; no equilibrium or
-polarization result exists.**
+its first COM-ceiling crossing, 7 fs into NVE. Checkpoint 13 used the same
+restart at one rank and completed 400 fs with maximum COM `9.65e-19 Å/fs`.
+Together the matched high-cadence traces support rank-count-sensitive behavior
+for this saved-state sequence; the cause remains unresolved. Checkpoint 13
+closes this diagnostic branch. The full bridge remains on hold pending
+DECISION-014; no equilibrium or polarization result exists.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -98,13 +101,14 @@ transition ended at 399.81 K with COM below the frozen ceiling. In the
 uncorrected NVE check, COM reached `7.14e-6 Å/fs` at 100 fs, above the approved
 `1e-6 Å/fs` limit; the partial run was stopped at 400 fs. This is an
 implementation failure, not an equilibrium result. See the
-[diagnostic report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md)
-the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md), the [checkpoint 11 same-restart report](../../results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md), and the [checkpoint 12 high-cadence report](../../results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md). DECISION-010 through DECISION-012 record the approvals and boundaries.
-The reproducible continuation, Stage-C zero-step, checkpoint-10, checkpoint-11, and checkpoint-12 inputs are tracked as
+[diagnostic report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md),
+the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md), the [checkpoint 11 same-restart report](../../results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md), the [checkpoint 12 high-cadence report](../../results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md), and the [checkpoint 13 matched one-rank report](../../results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md). DECISION-010 through DECISION-014 record the approvals, outcome, and consolidated go/no-go proposal.
+The reproducible continuation, Stage-C zero-step, checkpoint-10 through checkpoint-13 inputs are tracked as
 `in.checkpoint-09-continuation-b-nve` and
 `in.checkpoint-09-stage-c-zero-step`, `in.checkpoint-10-single-rank-nve`, and
 `in.checkpoint-11-same-restart-one-rank`, and
-`in.checkpoint-12-four-rank-high-cadence` in this directory.
+`in.checkpoint-12-four-rank-high-cadence`, and
+`in.checkpoint-13-one-rank-high-cadence` in this directory.
 
 ## Documentation contract
 

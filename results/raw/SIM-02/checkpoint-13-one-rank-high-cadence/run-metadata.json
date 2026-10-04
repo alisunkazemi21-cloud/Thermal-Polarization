@@ -1,0 +1,20 @@
+{
+  "record_type": "execution_provenance",
+  "date": "2026-10-04",
+  "host_environment": "Ubuntu on WSL",
+  "working_directory": "/mnt/c/Users/WebVajhegan/Thermal-Polarization",
+  "wsl_visible_logical_cpus": 4,
+  "wsl_visible_memory_kib": 3949164,
+  "lammps_version": "10 Dec 2025",
+  "mpi_ranks": 1,
+  "openmp_threads": 1,
+  "suffix": "opt",
+  "command": "OMP_NUM_THREADS=1 mpirun --oversubscribe -np 1 /usr/bin/lmp -sf opt -log results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/lammps.log -in simulations/SIM-02/lammps/in.checkpoint-13-one-rank-high-cadence",
+  "input": "simulations/SIM-02/lammps/in.checkpoint-13-one-rank-high-cadence",
+  "input_sha256": "3be558bf37469dba4abdca5d7940f6bcd8cb0bc922b8707f99014e2df4ea6a8f",
+  "restart_sha256": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef",
+  "final_step": 22400,
+  "completion_marker": "SIM02_GATE2 nve_window_exit final_step=22400 com_speed=5.5176068520554e-19",
+  "wall_time": "0:03:57",
+  "launcher_exit_code": "not separately captured; LAMMPS normal-finalization evidence recorded in checkpoint-13-summary.json"
+}

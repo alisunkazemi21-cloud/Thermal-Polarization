@@ -42,16 +42,16 @@
     "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
   },
   "PROJECT_STATE.md": {
-    "mtime": 1791142049.0378702,
-    "seen": 1791142447.4261155,
-    "ast_hash": "094d974cc2cb1919191598c38927a0f8",
-    "semantic_hash": "094d974cc2cb1919191598c38927a0f8"
+    "mtime": 1791145208.592746,
+    "seen": 1791145917.1812072,
+    "ast_hash": "52c42cfc351731b31ed6f77d0d0ec0d7",
+    "semantic_hash": "52c42cfc351731b31ed6f77d0d0ec0d7"
   },
   "README.md": {
-    "mtime": 1791142050.5463493,
-    "seen": 1791142447.4261155,
-    "ast_hash": "01d559fb70d412c8b94f76103ad91d16",
-    "semantic_hash": "01d559fb70d412c8b94f76103ad91d16"
+    "mtime": 1791144813.574411,
+    "seen": 1791145917.1812072,
+    "ast_hash": "0b1d4380e01d953920091580ae32967a",
+    "semantic_hash": "0b1d4380e01d953920091580ae32967a"
   },
   "environment/requirements-graphify.txt": {
     "mtime": 1790760461.996637,
@@ -90,10 +90,10 @@
     "semantic_hash": "ba1f7e64df836f049a8a0fa5e7f76be2"
   },
   "research/media/youtube-roadmap.md": {
-    "mtime": 1790764924.4634888,
-    "seen": 1791111933.0529678,
-    "ast_hash": "f108b8569640df918363049e86a50f06",
-    "semantic_hash": "f108b8569640df918363049e86a50f06"
+    "mtime": 1791145150.4283462,
+    "seen": 1791145917.1812072,
+    "ast_hash": "50dce46bfa50932318dabca3e24b8415",
+    "semantic_hash": "50dce46bfa50932318dabca3e24b8415"
   },
   "research/prompts/SIM-02_Claude_Prompt.txt": {
     "mtime": 1790746716.8858414,
@@ -120,16 +120,16 @@
     "semantic_hash": "72b5725b71fd6968054a75cb2e746b7b"
   },
   "simulations/SIM-02/README.md": {
-    "mtime": 1791140478.7206867,
-    "seen": 1791141066.7865355,
-    "ast_hash": "db2d1b80f392c541aff28b747ae82178",
-    "semantic_hash": "db2d1b80f392c541aff28b747ae82178"
+    "mtime": 1791144966.578329,
+    "seen": 1791145917.195223,
+    "ast_hash": "924abf1e863a106b5c7d72f1862b342d",
+    "semantic_hash": "924abf1e863a106b5c7d72f1862b342d"
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1791142124.3751304,
-    "seen": 1791142447.4261155,
-    "ast_hash": "46374d0da9741023c2b8a2e7f143fe85",
-    "semantic_hash": "46374d0da9741023c2b8a2e7f143fe85"
+    "mtime": 1791144895.8295405,
+    "seen": 1791145917.168527,
+    "ast_hash": "66327d7ed7368a0916260dbcdb786baf",
+    "semantic_hash": "66327d7ed7368a0916260dbcdb786baf"
   },
   "research/WORKFLOW.md": {
     "mtime": 1790764921.57253,
@@ -138,10 +138,10 @@
     "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
   },
   "research/book/SIM-02.md": {
-    "mtime": 1791142047.991735,
-    "seen": 1791142447.4261155,
-    "ast_hash": "075161ecc0e3ef1ff6578f7f58d58d94",
-    "semantic_hash": "075161ecc0e3ef1ff6578f7f58d58d94"
+    "mtime": 1791144859.5206947,
+    "seen": 1791145917.1812072,
+    "ast_hash": "cc5720e7b161f9af7ec8953380ca7cde",
+    "semantic_hash": "cc5720e7b161f9af7ec8953380ca7cde"
   },
   "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
     "mtime": 1790764264.228366,
@@ -156,16 +156,16 @@
     "semantic_hash": "14d9ae2aa5f2e13f1b0c4605691eae8c"
   },
   "research/media/SIM-02-longform-youtube.md": {
-    "mtime": 1791140520.7712836,
-    "seen": 1791141066.7865355,
-    "ast_hash": "b203789b2dba74887ee21f47c5a5d046",
-    "semantic_hash": "b203789b2dba74887ee21f47c5a5d046"
+    "mtime": 1791145020.718195,
+    "seen": 1791145917.1812072,
+    "ast_hash": "25301cc6a1d5f7acb39956b980113e45",
+    "semantic_hash": "25301cc6a1d5f7acb39956b980113e45"
   },
   "results/reports/SIM-02-report.md": {
-    "mtime": 1791140492.2923975,
-    "seen": 1791141066.7865355,
-    "ast_hash": "ef670544e6aabce5edf454330abd08f4",
-    "semantic_hash": "ef670544e6aabce5edf454330abd08f4"
+    "mtime": 1791144979.550041,
+    "seen": 1791145917.195223,
+    "ast_hash": "cbd80fb86a2ce65c49ec0f8c5a9cf2a9",
+    "semantic_hash": "cbd80fb86a2ce65c49ec0f8c5a9cf2a9"
   },
   "research/decisions/DECISION-006-SIM-02-temperature-path.md": {
     "mtime": 1790768589.455459,
@@ -588,9 +588,45 @@
     "semantic_hash": "728876a526cfaaa231a90d840c0f3600"
   },
   "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md": {
-    "mtime": 1791141987.9978373,
-    "seen": 1791142447.4261155,
-    "ast_hash": "910c4f3cf9e3dcbab531b1891a096500",
-    "semantic_hash": "910c4f3cf9e3dcbab531b1891a096500"
+    "mtime": 1791146066.6581557,
+    "seen": 1791146391.6116557,
+    "ast_hash": "fe3afbae6d8ab06b0de599042b415e07",
+    "semantic_hash": "fe3afbae6d8ab06b0de599042b415e07"
+  },
+  "results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/checkpoint-13-summary.json": {
+    "mtime": 1791144706.641484,
+    "seen": 1791145917.1812072,
+    "ast_hash": "2ec4278acdf09463dab6cb964b3e75c8",
+    "semantic_hash": "2ec4278acdf09463dab6cb964b3e75c8"
+  },
+  "results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/run-metadata.json": {
+    "mtime": 1791145432.868743,
+    "seen": 1791145917.1812072,
+    "ast_hash": "b63196c56d16d2d596f5feb8c22e93c2",
+    "semantic_hash": "b63196c56d16d2d596f5feb8c22e93c2"
+  },
+  "results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/sha256-manifest.json": {
+    "mtime": 1791145498.784743,
+    "seen": 1791145917.1812072,
+    "ast_hash": "4f7e81df2bfbaa3a5f104f94196644dc",
+    "semantic_hash": "4f7e81df2bfbaa3a5f104f94196644dc"
+  },
+  "research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md": {
+    "mtime": 1791145415.2283409,
+    "seen": 1791145917.1812072,
+    "ast_hash": "bbfe110ae084189330d15104b8f0eadc",
+    "semantic_hash": "bbfe110ae084189330d15104b8f0eadc"
+  },
+  "results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/README.md": {
+    "mtime": 1791144708.991521,
+    "seen": 1791145917.195223,
+    "ast_hash": "c3d69e5824a8970991cf5cf22329fd5e",
+    "semantic_hash": "c3d69e5824a8970991cf5cf22329fd5e"
+  },
+  "results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md": {
+    "mtime": 1791144679.7824488,
+    "seen": 1791145917.195223,
+    "ast_hash": "b896480cfca9bdf1c99db4c9dc0edf4a",
+    "semantic_hash": "b896480cfca9bdf1c99db4c9dc0edf4a"
   }
 }

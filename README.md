@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 12: the four-rank same-restart path crossed the COM ceiling 7 fs into NVE with per-step sampling; mechanism unresolved; full bridge held. A matched one-rank high-cadence control is proposed in DECISION-013 and awaits approval |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 13 completed 400 fs at one rank below the COM ceiling; the matched four-rank path crossed at 7 fs. Rank-count-sensitive behavior is supported, cause unresolved. Full bridge held pending DECISION-014 go/no-go |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -55,7 +55,9 @@ See:
 - [checkpoint 11 approval and result](research/decisions/DECISION-011-SIM-02-same-restart-rank-diagnostic.md)
 - [checkpoint 12 high-cadence diagnostic](results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md)
 - [checkpoint 12 approval and result](research/decisions/DECISION-012-SIM-02-four-rank-high-cadence-diagnostic.md)
-- [proposed checkpoint 13 one-rank high-cadence control](research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md)
+- [checkpoint 13 one-rank high-cadence result](results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md)
+- [DECISION-013 approval and result](research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md)
+- [DECISION-014 consolidated bridge go/no-go proposal](research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md)
 
 ## Research workflow
 

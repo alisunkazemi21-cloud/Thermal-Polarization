@@ -15,11 +15,13 @@ COM ceiling at 100 fs; checkpoint 10's one-rank continuation then completed 2 ps
 below the ceiling from a separately replayed Stage-B state. Checkpoint 11
 repeated Stage C/NVE at one rank from the exact four-rank Stage-B restart and
 also completed below the ceiling. The same-restart four-rank path failed at
-100 fs, supporting rank-count-sensitive behavior in the sequence without
-identifying its mechanism. The full equilibrium bridge is on hold. No
-equilibrium or polarization result exists. A matched one-rank, per-step
-control from the same restart is proposed in DECISION-013; it awaits approval
-and has not been run.**
+100 fs. Checkpoint 12 located the first crossing at 7 fs; checkpoint 13's
+matched one-rank replay completed 400 fs with maximum COM `9.6530e-19 Å/fs`.
+The traces support rank-count-sensitive behavior in this saved-state sequence,
+while the mechanism remains unresolved. The full equilibrium bridge is on
+hold. No equilibrium or polarization result exists. DECISION-014 proposes one
+consolidated Gate 2 go/no-go under the already frozen criteria, or closure of
+the current method path.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -60,7 +62,10 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-04 | Checkpoint 10 one-rank continuation | Measured implementation diagnostic | Stage B and 2 ps NVE completed; 20 NVE samples had max COM `1.0435e-18 Å/fs`; four-rank path had exceeded the ceiling at 100 fs; cause not isolated |
 | 2026-10-04 | DECISION-011 approved | Approved decision | User authorized a one-rank Stage-C/NVE comparison from the exact four-rank Stage-B restart; local WSL build selected to hold software environment close |
 | 2026-10-04 | Checkpoint 11 same-restart comparison | Measured implementation diagnostic | One-rank Stage C/NVE completed 2 ps (exit 0; max COM `1.2638e-18 Å/fs`); four-rank path from the same restart breached at 100 fs; mechanism unresolved |
-| 2026-10-04 | Checkpoint 12 trace review | Measured trace plus proposed follow-up | Four-rank COM started at `6.03e-8 Å/fs` after cleanup and crossed the ceiling at 7 fs; a matched one-rank high-cadence control is proposed in DECISION-013, not yet approved or run |
+| 2026-10-04 | Checkpoint 12 four-rank replay | Measured diagnostic | From the shared restart, COM crossed the ceiling at 7 fs; mechanism not identified |
+| 2026-10-04 | DECISION-013 approved and executed | Approved bounded diagnostic | Matched one-rank high-cadence control from the same restart completed 400 fs; max COM `9.6530e-19 Å/fs`; at 7 fs COM was `2.3195e-19 Å/fs`; no ceiling crossing |
+| 2026-10-04 | Checkpoint 13 comparison closed | Measured trace plus inference | Together with checkpoint 12, supports rank-count-sensitive early COM behavior for this saved-state sequence; cause unresolved. Temperature and total-energy changes remain exploratory because no short-run thresholds were frozen |
+| 2026-10-04 | DECISION-014 proposed | Proposed bridge go/no-go | One final Gate 2 attempt using DECISION-008's unchanged 1.52-million-step protocol and acceptance criteria, or close the current method path; no run authorized yet |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -270,6 +275,7 @@ result remains scientifically valuable.
 - `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`: one-rank comparison from replayed Stage B
 - `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`: one-rank comparison from the same four-rank Stage-B restart
 - `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md`: per-step four-rank replay from that restart
-- DECISION-010 through DECISION-013: rank-comparison, high-cadence diagnostic, and proposed one-rank control records
+- DECISION-010 through DECISION-014: rank-comparison diagnostics and consolidated bridge go/no-go proposal
+- `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md`: matched one-rank control result
 - `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
 - `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input

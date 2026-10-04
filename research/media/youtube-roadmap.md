@@ -71,10 +71,12 @@ crash. Great "MD simulations lie to you if you're not careful" narrative.
 - "Is There Actually a Voltage?" (V_OC measurement)
 - "Closing the Circuit" (SIM-03, the actual power question)
 
-The current detailed treatment for the first item is
+The current detailed treatment for the first item follows the full evidence
+timeline through checkpoint 13 and the consolidated DECISION-014 go/no-go. Its
+ending will depend on whether the frozen bridge is attempted once or this
+method path is formally closed. The treatment is in
 [`SIM-02-longform-youtube.md`](SIM-02-longform-youtube.md). Its final execution
-and results chapters remain intentionally open until the corresponding evidence
-exists.
+and results chapters remain open until the corresponding evidence exists.
 
 ---
 

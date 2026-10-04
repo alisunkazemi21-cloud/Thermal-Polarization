@@ -23,11 +23,13 @@ def _(mo):
     Checkpoint 11 repeated Stage C/NVE at one rank from that exact four-rank
     Stage-B restart and completed 2 ps below the ceiling. Checkpoint 12
     replayed four-rank Stage C/NVE with per-step sampling and halted at the
-    first COM-ceiling crossing, 7 fs after the NVE start. The timing is now
-    resolved at the sampled-step level; the cause is not. A matched one-rank,
-    per-step control from the same restart is proposed in DECISION-013; it is
-    awaiting approval and has not been run. The full bridge remains on hold;
-    no equilibrium or polarization result exists.**
+    first COM-ceiling crossing, 7 fs after the NVE start. DECISION-013's matched
+    one-rank control completed 400 fs with maximum COM 9.65e-19 Å/fs. Together,
+    the traces support rank-count-sensitive behavior in this saved-state
+    sequence; the cause remains unresolved. Checkpoint 13 closes this
+    diagnostic branch. DECISION-014 proposes one final Gate 2 go/no-go under
+    the existing frozen criteria, or closure of the current method path. The
+    full bridge remains on hold; no equilibrium or polarization result exists.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -138,9 +140,15 @@ def _(mo):
             },
             {
                 "date": "2026-10-04",
-                "stage": "DECISION-013 proposed control",
-                "event": "Trace review proposes a one-rank replay from the same Stage-B restart with per-step output to match checkpoint 12's early-time sampling; no run is authorized or recorded yet.",
-                "evidence": "proposed decision; awaiting user review",
+                "stage": "Checkpoint 13 one-rank high-cadence control",
+                "event": "The approved one-rank replay from the same restart completed all 400 fs; maximum COM was 9.653e-19 Å/fs and the 7 fs value was 2.320e-19 Å/fs.",
+                "evidence": "measured result; DECISION-013",
+            },
+            {
+                "date": "2026-10-04",
+                "stage": "DECISION-014 consolidated go/no-go proposal",
+                "event": "Proposes one final Gate 2 attempt under DECISION-008's unchanged criteria or formal closure of the current method path; no full-bridge run is authorized yet.",
+                "evidence": "proposed decision; user choice pending",
             },
         ]
     mo.ui.table(timeline)
@@ -246,7 +254,11 @@ def _(Path, mo):
         ("checkpoint-12 summary", "results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/checkpoint-12-summary.json"),
         ("checkpoint-12 report", "results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md"),
         ("checkpoint-12 input", "simulations/SIM-02/lammps/in.checkpoint-12-four-rank-high-cadence"),
-        ("checkpoint-13 proposed control", "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md"),
+        ("checkpoint-13 report", "results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md"),
+        ("checkpoint-13 summary", "results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/checkpoint-13-summary.json"),
+        ("checkpoint-13 input", "simulations/SIM-02/lammps/in.checkpoint-13-one-rank-high-cadence"),
+        ("DECISION-013 approval and outcome", "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md"),
+        ("DECISION-014 consolidated go/no-go proposal", "research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md"),
         ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
         ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
@@ -311,7 +323,8 @@ def _(json, mo, repo_root):
         {"field": "checkpoint 09 four-rank NVE, 0.4 ps captured", "value": "FAIL — first sample 7.14e-6 Å/fs at 100 fs", "evidence class": "frozen criterion"},
         {"field": "checkpoint 10 one-rank NVE, 2 ps", "value": "PASS — 20 samples; max COM 1.04e-18 Å/fs", "evidence class": "bounded cross-rank diagnostic"},
         {"field": "checkpoint 12 four-rank same-restart NVE", "value": "FAIL — first per-step COM ceiling crossing at 7 fs", "evidence class": "frozen criterion"},
-        {"field": "full gate-2 outcome", "value": "HOLD — same-restart diagnostic shows rank sensitivity; no bridge release", "evidence class": "not released"},
+        {"field": "checkpoint 13 one-rank same-restart NVE", "value": "PASS — 400 fs; max COM 9.65e-19 Å/fs; at 7 fs 2.32e-19 Å/fs", "evidence class": "bounded diagnostic"},
+        {"field": "full gate-2 outcome", "value": "HOLD — rank-count-sensitive sequence supported; mechanism unresolved; bridge not released", "evidence class": "not released"},
     ]
     mo.vstack([
         mo.md("## Checkpoint 09 — NVE momentum gate failed"),
@@ -329,8 +342,16 @@ def _(json, mo, repo_root):
             "differed. Checkpoint 11 then held the Stage-B restart fixed: one "
             "rank passed 2 ps, while the four-rank path from that restart had "
             "breached at 100 fs. Checkpoint 12's per-step trace located the "
-            "first four-rank breach at 7 fs. The specific mechanism remains "
-            "unresolved. The full bridge remains on hold."
+            "first four-rank breach at 7 fs. Checkpoint 13 used the same "
+            "restart at one rank with matched sampling and completed 400 fs; "
+            "its maximum COM was 9.65e-19 Å/fs and its 7 fs value was "
+            "2.32e-19 Å/fs. This supports rank-count-sensitive behavior in "
+            "the saved-state sequence but does not identify a mechanism. "
+            "Temperature and energy changes in the 400 fs run were exploratory "
+            "because DECISION-013 froze no thresholds. Checkpoint 13 closes "
+            "this diagnostic branch; DECISION-014 proposes one final Gate 2 "
+            "go/no-go under DECISION-008 criteria, or closure of the method "
+            "path. The full bridge remains on hold."
         ),
     ])
     return

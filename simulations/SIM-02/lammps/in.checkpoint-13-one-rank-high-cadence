@@ -1,0 +1,33 @@
+units           real
+atom_style      full
+read_restart    results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/stage-b-2ps-four-rank.restart
+kspace_style    pppm 1.0e-5
+neighbor        4.0 bin
+neigh_modify    one 7500
+
+variable        out index results/raw/SIM-02/checkpoint-13-one-rank-high-cadence
+variable        thermo_interval index 1
+variable        nve_steps index 400
+compute         bridge_temp all temp
+variable        vcomx equal vcm(all,x)
+variable        vcomy equal vcm(all,y)
+variable        vcomz equal vcm(all,z)
+variable        comspeed equal sqrt(v_vcomx*v_vcomx+v_vcomy*v_vcomy+v_vcomz*v_vcomz)
+
+thermo_style    custom step time atoms temp press pe ke etotal vol lx ly lz v_vcomx v_vcomy v_vcomz v_comspeed
+thermo_modify   temp bridge_temp flush yes
+thermo          ${thermo_interval}
+
+# Matched one-rank replay of checkpoint 12's Stage-C initialization and NVE protocol.
+# Per-step output resolves the early-time interval missed by checkpoint 11.
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+run             0 post no
+velocity        all scale 400.0
+velocity        all zero angular
+velocity        all zero linear
+fix             com_guard all halt 1 v_comspeed > 1.0e-6 error soft message yes
+run             ${nve_steps}
+unfix           com_guard
+write_restart   ${out}/one-rank-high-cadence-final.restart
+print           "SIM02_GATE2 nve_window_exit final_step=$(step) com_speed=$(v_comspeed:%.16g)"

@@ -4,9 +4,12 @@ Status: **gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
 checkpoint 09 four-rank NVE failed at 100 fs. Checkpoint 11 held the Stage-B
 restart fixed: one-rank Stage-C/NVE passed 2 ps, while the four-rank path
 failed at 100 fs. Checkpoint 12's per-step four-rank replay crossed the COM
-ceiling at 7 fs. Rank-count-sensitive behavior is supported, but its mechanism
-remains unresolved. The full bridge is on hold. No equilibrium or polarization
-result exists.**
+ceiling at 7 fs. Checkpoint 13's matched one-rank replay completed 400 fs with
+maximum COM `9.653e-19 Å/fs`; at 7 fs it was `2.320e-19 Å/fs`. This supports
+rank-count-sensitive behavior for the saved-state sequence, but its mechanism
+remains unresolved. Checkpoint 13 closes the diagnostic branch. The full
+bridge is on hold pending DECISION-014. No equilibrium or polarization result
+exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -93,6 +96,23 @@ energy-drift threshold was frozen for this timing test. The per-step trace
 locates the onset but does not identify its cause. The full bridge remains on
 hold. See DECISION-012 and
 `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md`.
+
+`[MEASURED BOUNDED PASS]` Checkpoint 13 replayed the same Stage-B restart at one
+rank with per-step sampling. It completed 400 fs without crossing the frozen
+COM ceiling; the maximum of 401 NVE states was `9.6530431e-19 Å/fs`. At the
+four-rank trace's 7 fs crossing time, one-rank COM was
+`2.3195258e-19 Å/fs`. Temperature ranged from 395.87137 to 407.85020 K, and the
+NVE total-energy column changed by +0.690 kcal/mol. Those thermal/energy values
+are exploratory because no 400 fs acceptance thresholds were frozen. This
+result closes the matched rank-count diagnostic but does not release Gate 2.
+See DECISION-013 and
+`results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md`.
+
+`[NEXT DECISION PROPOSED]` DECISION-014 consolidates the path: either authorize
+one resource-appropriate Gate 2 attempt under DECISION-008's unchanged protocol
+and criteria, or close the current method path with the rank-count-sensitive
+diagnostic as the present SIM-02 result. No new run is authorized by the
+proposal.
 
 ## 5. eHEX pilot
 

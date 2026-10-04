@@ -1,7 +1,7 @@
 # Project handoff
 
 Tags: `SIM-02` · `graphify` · `token-reduction`
-Inspected: 2026-10-04. This is a navigation summary, not simulation evidence.
+Inspected: 2026-10-05. This is a navigation summary, not simulation evidence.
 
 ## Current task
 Resume SIM-02 from Claude's drafts. Graphify and the token-efficient project
@@ -18,10 +18,11 @@ COM ceiling at 100 fs and stopped at 400 fs. Checkpoint 10's one-rank run passed
 Stage C/NVE from the exact four-rank Stage-B restart also passed 2 ps, while the
 four-rank continuation from that restart breached at 100 fs. Checkpoint 12
 replayed the four-rank path with per-step COM sampling and halted at the first
-ceiling crossing, 7 fs into NVE. COM rose at every recorded step from
-`6.03e-8` to `1.12e-6 Å/fs`. Rank-count-sensitive behavior is confirmed for
-this saved-state sequence, but its cause remains unresolved. The full bridge
-remains on hold.
+ceiling crossing, 7 fs into NVE. Checkpoint 13 used the same restart at one rank
+and completed 400 fs with max COM `9.65e-19 Å/fs`. The matched traces support
+rank-count-sensitive behavior for this saved-state sequence, but its cause
+remains unresolved. CP13 closes this diagnostic branch; the full bridge remains
+on hold pending DECISION-014.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -36,7 +37,7 @@ remains on hold.
 | SIM-02 method audit | `research/decisions/DECISION-004-SIM-02-method-audit.md` | Stock-GROMACS `tc-grps` approach rejected |
 | SIM-02 engine decision | `research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md` | LAMMPS eHEX approved; local build has eHEX/RIGID/SHAKE/PPPM |
 | SIM-02 temperature path | `research/decisions/DECISION-006-SIM-02-temperature-path.md` | 400 K validation followed by 300 K target approved |
-| SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Exact published box, reservoirs, and heat rate recovered; staged pilot awaits approval |
+| SIM-02 design | `research/designs/SIM-02-LAMMPS-eHEX-design.md` | Exact published box, reservoirs, and heat rate recovered; staged pilot gates approved in DECISION-007 |
 | Protocol checkpoint | `research/designs/SIM-02-checkpoint-07-protocol-freeze.md` | Exact 400 K implementation and release gates approved in DECISION-007 |
 | Protocol decision | `research/decisions/DECISION-007-SIM-02-protocol-freeze.md` | Exact benchmark and staged gates approved; gate 1 passed |
 | Gate 1 evidence | `results/reports/SIM-02-checkpoint-07-zero-step.md` | Structure audit and LAMMPS `run 0` passed; zero trajectory steps |
@@ -47,6 +48,8 @@ remains on hold.
 | Checkpoint 10 results | `results/reports/SIM-02-checkpoint-10-one-rank-nve.md` | One-rank 2 ps uncorrected NVE: 20 samples, max COM `1.04e-18 Å/fs`; Stage B was replayed, so its comparison alone did not isolate the cause |
 | Checkpoint 11 results | `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md` | From the same four-rank Stage-B restart, one-rank 2 ps Stage-C/NVE passed: max COM `1.264e-18 Å/fs`; four-rank path failed at 100 fs; rank-sensitive sequence, mechanism unresolved |
 | Checkpoint 12 results | `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md` | Four-rank replay from the same restart, per-step COM; first exceedance at 7 fs (`1.1198277e-6 Å/fs`); monotonic increase across eight samples; cause unresolved |
+| Checkpoint 13 results | `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md` | Matched one-rank replay completed 400 fs; max COM `9.6530e-19 Å/fs`; at 7 fs `2.3195e-19 Å/fs`; supports rank-count-sensitive behavior, mechanism unresolved |
+| Consolidated bridge decision | `research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md` | Proposed single final Gate 2 attempt under DECISION-008 criteria or close the current method path; no run authorized yet |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -106,13 +109,12 @@ LAMMPS design.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-The checkpoint-12 trace review supports a matched one-rank, per-step replay
-from the same Stage-B restart as the next bounded control. Its exact scope is in
-DECISION-013; it is proposed, not approved or run. The full equilibrium bridge
-has not been relaunched. The
-source paper omits its NpT target pressure, so the bridge keeps the exact
-published box rather than inventing that parameter. No equilibrium,
-temperature-gradient, or polarization result is claimed here.
+Checkpoint 13 closed the matched rank-count diagnostic; DECISION-014 proposes
+one final Gate 2 go/no-go using the existing frozen criteria, or closure of the
+current method path. No full equilibrium bridge has been relaunched. The source
+paper omits its NpT target pressure, so the bridge keeps the exact published
+box rather than inventing that parameter. No equilibrium, temperature-gradient,
+or polarization result is claimed here.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.
