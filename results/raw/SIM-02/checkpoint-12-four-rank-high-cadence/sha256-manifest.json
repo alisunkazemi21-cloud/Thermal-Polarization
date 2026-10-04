@@ -1,0 +1,15 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "README.md": "338e73b550f91b8fae02df06b1994348934699219b3383ec20a691f48ef418d5",
+    "checkpoint-12-summary.json": "6f3760651b3b13d2dcde0b14ef01962010285078cce1547f0dc029cc4ae7201d",
+    "run-metadata.json": "45a3ea7938bcdaa482ba4294c0e2bce96d291c17605fb85d4885572873f75bc0",
+    "lammps-exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "stdout.txt": "895a25e95e7872183064e222c4fc53aa4cb92db3047fbe9bc89ff0a9ad7fa905",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "launcher-attempt-01-stderr.txt": "00adb6665d3e2592a746d05656d152a8f18bcf5fb0c3e3c5a7053a45524f4456",
+    "lammps.log": "96344720c533f7e5b10bee56df2a383b09f734b44fdf1fde76ae9eb507494741",
+    "stage-b-2ps-four-rank.restart": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef",
+    "four-rank-high-cadence-final.restart": "f03dd54345229690c2cd4dd7e09ca3e1209501f37af21f8549edcfb32ce07e02"
+  }
+}

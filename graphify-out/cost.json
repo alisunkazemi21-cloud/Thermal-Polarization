@@ -2,5 +2,5 @@
   "status": "unavailable",
   "input_tokens": null,
   "output_tokens": null,
-  "note": "Agent usage was not exposed; extraction placeholders are not measured counts."
+  "note": "Agent usage is not exposed; do not interpret extraction placeholders as actual usage."
 }

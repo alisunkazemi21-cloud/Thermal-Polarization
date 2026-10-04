@@ -207,6 +207,37 @@ automatically accelerate this CPU OPT configuration.
 See `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md` and
 DECISION-011.
 
+## Checkpoint 12 — four-rank high-cadence replay
+
+`[MEASURED FAILURE, BOUNDED]` On 2026-10-04, the user approved a four-rank
+replay from the byte-identical checkpoint-11 Stage-B restart. The 1 fs step,
+400 K scale, RATTLE/PPPM settings, OPT suffix, and uncorrected NVE policy were
+preserved. COM components and speed were sampled every integration step, with
+an automatic halt at the existing `1e-6 Å/fs` ceiling and a 400 fs maximum.
+
+After velocity cleanup, the NVE start at step 22,000 had a COM speed of
+`6.0282895e-8 Å/fs` and temperature 400.02681 K. COM speed rose at every
+recorded step; the first exceedance occurred at step 22,007, 7 fs into NVE.
+The halt message reports `1.1198276995146967e-6 Å/fs`; the thermo row rounds
+that to `1.1198277e-6 Å/fs`. Temperature at the halt was 401.48097 K. The
+400 fs maximum was not reached because the stop criterion fired. LAMMPS
+returned exit code 0 after the configured soft halt and output finalization;
+that is not a COM pass.
+
+The thermo total-energy column changed by +2.206 kcal/mol over the seven
+steps. No energy-drift threshold was frozen for this COM-timing test, so this
+is an exploratory observation for a separately scoped follow-up. The COM and
+energy observations do not identify a mechanism. RATTLE, velocity
+initialization, PPPM/MPI reductions, and other rank-dependent operations
+remain hypotheses. The full bridge remains on hold; no equilibrium, eHEX,
+stationary-gradient, or polarization result follows.
+
+The initial `mpiexec -n 4` attempt failed before LAMMPS allocated ranks and
+advanced zero steps. The same approved run then completed with
+`mpirun --oversubscribe -np 4`; both attempts are noted in the raw provenance.
+See `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md` and
+DECISION-012.
+
 ## Evidence that must exist before a claim
 
 1. equilibrium LAMMPS density, temperature, and O–O structure consistent with
@@ -235,6 +266,7 @@ result remains scientifically valuable.
 - `results/reports/SIM-02-checkpoint-09-diagnostics.md`: four-rank bounded diagnostics
 - `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`: one-rank comparison from replayed Stage B
 - `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`: one-rank comparison from the same four-rank Stage-B restart
-- DECISION-010 and DECISION-011: matched and same-restart comparison records
+- `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md`: per-step four-rank replay from that restart
+- DECISION-010 through DECISION-012: rank-comparison and high-cadence diagnostic records
 - `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
 - `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input

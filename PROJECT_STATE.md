@@ -16,9 +16,12 @@ approved DECISION-009: preparation-only momentum control with zero-step, 2 ps,
 COM ceiling at 100 fs and stopped at 400 fs. Checkpoint 10's one-rank run passed
 2 ps NVE from a separately replayed Stage-B state. In checkpoint 11, one-rank
 Stage C/NVE from the exact four-rank Stage-B restart also passed 2 ps, while the
-four-rank continuation from that restart breached at 100 fs. This supports
-rank-count-sensitive behavior in the Stage-C/NVE sequence; its mechanism is
-unresolved. The full bridge remains on hold.
+four-rank continuation from that restart breached at 100 fs. Checkpoint 12
+replayed the four-rank path with per-step COM sampling and halted at the first
+ceiling crossing, 7 fs into NVE. COM rose at every recorded step from
+`6.03e-8` to `1.12e-6 Å/fs`. Rank-count-sensitive behavior is confirmed for
+this saved-state sequence, but its cause remains unresolved. The full bridge
+remains on hold.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -43,6 +46,7 @@ unresolved. The full bridge remains on hold.
 | Checkpoint 09 results | `results/reports/SIM-02-checkpoint-09-diagnostics.md` | 20 ps Stage A passed (400 K; max COM `9.65e-19 Å/fs`); 2 ps Stage B ended at `399.81 K`; uncorrected NVE exceeded the COM ceiling at 100 fs |
 | Checkpoint 10 results | `results/reports/SIM-02-checkpoint-10-one-rank-nve.md` | One-rank 2 ps uncorrected NVE: 20 samples, max COM `1.04e-18 Å/fs`; Stage B was replayed, so its comparison alone did not isolate the cause |
 | Checkpoint 11 results | `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md` | From the same four-rank Stage-B restart, one-rank 2 ps Stage-C/NVE passed: max COM `1.264e-18 Å/fs`; four-rank path failed at 100 fs; rank-sensitive sequence, mechanism unresolved |
+| Checkpoint 12 results | `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md` | Four-rank replay from the same restart, per-step COM; first exceedance at 7 fs (`1.1198277e-6 Å/fs`); monotonic increase across eight samples; cause unresolved |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -90,14 +94,21 @@ LAMMPS design.
   `1.2638e-18 Å/fs`. The four-rank path from this same restart breached at
   100 fs. This supports rank-count-sensitive behavior in Stage C/NVE, but the
   cause remains unresolved. See DECISION-011 and its report.
+- [MEASURED FAILURE] Checkpoint 12 replayed the four-rank continuation from
+  that exact restart with per-step output. COM speed rose at each of eight
+  samples from `6.03e-8 Å/fs` after cleanup and crossed `1e-6 Å/fs` at 7 fs
+  (`1.1198276995146967e-6 Å/fs` by the `fix halt` message). LAMMPS exited 0
+  after the configured soft stop and wrote its diagnostic restart. A
+  `+2.206 kcal/mol` total-energy-column change over those 7 fs is exploratory;
+  no energy-drift criterion was frozen for this run. See DECISION-012.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: review the checkpoint-11 same-restart result and decide
-whether to repeat or broaden the rank diagnostic. The full equilibrium bridge
-has not been relaunched. The
+Next scientific step: review the checkpoint-12 per-step trace and decide which
+mechanism-focused diagnostic is justified. The full equilibrium bridge has
+not been relaunched. The
 source paper omits its NpT target pressure, so the bridge keeps the exact
 published box rather than inventing that parameter. No equilibrium,
 temperature-gradient, or polarization result is claimed here.

@@ -2,10 +2,11 @@
 
 Status: **gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
 checkpoint 09 four-rank NVE failed at 100 fs. Checkpoint 11 held the Stage-B
-restart fixed: one-rank Stage-C/NVE passed 2 ps, while the four-rank path from
-that restart failed at 100 fs. Rank-count-sensitive behavior is supported for
-the sequence, but its mechanism remains unresolved. The full bridge is on hold.
-No equilibrium or polarization result exists.**
+restart fixed: one-rank Stage-C/NVE passed 2 ps, while the four-rank path
+failed at 100 fs. Checkpoint 12's per-step four-rank replay crossed the COM
+ceiling at 7 fs. Rank-count-sensitive behavior is supported, but its mechanism
+remains unresolved. The full bridge is on hold. No equilibrium or polarization
+result exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -79,6 +80,19 @@ first breached at 100 fs (`7.144552366951081e-6 Å/fs`). This supports a
 rank-count-sensitive Stage-C/NVE sequence, while the mechanism remains
 unresolved. See DECISION-011 and
 `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`.
+
+`[MEASURED FAILURE, BOUNDED]` Checkpoint 12 replayed four-rank Stage C/NVE from
+the same Stage-B restart, sampled COM each 1 fs, and halted at the first
+exceedance. COM speed rose at each of eight recorded samples from
+`6.0282895e-8 Å/fs` after velocity cleanup to `1.1198276995146967e-6 Å/fs` at
+step 22,007, 7 fs into NVE. Temperature at the halt was 401.48097 K. LAMMPS
+returned exit code 0 after the configured soft halt and output finalization;
+the acceptance criterion failed. The thermo total-energy column also changed
+by +2.206 kcal/mol over seven steps, an exploratory observation because no
+energy-drift threshold was frozen for this timing test. The per-step trace
+locates the onset but does not identify its cause. The full bridge remains on
+hold. See DECISION-012 and
+`results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md`.
 
 ## 5. eHEX pilot
 

@@ -21,11 +21,11 @@ def _(mo):
     **Status: checkpoint 07 gate 1 passed; checkpoint 08 failed Stage A. The
     checkpoint 09 four-rank NVE path breached the frozen COM ceiling at 100 fs.
     Checkpoint 11 repeated Stage C/NVE at one rank from that exact four-rank
-    Stage-B restart and completed 2 ps below the ceiling. The matching four-
-    rank path from that restart breached at 100 fs. This supports
-    rank-count-sensitive behavior in Stage C/NVE but does not identify a
-    mechanism. The full bridge remains on hold; no equilibrium or polarization
-    result exists.**
+    Stage-B restart and completed 2 ps below the ceiling. Checkpoint 12
+    replayed four-rank Stage C/NVE with per-step sampling and halted at the
+    first COM-ceiling crossing, 7 fs after the NVE start. The timing is now
+    resolved at the sampled-step level; the cause is not. The full bridge
+    remains on hold; no equilibrium or polarization result exists.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -128,6 +128,12 @@ def _(mo):
                 "event": "From the exact four-rank Stage-B restart, the one-rank Stage-C/NVE path completed 2 ps with exit code 0 and maximum COM 1.264e-18 Å/fs; the four-rank path from that restart breached at 100 fs.",
                 "evidence": "user-approved bounded diagnostic; DECISION-011",
             },
+            {
+                "date": "2026-10-04",
+                "stage": "Checkpoint 12 four-rank high-cadence replay",
+                "event": "From the same restart, four-rank COM speed rose at each of eight per-step samples and first exceeded 1e-6 Å/fs at 7 fs (1.1198277e-6 Å/fs); the run halted automatically.",
+                "evidence": "user-approved bounded diagnostic; DECISION-012",
+            },
         ]
     mo.ui.table(timeline)
     return
@@ -228,6 +234,10 @@ def _(Path, mo):
         ("checkpoint-11 summary", "results/raw/SIM-02/checkpoint-11-same-restart-one-rank/checkpoint-11-summary.json"),
         ("checkpoint-11 report", "results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md"),
         ("checkpoint-11 input", "simulations/SIM-02/lammps/in.checkpoint-11-same-restart-one-rank"),
+        ("checkpoint-12 approval", "research/decisions/DECISION-012-SIM-02-four-rank-high-cadence-diagnostic.md"),
+        ("checkpoint-12 summary", "results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/checkpoint-12-summary.json"),
+        ("checkpoint-12 report", "results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md"),
+        ("checkpoint-12 input", "simulations/SIM-02/lammps/in.checkpoint-12-four-rank-high-cadence"),
         ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
         ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
@@ -291,6 +301,7 @@ def _(json, mo, repo_root):
         {"field": "checkpoint 09 Stage B, 2 ps", "value": "PASS — endpoint 399.81 K; COM below ceiling", "evidence class": "bounded diagnostic"},
         {"field": "checkpoint 09 four-rank NVE, 0.4 ps captured", "value": "FAIL — first sample 7.14e-6 Å/fs at 100 fs", "evidence class": "frozen criterion"},
         {"field": "checkpoint 10 one-rank NVE, 2 ps", "value": "PASS — 20 samples; max COM 1.04e-18 Å/fs", "evidence class": "bounded cross-rank diagnostic"},
+        {"field": "checkpoint 12 four-rank same-restart NVE", "value": "FAIL — first per-step COM ceiling crossing at 7 fs", "evidence class": "frozen criterion"},
         {"field": "full gate-2 outcome", "value": "HOLD — same-restart diagnostic shows rank sensitivity; no bridge release", "evidence class": "not released"},
     ]
     mo.vstack([
@@ -308,9 +319,9 @@ def _(json, mo, repo_root):
             "under each rank count, so the phase-space states entering NVE "
             "differed. Checkpoint 11 then held the Stage-B restart fixed: one "
             "rank passed 2 ps, while the four-rank path from that restart had "
-            "breached at 100 fs. Rank count is implicated in the Stage-C/NVE "
-            "sequence, but its specific mechanism remains unresolved. The full "
-            "bridge remains on hold."
+            "breached at 100 fs. Checkpoint 12's per-step trace located the "
+            "first four-rank breach at 7 fs. The specific mechanism remains "
+            "unresolved. The full bridge remains on hold."
         ),
     ])
     return
@@ -322,6 +333,7 @@ def _(mo):
         {"run": "Checkpoint 09; 4 MPI ranks", "NVE duration": "0.4 ps captured", "samples": 4, "first threshold breach": "100 fs; 7.1446e-6 Å/fs", "maximum COM": "8.3573e-6 Å/fs", "outcome": "Ceiling exceeded"},
         {"run": "Checkpoint 10; 1 MPI rank", "NVE duration": "2 ps completed", "samples": 20, "first threshold breach": "None", "maximum COM": "1.0435e-18 Å/fs at 1.9 ps", "outcome": "All sampled COM values below ceiling"},
         {"run": "Checkpoint 11; 1 MPI rank, same Stage-B restart", "NVE duration": "2 ps completed", "samples": 20, "first threshold breach": "None", "maximum COM": "1.2638e-18 Å/fs at step 23,600", "outcome": "Same-restart continuation below ceiling"},
+        {"run": "Checkpoint 12; 4 MPI ranks, same Stage-B restart", "NVE duration": "7 fs until halt", "samples": 8, "first threshold breach": "7 fs; 1.1198e-6 Å/fs", "maximum COM": "1.1198e-6 Å/fs at step 22,007", "outcome": "Automatic stop at frozen ceiling"},
     ]
     mo.vstack([
         mo.md(r"""
@@ -364,6 +376,27 @@ def _(mo):
         build to keep the environment aligned. Google Colab can be evaluated
         for longer workloads after an environment and performance benchmark.
         """),
+        mo.md(r"""
+        ## Checkpoint 12 — four-rank high-cadence replay
+
+        The user approved a four-rank replay from the checkpoint-11 Stage-B
+        restart, preserving the 1 fs, 400 K, RATTLE, PPPM, OPT, and uncorrected
+        NVE settings. Only output cadence and early-stop logic changed. COM
+        components and speed were sampled every step, with a 400 fs maximum.
+
+        After velocity cleanup, step 22,000 began at 400.02681 K and
+        `6.0282895e-8 Å/fs` COM speed. The eight recorded NVE samples increased
+        monotonically. The first ceiling crossing occurred at step 22,007
+        (7 fs), with `1.1198276995146967e-6 Å/fs` in the halt message. LAMMPS
+        returned exit code 0 after its configured soft halt and output
+        finalization; this is a bounded COM failure, not a pass.
+
+        The total-energy column changed by +2.206 kcal/mol over the same seven
+        steps. This was not a preregistered acceptance metric and remains an
+        exploratory observation. Neither trace identifies the mechanism. The
+        full bridge remains on hold; no equilibrium or polarization result
+        follows.
+        """),
         mo.ui.table(rank_comparison),
     ])
     return
@@ -394,8 +427,10 @@ def _(mo):
             and stopped at 400 fs. Checkpoint 11's one-rank Stage-C/NVE
             comparison from the exact four-rank Stage-B restart completed 2 ps
             below the ceiling; the four-rank path from that same restart had
-            breached at 100 fs. This indicates rank-count-sensitive behavior,
-            but the mechanism is unresolved. The full bridge remains on hold.**
+            breached at 100 fs. Checkpoint 12's per-step replay located the
+            first breach at 7 fs. This confirms early rank-sensitive COM
+            growth in this path but does not identify the mechanism. The full
+            bridge remains on hold.**
             """
         ),
         mo.ui.table(bridge_stages),

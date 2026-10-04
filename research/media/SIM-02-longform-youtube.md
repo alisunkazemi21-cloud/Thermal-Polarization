@@ -203,6 +203,18 @@ hash and logs in the research record. End with the full bridge **on hold** and
 no equilibrium or polarization claim. Do not show a corrected curve or imply
 equilibrium was established.
 
+Checkpoint 12 gives the story a sharper beat: the four-rank path was replayed
+from that same restart with per-step COM output and an automatic halt. The COM
+speed rose at each recorded NVE step and crossed the frozen ceiling after only
+7 fs, at step 22,007. LAMMPS returned exit code 0 because the approved soft
+halt finalized the diagnostic; the acceptance criterion still failed. The
+thermo total-energy column changed by +2.206 kcal/mol over those seven steps,
+but no energy-drift threshold had been set for this timing test. Present that
+as a follow-up lead, not an energy-conservation verdict. The trace locates the
+onset but does not reveal its mechanism. Keep the bridge on hold and end this
+chapter at the review decision: what evidence would distinguish constraint,
+velocity-initialization, and rank-reduction explanations?
+
 ### 9. The eHEX pilot
 
 Required footage/data: reservoir occupancy, energy ledger, unfolded T(z), ρ(z),

@@ -1,0 +1,163 @@
+{
+  "record_type": "bounded_simulation_diagnostic",
+  "checkpoint": "SIM-02-12",
+  "date": "2026-10-04",
+  "authorization": "DECISION-012",
+  "starting_restart": "results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/stage-b-2ps-four-rank.restart",
+  "starting_restart_sha256": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef",
+  "ranks": 4,
+  "openmp_threads": 1,
+  "lammps": "10 Dec 2025",
+  "suffix": "opt",
+  "timestep_fs": 1,
+  "thermo_interval_steps": 1,
+  "nve_max_duration_fs": 400,
+  "nve_start_step": 22000,
+  "final_step": 22007,
+  "nve_duration_fs": 7,
+  "nve_sample_count": 8,
+  "stage_c_pre_cleanup": {
+    "temperature_K": 399.75212,
+    "com_speed_A_per_fs": 7.9279908e-08
+  },
+  "com_speed_A_per_fs": {
+    "ceiling": 1e-06,
+    "initial_post_cleanup": 6.0282895e-08,
+    "first_exceedance_step": 22007,
+    "first_exceedance_fs": 7,
+    "first_exceedance_speed": 1.1198276995146967e-06,
+    "exceedance_samples": 1,
+    "monotone_in_recorded_samples": true,
+    "halt_message_value": 1.1198276995146967e-06
+  },
+  "temperature_K": {
+    "initial_post_cleanup": 400.02681,
+    "at_halt": 401.48097
+  },
+  "total_energy_kcal_per_mol": {
+    "initial_post_cleanup": -33190.234,
+    "at_halt": -33188.028,
+    "change": 2.205999999998312,
+    "status": "observed thermo field; no frozen energy-drift criterion in this diagnostic"
+  },
+  "samples": [
+    {
+      "elapsed_fs": 0,
+      "step": 22000,
+      "temperature_K": 400.02681,
+      "potential_energy_kcal_mol": -43920.677,
+      "kinetic_energy_kcal_mol": 10730.443,
+      "total_energy_kcal_mol": -33190.234,
+      "vcom_A_per_fs": [
+        5.5795751e-09,
+        1.6525909e-08,
+        5.7704334e-08
+      ],
+      "com_speed_A_per_fs": 6.0282895e-08
+    },
+    {
+      "elapsed_fs": 1,
+      "step": 22001,
+      "temperature_K": 400.17401,
+      "potential_energy_kcal_mol": -43924.369,
+      "kinetic_energy_kcal_mol": 10734.392,
+      "total_energy_kcal_mol": -33189.978,
+      "vcom_A_per_fs": [
+        5.6407115e-08,
+        3.9442449e-08,
+        1.9604722e-07
+      ],
+      "com_speed_A_per_fs": 2.0777868e-07
+    },
+    {
+      "elapsed_fs": 2,
+      "step": 22002,
+      "temperature_K": 400.36692,
+      "potential_energy_kcal_mol": -43929.243,
+      "kinetic_energy_kcal_mol": 10739.566,
+      "total_energy_kcal_mol": -33189.677,
+      "vcom_A_per_fs": [
+        1.0883968e-07,
+        6.1476777e-08,
+        3.3294935e-07
+      ],
+      "com_speed_A_per_fs": 3.556413e-07
+    },
+    {
+      "elapsed_fs": 3,
+      "step": 22003,
+      "temperature_K": 400.5875,
+      "potential_energy_kcal_mol": -43934.895,
+      "kinetic_energy_kcal_mol": 10745.483,
+      "total_energy_kcal_mol": -33189.412,
+      "vcom_A_per_fs": [
+        1.6275657e-07,
+        8.2655007e-08,
+        4.6953587e-07
+      ],
+      "com_speed_A_per_fs": 5.0377126e-07
+    },
+    {
+      "elapsed_fs": 4,
+      "step": 22004,
+      "temperature_K": 400.8192,
+      "potential_energy_kcal_mol": -43940.784,
+      "kinetic_energy_kcal_mol": 10751.698,
+      "total_energy_kcal_mol": -33189.085,
+      "vcom_A_per_fs": [
+        2.1805261e-07,
+        1.0301493e-07,
+        6.0702327e-07
+      ],
+      "com_speed_A_per_fs": 6.5317399e-07
+    },
+    {
+      "elapsed_fs": 5,
+      "step": 22005,
+      "temperature_K": 401.04907,
+      "potential_energy_kcal_mol": -43946.611,
+      "kinetic_energy_kcal_mol": 10757.864,
+      "total_energy_kcal_mol": -33188.747,
+      "vcom_A_per_fs": [
+        2.7463121e-07,
+        1.2259048e-07,
+        7.4665328e-07
+      ],
+      "com_speed_A_per_fs": 8.0494835e-07
+    },
+    {
+      "elapsed_fs": 6,
+      "step": 22006,
+      "temperature_K": 401.2698,
+      "potential_energy_kcal_mol": -43952.172,
+      "kinetic_energy_kcal_mol": 10763.785,
+      "total_energy_kcal_mol": -33188.387,
+      "vcom_A_per_fs": [
+        3.3241114e-07,
+        1.4141301e-07,
+        8.8962376e-07
+      ],
+      "com_speed_A_per_fs": 9.6016938e-07
+    },
+    {
+      "elapsed_fs": 7,
+      "step": 22007,
+      "temperature_K": 401.48097,
+      "potential_energy_kcal_mol": -43957.478,
+      "kinetic_energy_kcal_mol": 10769.45,
+      "total_energy_kcal_mol": -33188.028,
+      "vcom_A_per_fs": [
+        3.9131664e-07,
+        1.5951733e-07,
+        1.037034e-06
+      ],
+      "com_speed_A_per_fs": 1.1198277e-06
+    }
+  ],
+  "process_exit_code": 0,
+  "stop_reason": "fix halt triggered at first per-step COM-speed exceedance; LAMMPS continued to write diagnostic restart and log marker",
+  "completion_marker": "print           \"SIM02_GATE2 nve_window_exit final_step=$(step) com_speed=$(v_comspeed:%.16g)\"",
+  "wall_time": "0:00:05",
+  "input_sha256": "468980c5f5c26200c316a5ec2c204bc67c611fee71cf5f7ecab378f19f1da993",
+  "launch_attempt_01": "mpiexec -n 4 rejected rank allocation before LAMMPS start; zero simulation steps; retry used mpirun --oversubscribe -np 4"
+}

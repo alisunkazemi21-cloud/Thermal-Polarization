@@ -1,0 +1,20 @@
+{
+  "record_type": "execution_provenance",
+  "date": "2026-10-04",
+  "host_environment": "Ubuntu on WSL",
+  "working_directory": "/mnt/c/Users/WebVajhegan/Thermal-Polarization",
+  "wsl_visible_logical_cpus": 4,
+  "wsl_visible_memory_kib": 3949164,
+  "lammps_version": "10 Dec 2025",
+  "mpi_ranks": 4,
+  "openmp_threads": 1,
+  "suffix": "opt",
+  "command": "OMP_NUM_THREADS=1 mpirun --oversubscribe -np 4 /usr/bin/lmp -sf opt -log results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/lammps.log -in simulations/SIM-02/lammps/in.checkpoint-12-four-rank-high-cadence",
+  "input": "simulations/SIM-02/lammps/in.checkpoint-12-four-rank-high-cadence",
+  "input_sha256": "468980c5f5c26200c316a5ec2c204bc67c611fee71cf5f7ecab378f19f1da993",
+  "restart_sha256": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef",
+  "exit_code": 0,
+  "completion_marker": "print           \"SIM02_GATE2 nve_window_exit final_step=$(step) com_speed=$(v_comspeed:%.16g)\"",
+  "wall_time": "0:00:05",
+  "launcher_retry": "First mpiexec -n 4 attempt failed during process allocation before LAMMPS; approved protocol then succeeded with --oversubscribe."
+}
