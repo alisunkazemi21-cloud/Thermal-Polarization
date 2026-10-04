@@ -106,9 +106,10 @@ LAMMPS design.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: review the checkpoint-12 per-step trace and decide which
-mechanism-focused diagnostic is justified. The full equilibrium bridge has
-not been relaunched. The
+The checkpoint-12 trace review supports a matched one-rank, per-step replay
+from the same Stage-B restart as the next bounded control. Its exact scope is in
+DECISION-013; it is proposed, not approved or run. The full equilibrium bridge
+has not been relaunched. The
 source paper omits its NpT target pressure, so the bridge keeps the exact
 published box rather than inventing that parameter. No equilibrium,
 temperature-gradient, or polarization result is claimed here.

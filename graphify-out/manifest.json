@@ -42,16 +42,16 @@
     "semantic_hash": "d9a1c75a9b0cc4831a6bb1cfb2ee4ae2"
   },
   "PROJECT_STATE.md": {
-    "mtime": 1791140261.587664,
-    "seen": 1791141066.7865355,
-    "ast_hash": "51a1ebe01cd5e036e4245b9ac140cf62",
-    "semantic_hash": "51a1ebe01cd5e036e4245b9ac140cf62"
+    "mtime": 1791142049.0378702,
+    "seen": 1791142447.4261155,
+    "ast_hash": "094d974cc2cb1919191598c38927a0f8",
+    "semantic_hash": "094d974cc2cb1919191598c38927a0f8"
   },
   "README.md": {
-    "mtime": 1791140262.5378246,
-    "seen": 1791141066.7865355,
-    "ast_hash": "6d66029bbe11d40b0adbde19fe741e77",
-    "semantic_hash": "6d66029bbe11d40b0adbde19fe741e77"
+    "mtime": 1791142050.5463493,
+    "seen": 1791142447.4261155,
+    "ast_hash": "01d559fb70d412c8b94f76103ad91d16",
+    "semantic_hash": "01d559fb70d412c8b94f76103ad91d16"
   },
   "environment/requirements-graphify.txt": {
     "mtime": 1790760461.996637,
@@ -126,10 +126,10 @@
     "semantic_hash": "db2d1b80f392c541aff28b747ae82178"
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1791140393.6388597,
-    "seen": 1791141066.7824993,
-    "ast_hash": "1d8320564767bb654564580aa3202529",
-    "semantic_hash": "1d8320564767bb654564580aa3202529"
+    "mtime": 1791142124.3751304,
+    "seen": 1791142447.4261155,
+    "ast_hash": "46374d0da9741023c2b8a2e7f143fe85",
+    "semantic_hash": "46374d0da9741023c2b8a2e7f143fe85"
   },
   "research/WORKFLOW.md": {
     "mtime": 1790764921.57253,
@@ -138,10 +138,10 @@
     "semantic_hash": "c538bc16191e13b7a5dfc46f74c13f9a"
   },
   "research/book/SIM-02.md": {
-    "mtime": 1791140263.8126264,
-    "seen": 1791141066.7865355,
-    "ast_hash": "b3859c1c1fa1747db5aa5c3f6f1608e2",
-    "semantic_hash": "b3859c1c1fa1747db5aa5c3f6f1608e2"
+    "mtime": 1791142047.991735,
+    "seen": 1791142447.4261155,
+    "ast_hash": "075161ecc0e3ef1ff6578f7f58d58d94",
+    "semantic_hash": "075161ecc0e3ef1ff6578f7f58d58d94"
   },
   "research/decisions/DECISION-005-SIM-02-LAMMPS-eHEX.md": {
     "mtime": 1790764264.228366,
@@ -586,5 +586,11 @@
     "seen": 1791141066.7865355,
     "ast_hash": "728876a526cfaaa231a90d840c0f3600",
     "semantic_hash": "728876a526cfaaa231a90d840c0f3600"
+  },
+  "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md": {
+    "mtime": 1791141987.9978373,
+    "seen": 1791142447.4261155,
+    "ast_hash": "910c4f3cf9e3dcbab531b1891a096500",
+    "semantic_hash": "910c4f3cf9e3dcbab531b1891a096500"
   }
 }

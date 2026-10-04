@@ -24,8 +24,10 @@ def _(mo):
     Stage-B restart and completed 2 ps below the ceiling. Checkpoint 12
     replayed four-rank Stage C/NVE with per-step sampling and halted at the
     first COM-ceiling crossing, 7 fs after the NVE start. The timing is now
-    resolved at the sampled-step level; the cause is not. The full bridge
-    remains on hold; no equilibrium or polarization result exists.**
+    resolved at the sampled-step level; the cause is not. A matched one-rank,
+    per-step control from the same restart is proposed in DECISION-013; it is
+    awaiting approval and has not been run. The full bridge remains on hold;
+    no equilibrium or polarization result exists.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -134,6 +136,12 @@ def _(mo):
                 "event": "From the same restart, four-rank COM speed rose at each of eight per-step samples and first exceeded 1e-6 Å/fs at 7 fs (1.1198277e-6 Å/fs); the run halted automatically.",
                 "evidence": "user-approved bounded diagnostic; DECISION-012",
             },
+            {
+                "date": "2026-10-04",
+                "stage": "DECISION-013 proposed control",
+                "event": "Trace review proposes a one-rank replay from the same Stage-B restart with per-step output to match checkpoint 12's early-time sampling; no run is authorized or recorded yet.",
+                "evidence": "proposed decision; awaiting user review",
+            },
         ]
     mo.ui.table(timeline)
     return
@@ -238,6 +246,7 @@ def _(Path, mo):
         ("checkpoint-12 summary", "results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/checkpoint-12-summary.json"),
         ("checkpoint-12 report", "results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md"),
         ("checkpoint-12 input", "simulations/SIM-02/lammps/in.checkpoint-12-four-rank-high-cadence"),
+        ("checkpoint-13 proposed control", "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md"),
         ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
         ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),

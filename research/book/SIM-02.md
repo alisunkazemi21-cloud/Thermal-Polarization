@@ -17,7 +17,9 @@ repeated Stage C/NVE at one rank from the exact four-rank Stage-B restart and
 also completed below the ceiling. The same-restart four-rank path failed at
 100 fs, supporting rank-count-sensitive behavior in the sequence without
 identifying its mechanism. The full equilibrium bridge is on hold. No
-equilibrium or polarization result exists.**
+equilibrium or polarization result exists. A matched one-rank, per-step
+control from the same restart is proposed in DECISION-013; it awaits approval
+and has not been run.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -58,6 +60,7 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-04 | Checkpoint 10 one-rank continuation | Measured implementation diagnostic | Stage B and 2 ps NVE completed; 20 NVE samples had max COM `1.0435e-18 Å/fs`; four-rank path had exceeded the ceiling at 100 fs; cause not isolated |
 | 2026-10-04 | DECISION-011 approved | Approved decision | User authorized a one-rank Stage-C/NVE comparison from the exact four-rank Stage-B restart; local WSL build selected to hold software environment close |
 | 2026-10-04 | Checkpoint 11 same-restart comparison | Measured implementation diagnostic | One-rank Stage C/NVE completed 2 ps (exit 0; max COM `1.2638e-18 Å/fs`); four-rank path from the same restart breached at 100 fs; mechanism unresolved |
+| 2026-10-04 | Checkpoint 12 trace review | Measured trace plus proposed follow-up | Four-rank COM started at `6.03e-8 Å/fs` after cleanup and crossed the ceiling at 7 fs; a matched one-rank high-cadence control is proposed in DECISION-013, not yet approved or run |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -267,6 +270,6 @@ result remains scientifically valuable.
 - `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`: one-rank comparison from replayed Stage B
 - `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md`: one-rank comparison from the same four-rank Stage-B restart
 - `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md`: per-step four-rank replay from that restart
-- DECISION-010 through DECISION-012: rank-comparison and high-cadence diagnostic records
+- DECISION-010 through DECISION-013: rank-comparison, high-cadence diagnostic, and proposed one-rank control records
 - `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
 - `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input
