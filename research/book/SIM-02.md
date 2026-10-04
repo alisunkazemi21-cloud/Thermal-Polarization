@@ -7,7 +7,7 @@ stationary temperature gradient and a signed molecular polarization profile that
 is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
-Status on 2026-10-04: **method, temperature sequence, and exact 400 K protocol
+Status on 2026-10-05: **method, temperature sequence, and exact 400 K protocol
 approved; gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
 checkpoint 09 Stage A (2 ps and 20 ps) and Stage B (2 ps) passed their
 implementation checks. Its four-rank uncorrected NVE diagnostic exceeded the
@@ -18,14 +18,17 @@ also completed below the ceiling. The same-restart four-rank path failed at
 100 fs. Checkpoint 12 located the first crossing at 7 fs; checkpoint 13's
 matched one-rank replay completed 400 fs with maximum COM `9.6530e-19 Å/fs`.
 The traces support rank-count-sensitive behavior in this saved-state sequence,
-while the mechanism remains unresolved. The full equilibrium bridge is on
-hold. No equilibrium or polarization result exists. DECISION-014 proposes one
-consolidated Gate 2 go/no-go under the already frozen criteria, or closure of
-the current method path.**
+while the mechanism remains unresolved. The full equilibrium bridge has not relaunched. No equilibrium or polarization
+result exists. On 2026-10-05 DECISION-014 was approved as one conditional
+final-results campaign: the existing bridge, eHEX, pilot, and production gates
+now act as automatic stop/proceed rules, with no new user approval between
+passing stages. Resource and restart-continuity preflight comes first.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
-(DECISION-006).
+(DECISION-006). That decision leaves the 300 K run length and replicate count
+open; derive and record them through the approved pilot workflow before starting
+that condition.
 
 ## Why this experiment follows SIM-01
 
@@ -65,7 +68,7 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-04 | Checkpoint 12 four-rank replay | Measured diagnostic | From the shared restart, COM crossed the ceiling at 7 fs; mechanism not identified |
 | 2026-10-04 | DECISION-013 approved and executed | Approved bounded diagnostic | Matched one-rank high-cadence control from the same restart completed 400 fs; max COM `9.6530e-19 Å/fs`; at 7 fs COM was `2.3195e-19 Å/fs`; no ceiling crossing |
 | 2026-10-04 | Checkpoint 13 comparison closed | Measured trace plus inference | Together with checkpoint 12, supports rank-count-sensitive early COM behavior for this saved-state sequence; cause unresolved. Temperature and total-energy changes remain exploratory because no short-run thresholds were frozen |
-| 2026-10-04 | DECISION-014 proposed | Proposed bridge go/no-go | One final Gate 2 attempt using DECISION-008's unchanged 1.52-million-step protocol and acceptance criteria, or close the current method path; no run authorized yet |
+| 2026-10-05 | DECISION-014 approved | Integrated conditional final-results campaign | Preserve the frozen scientific criteria; pass through the bridge, eHEX, stationarity, and production gates without extra approval pauses; stop at the first failed gate; resource preflight first |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the

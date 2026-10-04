@@ -8,8 +8,9 @@ ceiling at 7 fs. Checkpoint 13's matched one-rank replay completed 400 fs with
 maximum COM `9.653e-19 Å/fs`; at 7 fs it was `2.320e-19 Å/fs`. This supports
 rank-count-sensitive behavior for the saved-state sequence, but its mechanism
 remains unresolved. Checkpoint 13 closes the diagnostic branch. The full
-bridge is on hold pending DECISION-014. No equilibrium or polarization result
-exists.**
+bridge has not relaunched. DECISION-014 now authorizes one conditional
+final-results campaign; resource preflight comes before the long bridge. No
+equilibrium or polarization result exists yet.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -108,11 +109,13 @@ result closes the matched rank-count diagnostic but does not release Gate 2.
 See DECISION-013 and
 `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md`.
 
-`[NEXT DECISION PROPOSED]` DECISION-014 consolidates the path: either authorize
-one resource-appropriate Gate 2 attempt under DECISION-008's unchanged protocol
-and criteria, or close the current method path with the rank-count-sensitive
-diagnostic as the present SIM-02 result. No new run is authorized by the
-proposal.
+`[CAMPAIGN AUTHORIZED — PREFLIGHT NEXT]` DECISION-014 consolidates SIM-02 into one conditional final-results campaign.
+The unchanged DECISION-008 bridge criteria, DECISION-007 eHEX gates, the
+stationarity pilot, and the production evidence requirements are automatic
+stop/proceed rules; no new user approval is needed between passing stages.
+First record a suitable host/build, durable restart plan, and successful
+10 ps restart-continuity preflight. Stop and document the first failed gate;
+make no parameter sweep.
 
 ## 5. eHEX pilot
 

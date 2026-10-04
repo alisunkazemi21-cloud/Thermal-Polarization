@@ -10,8 +10,9 @@ its first COM-ceiling crossing, 7 fs into NVE. Checkpoint 13 used the same
 restart at one rank and completed 400 fs with maximum COM `9.65e-19 Å/fs`.
 Together the matched high-cadence traces support rank-count-sensitive behavior
 for this saved-state sequence; the cause remains unresolved. Checkpoint 13
-closes this diagnostic branch. The full bridge remains on hold pending
-DECISION-014; no equilibrium or polarization result exists.**
+closes this diagnostic branch. DECISION-014 now authorizes one conditional final-results campaign. The long
+bridge awaits host and restart-continuity preflight; no equilibrium or
+polarization result exists yet.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -102,7 +103,7 @@ uncorrected NVE check, COM reached `7.14e-6 Å/fs` at 100 fs, above the approved
 `1e-6 Å/fs` limit; the partial run was stopped at 400 fs. This is an
 implementation failure, not an equilibrium result. See the
 [diagnostic report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md),
-the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md), the [checkpoint 11 same-restart report](../../results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md), the [checkpoint 12 high-cadence report](../../results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md), and the [checkpoint 13 matched one-rank report](../../results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md). DECISION-010 through DECISION-014 record the approvals, outcome, and consolidated go/no-go proposal.
+the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md), the [checkpoint 11 same-restart report](../../results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md), the [checkpoint 12 high-cadence report](../../results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md), and the [checkpoint 13 matched one-rank report](../../results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md). DECISION-010 through DECISION-014 record the diagnostics and the approved conditional campaign; its stages stop automatically at the first failed gate.
 The reproducible continuation, Stage-C zero-step, checkpoint-10 through checkpoint-13 inputs are tracked as
 `in.checkpoint-09-continuation-b-nve` and
 `in.checkpoint-09-stage-c-zero-step`, `in.checkpoint-10-single-rank-nve`, and

@@ -21,8 +21,9 @@ replayed the four-rank path with per-step COM sampling and halted at the first
 ceiling crossing, 7 fs into NVE. Checkpoint 13 used the same restart at one rank
 and completed 400 fs with max COM `9.65e-19 Å/fs`. The matched traces support
 rank-count-sensitive behavior for this saved-state sequence, but its cause
-remains unresolved. CP13 closes this diagnostic branch; the full bridge remains
-on hold pending DECISION-014.
+remains unresolved. CP13 closes this diagnostic branch. On 2026-10-05 the user approved DECISION-014
+as one conditional final-results campaign. The long bridge awaits resource and
+restart-continuity preflight; the scientific gates remain unchanged.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -49,7 +50,7 @@ on hold pending DECISION-014.
 | Checkpoint 11 results | `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md` | From the same four-rank Stage-B restart, one-rank 2 ps Stage-C/NVE passed: max COM `1.264e-18 Å/fs`; four-rank path failed at 100 fs; rank-sensitive sequence, mechanism unresolved |
 | Checkpoint 12 results | `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md` | Four-rank replay from the same restart, per-step COM; first exceedance at 7 fs (`1.1198277e-6 Å/fs`); monotonic increase across eight samples; cause unresolved |
 | Checkpoint 13 results | `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md` | Matched one-rank replay completed 400 fs; max COM `9.6530e-19 Å/fs`; at 7 fs `2.3195e-19 Å/fs`; supports rank-count-sensitive behavior, mechanism unresolved |
-| Consolidated bridge decision | `research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md` | Proposed single final Gate 2 attempt under DECISION-008 criteria or close the current method path; no run authorized yet |
+| Consolidated bridge decision | `research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md` | Approved conditional end-to-end campaign: run the frozen bridge, eHEX pilot, stationarity and production gates without new user approvals between passes; stop at the first failed gate. Resource and restart-continuity preflight is next. |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -109,12 +110,12 @@ LAMMPS design.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Checkpoint 13 closed the matched rank-count diagnostic; DECISION-014 proposes
-one final Gate 2 go/no-go using the existing frozen criteria, or closure of the
-current method path. No full equilibrium bridge has been relaunched. The source
-paper omits its NpT target pressure, so the bridge keeps the exact published
-box rather than inventing that parameter. No equilibrium, temperature-gradient,
-or polarization result is claimed here.
+Checkpoint 13 closed the matched rank-count diagnostic. DECISION-014 now
+authorizes one conditional campaign toward a signed polarization profile with
+block uncertainty. The next task is host/build/restart preflight; no long bridge
+run starts until that preflight passes. The source paper omits its NpT target
+pressure, so the bridge keeps the exact published box. No equilibrium,
+temperature-gradient, or polarization result is claimed yet.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.

@@ -27,9 +27,10 @@ def _(mo):
     one-rank control completed 400 fs with maximum COM 9.65e-19 Å/fs. Together,
     the traces support rank-count-sensitive behavior in this saved-state
     sequence; the cause remains unresolved. Checkpoint 13 closes this
-    diagnostic branch. DECISION-014 proposes one final Gate 2 go/no-go under
-    the existing frozen criteria, or closure of the current method path. The
-    full bridge remains on hold; no equilibrium or polarization result exists.**
+    diagnostic branch. DECISION-014 authorizes one conditional final-results
+    campaign, with the existing bridge, eHEX, stationarity, and production gates
+    acting as automatic stop/proceed rules. Resource and restart-continuity
+    preflight comes first; no equilibrium or polarization result exists yet.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -145,10 +146,10 @@ def _(mo):
                 "evidence": "measured result; DECISION-013",
             },
             {
-                "date": "2026-10-04",
-                "stage": "DECISION-014 consolidated go/no-go proposal",
-                "event": "Proposes one final Gate 2 attempt under DECISION-008's unchanged criteria or formal closure of the current method path; no full-bridge run is authorized yet.",
-                "evidence": "proposed decision; user choice pending",
+                "date": "2026-10-05",
+                "stage": "DECISION-014 integrated final-results campaign",
+                "event": "The user approved one conditional campaign toward the final polarization result. Frozen gates stop or release later stages automatically; host/build and restart-continuity preflight comes first.",
+                "evidence": "approved campaign; resource preflight authorized",
             },
         ]
     mo.ui.table(timeline)
@@ -198,7 +199,7 @@ def _(mo):
     design_register = [
         {"item": "engine", "value": "LAMMPS eHEX", "status": "approved", "basis": "DECISION-005"},
         {"item": "water model", "value": "rigid SPC/E", "status": "approved project model", "basis": "SIM-01 / model files"},
-        {"item": "temperature path", "value": "400 K benchmark, then 300 K target", "status": "approved", "basis": "DECISION-006"},
+        {"item": "temperature path", "value": "400 K benchmark, then 300 K target; freeze 300 K duration/replicates from pilot before launch", "status": "sequence approved; target run plan open", "basis": "DECISION-006 / DECISION-014"},
         {"item": "benchmark system", "value": "4,500 waters; 36.35343 × 36.35343 × 109.06058 Å³", "status": "approved; gate 1 passed", "basis": "DECISION-007 / audit"},
         {"item": "time step", "value": "1 fs pilot; test 2 fs", "status": "proposed", "basis": "published production used 2 fs"},
         {"item": "reservoirs", "value": "hot: edge 4+4 Å; cold: central 8 Å", "status": "approved; syntax passed", "basis": "DECISION-007 / run 0"},
@@ -258,7 +259,7 @@ def _(Path, mo):
         ("checkpoint-13 summary", "results/raw/SIM-02/checkpoint-13-one-rank-high-cadence/checkpoint-13-summary.json"),
         ("checkpoint-13 input", "simulations/SIM-02/lammps/in.checkpoint-13-one-rank-high-cadence"),
         ("DECISION-013 approval and outcome", "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md"),
-        ("DECISION-014 consolidated go/no-go proposal", "research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md"),
+        ("DECISION-014 integrated final-results campaign", "research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md"),
         ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
         ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
@@ -349,9 +350,9 @@ def _(json, mo, repo_root):
             "the saved-state sequence but does not identify a mechanism. "
             "Temperature and energy changes in the 400 fs run were exploratory "
             "because DECISION-013 froze no thresholds. Checkpoint 13 closes "
-            "this diagnostic branch; DECISION-014 proposes one final Gate 2 "
-            "go/no-go under DECISION-008 criteria, or closure of the method "
-            "path. The full bridge remains on hold."
+            "this diagnostic branch; DECISION-014 authorizes one conditional final-results "
+            "campaign with frozen stop/proceed gates. Resource and restart- "
+            "continuity preflight comes first; the long bridge has not relaunched."
         ),
     ])
     return

@@ -227,13 +227,13 @@ acceptance threshold; show them as measurements, not verdicts. The one-rank
 run took 3:57 on the local WSL host, which makes the cost of the full 1.52
 million-step bridge a real planning question.
 
-Close this chapter with the streamlined decision: one final Gate 2 attempt
-under the criteria already frozen in DECISION-008, on a resource-appropriate
-host, or formally close this method path and report the numerical limitation.
-Do not promise a mechanism fix, change a threshold, or insert more short tests
-without a decision-blocking ambiguity. The bridge stays on hold until that
-go/no-go is settled. No equilibrium, eHEX, gradient, or polarization result
-exists.
+Close this chapter with DECISION-014: one conditional campaign now aims at
+the signed polarization profile and its uncertainty. The bridge, eHEX, pilot,
+and production gates remain unchanged and act as automatic stop/proceed rules,
+so each passing stage does not require a new approval pause. A failed gate ends
+the campaign; no parameter sweep follows. Resource and restart-continuity
+preflight comes before the long bridge. The present record still contains no
+measured equilibrium, eHEX, gradient, or polarization result.
 
 ### 9. The eHEX pilot
 
