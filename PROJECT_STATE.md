@@ -13,8 +13,9 @@ Checkpoint 08 was stopped at 2 ps after its COM criterion failed. The user then
 approved DECISION-009: preparation-only momentum control with zero-step, 2 ps,
 20 ps, NVT-transition, and uncorrected-NVE checks. Stage A passed at 2 ps and
 20 ps; Stage B passed at 2 ps. The uncorrected NVE diagnostic failed the frozen
-COM ceiling at 100 fs and stopped at 400 fs. The full bridge remains on hold
-pending the user's next decision about NVE momentum drift.
+COM ceiling at 100 fs and stopped at 400 fs. The user approved a matched one-MPI-rank continuation diagnostic on 2026-10-04.
+The 2 ps one-rank NVE segment passed the COM ceiling; the full bridge remains
+on hold pending a follow-up decision.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -37,7 +38,7 @@ pending the user's next decision about NVE momentum drift.
 | Gate 2 failure | `results/reports/SIM-02-checkpoint-08-stage-a-com-drift.md` | Step 1000: 1.0278e-5 Å/fs; step 2000: 1.2511e-5 Å/fs versus 1e-6 ceiling; stopped |
 | Checkpoint 09 decision | `research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md` | User approved preparation-only momentum control and bounded diagnostics |
 | Checkpoint 09 results | `results/reports/SIM-02-checkpoint-09-diagnostics.md` | 20 ps Stage A passed (400 K; max COM `9.65e-19 Å/fs`); 2 ps Stage B ended at `399.81 K`; uncorrected NVE exceeded the COM ceiling at 100 fs |
-| Checkpoint 10 review | `research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md` | Open user decision; MPI/RATTLE mechanism unconfirmed; full bridge not relaunched |
+| Checkpoint 10 results | `results/reports/SIM-02-checkpoint-10-one-rank-nve.md` | One-rank 2 ps uncorrected NVE: 20 samples, max COM `1.04e-18 Å/fs`; four-rank comparison failed at 100 fs; cause not isolated |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -78,16 +79,19 @@ LAMMPS design.
 - [MEASURED / OPEN] A Stage-C zero-step replay left COM at `4.8768857346949e-8
   Å/fs` after the final zero-linear command. The jump occurred during NVE
   integration; RATTLE/MPI is an unconfirmed mechanism hypothesis.
-- [NEXT / DECISION REQUIRED] Review DECISION-010 and choose a bounded diagnostic
-  for the NVE COM excursion. Do not relaunch the full bridge or change the
-  accepted COM ceiling until a follow-up decision is recorded.
+- [MEASURED] The user-approved one-rank comparison replayed Stage B from the
+  Stage-A restart and completed 2 ps uncorrected NVE. All 20 samples stayed
+  below the ceiling; max COM was `1.0435e-18 Å/fs`. The four-rank run breached
+  at 100 fs. Since Stage B was also replayed under each rank count, the cause
+  is not isolated to NVE/RATTLE/MPI. See the checkpoint-10 report and DECISION-010.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
-Next scientific step: resolve the failed uncorrected NVE momentum diagnostic
-through DECISION-010. The full equilibrium bridge has not been relaunched. The
+Next scientific step: decide whether to compare Stage C/NVE at one rank from
+the saved four-rank Stage-B restart. This proposed isolating diagnostic is not
+approved yet. The full equilibrium bridge has not been relaunched. The
 source paper omits its NpT target pressure, so the bridge keeps the exact
 published box rather than inventing that parameter. No equilibrium,
 temperature-gradient, or polarization result is claimed here.

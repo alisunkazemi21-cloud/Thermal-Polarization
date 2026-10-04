@@ -1,0 +1,84 @@
+{
+  "record_type": "SIM-02 checkpoint 10 single-rank NVE comparison",
+  "date": "2026-10-04",
+  "approved_by_user": true,
+  "decision": "DECISION-010",
+  "execution": {
+    "engine": "LAMMPS 10 Dec 2025",
+    "mpi_ranks": 1,
+    "openmp_threads": 1,
+    "suffix": "opt",
+    "timestep_fs": 1,
+    "wall_time": "0:32:23",
+    "starting_restart": "results/raw/SIM-02/checkpoint-09-diagnostics/stage-a-20ps/stage-a-20ps.restart",
+    "input": "simulations/SIM-02/lammps/in.checkpoint-10-single-rank-nve",
+    "output_directory": "results/raw/SIM-02/checkpoint-10-single-rank-nve"
+  },
+  "protocol": {
+    "stage_b_steps": 2000,
+    "stage_b_samples": 20,
+    "nve_steps": 2000,
+    "nve_samples": 20,
+    "thermo_interval_steps": 100,
+    "nve_periodic_momentum_control": false,
+    "com_speed_ceiling_angstrom_per_fs": 1e-06
+  },
+  "measurements": {
+    "stage_b": {
+      "name": "stage_b_nvt_transition_one_mpi_rank",
+      "status": "completed_below_com_ceiling",
+      "samples": 20,
+      "first_step": 20100,
+      "last_step": 22000,
+      "temperature_min_K": 395.56237,
+      "temperature_max_K": 404.8622,
+      "temperature_endpoint_K": 400.5573,
+      "max_sampled_com_speed_angstrom_per_fs": 2.9949981187046465e-19,
+      "max_com_step": 21200,
+      "first_sample_com_speed_angstrom_per_fs": 8.429257327711466e-20,
+      "com_speed_ceiling_angstrom_per_fs": 1e-06,
+      "exceedance_count": 0
+    },
+    "nve": {
+      "name": "stage_c_nve_one_mpi_rank",
+      "status": "completed_below_com_ceiling",
+      "samples": 20,
+      "first_step": 22100,
+      "last_step": 24000,
+      "temperature_min_K": 392.66022,
+      "temperature_max_K": 402.37766,
+      "temperature_endpoint_K": 399.69651,
+      "max_sampled_com_speed_angstrom_per_fs": 1.0435411502651417e-18,
+      "max_com_step": 23900,
+      "first_sample_com_speed_angstrom_per_fs": 2.65403473960656e-19,
+      "com_speed_ceiling_angstrom_per_fs": 1e-06,
+      "exceedance_count": 0
+    }
+  },
+  "cross_rank_comparison": {
+    "four_rank_checkpoint_09_nve": {
+      "samples": 4,
+      "last_step": 22400,
+      "duration_fs": 400,
+      "first_ceiling_exceedance_step": 22100,
+      "first_ceiling_exceedance_angstrom_per_fs": 7.144552366951081e-06,
+      "max_sampled_com_speed_angstrom_per_fs": 8.357269209836094e-06
+    },
+    "single_rank_checkpoint_10_nve": {
+      "samples": 20,
+      "last_step": 24000,
+      "duration_fs": 2000,
+      "first_ceiling_exceedance_step": null,
+      "max_sampled_com_speed_angstrom_per_fs": 1.0435411502651417e-18
+    },
+    "interpretation": "The observed NVE COM outcome differed by rank count in these runs. Because Stage B was replayed under each rank count, the continuation trajectories entering Stage C were not identical; this comparison does not isolate the cause to NVE integration, RATTLE, or a specific MPI reduction."
+  },
+  "completion_evidence": {
+    "lammps_completion_marker": true,
+    "final_restart_exists": true,
+    "stderr_bytes": 0,
+    "lammps_process_exit_status": "not captured; the post-run shell wrapper failed while writing its exit-code file after LAMMPS printed the completion marker",
+    "lammps_reported_wall_time": "0:32:23"
+  },
+  "scientific_scope": "bounded implementation diagnostic only; no equilibrium, energy-drift, eHEX, heat-flux, or polarization conclusion"
+}

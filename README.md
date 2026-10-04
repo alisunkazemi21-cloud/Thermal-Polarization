@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Gate 1 passed; checkpoint 08 failed; checkpoint 09 Stage A/B checks passed but uncorrected NVE failed the COM ceiling; review pending |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 09 four-rank NVE failed COM at 100 fs; checkpoint 10 one-rank 2 ps NVE stayed below the ceiling; rank-sensitive continuation behavior is indicated but cause is not isolated; full bridge held |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -49,6 +49,7 @@ See:
 - [checkpoint 09 momentum-control proposal](research/designs/SIM-02-checkpoint-09-preparation-momentum-control.md)
 - [checkpoint 09 approval](research/decisions/DECISION-009-SIM-02-preparation-momentum-control.md)
 - [checkpoint 09 diagnostic results](results/reports/SIM-02-checkpoint-09-diagnostics.md)
+- [checkpoint 10 one-rank NVE report](results/reports/SIM-02-checkpoint-10-one-rank-nve.md)
 - [checkpoint 10 NVE COM-drift review](research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md)
 
 ## Research workflow

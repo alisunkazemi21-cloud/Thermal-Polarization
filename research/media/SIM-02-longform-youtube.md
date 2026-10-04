@@ -182,9 +182,19 @@ this is an implementation diagnostic, not an equilibrium result.
 Show the zero-step Stage-C replay. After the final zero-linear command COM speed
 is `4.88e-8 Å/fs`, below the ceiling; after integration it crosses the threshold.
 Say that this narrows the interval where the problem appears but does not prove
-RATTLE or MPI is the cause. End the segment with the full bridge **on hold** and
-DECISION-010 open for a rank-sensitivity or initialization-order diagnostic.
-Do not show a corrected curve or imply the next choice has already been made.
+RATTLE or MPI is the cause. Then show the 2026-10-04 user-approved one-rank continuation from the same
+Stage-A restart. The Stage-B replay ended at 400.56 K. Its following 2 ps of
+uncorrected NVE produced 20 samples, ranging from 392.66 to 402.38 K, with the
+maximum sampled COM speed only `1.04e-18 Å/fs` at 1.9 ps. Contrast this with the
+four-rank failure at 100 fs. Explain the limitation on screen: Stage B was
+replayed at each rank count, so the NVE starting states were not identical. The
+result points to rank-sensitive behavior in the continuation, but does not
+prove RATTLE, an MPI reduction, or NVE alone caused the difference. Show the
+32:23 run and disclose that a shell-wrapper `printf` error prevented capture of
+the LAMMPS exit code even though its completion marker and final restart exist.
+End with the full bridge **on hold** and the next isolated diagnostic proposed,
+not yet approved. Do not show a corrected curve or imply equilibrium was
+established.
 
 ### 9. The eHEX pilot
 

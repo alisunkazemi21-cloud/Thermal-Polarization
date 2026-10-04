@@ -1,10 +1,11 @@
 # SIM-02 — thermal-gradient NEMD
 
-Status: **checkpoint 07 gate 1 passed. The checkpoint 08 equilibrium bridge
-failed its Stage-A COM criterion. Under DECISION-009, Stage A passed at 2 ps and
-20 ps, and the short Stage-B transition passed. The uncorrected NVE diagnostic
-exceeded the frozen COM ceiling at 100 fs and stopped at 400 fs. The full bridge
-is on hold pending DECISION-010. No equilibrium or polarization result exists.**
+Status: **checkpoint 07 gate 1 passed. Checkpoint 08 failed its Stage-A COM
+criterion. Checkpoint 09 passed Stage A/B but the four-rank NVE diagnostic
+exceeded the frozen COM ceiling at 100 fs. Under DECISION-010, the one-rank
+2 ps NVE comparison passed all 20 sampled COM checks. The rank-dependent
+continuation outcome does not isolate a cause. The full bridge remains on hold;
+no equilibrium or polarization result exists.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -95,10 +96,10 @@ uncorrected NVE check, COM reached `7.14e-6 Å/fs` at 100 fs, above the approved
 `1e-6 Å/fs` limit; the partial run was stopped at 400 fs. This is an
 implementation failure, not an equilibrium result. See the
 [diagnostic report](../../results/reports/SIM-02-checkpoint-09-diagnostics.md)
-and pending [DECISION-010](../../research/decisions/DECISION-010-SIM-02-NVE-COM-drift-review.md).
-The reproducible continuation and Stage-C zero-step input files are tracked as
+and the completed [checkpoint 10 one-rank report](../../results/reports/SIM-02-checkpoint-10-one-rank-nve.md). DECISION-010 records the approved comparison and follow-up boundary.
+The reproducible continuation, Stage-C zero-step, and checkpoint-10 inputs are tracked as
 `in.checkpoint-09-continuation-b-nve` and
-`in.checkpoint-09-stage-c-zero-step` in this directory.
+`in.checkpoint-09-stage-c-zero-step`, and `in.checkpoint-10-single-rank-nve` in this directory.
 
 ## Documentation contract
 

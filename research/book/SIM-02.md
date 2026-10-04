@@ -7,11 +7,13 @@ stationary temperature gradient and a signed molecular polarization profile that
 is reproducible across time blocks. It covers
 \(\nabla T \rightarrow J_q \rightarrow P\) only.
 
-Status on 2026-10-03: **method, temperature sequence, and exact 400 K protocol
+Status on 2026-10-04: **method, temperature sequence, and exact 400 K protocol
 approved; gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
 checkpoint 09 Stage A (2 ps and 20 ps) and Stage B (2 ps) passed their
-implementation checks, but the uncorrected NVE diagnostic exceeded the COM
-ceiling at 100 fs. The full equilibrium bridge is on hold. No equilibrium or
+implementation checks. Its four-rank uncorrected NVE diagnostic exceeded the
+COM ceiling at 100 fs; the approved one-rank continuation then completed 2 ps
+below the ceiling. This indicates rank-sensitive continuation behavior but
+does not isolate a mechanism. The full equilibrium bridge is on hold. No equilibrium or
 polarization result exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
@@ -48,7 +50,9 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-03 | Checkpoint 09 20 ps Stage-A check | Measured implementation pass | 200 samples at 400 K; maximum sampled COM speed `9.6548e-19 Å/fs`; completed 20,000 steps |
 | 2026-10-03 | Checkpoint 09 Stage-B transition | Measured implementation pass | 2,000 NVT steps; temperature returned to `399.81022 K`; COM remained below `1e-6 Å/fs` |
 | 2026-10-03 | Checkpoint 09 uncorrected NVE diagnostic | Measured implementation failure | COM speed was `7.1446e-6 Å/fs` at 100 fs; run was interrupted at 400 fs; full bridge held |
-| 2026-10-03 | Stage-C zero-step replay | Measured diagnostic | After the final zero-linear command COM was `4.8769e-8 Å/fs`; the mechanism of subsequent NVE drift remains open |
+| 2026-10-03 | Stage-C zero-step replay | Measured diagnostic | After the final zero-linear command COM was `4.8769e-8 Å/fs`; the mechanism of subsequent NVE drift remained open |
+| 2026-10-04 | DECISION-010 approved | Approved decision | User authorized the matched one-rank Stage-B/NVE comparison; full bridge and threshold changes remained out of scope |
+| 2026-10-04 | Checkpoint 10 one-rank continuation | Measured implementation diagnostic | Stage B and 2 ps NVE completed; 20 NVE samples had max COM `1.0435e-18 Å/fs`; four-rank path had exceeded the ceiling at 100 fs; cause not isolated |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -148,9 +152,31 @@ structure, or stationarity.
 `[MEASURED DIAGNOSTIC]` A zero-step replay of the Stage-C adjustments ended at
 `4.8768857346949e-8 Å/fs`, below the ceiling. The excursion therefore appeared
 during subsequent integration; RATTLE/MPI behavior is a hypothesis to test, not
-an established cause. DECISION-010 records the open options. Until then, no full
-bridge relaunch, periodic NVE momentum correction, or threshold change is
-approved.
+an established cause. DECISION-010 later authorized a bounded one-rank
+comparison; checkpoint 10 records its result. No full bridge relaunch, periodic
+NVE momentum correction, or threshold change is approved.
+
+## Checkpoint 10 — one-rank comparison
+
+`[MEASURED PASS, BOUNDED]` On 2026-10-04, the user-approved one-rank OPT run
+replayed the 2 ps Stage-B transition from the same 20 ps Stage-A restart, then
+completed 2 ps of uncorrected NVE. Stage B's 20 samples ranged from 395.56237 to
+404.86220 K and ended at 400.55730 K. NVE's 20 samples ranged from 392.66022 to
+402.37766 K and ended at 399.69651 K. Maximum NVE COM speed was
+`1.0435411502651417e-18 Å/fs`, with no exceedances of the frozen
+`1e-6 Å/fs` ceiling. LAMMPS logged completion at step 24,000 in 32:23.
+
+The contrasting four-rank failure indicates rank-sensitive behavior in this
+continuation sequence, but Stage B was replayed under each rank count, so the
+phase-space state entering NVE differed. This comparison does not isolate the
+cause to NVE, RATTLE, or MPI reduction. The report also records that a wrapper
+error after LAMMPS completion prevented capture of the process exit status.
+This bounded diagnostic measured no equilibrium energy drift, structure,
+eHEX heat transfer, stationary gradient, or polarization. The full bridge stays
+on hold. A same-Stage-B-restart one-rank Stage-C/NVE comparison is a proposed
+next diagnostic and needs a separate decision.
+
+See `results/reports/SIM-02-checkpoint-10-one-rank-nve.md` and DECISION-010.
 
 ## Evidence that must exist before a claim
 
@@ -177,7 +203,8 @@ result remains scientifically valuable.
 - `simulations/SIM-02/README.md`: run status
 - `notebooks/sim02_research.py`: executable research record
 - `results/reports/SIM-02-report.md`: technical report shell
-- `results/reports/SIM-02-checkpoint-09-diagnostics.md`: bounded diagnostic results
-- DECISION-010: pending review of uncorrected NVE COM drift
+- `results/reports/SIM-02-checkpoint-09-diagnostics.md`: four-rank bounded diagnostics
+- `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`: approved one-rank comparison
+- DECISION-010: completed comparison; next isolating test not yet approved
 - `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
 - `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input

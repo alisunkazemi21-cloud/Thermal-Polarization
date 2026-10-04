@@ -1,7 +1,7 @@
 # DECISION-010 — Review of checkpoint-09 NVE COM drift
 
 - Date opened: 2026-10-03
-- Status: **Pending user discussion; no corrective action approved**
+- Status: **Approved diagnostic complete; follow-up review pending**
 - Depends on: DECISION-009 and the checkpoint-09 results report
 
 ## Measured evidence
@@ -19,18 +19,37 @@ This diagnostic failure blocks the full equilibrium bridge. It does not
 establish an equilibrium or polarization result. No scientific parameter or
 acceptance threshold has been changed.
 
-## Questions for the next checkpoint
+## Approved diagnostic scope (2026-10-04)
 
-1. Should a matched short NVE diagnostic be repeated with one MPI rank to test
-   whether the excursion depends on parallel RATTLE/reduction behavior?
-2. If the excursion persists, should we compare a carefully isolated Stage-C
-   initialization ordering while keeping periodic momentum correction disabled
-   during NVE?
-3. Should the existing `1e-6 Å/fs` ceiling remain unchanged unless evidence
-   demonstrates it is incompatible with the accepted implementation?
+The user approved the recommended matched single-MPI-rank NVE diagnostic. Replay
+Stage B from the same completed 20 ps Stage-A restart, then execute the existing
+Stage-C initialization and up to 2 ps of uncorrected NVE. Keep the 1 fs timestep,
+100-step thermo cadence, 400 K velocity scale, RATTLE settings, OPT suffix, and
+one OpenMP thread. Change only the MPI rank count (four to one) and the output
+location. Keep periodic momentum correction disabled during NVE and retain the
+`1e-6 Å/fs` ceiling. The tracked input is
+`simulations/SIM-02/lammps/in.checkpoint-10-single-rank-nve`.
 
-## Boundary
+## Measured one-rank result (2026-10-04)
 
-Until a follow-up decision is made, do not relaunch the full bridge, add
-periodic momentum removal to NVE, or relax the frozen ceiling. The current
-proposal is diagnostic only; these questions are not approved decisions.
+The one-rank OPT run replayed Stage B from the same 20 ps Stage-A restart, then
+completed 2 ps of uncorrected NVE. Stage B had 20 samples from 395.56237 to
+404.86220 K and ended at 400.55730 K. The NVE segment had 20 samples through
+step 24,000 (2 ps); temperature ranged from 392.66022 to 402.37766 K and ended
+at 399.69651 K. Maximum sampled COM speed was
+`1.0435411502651417e-18 Å/fs` at 1.9 ps, with no ceiling exceedance.
+
+Compared with the four-rank run's first-sample failure at 100 fs, this indicates
+rank-sensitive behavior in the Stage-B-to-NVE continuation. Stage B was replayed
+under each rank count, so the phase-space state entering Stage C differed. This
+does not isolate the cause to the NVE integrator, RATTLE, or an MPI reduction.
+The LAMMPS log contains the completion marker and final restart; a shell-wrapper
+`printf` error prevented capture of the LAMMPS exit code after completion. See
+`results/reports/SIM-02-checkpoint-10-one-rank-nve.md` and the local raw archive.
+
+## Boundary and proposed follow-up
+
+The full bridge remains on hold. No scientific parameter, COM threshold, or
+NVE momentum policy changed. A proposed isolating check is to start from the
+saved four-rank Stage-B restart and compare Stage C plus NVE at one rank, so the
+state entering the segment is held fixed. This follow-up is not yet approved.

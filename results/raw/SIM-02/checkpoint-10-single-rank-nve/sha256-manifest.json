@@ -1,0 +1,56 @@
+{
+  "record_type": "diagnostic_sha256_manifest",
+  "file_count": 10,
+  "files": [
+    {
+      "path": "checkpoint-10-summary.json",
+      "bytes": 3404,
+      "sha256": "e2c16b24d6da10d1e4b1603b3e830b378558962487a04e9694a2bad4c28e2892"
+    },
+    {
+      "path": "in.checkpoint-10-single-rank-nve",
+      "bytes": 1806,
+      "sha256": "e512d994310d87f497edd2395c810ed2b6a32c296da8e85e32248ab26638a13a"
+    },
+    {
+      "path": "lammps.log",
+      "bytes": 19816,
+      "sha256": "1e2a7f9572f32ec86c09592a8cf706661a1cf49dabd706b2d82093797c11da73"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1251,
+      "sha256": "4f472a2ca93da39b46186923335f25162b5c0554c30076554a600ca2e7c4d69a"
+    },
+    {
+      "path": "run-command.txt",
+      "bytes": 248,
+      "sha256": "3fd7a732d3f3d09b8ffa64d103c916e67635e202585a7e9eb76306441203a413"
+    },
+    {
+      "path": "run-metadata.json",
+      "bytes": 736,
+      "sha256": "015f353d8a31f44be5a593884664c7e7966a68c7e8ef4f5c86e293db36bd94c7"
+    },
+    {
+      "path": "stage-b-2ps.restart",
+      "bytes": 2125129,
+      "sha256": "2644f2a9a57bc8da9416d63ace6b5f07220282f7b04c64ae4c86fca46b3e9169"
+    },
+    {
+      "path": "stage-b-nve-final.restart",
+      "bytes": 2125129,
+      "sha256": "3db5b2843f34049139fa1d467652be3448f06f50a2c070d9feb3fa1edaed9166"
+    },
+    {
+      "path": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "stdout.txt",
+      "bytes": 18144,
+      "sha256": "010736a88cfb9ebe7bc6e7c46b65e88373b215db8787692edf08a2d253535d7d"
+    }
+  ]
+}

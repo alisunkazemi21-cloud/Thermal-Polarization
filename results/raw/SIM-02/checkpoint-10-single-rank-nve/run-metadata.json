@@ -1,0 +1,11 @@
+{
+  "record_type": "execution_provenance",
+  "date": "2026-10-04",
+  "host_environment": "Ubuntu on WSL",
+  "working_directory": "/mnt/c/Users/WebVajhegan/Thermal-Polarization",
+  "command": "OMP_NUM_THREADS=1 mpiexec -n 1 /usr/bin/lmp -sf opt -log results/raw/SIM-02/checkpoint-10-single-rank-nve/lammps.log -in simulations/SIM-02/lammps/in.checkpoint-10-single-rank-nve",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "completion_marker": "SIM02_GATE2 nve_complete=yes final_step=24000",
+  "launcher_note": "LAMMPS completed and wrote its final restart. The shell wrapper returned an error after a malformed printf command failed to save LAMMPS exit status; stderr is empty and the completion marker is present."
+}

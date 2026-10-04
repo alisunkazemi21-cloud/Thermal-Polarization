@@ -1,9 +1,10 @@
 # SIM-02 technical report — execution record
 
 Status: **gate 1 passed; checkpoint 08 failed its Stage-A COM criterion;
-checkpoint 09 Stage A and Stage B diagnostics passed, but uncorrected NVE failed
-the frozen COM-speed ceiling at 100 fs. The full bridge is on hold. No
-equilibrium or polarization result exists.**
+checkpoint 09 four-rank NVE failed at 100 fs, while checkpoint 10 one-rank NVE
+completed 2 ps below the frozen COM ceiling. Rank sensitivity is indicated, but
+the phase-space states differed after the Stage-B replay. The full bridge is on
+hold. No equilibrium or polarization result exists.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -57,7 +58,19 @@ samples was `8.3573e-6 Å/fs`. A Stage-C zero-step replay ended at
 `4.8769e-8 Å/fs` after the final velocity cleanup, so the excursion developed
 during integration, but its mechanism remains unknown. The full bridge was not
 relaunched. See
-`results/reports/SIM-02-checkpoint-09-diagnostics.md` and pending DECISION-010.
+`results/reports/SIM-02-checkpoint-09-diagnostics.md`; see the completed
+`results/reports/SIM-02-checkpoint-10-one-rank-nve.md` and DECISION-010.
+
+
+`[MEASURED FOLLOW-UP]` On 2026-10-04, the user-approved one-rank continuation
+replayed Stage B from the same Stage-A restart and completed 2 ps uncorrected
+NVE. The 20 integrated NVE samples had temperatures from 392.66022 to 402.37766
+K, endpoint 399.69651 K, and maximum COM speed `1.0435411502651417e-18 Å/fs`;
+no sample exceeded the ceiling. The four-rank path exceeded it at 100 fs.
+Because Stage B was replayed under each rank count, the resulting NVE initial
+states differed; the comparison indicates rank-sensitive continuation behavior
+but does not isolate the mechanism. The full bridge remains on hold pending a
+separate decision. See `results/reports/SIM-02-checkpoint-10-one-rank-nve.md`.
 
 ## 5. eHEX pilot
 

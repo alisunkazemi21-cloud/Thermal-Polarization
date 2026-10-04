@@ -1,26 +1,26 @@
 {
-  "node_count": 164,
+  "node_count": 237,
   "unverified_node_count": 0,
-  "raw_edge_count": 196,
+  "raw_edge_count": 305,
   "non_object_edges": 0,
   "missing_endpoint_edges": 0,
   "dangling_endpoint_edges": 5,
   "external_reference_edges": 0,
   "self_loop_edges": 0,
-  "valid_candidate_edges": 191,
-  "exact_duplicate_edges": 0,
-  "directed_unique_endpoint_pairs": 191,
-  "directed_same_endpoint_collapsed_edges": 0,
-  "undirected_unique_endpoint_pairs": 191,
-  "undirected_same_endpoint_collapsed_edges": 0,
-  "same_endpoint_group_count": 0,
+  "valid_candidate_edges": 300,
+  "exact_duplicate_edges": 57,
+  "directed_unique_endpoint_pairs": 243,
+  "directed_same_endpoint_collapsed_edges": 57,
+  "undirected_unique_endpoint_pairs": 243,
+  "undirected_same_endpoint_collapsed_edges": 57,
+  "same_endpoint_group_count": 57,
   "relation_variant_groups": 0,
   "source_file_variant_groups": 0,
   "source_location_variant_groups": 0,
   "context_variant_groups": 0,
   "post_build_graph_type": "Graph",
-  "post_build_node_count": 164,
-  "post_build_edge_count": 191,
+  "post_build_node_count": 237,
+  "post_build_edge_count": 243,
   "post_build_error": "",
   "producer_suppression": {
     "path": "C:\\Users\\WebVajhegan\\Thermal-Polarization\\.venv\\Lib\\site-packages\\graphify\\extract.py",
@@ -101,5 +101,91 @@
     ],
     "error": ""
   },
-  "examples": []
+  "examples": [
+    {
+      "source": "project_state_project_handoff",
+      "target": "project_state_sim_02_equilibrium_bridge_status",
+      "edge_count": 2,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "C:\\Users\\WebVajhegan\\Thermal-Polarization\\PROJECT_STATE.md"
+      ],
+      "source_locations": [
+        ""
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "project_state_project_handoff",
+      "target": "project_state_checkpoint_10_one_rank_nve_result",
+      "edge_count": 2,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "C:\\Users\\WebVajhegan\\Thermal-Polarization\\PROJECT_STATE.md"
+      ],
+      "source_locations": [
+        ""
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "project_state_checkpoint_10_one_rank_nve_result",
+      "target": "project_state_com_speed_ceiling",
+      "edge_count": 2,
+      "relations": [
+        "conceptually_related_to"
+      ],
+      "source_files": [
+        "C:\\Users\\WebVajhegan\\Thermal-Polarization\\PROJECT_STATE.md"
+      ],
+      "source_locations": [
+        ""
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "readme_thermal_polarization_project",
+      "target": "readme_thermal_polarization_causal_chain",
+      "edge_count": 2,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "C:\\Users\\WebVajhegan\\Thermal-Polarization\\README.md"
+      ],
+      "source_locations": [
+        ""
+      ],
+      "contexts": [
+        ""
+      ]
+    },
+    {
+      "source": "readme_thermal_polarization_project",
+      "target": "readme_dynamic_region_ehex",
+      "edge_count": 2,
+      "relations": [
+        "references"
+      ],
+      "source_files": [
+        "C:\\Users\\WebVajhegan\\Thermal-Polarization\\README.md"
+      ],
+      "source_locations": [
+        ""
+      ],
+      "contexts": [
+        ""
+      ]
+    }
+  ]
 }
