@@ -23,7 +23,7 @@ current, or electrical power.
 | Stage | Purpose | Status |
 |---|---|---|
 | SIM-01 | Validate equilibrium SPC/E water | Completed; five recorded checks passed |
-| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 13 completed 400 fs at one rank below the COM ceiling; the matched four-rank path crossed at 7 fs. Rank-count-sensitive behavior is supported, cause unresolved. DECISION-014 authorizes one conditional final-results campaign; resource preflight comes before the long bridge |
+| SIM-02 | Impose a thermal gradient and measure heat transport, orientation, and polarization | Checkpoint 13's matched traces support rank-count-sensitive behavior, cause unresolved. DECISION-014's local restart preflight completed, but statistical equivalence is unadjudicated and the local host is not released for the estimated 10.5-day bridge. No equilibrium or polarization result exists. |
 | SIM-03 | Evaluate the electrostatic/electrical consequences only after a validated SIM-02 signal | Not started |
 
 Earlier files that used different stage names are historical records. The table
@@ -58,6 +58,7 @@ See:
 - [checkpoint 13 one-rank high-cadence result](results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md)
 - [DECISION-013 approval and result](research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md)
 - [DECISION-014 integrated SIM-02 final-results campaign](research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md)
+- [2026-10-05 resource and restart-continuity preflight](results/reports/SIM-02-preflight-restart-continuity-2026-10-05.md)
 
 ## Research workflow
 

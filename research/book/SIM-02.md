@@ -22,7 +22,10 @@ while the mechanism remains unresolved. The full equilibrium bridge has not rela
 result exists. On 2026-10-05 DECISION-014 was approved as one conditional
 final-results campaign: the existing bridge, eHEX, pilot, and production gates
 now act as automatic stop/proceed rules, with no new user approval between
-passing stages. Resource and restart-continuity preflight comes first.**
+passing stages. The 2026-10-05 local preflight completed both 10 ps paths, but
+continuity equivalence is not adjudicated and the local host is not released
+for the estimated 10.5-day bridge. No equilibrium or polarization result
+exists.**
 
 The approved sequence is a 400 K method-validation condition followed by the
 300 K target only after the equilibrium and eHEX pilot gates pass
@@ -69,6 +72,7 @@ establish thermopolarization or make 300 K a special transition temperature.
 | 2026-10-04 | DECISION-013 approved and executed | Approved bounded diagnostic | Matched one-rank high-cadence control from the same restart completed 400 fs; max COM `9.6530e-19 Å/fs`; at 7 fs COM was `2.3195e-19 Å/fs`; no ceiling crossing |
 | 2026-10-04 | Checkpoint 13 comparison closed | Measured trace plus inference | Together with checkpoint 12, supports rank-count-sensitive early COM behavior for this saved-state sequence; cause unresolved. Temperature and total-energy changes remain exploratory because no short-run thresholds were frozen |
 | 2026-10-05 | DECISION-014 approved | Integrated conditional final-results campaign | Preserve the frozen scientific criteria; pass through the bridge, eHEX, stationarity, and production gates without extra approval pauses; stop at the first failed gate; resource preflight first |
+| 2026-10-05 | Resource/restart preflight | Both 10 ps NVE paths completed on one-rank WSL | No COM halt and 0 dangerous neighbor builds; paired 1 ps means were close, but a `-2.412 kcal/mol` restart-boundary energy jump and different fitted slopes leave statistical equivalence unadjudicated; local bridge estimate about 10.5 days |
 
 The GROMACS draft was useful: it exposed the real methodological question. A
 thermal reservoir in a liquid must be defined by current position, not by the
@@ -249,6 +253,34 @@ advanced zero steps. The same approved run then completed with
 See `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md` and
 DECISION-012.
 
+## Resource and restart-continuity preflight
+
+`[MEASURED, DESCRIPTIVE]` On 2026-10-05, the WSL2 host ran LAMMPS 10 Dec 2025
+with one MPI rank and one OpenMP thread. From the checkpoint-12 Stage-B restart,
+an uninterrupted 10,000-step path took 1:39:41. The comparison path used two
+5,000-step runs joined by a binary restart and took 0:48:41 plus 0:48:53. All
+three processes exited 0 at step 32,000, no COM guard halted a path, and the
+logs report zero dangerous neighbor builds.
+
+Eleven paired 1 ps samples give mean temperatures 403.070 K and 403.135 K, and
+mean total energies −33,188.728 and −33,189.342 kcal/mol for uninterrupted and
+split paths, respectively. At the restart boundary, total energy changes by
+−2.412 kcal/mol; at the endpoint, split minus uninterrupted total energy is
+−3.055 kcal/mol. Their fitted 10 ps energy slopes have opposite signs
+(+0.1313 and −0.0356 kcal/mol/ps). These are descriptive measurements, not
+independent replicates or a formal equivalence test. The short-test acceptance
+threshold was not specified, so no pass/fail equivalence claim is assigned.
+The DECISION-008 1 ns energy-drift rule is not transferred to this test.
+
+LAMMPS documents that RATTLE restart state is not stored and restarted
+trajectories need not be exact, while expected to be statistically similar.
+This is consistent with possible trajectory divergence but does not establish
+the cause of this boundary jump. The local measured rate projects the
+1.52-million-step bridge to roughly 10.5 days; DECISION-014 therefore does not
+release this host for the long run. See
+`results/reports/SIM-02-preflight-restart-continuity-2026-10-05.md`, the paired
+table, summary JSON, and analysis script.
+
 ## Evidence that must exist before a claim
 
 1. equilibrium LAMMPS density, temperature, and O–O structure consistent with
@@ -280,5 +312,6 @@ result remains scientifically valuable.
 - `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md`: per-step four-rank replay from that restart
 - DECISION-010 through DECISION-014: rank-comparison diagnostics and consolidated bridge go/no-go proposal
 - `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md`: matched one-rank control result
+- `results/reports/SIM-02-preflight-restart-continuity-2026-10-05.md`: resource and restart-continuity preflight
 - `simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve`: restart-based NVT/NVE diagnostic input
 - `simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step`: COM-transition isolation input

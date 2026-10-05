@@ -1,0 +1,63 @@
+{
+  "status": "descriptive preflight complete; statistical-equivalence acceptance not adjudicated",
+  "reason": "DECISION-014 specifies statistical agreement but freezes no quantitative acceptance threshold for this 10 ps test.",
+  "sampling": "paired 1 ps thermo samples; n=11 per path; samples are not independent replicates",
+  "continuous": {
+    "sample_count_1ps": 11,
+    "mean_temperature_K": 403.07039545454546,
+    "sample_sd_temperature_K": 2.8522014756687986,
+    "mean_total_energy_kcal_mol": -33188.72845454545,
+    "fitted_total_energy_slope_kcal_mol_ps": 0.1312636363636226,
+    "sampled_endpoint_total_energy_change_kcal_mol": 2.5499999999956344,
+    "mean_com_speed_A_fs": 9.69940194090909e-19,
+    "maximum_sampled_com_speed_A_fs": 1.59989e-18
+  },
+  "split_restart": {
+    "sample_count_1ps": 11,
+    "mean_temperature_K": 403.13486,
+    "sample_sd_temperature_K": 2.941721034911369,
+    "mean_total_energy_kcal_mol": -33189.34154545455,
+    "fitted_total_energy_slope_kcal_mol_ps": -0.03557272727299609,
+    "sampled_endpoint_total_energy_change_kcal_mol": -0.5050000000046566,
+    "mean_com_speed_A_fs": 1.0511974631818182e-18,
+    "maximum_sampled_com_speed_A_fs": 2.0640859e-18
+  },
+  "restart_boundary_at_step_27000": {
+    "total_energy_jump_kcal_mol_split_minus_first": -2.4120000000039,
+    "temperature_jump_K_split_minus_first": -0.08994999999998754
+  },
+  "paired_energy_difference_after_restart": {
+    "maximum_absolute_kcal_mol": 3.055000000000291,
+    "root_mean_square_kcal_mol": 1.628462567373638,
+    "endpoint_kcal_mol_split_minus_continuous": -3.055000000000291
+  },
+  "sha256": {
+    "source_stage_b_restart": {
+      "path": "results/raw/SIM-02/checkpoint-12-four-rank-high-cadence/stage-b-2ps-four-rank.restart",
+      "digest": "3b43042a7dceb3f774708d54a57d76bc701cff44cfe7231afea299ba8a9494ef"
+    },
+    "inputs": {
+      "simulations/SIM-02/lammps/in.preflight-restart-continuity-10ps": "b05b9ea577c81d47172e8ff0b096a6fa35f5d580afccb3e4c88ed0be3f547fb5",
+      "simulations/SIM-02/lammps/in.preflight-restart-continuity-5ps-first": "8316ef2e56ee527089b2af04a2344e2b10d80c8015ee06e2a4198efeb4b52017",
+      "simulations/SIM-02/lammps/in.preflight-restart-continuity-5ps-second": "4d8a6112a72e8607f31960c7690445cb6feb50a95619756a24ffeb2a9d2a04de"
+    },
+    "raw_artifacts": {
+      "continuous-10ps-final.restart": "5898ff4daa24b21a4bcc73b071bf2d178a3093e79fd0c0202f95909db64ae695",
+      "continuous.log": "e0e21810d4964c4d419f27ab47f5605e6bf20944225d6ddccd844248aed15745",
+      "continuous.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "continuous.stdout": "f55cd51ff09409f9508be6814888579904609604f2d975f47c19ffacd0f14609",
+      "split-10ps-final.restart": "cdefd13434f359870ea704cb2f508c3480fb5b93c488b0524e59a395199346d6",
+      "split-5ps.restart": "1a1762a651ff5a5a6d4a15d7b22d6791df4f5a56d07442347450b06d79d6e01b",
+      "split-first.log": "d5728630debee1b12dec962c3b39e85c926cdcec8a2dd3ccf7c31dc2a7fc92dd",
+      "split-first.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "split-first.stdout": "e6d2d5b456f63cbc22f02b89d5d4350dfa41862530dd3f67a37af58e30068524",
+      "split-second.log": "325dc2e51f5ff48ce85da049c77985f887248b0953bea9eabcb741e750a3794b",
+      "split-second.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "split-second.stdout": "53db07881ae9f8ec4969f5d15c9ffb46e030f7b2bffb943c54dd5efff32d1a8c"
+    }
+  },
+  "outputs": {
+    "paired_csv": "results\\tables\\SIM-02-preflight-continuity-2026-10-05.csv",
+    "summary_json": "results\\tables\\SIM-02-preflight-continuity-2026-10-05-summary.json"
+  }
+}

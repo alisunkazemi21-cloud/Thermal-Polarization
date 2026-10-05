@@ -10,9 +10,12 @@ its first COM-ceiling crossing, 7 fs into NVE. Checkpoint 13 used the same
 restart at one rank and completed 400 fs with maximum COM `9.65e-19 Å/fs`.
 Together the matched high-cadence traces support rank-count-sensitive behavior
 for this saved-state sequence; the cause remains unresolved. Checkpoint 13
-closes this diagnostic branch. DECISION-014 now authorizes one conditional final-results campaign. The long
-bridge awaits host and restart-continuity preflight; no equilibrium or
-polarization result exists yet.**
+closes this diagnostic branch. DECISION-014 now authorizes one conditional
+final-results campaign. The 2026-10-05 local restart-continuity preflight
+completed both paths, but
+statistical equivalence is not adjudicated and the measured local host is not
+released for the roughly 10.5-day bridge. No equilibrium or polarization result
+exists yet.**
 
 The GROMACS NEMD files in this directory remain **non-runnable historical
 drafts**. The approved implementation and imported reference configuration live
@@ -24,6 +27,18 @@ polarization under a controlled thermal gradient. Its scope is
 extraction.
 
 ## Current finding
+
+DECISION-014's resource preflight is recorded in
+`../../results/reports/SIM-02-preflight-restart-continuity-2026-10-05.md`.
+The one-rank LAMMPS 10 Dec 2025 uninterrupted and split-restart paths both
+completed 10 ps with no COM halt. Paired 1 ps samples have close mean
+temperature and total energy, but the restart boundary changed total energy by
+−2.412 kcal/mol and the endpoint split-minus-continuous difference was
+−3.055 kcal/mol. The approved documents freeze no numerical equivalence rule
+for this test, so the result is descriptive and no pass/fail equivalence label
+is assigned. The measured local rate projects the long bridge to about 10.5
+days; do not launch it on this host. Inputs and the CSV/JSON analysis are linked
+from the report.
 
 The equilibrium preparation files are drafts. The current NEMD files
 `nemd-startup.mdp` and `nemd-production.mdp` use `tc-grps = Hot Cold Rest`.

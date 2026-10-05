@@ -21,9 +21,14 @@ replayed the four-rank path with per-step COM sampling and halted at the first
 ceiling crossing, 7 fs into NVE. Checkpoint 13 used the same restart at one rank
 and completed 400 fs with max COM `9.65e-19 Å/fs`. The matched traces support
 rank-count-sensitive behavior for this saved-state sequence, but its cause
-remains unresolved. CP13 closes this diagnostic branch. On 2026-10-05 the user approved DECISION-014
-as one conditional final-results campaign. The long bridge awaits resource and
-restart-continuity preflight; the scientific gates remain unchanged.
+remains unresolved. CP13 closes this diagnostic branch. On 2026-10-05 the user
+approved DECISION-014 as one conditional final-results campaign. The local
+resource and restart preflight ran on 2026-10-05. Both NVE paths completed 10 ps
+without a COM halt, but statistical equivalence is not adjudicated: the restart
+boundary energy jump was `-2.412 kcal/mol`, the endpoint paired difference was
+`-3.055 kcal/mol`, and no quantitative threshold was frozen for this test. The
+local one-rank bridge estimate is about 10.5 days, so this host is not released
+for the long bridge. No equilibrium or polarization result exists.
 
 ## Evidence and routes
 | Topic | Source | Observed status |
@@ -50,7 +55,8 @@ restart-continuity preflight; the scientific gates remain unchanged.
 | Checkpoint 11 results | `results/reports/SIM-02-checkpoint-11-same-restart-one-rank.md` | From the same four-rank Stage-B restart, one-rank 2 ps Stage-C/NVE passed: max COM `1.264e-18 Å/fs`; four-rank path failed at 100 fs; rank-sensitive sequence, mechanism unresolved |
 | Checkpoint 12 results | `results/reports/SIM-02-checkpoint-12-four-rank-high-cadence.md` | Four-rank replay from the same restart, per-step COM; first exceedance at 7 fs (`1.1198277e-6 Å/fs`); monotonic increase across eight samples; cause unresolved |
 | Checkpoint 13 results | `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md` | Matched one-rank replay completed 400 fs; max COM `9.6530e-19 Å/fs`; at 7 fs `2.3195e-19 Å/fs`; supports rank-count-sensitive behavior, mechanism unresolved |
-| Consolidated bridge decision | `research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md` | Approved conditional end-to-end campaign: run the frozen bridge, eHEX pilot, stationarity and production gates without new user approvals between passes; stop at the first failed gate. Resource and restart-continuity preflight is next. |
+| Consolidated bridge decision | `research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md` | Approved conditional end-to-end campaign; scientific gates unchanged. Stage-0 execution completed, but continuity equivalence is not adjudicated and the local host is unsuitable for the estimated 10.5-day bridge |
+| Resource/restart preflight | `results/reports/SIM-02-preflight-restart-continuity-2026-10-05.md` | Both 10 ps paths exited 0; paired 1 ps series have similar means but show a restart-boundary energy jump and different fitted slopes. No predeclared acceptance threshold; not a scientific result |
 | SIM-02 drafts | `simulations/SIM-02/` | GROMACS files retained as non-runnable historical drafts |
 | Literature notes | `research/literature/Wirnsberger-2016-reproduction-notes.md` | Primary paper and author package audited; no project result imported |
 
@@ -107,17 +113,32 @@ LAMMPS design.
   no energy-drift criterion was frozen for this run. See DECISION-012.
 - [TO TEST] LAMMPS equilibrium bridge, eHEX energy conservation, regional
   membership, heat accounting, and stationary profile/block uncertainty checks.
+- [PREFLIGHT COMPLETE / CONTINUITY OPEN] The local one-rank WSL continuity
+  branches completed 10 ps uninterrupted and 5 ps + restart + 5 ps without a
+  COM halt. Their descriptive paired means are close, but restart-boundary and
+  fitted-drift differences remain; no quantitative equivalence threshold was
+  frozen. See the preflight report, paired table, and summary JSON.
+- [HOST NOT RELEASED] The 1.52-million-step equilibrium bridge is estimated at
+  about 10.5 days on the measured local one-rank path. Pin a suitable sustained
+  runtime and durable restart plan before launching Gate 2.
 - Historical SIM-01 report has an empty command section and inconsistent temperature
   summaries; consult raw evidence if that discrepancy affects a decision.
 
 Checkpoint 13 closed the matched rank-count diagnostic. DECISION-014 now
 authorizes one conditional campaign toward a signed polarization profile with
-block uncertainty. The next task is host/build/restart preflight; no long bridge
-run starts until that preflight passes. The source paper omits its NpT target
-pressure, so the bridge keeps the exact published box. No equilibrium,
+block uncertainty. Resource preflight is measured; statistical-equivalence
+interpretation of the 10 ps restart test remains open, and the local host is
+not suitable for the roughly 10.5-day bridge. The source paper omits its NpT
+target pressure, so the bridge keeps the exact published box. No equilibrium,
 temperature-gradient, or polarization result is claimed yet.
 
 ## Navigation
 Use `scripts/graphify.ps1 query "SIM-02" --budget 1500` once the graph is built.
 Graph is a retrieval index; source files remain authoritative. Avoid reading the
 full graph JSON, bundled web assets, or trajectories into chat.
+
+Graphify was refreshed code-only on 2026-10-05: 284 nodes, 297 edges, 47
+communities. Semantic re-extraction of 26 changed research documents did not
+run because no supported Graphify LLM API key was configured; the site graph
+and report may therefore contain stale document nodes. A future semantic
+refresh should re-queue those documents after credentials are configured.

@@ -7,10 +7,11 @@ failed at 100 fs. Checkpoint 12's per-step four-rank replay crossed the COM
 ceiling at 7 fs. Checkpoint 13's matched one-rank replay completed 400 fs with
 maximum COM `9.653e-19 Å/fs`; at 7 fs it was `2.320e-19 Å/fs`. This supports
 rank-count-sensitive behavior for the saved-state sequence, but its mechanism
-remains unresolved. Checkpoint 13 closes the diagnostic branch. The full
-bridge has not relaunched. DECISION-014 now authorizes one conditional
-final-results campaign; resource preflight comes before the long bridge. No
-equilibrium or polarization result exists yet.**
+remains unresolved. Checkpoint 13 closes the diagnostic branch. DECISION-014
+authorizes one conditional final-results campaign. The local 10 ps
+restart-continuity preflight completed without a COM halt, but statistical
+equivalence is not adjudicated and the measured host is not released for the
+estimated 10.5-day bridge. No equilibrium or polarization result exists yet.**
 Proposed values belong in the design document until their gate is released.
 
 ## 1. Research question
@@ -109,33 +110,59 @@ result closes the matched rank-count diagnostic but does not release Gate 2.
 See DECISION-013 and
 `results/reports/SIM-02-checkpoint-13-one-rank-high-cadence.md`.
 
-`[CAMPAIGN AUTHORIZED — PREFLIGHT NEXT]` DECISION-014 consolidates SIM-02 into one conditional final-results campaign.
+`[CAMPAIGN AUTHORIZED — LOCAL PREFLIGHT RECORDED]` DECISION-014 consolidates SIM-02 into one conditional final-results campaign.
 The unchanged DECISION-008 bridge criteria, DECISION-007 eHEX gates, the
 stationarity pilot, and the production evidence requirements are automatic
 stop/proceed rules; no new user approval is needed between passing stages.
-First record a suitable host/build, durable restart plan, and successful
-10 ps restart-continuity preflight. Stop and document the first failed gate;
-make no parameter sweep.
+The local host/build and 10 ps restart-continuity execution are recorded below.
+Statistical equivalence is not adjudicated, and the local runtime is unsuitable
+for the 10.5-day bridge estimate. Pin a suitable sustained host and durable
+restart plan before Gate 2. Stop and document the first failed gate; make no
+parameter sweep.
 
-## 5. eHEX pilot
+## 5. Resource and restart-continuity preflight
+
+`[MEASURED, DESCRIPTIVE]` On 2026-10-05, LAMMPS 10 Dec 2025 ran on one MPI rank
+and one OpenMP thread under Ubuntu WSL2. Both the uninterrupted 10 ps NVE path
+and split 5 ps + binary restart + 5 ps path exited 0 at step 32,000 without a
+COM halt; all three component runs logged zero dangerous neighbor builds.
+
+The 11 paired 1 ps samples have mean temperatures of 403.070 K (continuous)
+and 403.135 K (split), and mean total energies of −33,188.728 and
+−33,189.342 kcal/mol. The 5 ps restart boundary has a −2.412 kcal/mol energy
+jump; the endpoint split-minus-continuous difference is −3.055 kcal/mol. The
+fitted energy slopes differ in sign (+0.1313 versus −0.0356 kcal/mol/ps). The
+test's statistical-equivalence threshold was not frozen, and the samples are
+not independent replicates. The result is descriptive; the DECISION-008
+1 ns energy threshold is not applied here. LAMMPS documents that RATTLE state
+is not saved in binary restarts and trajectories need not restart exactly, but
+this does not identify the cause of the observed difference. See the detailed
+[preflight report](SIM-02-preflight-restart-continuity-2026-10-05.md), paired
+table, summary JSON, and analysis script.
+
+The measured local rate implies about 10.5 days for the 1.52-million-step
+bridge. DECISION-014 requires a suitable sustained runtime and recovery plan;
+this host is not released, and no long bridge was launched.
+
+## 6. eHEX pilot
 
 `[TO TEST]` Energy balance, heat-flux conversion, reservoir occupancy,
 temperature/density profiles, symmetry, and stability.
 
-## 6. Steady state and production
+## 7. Steady state and production
 
 `[TO TEST]` Stationarity windows and accepted production blocks.
 
-## 7. Results
+## 8. Results
 
 `[TO MEASURE]` T(z), ρ(z), Jq, Pz(z), <cos θ(z)>, Pz versus ρ, and uncertainty.
 
-## 8. Interpretation and limitations
+## 9. Interpretation and limitations
 
 No interpretation is permitted until the measured profiles and block
 uncertainties are available.
 
-## 9. Reproducibility record
+## 10. Reproducibility record
 
 The completed report must list the LAMMPS version, installed packages, platform,
 commit, SPC/E provenance, exact inputs, seeds, box/count, heat rate, durations,

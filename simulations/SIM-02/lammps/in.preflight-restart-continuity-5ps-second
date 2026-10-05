@@ -1,0 +1,24 @@
+units           real
+atom_style      full
+read_restart    results/raw/SIM-02/preflight-restart-continuity-2026-10-05/split-5ps.restart
+kspace_style    pppm 1.0e-5
+neighbor        4.0 bin
+neigh_modify    one 7500
+
+compute         bridge_temp all temp
+variable        vcomx equal vcm(all,x)
+variable        vcomy equal vcm(all,y)
+variable        vcomz equal vcm(all,z)
+variable        comspeed equal sqrt(v_vcomx*v_vcomx+v_vcomy*v_vcomy+v_vcomz*v_vcomz)
+thermo_style    custom step time atoms temp press pe ke etotal vol lx ly lz v_vcomx v_vcomy v_vcomz v_comspeed
+thermo_modify   temp bridge_temp flush yes
+thermo          1000
+
+# Recreate transient integrator and constraint fixes after read_restart.
+fix             integrate all nve
+fix             constraints all rattle 1.0e-10 400 0 b 1 a 1
+fix             com_guard all halt 1 v_comspeed > 1.0e-6 error soft message yes
+run             5000
+unfix           com_guard
+write_restart   results/raw/SIM-02/preflight-restart-continuity-2026-10-05/split-10ps-final.restart
+print           "SIM02_PREFLIGHT split_second final_step=$(step) com_speed=$(v_comspeed:%.16g)"

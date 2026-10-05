@@ -126,10 +126,10 @@
     "semantic_hash": ""
   },
   "notebooks/sim02_research.py": {
-    "mtime": 1791149445.973907,
-    "seen": 1791149475.3327978,
-    "ast_hash": "ccfc45af4ff3884056bff4c16351fdd4",
-    "semantic_hash": "ccfc45af4ff3884056bff4c16351fdd4"
+    "mtime": 1791163411.39961,
+    "seen": 1791163439.8224235,
+    "ast_hash": "8c7d79873e692ffb35d627af60ed9d75",
+    "semantic_hash": "8c7d79873e692ffb35d627af60ed9d75"
   },
   "research/WORKFLOW.md": {
     "mtime": 1790764921.57253,
@@ -628,5 +628,17 @@
     "seen": 1791145917.195223,
     "ast_hash": "b896480cfca9bdf1c99db4c9dc0edf4a",
     "semantic_hash": "b896480cfca9bdf1c99db4c9dc0edf4a"
+  },
+  "results/tables/SIM-02-preflight-continuity-2026-10-05-summary.json": {
+    "mtime": 1791162651.978134,
+    "seen": 1791163116.7534666,
+    "ast_hash": "8eda9ac6bbef1f8c14037e43929772d8",
+    "semantic_hash": "8eda9ac6bbef1f8c14037e43929772d8"
+  },
+  "scripts/analysis/analyze_sim02_restart_continuity.py": {
+    "mtime": 1791162644.5229855,
+    "seen": 1791163116.7534666,
+    "ast_hash": "a2eb74e382477c0a4ede1bf9030e9df1",
+    "semantic_hash": "a2eb74e382477c0a4ede1bf9030e9df1"
   }
 }

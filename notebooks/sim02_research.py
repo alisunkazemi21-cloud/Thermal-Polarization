@@ -29,8 +29,11 @@ def _(mo):
     sequence; the cause remains unresolved. Checkpoint 13 closes this
     diagnostic branch. DECISION-014 authorizes one conditional final-results
     campaign, with the existing bridge, eHEX, stationarity, and production gates
-    acting as automatic stop/proceed rules. Resource and restart-continuity
-    preflight comes first; no equilibrium or polarization result exists yet.**
+    acting as automatic stop/proceed rules. The first campaign action, a local
+    resource and restart-continuity preflight, completed on 2026-10-05 without
+    a COM halt. Its statistical-equivalence outcome is not
+    adjudicated and the roughly 10.5-day local bridge is not released. No
+    equilibrium or polarization result exists yet.**
 
     This notebook is the executable companion to the SIM-02 research book.
     It keeps the chronological record, decisions, expected evidence, and later
@@ -151,6 +154,12 @@ def _(mo):
                 "event": "The user approved one conditional campaign toward the final polarization result. Frozen gates stop or release later stages automatically; host/build and restart-continuity preflight comes first.",
                 "evidence": "approved campaign; resource preflight authorized",
             },
+            {
+                "date": "2026-10-05",
+                "stage": "Resource and restart-continuity preflight",
+                "event": "One-rank WSL continuous and split 10 ps NVE paths completed without a COM halt. A restart-boundary energy jump and different fitted slopes remain descriptive because no short-test equivalence threshold was frozen; the local bridge estimate is about 10.5 days.",
+                "evidence": "preflight report, paired CSV, and summary JSON",
+            },
         ]
     mo.ui.table(timeline)
     return
@@ -260,6 +269,13 @@ def _(Path, mo):
         ("checkpoint-13 input", "simulations/SIM-02/lammps/in.checkpoint-13-one-rank-high-cadence"),
         ("DECISION-013 approval and outcome", "research/decisions/DECISION-013-SIM-02-one-rank-high-cadence-control-proposal.md"),
         ("DECISION-014 integrated final-results campaign", "research/decisions/DECISION-014-SIM-02-consolidated-bridge-go-no-go.md"),
+        ("restart-continuity preflight report", "results/reports/SIM-02-preflight-restart-continuity-2026-10-05.md"),
+        ("restart-continuity paired table", "results/tables/SIM-02-preflight-continuity-2026-10-05.csv"),
+        ("restart-continuity summary", "results/tables/SIM-02-preflight-continuity-2026-10-05-summary.json"),
+        ("restart-continuity analysis", "scripts/analysis/analyze_sim02_restart_continuity.py"),
+        ("10 ps continuous input", "simulations/SIM-02/lammps/in.preflight-restart-continuity-10ps"),
+        ("5 ps split first input", "simulations/SIM-02/lammps/in.preflight-restart-continuity-5ps-first"),
+        ("5 ps split second input", "simulations/SIM-02/lammps/in.preflight-restart-continuity-5ps-second"),
         ("checkpoint-09 continuation diagnostic input", "simulations/SIM-02/lammps/in.checkpoint-09-continuation-b-nve"),
         ("checkpoint-09 Stage-C zero-step input", "simulations/SIM-02/lammps/in.checkpoint-09-stage-c-zero-step"),
         ("temperature profile", "results/tables/SIM-02-temperature-profile.csv"),
@@ -351,8 +367,9 @@ def _(json, mo, repo_root):
             "Temperature and energy changes in the 400 fs run were exploratory "
             "because DECISION-013 froze no thresholds. Checkpoint 13 closes "
             "this diagnostic branch; DECISION-014 authorizes one conditional final-results "
-            "campaign with frozen stop/proceed gates. Resource and restart- "
-            "continuity preflight comes first; the long bridge has not relaunched."
+            "campaign with frozen stop/proceed gates. The local restart preflight "
+            "completed without a COM halt, but equivalence is unadjudicated and "
+            "the estimated 10.5-day local bridge has not relaunched."
         ),
     ])
     return
@@ -500,6 +517,44 @@ def _(mo):
     A failed gate is a recorded result. It triggers a documented change and a
     new pilot; it cannot be silently tuned away.
     """)
+    return
+
+
+@app.cell
+def _(json, mo, repo_root):
+    preflight = json.loads(
+        (repo_root / "results/tables/SIM-02-preflight-continuity-2026-10-05-summary.json").read_text()
+    )
+    continuous = preflight["continuous"]
+    split = preflight["split_restart"]
+    boundary = preflight["restart_boundary_at_step_27000"]
+    endpoint = preflight["paired_energy_difference_after_restart"]
+    preflight_table = [
+        {"measure": "mean sampled temperature", "continuous 10 ps": f"{continuous['mean_temperature_K']:.3f} K", "split/restarted": f"{split['mean_temperature_K']:.3f} K"},
+        {"measure": "mean total energy", "continuous 10 ps": f"{continuous['mean_total_energy_kcal_mol']:.3f} kcal/mol", "split/restarted": f"{split['mean_total_energy_kcal_mol']:.3f} kcal/mol"},
+        {"measure": "fitted total-energy slope", "continuous 10 ps": f"{continuous['fitted_total_energy_slope_kcal_mol_ps']:.4f} kcal/mol/ps", "split/restarted": f"{split['fitted_total_energy_slope_kcal_mol_ps']:.4f} kcal/mol/ps"},
+        {"measure": "maximum sampled COM", "continuous 10 ps": f"{continuous['maximum_sampled_com_speed_A_fs']:.3e} Å/fs", "split/restarted": f"{split['maximum_sampled_com_speed_A_fs']:.3e} Å/fs"},
+        {"measure": "restart-boundary ΔEtot", "continuous 10 ps": "—", "split/restarted": f"{boundary['total_energy_jump_kcal_mol_split_minus_first']:.3f} kcal/mol"},
+        {"measure": "final paired ΔEtot", "continuous 10 ps": "reference", "split/restarted": f"{endpoint['endpoint_kcal_mol_split_minus_continuous']:.3f} kcal/mol"},
+    ]
+    mo.vstack([
+        mo.md(r"""
+        ## DECISION-014 Stage 0 — resource and restart-continuity preflight
+
+        Both one-rank WSL paths completed 10 ps and exited 0 without a COM
+        halt. The split path matches the uninterrupted samples through 5 ps;
+        the first resumed sample shows a `−2.412 kcal/mol` total-energy change.
+        The table summarizes eleven paired 1 ps samples. Their fitted energy
+        slopes have different signs, so this is a descriptive continuity record,
+        not a formal equivalence result. DECISION-014 froze no short-test
+        threshold; the DECISION-008 1 ns threshold is not applied here.
+
+        The local measured rate projects the 1.52-million-step bridge to about
+        10.5 days. The local host is not released for Gate 2. No cloud runtime
+        was launched and no equilibrium or polarization result exists.
+        """),
+        mo.ui.table(preflight_table),
+    ])
     return
 
 

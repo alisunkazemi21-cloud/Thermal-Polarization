@@ -231,9 +231,28 @@ Close this chapter with DECISION-014: one conditional campaign now aims at
 the signed polarization profile and its uncertainty. The bridge, eHEX, pilot,
 and production gates remain unchanged and act as automatic stop/proceed rules,
 so each passing stage does not require a new approval pause. A failed gate ends
-the campaign; no parameter sweep follows. Resource and restart-continuity
-preflight comes before the long bridge. The present record still contains no
-measured equilibrium, eHEX, gradient, or polarization result.
+the campaign; no parameter sweep follows.
+
+Then show the 2026-10-05 resource and restart preflight as a real result in its
+own right. One local WSL path ran 10 ps continuously; the paired path ran 5 ps,
+wrote a binary restart, then ran 5 ps more. Every process exited normally, the
+COM guard never halted, and no dangerous neighbor builds were logged. The first
+5 ps paths match at the saved sample precision. At the restart boundary the
+sampled total energy shifted by −2.412 kcal/mol. Across eleven 1 ps samples,
+mean temperature differs by only 0.064 K and mean total energy by 0.613
+kcal/mol, yet the fitted energy slopes have opposite signs and the final paired
+energy difference is −3.055 kcal/mol. The exact short-test equivalence
+threshold was never frozen, so the honest ending is “the restart worked; this
+short record does not settle statistical equivalence.” Do not turn the later
+nearby samples into proof or the boundary jump into a diagnosed mechanism.
+
+The final image is a clock, not a polarization plot: measured local throughput
+projects the 1.52-million-step bridge to roughly 10.5 days on the tested
+one-rank path. No long bridge was launched. If discussing Colab, cite its FAQ:
+resources vary, and free runtimes may end at 12 hours depending on availability.
+Present it as a possible checkpoint host only after a version-pinned, durable
+restart-recovery trial, not as guaranteed compute. The present record still
+contains no measured equilibrium, eHEX, gradient, or polarization result.
 
 ### 9. The eHEX pilot
 
@@ -267,6 +286,7 @@ from mechanism.
 | decision timeline | research book | Ready |
 | LAMMPS capability terminal capture | environment check | Repeat on camera if desired |
 | gate 1 structure and `run 0` audit | checkpoint 07 report and raw log | Existing measured evidence |
+| restart-continuity paired traces | preflight report, paired CSV, raw logs | New measured infrastructure result; no equivalence verdict |
 | T(z), ρ(z), Pz(z), orientation | SIM-02 notebook | Awaiting measured data |
 | block uncertainty view | SIM-02 notebook | Awaiting measured data |
 
